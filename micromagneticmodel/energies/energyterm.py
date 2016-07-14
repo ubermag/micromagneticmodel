@@ -5,6 +5,9 @@ class EnergyTerm(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
+    def __init__(self): pass
+    
+    @abc.abstractmethod
     def calculator_script(self): pass
 
     @abc.abstractmethod

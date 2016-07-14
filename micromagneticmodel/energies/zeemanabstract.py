@@ -18,7 +18,8 @@ class ZeemanAbstract(EnergyTerm):
 
     def set_H(self, H):
         if not isinstance(H, (list, tuple, np.ndarray)) or len(H) != 3:
-            raise ValueError('H must be a 3-element tuple or list.')
+            raise ValueError('H must be a 3-element tuple, '
+                             'list, or np.ndarray.')
         if not all([isinstance(i, Real) for i in H]):
             raise ValueError('All elements of H must be real numbers.')
         self.H = H

@@ -6,7 +6,7 @@ class EnergyTerm(object):
 
     @abc.abstractmethod
     def __init__(self): pass
-    
+
     @abc.abstractmethod
     def calculator_script(self): pass
 

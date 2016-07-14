@@ -1,8 +1,6 @@
-from IPython.display import Math
+from energyterm import EnergyTerm
 
-class Demag(object):
-    def __init__(self):
-        self.expression = 'w_\\text{d}'
 
-    def show(self):
-        return Math(self.expression)
+class DemagAbstract(EnergyTerm):
+    latex_str = ("$-\\frac{1}{2}\mu_{0}M_\\text{s}"
+                 "\mathbf{m} \cdot \mathbf{H}_\\text{d}$")

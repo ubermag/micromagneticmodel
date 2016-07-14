@@ -6,7 +6,7 @@ class ExchangeAbstract(EnergyTerm):
     latex_str = ("$A [(\\nabla m_{x})^{2} + "
                  "(\\nabla m_{y})^{2} + "
                  "(\\nabla m_{z})^{2}]$")
-    
+
     def __init__(self, A):
         """An exchange energy class.
 
@@ -17,5 +17,3 @@ class ExchangeAbstract(EnergyTerm):
         if not isinstance(A, Real) or A <= 0:
             raise ValueError('A must be a positive real number.')
         self.A = A
-
-    

@@ -35,3 +35,17 @@ class TestZeemanAbstract(object):
         for H in self.invalid_args:
             with pytest.raises(ValueError):
                 zeeman = Zeeman(H)
+
+    def test_repr_latex(self):
+        for H in self.valid_args:
+            zeeman = Zeeman(H)
+            latex_str = zeeman._repr_latex_()
+
+            # Assert some characteristics of LaTeX string.
+            assert isinstance(latex_str, str)
+            assert latex_str[0] == latex_str[-1] == '$'
+            assert '\\mu_{0}' in latex_str
+            assert '\mathbf{H}' in latex_str
+            assert '\mathbf{m}' in latex_str
+            assert '\cdot' in latex_str
+            assert 'M_\\text{s}' in latex_str

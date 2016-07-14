@@ -1,3 +1,4 @@
+from .energyterm import EnergyTerm
 from .exchangeabstract import ExchangeAbstract
 from .zeemanabstract import ZeemanAbstract
-from .energyterm import EnergyTerm
+from .demagabstract import DemagAbstract

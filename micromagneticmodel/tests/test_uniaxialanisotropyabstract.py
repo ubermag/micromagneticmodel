@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from numbers import Real
-from micromagneticmodel.energies import UniaxialAnisotropyAbstract
+from micromagneticmodel.hamiltonian import UniaxialAnisotropyAbstract
 
 
 class UniaxialAnisotropy(UniaxialAnisotropyAbstract):

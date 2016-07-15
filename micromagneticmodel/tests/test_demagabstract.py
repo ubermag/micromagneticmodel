@@ -1,4 +1,4 @@
-from micromagneticmodel.energies import DemagAbstract
+from micromagneticmodel.hamiltonian import DemagAbstract
 
 
 class Demag(DemagAbstract):

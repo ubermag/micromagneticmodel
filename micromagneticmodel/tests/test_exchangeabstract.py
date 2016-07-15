@@ -1,6 +1,6 @@
 import pytest
 from numbers import Real
-from micromagneticmodel.energies import ExchangeAbstract
+from micromagneticmodel.hamiltonian import ExchangeAbstract
 
 
 class Exchange(ExchangeAbstract):

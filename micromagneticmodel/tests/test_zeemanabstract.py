@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from numbers import Real
-from micromagneticmodel.energies import ZeemanAbstract
+from micromagneticmodel.hamiltonian import ZeemanAbstract
 
 
 class Zeeman(ZeemanAbstract):

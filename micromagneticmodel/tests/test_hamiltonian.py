@@ -1,5 +1,5 @@
 import pytest
-from micromagneticmodel.energies import ExchangeAbstract, \
+from micromagneticmodel.hamiltonian import ExchangeAbstract, \
     ZeemanAbstract, DemagAbstract, UniaxialAnisotropyAbstract, Hamiltonian
 
 
@@ -52,19 +52,19 @@ class TestHamiltonian(object):
             hamiltonian.add(energy)
 
             assert isinstance(hamiltonian, Hamiltonian)
-            assert isinstance(hamiltonian.energyterms, list)
-            assert hamiltonian.energyterms[-1] == energy
-            assert hamiltonian.energyterms[-1]._name == energy._name
+            assert isinstance(hamiltonian.terms, list)
+            assert hamiltonian.terms[-1] == energy
+            assert hamiltonian.terms[-1]._name == energy._name
 
-        assert len(hamiltonian.energyterms) == 4
+        assert len(hamiltonian.terms) == 4
 
     def test_add(self):
         hamiltonian = self.exchange + self.zeeman + \
                       self.uniaxialanisotropy + self.demag
 
         assert isinstance(hamiltonian, Hamiltonian)
-        assert isinstance(hamiltonian.energyterms, list)
-        assert len(hamiltonian.energyterms) == 4
+        assert isinstance(hamiltonian.terms, list)
+        assert len(hamiltonian.terms) == 4
 
     def test_iadd(self):
         hamiltonian = Hamiltonian()
@@ -72,11 +72,11 @@ class TestHamiltonian(object):
             hamiltonian += energy
 
             assert isinstance(hamiltonian, Hamiltonian)
-            assert isinstance(hamiltonian.energyterms, list)
-            assert hamiltonian.energyterms[-1] == energy
-            assert hamiltonian.energyterms[-1]._name == energy._name
+            assert isinstance(hamiltonian.terms, list)
+            assert hamiltonian.terms[-1] == energy
+            assert hamiltonian.terms[-1]._name == energy._name
 
-        assert len(hamiltonian.energyterms) == 4
+        assert len(hamiltonian.terms) == 4
 
     def test_repr_latex(self):
         hamiltonian = Hamiltonian()

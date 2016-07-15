@@ -35,3 +35,10 @@ class Hamiltonian(object):
     def __iadd__(self, other):
         self.add(other)
         return self
+
+    def calculator_script(self):
+        script = ''
+        for energy in self.energyterms:
+            script += energy.calculator_script()
+
+        return script

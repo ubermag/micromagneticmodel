@@ -19,14 +19,10 @@ class EnergyTerm(object):
 
     def __add__(self, other):
         """Addition for creating a list of energy objects."""
-        if isinstance(other, Hamiltonian):
-            other.add(self)
-            return other
-        else:
-            hamiltonian = Hamiltonian()
-            hamiltonian.add(self)
-            hamiltonian.add(other)
-            return hamiltonian
+        hamiltonian = Hamiltonian()
+        hamiltonian.add(self)
+        hamiltonian.add(other)
+        return hamiltonian
 
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""

@@ -3,6 +3,8 @@ from micromagneticmodel.util import TermSum
 
 
 class Hamiltonian(TermSum):
+    _lefthandside = '$\\mathcal{H}='
+    
     def add(self, term):
         """Add an energy term to hamiltonian.
         

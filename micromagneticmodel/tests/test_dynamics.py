@@ -64,7 +64,7 @@ class TestDynamics(object):
         latex_str = dynamics._repr_latex_()
         assert latex_str[0] == latex_str[-1] == '$'
         assert latex_str.count('$') == 2
-        assert '\\mathcal{H}' in latex_str
+        assert '\\frac' in latex_str
         assert latex_str[-2] == '0'
 
         for term in self.terms:
@@ -74,7 +74,6 @@ class TestDynamics(object):
 
         assert latex_str[0] == latex_str[-1] == '$'
         assert latex_str.count('$') == 2
-        assert '\\mathcal{H}=' in latex_str
         assert '-\gamma' in latex_str
         assert '\mathbf{m}' in latex_str
         assert '\mathbf{H}_\\text{eff}' in latex_str
@@ -83,7 +82,7 @@ class TestDynamics(object):
         assert latex_str.count('-') == 1
         assert latex_str.count('+') == 1
         assert latex_str.count('=') == 1
-        assert latex_str.count('\partial') == 2
+        assert latex_str.count('\partial') == 4
 
     def test_add_exception(self):
         dynamics = Dynamics()

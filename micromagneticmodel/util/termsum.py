@@ -2,6 +2,7 @@ import abc
 
 
 class TermSum(object):
+    __metaclass__ = abc.ABCMeta
     _latex_str = ''
 
     def __init__(self):
@@ -9,7 +10,7 @@ class TermSum(object):
 
     @property
     def latex_str(self):
-        self._latex_str = '$\mathcal{H}='
+        self._latex_str = self._lefthandside
 
         for i in self.terms:
             if i._latex_str[1] != '-' and self._latex_str[-1] != '=':
@@ -28,6 +29,9 @@ class TermSum(object):
     @abc.abstractmethod
     def add(self, term): pass
 
+    @abc.abstractmethod
+    def _lefthandside(self): pass
+    
     def __iadd__(self, other):
         self.add(other)
         return self

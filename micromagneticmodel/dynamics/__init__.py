@@ -1,3 +1,3 @@
-from .precession import Precession
-from .damping import Damping
+from .precessionabstract import PrecessionAbstract
+from .dampingabstract import DampingAbstract
 from .dynamics import Dynamics

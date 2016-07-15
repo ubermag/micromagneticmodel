@@ -38,7 +38,7 @@ class TestHamiltonian(object):
         self.uniaxialanisotropy = UniaxialAnisotropy(K, u)
         self.demag = Demag()
 
-        self.energies = [self.exchange,
+        self.terms = [self.exchange,
                          self.zeeman,
                          self.uniaxialanisotropy,
                          self.demag]
@@ -48,17 +48,17 @@ class TestHamiltonian(object):
 
     def test_add(self):
         hamiltonian = Hamiltonian()
-        for energy in self.energies:
-            hamiltonian.add(energy)
+        for term in self.terms:
+            hamiltonian.add(term)
 
             assert isinstance(hamiltonian, Hamiltonian)
             assert isinstance(hamiltonian.terms, list)
-            assert hamiltonian.terms[-1] == energy
-            assert hamiltonian.terms[-1]._name == energy._name
+            assert hamiltonian.terms[-1] == term
+            assert hamiltonian.terms[-1]._name == term._name
 
         assert len(hamiltonian.terms) == 4
 
-    def test_add(self):
+    def test_add_sum(self):
         hamiltonian = self.exchange + self.zeeman + \
                       self.uniaxialanisotropy + self.demag
 
@@ -68,13 +68,13 @@ class TestHamiltonian(object):
 
     def test_iadd(self):
         hamiltonian = Hamiltonian()
-        for energy in self.energies:
-            hamiltonian += energy
+        for term in self.terms:
+            hamiltonian += term
 
             assert isinstance(hamiltonian, Hamiltonian)
             assert isinstance(hamiltonian.terms, list)
-            assert hamiltonian.terms[-1] == energy
-            assert hamiltonian.terms[-1]._name == energy._name
+            assert hamiltonian.terms[-1] == term
+            assert hamiltonian.terms[-1]._name == term._name
 
         assert len(hamiltonian.terms) == 4
 
@@ -86,8 +86,8 @@ class TestHamiltonian(object):
         assert '\\mathcal{H}' in latex_str
         assert latex_str[-2] == '0'
 
-        for energy in self.energies:
-            hamiltonian.add(energy)
+        for term in self.terms:
+            hamiltonian.add(term)
 
         latex_str = hamiltonian._repr_latex_()
 
@@ -101,13 +101,13 @@ class TestHamiltonian(object):
         assert 'K' in latex_str
         assert '\mathbf{H}_\\text{d}' in latex_str
         assert '\cdot' in latex_str
+        assert '\\frac{1}{2}' in latex_str
+        assert 'M_\\text{s}' in latex_str
         assert latex_str.count('-') == 2
         assert latex_str.count('+') == 3
         assert latex_str.count('=') == 1
         assert latex_str.count('\\nabla') == 3
 
-        assert '\\frac{1}{2}' in latex_str
-        assert 'M_\\text{s}' in latex_str
 
     def test_add_exception(self):
         hamiltonian = Hamiltonian()

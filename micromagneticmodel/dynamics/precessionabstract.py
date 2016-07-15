@@ -4,7 +4,7 @@ from dynamicsterm import DynamicsTerm
 
 class PrecessionAbstract(DynamicsTerm):
     _name = 'precession'
-    _latex_str = ("$\gamma \mathbf{m} \\times \mathbf{H}_\\text{eff}$")
+    _latex_str = ("$-\gamma \mathbf{m} \\times \mathbf{H}_\\text{eff}$")
 
     def __init__(self, gamma):
         """A precession dynamics term class.

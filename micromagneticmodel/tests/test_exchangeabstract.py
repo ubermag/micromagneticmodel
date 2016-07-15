@@ -22,7 +22,6 @@ class TestExchangeAbstract(object):
             assert isinstance(exchange.A, Real)
 
     def test_init_invalid_args(self):
-        # Invalid arguments (ValueError expected).
         for A in self.invalid_args:
             with pytest.raises(ValueError):
                 exchange = Exchange(A)

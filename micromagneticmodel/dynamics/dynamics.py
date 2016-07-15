@@ -10,7 +10,7 @@ class Dynamics(TermSum):
             term (DynamicsTerm): dynamics term to be added
 
         """
-        if not isinstance(term, et.DynamicsTerm):
+        if not isinstance(term, dynamicsterm.DynamicsTerm):
             raise TypeError("Only dynamics terms can be added to the "
                             "equation of motion.")
         self.terms.append(term)

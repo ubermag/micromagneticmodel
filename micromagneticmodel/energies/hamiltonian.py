@@ -1,22 +1,33 @@
-from IPython.display import Math
+import energyterm as et
+
 
 class Hamiltonian(object):
+    _latex_str = ''
+
     def __init__(self):
-        self.terms = []
+        self.energyterms = []
 
-    def add(self, energy):
-        self.terms.append(energy)
+    @property
+    def latex_str(self):
+        self._latex_str = '$\mathcal{H}='
 
-    def show(self):
-        expression = '\mathcal{H}='
+        for i in self.energyterms:
+            if i._latex_str[1] != '-' and self._latex_str[-1] != '=':
+                self._latex_str += '+'
+            self._latex_str += i._latex_str[1:-1]
 
-        for term in self.terms:
-            string = term.expression
-            if string[0] != '-' and expression[-1] != '=':
-                expression += '+'
-            expression += term.expression
+        if self.energyterms == []:
+            self._latex_str += '0'
+        self._latex_str += '$'
 
-        if len(self.terms) == 0:
-            expression += '0'
+        return self._latex_str
 
-        return Math(expression)
+    def _repr_latex_(self):
+        return self.latex_str
+
+    def add(self, term):
+        if not isinstance(term, et.EnergyTerm):
+            raise TypeError('Only energy terms can be added to hamiltonian.')
+        self.energyterms.append(term)
+        # This is to trigger
+        self._latex_str = ''

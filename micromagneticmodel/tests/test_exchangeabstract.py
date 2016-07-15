@@ -38,3 +38,9 @@ class TestExchangeAbstract(object):
             assert '\\nabla' in latex_str
             assert 'A' in latex_str
             assert latex_str.count('+') == 2
+
+    def test_name(self):
+        for A in self.valid_args:
+            exchange = Exchange(A)
+
+            assert exchange._name == 'exchange'

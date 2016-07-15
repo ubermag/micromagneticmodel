@@ -5,7 +5,8 @@ from energyterm import EnergyTerm
 
 
 class ZeemanAbstract(EnergyTerm):
-    latex_str = '$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$'
+    _name = 'zeeman'
+    _latex_str = '$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$'
 
     def __init__(self, H):
         """A Zeeman energy class.

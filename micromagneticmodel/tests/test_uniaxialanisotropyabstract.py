@@ -19,7 +19,9 @@ class TestUniaxialAnisotropy(object):
         self.invalid_args = [('1', (0, 1, 0)),
                              (5e6, '(1, 1, 1)'),
                              (1e-3, (0, 0, 0, 1)),
-                             (5, 5.0)]
+                             (5, 5.0),
+                             (-7e3, ('1', 2e6, 0)),
+                             ((1, 0, 0), (0, 0, 1))]
 
     def test_init_valid_args(self):
         for arg in self.valid_args:
@@ -55,3 +57,11 @@ class TestUniaxialAnisotropy(object):
             assert '\mathbf{m}' in latex_str
             assert '^{2}' in latex_str
             assert '\cdot' in latex_str
+
+    def test_name(self):
+        for arg in self.valid_args:
+            K = arg[0]
+            u = arg[1]
+            anisotropy = UniaxialAnisotropy(K, u)
+
+            assert anisotropy._name == 'uniaxialanisotropy'

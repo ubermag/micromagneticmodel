@@ -4,7 +4,8 @@ from energyterm import EnergyTerm
 
 
 class UniaxialAnisotropyAbstract(EnergyTerm):
-    latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
+    _name = 'uniaxialanisotropy'
+    _latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
 
     def __init__(self, K, u):
         """A uniaxial anisotropy energy abstract class.

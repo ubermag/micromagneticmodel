@@ -44,8 +44,15 @@ class TestZeemanAbstract(object):
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex_str, str)
             assert latex_str[0] == latex_str[-1] == '$'
+            assert latex_str[1] == '-'
             assert '\\mu_{0}' in latex_str
             assert '\mathbf{H}' in latex_str
             assert '\mathbf{m}' in latex_str
             assert '\cdot' in latex_str
             assert 'M_\\text{s}' in latex_str
+
+    def test_name(self):
+        for H in self.valid_args:
+            zeeman = Zeeman(H)
+
+            assert zeeman._name == 'zeeman'

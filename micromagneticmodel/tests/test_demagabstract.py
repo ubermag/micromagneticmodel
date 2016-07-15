@@ -7,7 +7,7 @@ class Demag(DemagAbstract):
         raise NotImplementedError()
 
 
-class TestExchangeAbstract(object):
+class TestDemagAbstract(object):
     def test_repr_latex_(self):
         demag = Demag()
         latex_str = demag._repr_latex_()
@@ -21,3 +21,8 @@ class TestExchangeAbstract(object):
         assert '\cdot' in latex_str
         assert 'M_\\text{s}' in latex_str
         assert '\\frac{1}{2}' in latex_str
+
+    def test_name(self):
+        demag = Demag()
+
+        assert demag._name == 'demag'

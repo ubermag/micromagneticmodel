@@ -3,9 +3,10 @@ from energyterm import EnergyTerm
 
 
 class ExchangeAbstract(EnergyTerm):
-    latex_str = ("$A [(\\nabla m_{x})^{2} + "
-                 "(\\nabla m_{y})^{2} + "
-                 "(\\nabla m_{z})^{2}]$")
+    _name = 'exchange'
+    _latex_str = ("$A [(\\nabla m_{x})^{2} + "
+                  "(\\nabla m_{y})^{2} + "
+                  "(\\nabla m_{z})^{2}]$")
 
     def __init__(self, A):
         """An exchange energy class.

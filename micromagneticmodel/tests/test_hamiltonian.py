@@ -47,6 +47,7 @@ class TestHamiltonian(object):
         for energy in self.energies:
             hamiltonian.add(energy)
 
+            assert isinstance(hamiltonian, Hamiltonian)
             assert isinstance(hamiltonian.energyterms, list)
             assert hamiltonian.energyterms[-1] == energy
             assert hamiltonian.energyterms[-1]._name == energy._name
@@ -75,3 +76,15 @@ class TestHamiltonian(object):
 
         assert '\\frac{1}{2}' in latex_str
         assert 'M_\\text{s}' in latex_str
+
+    def test_iadd(self):
+        hamiltonian = Hamiltonian()
+        for energy in self.energies:
+            hamiltonian += energy
+
+            assert isinstance(hamiltonian, Hamiltonian)
+            assert isinstance(hamiltonian.energyterms, list)
+            assert hamiltonian.energyterms[-1] == energy
+            assert hamiltonian.energyterms[-1]._name == energy._name
+
+        assert len(hamiltonian.energyterms) == 4

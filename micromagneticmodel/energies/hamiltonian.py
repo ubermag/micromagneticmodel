@@ -31,3 +31,7 @@ class Hamiltonian(object):
         self.energyterms.append(term)
         # This is to trigger
         self._latex_str = ''
+
+    def __iadd__(self, other):
+        self.add(other)
+        return self

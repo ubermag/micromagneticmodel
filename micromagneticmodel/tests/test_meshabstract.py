@@ -1,0 +1,1 @@
+from micromagneticmodel.mesh import MeshAbstract

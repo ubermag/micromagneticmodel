@@ -1,9 +1,9 @@
 import abc
 import matplotlib
-matplotlib.use('nbagg')
-import matplotlib.pyplot as plt
 import numpy as np
 from numbers import Real
+matplotlib.use('nbagg')
+import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
@@ -43,7 +43,7 @@ def plot_cube(ax, cmin, cmax, color='blue', linewidth=2):
     return ax
 
 
-class Mesh(object):
+class MeshAbstract(object):
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, cmin, cmax, d):
@@ -83,17 +83,18 @@ class Mesh(object):
         self.d = d
 
     def _ipython_display_(self):
+        """Shows a matplotlib figure of sample range and discretiation."""
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.set_aspect('equal')
-        
+
         cd = (self.d[0] + self.cmin[0],
               self.d[1] + self.cmin[1],
               self.d[2] + self.cmin[2])
 
         plot_cube(ax, self.cmin, self.cmax)
         plot_cube(ax, self.cmin, cd, color='red', linewidth=1)
-        
+
         ax.set(xlabel=r'$x$', ylabel=r'$y$', zlabel=r'$z$')
 
         plt.show()

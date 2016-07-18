@@ -39,9 +39,9 @@ class TestHamiltonian(object):
         self.demag = Demag()
 
         self.terms = [self.exchange,
-                         self.zeeman,
-                         self.uniaxialanisotropy,
-                         self.demag]
+                      self.zeeman,
+                      self.uniaxialanisotropy,
+                      self.demag]
 
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.exchange, self.zeeman]]
@@ -107,7 +107,6 @@ class TestHamiltonian(object):
         assert latex_str.count('+') == 3
         assert latex_str.count('=') == 1
         assert latex_str.count('\\nabla') == 3
-
 
     def test_add_exception(self):
         hamiltonian = Hamiltonian()

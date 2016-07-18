@@ -23,6 +23,11 @@ class TestZeemanAbstract(object):
                              (0.56, 1.98, '-1.1'),
                              ([15], [0], [np.pi])]
 
+    def test_abstract_class(self):
+        for H in self.valid_args:
+            with pytest.raises(TypeError):
+                zeemanabstract = ZeemanAbstract(H)
+
     def test_init_valid_args(self):
         for H in self.valid_args:
             zeeman = Zeeman(H)

@@ -1,3 +1,4 @@
+import pytest
 from micromagneticmodel.hamiltonian import DemagAbstract
 
 
@@ -21,6 +22,10 @@ class TestDemagAbstract(object):
         assert '\cdot' in latex_str
         assert 'M_\\text{s}' in latex_str
         assert '\\frac{1}{2}' in latex_str
+
+    def test_abstract_class(self):
+        with pytest.raises(TypeError):
+            demagabstract = DemagAbstract()
 
     def test_name(self):
         demag = Demag()

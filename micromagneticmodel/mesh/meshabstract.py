@@ -45,7 +45,8 @@ def plot_cube(ax, cmin, cmax, color='blue', linewidth=2):
 
 class MeshAbstract(object):
     __metaclass__ = abc.ABCMeta
-
+    _name = 'mesh'
+    
     def __init__(self, cmin, cmax, d):
         """
         Creates a rectangular mesh across the space covered by atlas.
@@ -75,8 +76,8 @@ class MeshAbstract(object):
         if not isinstance(d, (list, tuple, np.ndarray)) or len(d) != 3:
             raise ValueError('d must be a 3-element tuple, '
                              'list, or np.ndarray.')
-        if not all([isinstance(i, Real) for i in d]):
-            raise ValueError('All elements of d must be real numbers.')
+        if not all([isinstance(i, Real) and i >= 0 for i in d]):
+            raise ValueError('All elements of d must be positive real numbers.')
 
         self.cmin = cmin
         self.cmax = cmax

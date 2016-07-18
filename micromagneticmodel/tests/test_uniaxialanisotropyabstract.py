@@ -23,6 +23,13 @@ class TestUniaxialAnisotropy(object):
                              (-7e3, ('1', 2e6, 0)),
                              ((1, 0, 0), (0, 0, 1))]
 
+    def test_abstract_class(self):
+        for arg in self.valid_args:
+            K = arg[0]
+            u = arg[1]
+            with pytest.raises(TypeError):
+                uniaxialanisotropyabstract = UniaxialAnisotropyAbstract(K, u)
+
     def test_init_valid_args(self):
         for arg in self.valid_args:
             K = arg[0]

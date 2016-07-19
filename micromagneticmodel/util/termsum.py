@@ -1,8 +1,9 @@
 import abc
+import six
 
 
+@six.add_metaclass(abc.ABCMeta)
 class TermSum(object):
-    __metaclass__ = abc.ABCMeta
     _latex_str = ''
 
     def __init__(self):

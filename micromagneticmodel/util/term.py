@@ -1,6 +1,8 @@
+import sys
 import abc
 
 
+@six.add_metaclass(abc.ABCMeta)
 class Term(object):
     __metaclass__ = abc.ABCMeta
 

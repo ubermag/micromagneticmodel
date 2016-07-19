@@ -1,5 +1,5 @@
 from numbers import Real
-from dynamicsterm import DynamicsTerm
+from micromagneticmodel.dynamics import DynamicsTerm
 
 
 class DampingAbstract(DynamicsTerm):

@@ -1,4 +1,4 @@
-import dynamicsterm
+from micromagneticmodel.dynamics import DynamicsTerm
 from micromagneticmodel.util import TermSum
 
 
@@ -12,7 +12,7 @@ class Dynamics(TermSum):
             term (DynamicsTerm): dynamics term to be added
 
         """
-        if not isinstance(term, dynamicsterm.DynamicsTerm):
+        if not isinstance(term, DynamicsTerm):
             raise TypeError("Only dynamics terms can be added to the "
                             "equation of motion.")
         self.terms.append(term)

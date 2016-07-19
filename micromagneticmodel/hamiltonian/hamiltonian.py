@@ -1,4 +1,4 @@
-import energyterm
+from micromagneticmodel.hamiltonian import energyterm
 from micromagneticmodel.util import TermSum
 
 

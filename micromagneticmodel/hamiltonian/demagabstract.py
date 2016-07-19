@@ -1,4 +1,4 @@
-from energyterm import EnergyTerm
+from micromagneticmodel.hamiltonian import EnergyTerm
 
 
 class DemagAbstract(EnergyTerm):

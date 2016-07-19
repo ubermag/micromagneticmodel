@@ -1,7 +1,7 @@
 import abc
 import numpy as np
 from numbers import Real
-from energyterm import EnergyTerm
+from micromagneticmodel.hamiltonian import EnergyTerm
 
 
 class ZeemanAbstract(EnergyTerm):

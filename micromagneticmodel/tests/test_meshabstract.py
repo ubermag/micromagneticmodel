@@ -26,15 +26,24 @@ class TestMeshAbstract(object):
         self.invalid_args = [[(0, 0, 0),
                               (5, 5, 5),
                               (-1, 1, 1)],
+                             [(0, 0, 0),
+                              (5e-9, 5e-9, 5e-9),
+                              (2, 2, 2)],
                              ['1',
                               (1, 1, 1),
                               (0, 0, 1e-9)],
-                             [(-1.5e-9, -5e-9, 0),
+                             [(-1.5e-9, -5e-9, 'a'),
                               (1.5e-9, 15e-9, 16e-9),
                               (5, 1, -1e-9)],
                              [(-1.5e-9, -5e-9, 0),
                               (1.5e-9, 15e-9, 16e-9),
                               (-2e-9, 1, 1e-9)],
+                             [(-1.5e-9, -5e-9, 0),
+                              (1.5e-9, 16e-9),
+                              (5, 1, 1e-9)],
+                             [(-1.5e-9, -5e-9, 0),
+                              (1.5e-9, 15e-9, 1+2j),
+                              (5, 1, 1e-9)],
                              ['string', (5, 1, 1e-9), 'string'],
                              [(-1.5e-9, -5e-9, 0),
                               (1.5e-9, 15e-9, 16e-9),
@@ -79,3 +88,13 @@ class TestMeshAbstract(object):
             mesh = Mesh(cmin, cmax, d)
 
             assert mesh._name == 'mesh'
+
+    def test_plot_mesh(self):
+        for arg in self.valid_args:
+            cmin = arg[0]
+            cmax = arg[1]
+            d = arg[2]
+
+            mesh = Mesh(cmin, cmax, d)
+
+            mesh.plot_mesh()

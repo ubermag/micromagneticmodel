@@ -46,7 +46,7 @@ def plot_cube(ax, cmin, cmax, color='blue', linewidth=2):
 class MeshAbstract(object):
     __metaclass__ = abc.ABCMeta
     _name = 'mesh'
-    
+
     def __init__(self, cmin, cmax, d):
         """
         Creates a rectangular mesh across the space covered by atlas.
@@ -63,6 +63,8 @@ class MeshAbstract(object):
             x, y, and z directions: (dx, dy, dz)
 
         """
+        tol = 1e-12
+        
         if not isinstance(cmin, (list, tuple, np.ndarray)) or len(cmin) != 3:
             raise ValueError('cmin must be a 3-element tuple, '
                              'list, or np.ndarray.')
@@ -77,13 +79,17 @@ class MeshAbstract(object):
             raise ValueError('d must be a 3-element tuple, '
                              'list, or np.ndarray.')
         if not all([isinstance(i, Real) and i >= 0 for i in d]):
-            raise ValueError('All elements of d must be positive real numbers.')
+            raise ValueError('All d elements must be positive real numbers.')
+        if d[0] - tol > cmax[0]-cmin[0] % d[0] > tol or \
+           d[1] - tol > cmax[1]-cmin[1] % d[1] > tol or \
+           d[2] - tol > cmax[2]-cmin[2] % d[2] > tol:
+            raise ValueError('Domain is not a multiple of {}.'.format(d))
 
         self.cmin = cmin
         self.cmax = cmax
         self.d = d
 
-    def _ipython_display_(self):
+    def plot_mesh(self):
         """Shows a matplotlib figure of sample range and discretiation."""
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
@@ -97,6 +103,12 @@ class MeshAbstract(object):
         plot_cube(ax, self.cmin, cd, color='red', linewidth=1)
 
         ax.set(xlabel=r'$x$', ylabel=r'$y$', zlabel=r'$z$')
+
+        return fig
+
+    def _ipython_display_(self):
+        """Shows a matplotlib figure of sample range and discretisation."""
+        fig = self.plot_mesh()
 
         plt.show()
 

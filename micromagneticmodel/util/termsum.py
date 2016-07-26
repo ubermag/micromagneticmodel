@@ -4,25 +4,23 @@ import abc
 
 @six.add_metaclass(abc.ABCMeta)
 class TermSum(object):
-    _latex_str = ''
-
     def __init__(self):
         self.terms = []
 
     @property
     def latex_str(self):
-        self._latex_str = self._lefthandside
+        s = self._lefthandside
 
         for i in self.terms:
-            if i._latex_str[1] != '-' and self._latex_str[-1] != '=':
-                self._latex_str += '+'
-            self._latex_str += i._latex_str[1:-1]
+            if i._latex_str[1] != '-' and s[-1] != '=':
+                s += '+'
+            s += i._latex_str[1:-1]
 
         if self.terms == []:
-            self._latex_str += '0'
-        self._latex_str += '$'
+            s += '0'
+        s += '$'
 
-        return self._latex_str
+        return s
 
     def _repr_latex_(self):
         return self.latex_str

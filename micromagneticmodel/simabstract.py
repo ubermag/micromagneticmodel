@@ -5,7 +5,7 @@ from finitedifferencefield import Field
 from micromagneticmodel.hamiltonian import Hamiltonian
 from micromagneticmodel.dynamics import Dynamics
 from micromagneticmodel.mesh import MeshAbstract
-from energies import Zeeman
+from micromagneticmodel.hamiltonian import ZeemanAbstract
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -23,32 +23,16 @@ class SimAbstract(object):
 
         self.hamiltonian = Hamiltonian()
         self.dynamics = Dynamics()
-
+        """
         self.dirname = self.name + '/'
         if not os.path.exists(self.dirname):
             os.makedirs(self.dirname)
-
-        self.m =  Field(self.atlas.cmin, self.atlas.cmax, self.mesh.d, dim=3)
+        """
+        self.m =  Field(self.mesh.cmin, self.mesh.cmax, self.mesh.d, dim=3)
 
         self.t = 0
         
     def set_m(self, m0):
         self.m0 = m0
 
-    def set_H(self, H):
-        print("MicromagneticModel: setting field = {}")
-        for energy in self.energies:
-            if isinstance(energy, Zeeman):
-                self.energies.remove(energy)
-        self.add(Zeeman(H))
-
-    @abc.abstractmethod
-    def relax(self): pass
-
-    @abc.abstractmethod
-    def m_average(self): pass
-
-    @abc.abstractmethod
-    def total_energy(self): pass
-
-    
+        self.m.set(m0)

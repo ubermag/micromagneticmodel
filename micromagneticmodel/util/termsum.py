@@ -41,3 +41,9 @@ class TermSum(object):
             script += term.calculator_script()
 
         return script
+
+    def __repr__(self):
+        s = ""
+        for term in self.terms:
+            s += "+ " + repr(term)
+        raise NotImplementedError("Needs fine tuning")

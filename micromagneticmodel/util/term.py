@@ -28,3 +28,6 @@ class Term(object):
     def _repr_latex_(self):
         """A LaTeX representation method."""
         return self._latex_str
+
+    @abc.abstractmethod
+    def __repr__(self): pass

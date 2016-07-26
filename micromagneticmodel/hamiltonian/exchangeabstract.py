@@ -18,3 +18,6 @@ class ExchangeAbstract(EnergyTerm):
         if not isinstance(A, Real) or A <= 0:
             raise ValueError('A must be a positive real number.')
         self.A = A
+
+    def __repr__(self):
+        return "Exchange(A={})".format(self.A)

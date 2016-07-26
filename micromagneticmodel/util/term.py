@@ -4,7 +4,6 @@ import abc
 
 @six.add_metaclass(abc.ABCMeta)
 class Term(object):
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def __init__(self): pass

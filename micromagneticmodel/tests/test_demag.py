@@ -31,3 +31,8 @@ class TestDemag(object):
         demag = Demag()
 
         assert repr(demag) == 'Demag()'
+
+    def test_script(self):
+        demag = Demag()
+        with pytest.raises(NotImplementedError):
+            demag.script()

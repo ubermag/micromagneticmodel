@@ -54,3 +54,9 @@ class TestDampingAbstract(object):
 
         damping = Damping(0.05)
         assert repr(damping) == 'Damping(alpha=0.05)'
+
+    def test_script(self):
+        for alpha in self.valid_args:
+            damping = Damping(alpha)
+            with pytest.raises(NotImplementedError):
+                damping.script()

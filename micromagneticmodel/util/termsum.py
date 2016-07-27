@@ -40,12 +40,10 @@ class TermSum(object):
         self.add(other)
         return self
 
-    def calculator_script(self):
-        script = ''
-        for term in self.terms:
-            script += term.calculator_script()
-
-        return script
-
     def __repr__(self):
         return self._repr_str
+
+    def script(self):
+        """This method should be provided by the specific micromagnetic
+        calculator"""
+        raise NotImplementedError

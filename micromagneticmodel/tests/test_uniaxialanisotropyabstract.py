@@ -77,3 +77,11 @@ class TestUniaxialAnisotropy(object):
             
         anisotropy = UniaxialAnisotropy(1000, (0, 0, 1))
         assert repr(anisotropy) == "UniaxialAnisotropy(K=1000, u=(0, 0, 1))"
+
+    def test_script(self):
+        for arg in self.valid_args:
+            K = arg[0]
+            u = arg[1]
+            anisotropy = UniaxialAnisotropy(K, u)
+            with pytest.raises(NotImplementedError):
+                anisotropy.script()

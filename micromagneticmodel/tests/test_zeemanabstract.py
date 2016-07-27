@@ -65,3 +65,9 @@ class TestZeemanAbstract(object):
 
         zeeman = Zeeman(H=(1, 0, 1))
         assert repr(zeeman) == "Zeeman(H=(1, 0, 1))"
+
+    def test_script(self):
+        for H in self.valid_args:
+            zeeman = Zeeman(H)
+            with pytest.raises(NotImplementedError):
+                zeeman.script()

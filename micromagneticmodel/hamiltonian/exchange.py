@@ -28,8 +28,3 @@ class Exchange(EnergyTerm):
 
         """
         return "Exchange(A={})".format(self.A)
-
-    def script(self):
-        """This method should be provided by the specific micromagnetic
-        calculator"""
-        raise NotImplementedError

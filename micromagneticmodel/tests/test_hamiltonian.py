@@ -112,17 +112,7 @@ class TestHamiltonian(object):
                    "Demag()")
         assert repr(hamiltonian) == exp_str
 
-    """
-    def test_calculator_script(self):
-        hamiltonian = self.exchange + self.zeeman + \
-                      self.uniaxialanisotropy + self.demag
-
-        calculator_script = hamiltonian.calculator_script()
-
-        assert isinstance(calculator_script, str)
-        assert 'exchange_script' in calculator_script
-        assert 'zeeman_script' in calculator_script
-        assert 'demag_script' in calculator_script
-        assert 'uniaxialanisotropy_script' in calculator_script
-        assert calculator_script.count('\n') == 4
-    """
+    def test_script(self):
+        hamiltonian = Hamiltonian()
+        with pytest.raises(NotImplementedError):
+            hamiltonian.script()

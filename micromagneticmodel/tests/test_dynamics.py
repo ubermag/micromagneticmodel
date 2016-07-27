@@ -90,16 +90,6 @@ class TestDynamics(object):
             with pytest.raises(TypeError):
                 dynamics += term
 
-    def test_calculator_script(self):
-        dynamics = self.precession + self.damping
-
-        calculator_script = dynamics.calculator_script()
-
-        assert isinstance(calculator_script, str)
-        assert 'precession_script' in calculator_script
-        assert 'damping_script' in calculator_script
-        assert calculator_script.count('\n') == 2
-
     def test_repr(self):
         gamma = 2.21e5
         self.precession = Precession(gamma)
@@ -109,3 +99,8 @@ class TestDynamics(object):
         exp_str = ("Precession(gamma=221000.0) + "
                    "Damping(alpha=0.5)")
         assert repr(dynamics) == exp_str
+
+    def test_script(self):
+        dynamics = Dynamics()
+        with pytest.raises(NotImplementedError):
+            dynamics.script()

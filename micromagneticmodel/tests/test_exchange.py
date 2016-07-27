@@ -52,3 +52,9 @@ class TestExchange(object):
 
         exchange = Exchange(8.78e-12)
         assert repr(exchange) == "Exchange(A=8.78e-12)"
+
+    def test_script(self):
+        for A in self.valid_args:
+            exchange = Exchange(A)
+            with pytest.raises(NotImplementedError):
+                exchange.script()

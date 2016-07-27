@@ -53,3 +53,9 @@ class TestPrecessionAbstract(object):
 
         precession = Precession(2.211e5)
         assert repr(precession) == 'Precession(gamma=221100.0)'
+
+    def test_script(self):
+        for gamma in self.valid_args:
+            precession = Precession(gamma)
+            with pytest.raises(NotImplementedError):
+                precession.script()

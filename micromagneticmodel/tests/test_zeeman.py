@@ -1,16 +1,10 @@
 import pytest
 import numpy as np
 from numbers import Real
-from micromagneticmodel.hamiltonian import ZeemanAbstract
+from micromagneticmodel.hamiltonian import Zeeman
 
 
-class Zeeman(ZeemanAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        raise NotImplementedError()
-
-
-class TestZeemanAbstract(object):
+class TestZeeman(object):
     def setup(self):
         self.valid_args = [(1, 1.4, 1),
                            (0, 0, 1),

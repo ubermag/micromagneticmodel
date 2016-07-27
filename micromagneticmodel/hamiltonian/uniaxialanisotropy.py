@@ -3,7 +3,7 @@ from numbers import Real
 from micromagneticmodel.hamiltonian import EnergyTerm
 
 
-class UniaxialAnisotropyAbstract(EnergyTerm):
+class UniaxialAnisotropy(EnergyTerm):
     _name = "uniaxialanisotropy"
     _latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
     

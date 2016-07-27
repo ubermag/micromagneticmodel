@@ -1,18 +1,5 @@
 import pytest
-from micromagneticmodel.dynamics import PrecessionAbstract, \
-    DampingAbstract, Dynamics
-
-
-class Precession(PrecessionAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        return 'precession_script\n'
-
-
-class Damping(DampingAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        return 'damping_script\n'
+from micromagneticmodel.dynamics import Precession, Damping, Dynamics
 
 
 class TestDynamics(object):

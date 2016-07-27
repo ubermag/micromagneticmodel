@@ -2,7 +2,7 @@ from numbers import Real
 from micromagneticmodel.dynamics import DynamicsTerm
 
 
-class PrecessionAbstract(DynamicsTerm):
+class Precession(DynamicsTerm):
     _name = "precession"
     _latex_str = ("$-\gamma \mathbf{m} \\times \mathbf{H}_\\text{eff}$")
     

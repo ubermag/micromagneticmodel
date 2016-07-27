@@ -1,18 +1,6 @@
 import pytest
 from micromagneticmodel.hamiltonian import Exchange, \
-    ZeemanAbstract, Demag, UniaxialAnisotropyAbstract, Hamiltonian
-
-
-class Zeeman(ZeemanAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        return 'zeeman_script\n'
-
-
-class UniaxialAnisotropy(UniaxialAnisotropyAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        return 'uniaxialanisotropy_script\n'
+    Zeeman, Demag, UniaxialAnisotropy, Hamiltonian
 
 
 class TestHamiltonian(object):

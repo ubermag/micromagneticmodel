@@ -2,7 +2,7 @@ from numbers import Real
 from micromagneticmodel.dynamics import DynamicsTerm
 
 
-class DampingAbstract(DynamicsTerm):
+class Damping(DynamicsTerm):
     _name = 'damping'
     _latex_str = ("$\\alpha \mathbf{m} \\times"
                   "\\frac{\partial \mathbf{m}}{\partial t}$")

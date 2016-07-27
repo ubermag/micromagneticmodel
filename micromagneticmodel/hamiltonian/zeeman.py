@@ -4,7 +4,7 @@ from numbers import Real
 from micromagneticmodel.hamiltonian import EnergyTerm
 
 
-class ZeemanAbstract(EnergyTerm):
+class Zeeman(EnergyTerm):
     _name = "zeeman"
     _latex_str = "$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$"
 

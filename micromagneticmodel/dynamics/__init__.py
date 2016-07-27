@@ -1,4 +1,4 @@
 from .dynamicsterm import DynamicsTerm
-from .precessionabstract import PrecessionAbstract
-from .dampingabstract import DampingAbstract
+from .precession import Precession
+from .damping import Damping
 from .dynamics import Dynamics

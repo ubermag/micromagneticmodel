@@ -1,13 +1,7 @@
 import pytest
 import numpy as np
 from numbers import Real
-from micromagneticmodel.hamiltonian import UniaxialAnisotropyAbstract
-
-
-class UniaxialAnisotropy(UniaxialAnisotropyAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        raise NotImplementedError()
+from micromagneticmodel.hamiltonian import UniaxialAnisotropy
 
 
 class TestUniaxialAnisotropy(object):

@@ -16,12 +16,6 @@ class Term(object):
 
     @abc.abstractmethod
     def __add__(self, other): pass
-
-    @abc.abstractmethod
-    def __repr__(self): pass
-
-    @abc.abstractmethod
-    def script(self): pass
     
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""

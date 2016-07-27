@@ -1,14 +1,8 @@
 import pytest
-from micromagneticmodel.hamiltonian import DemagAbstract
+from micromagneticmodel.hamiltonian import Demag
 
 
-class Demag(DemagAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        raise NotImplementedError()
-
-
-class TestDemagAbstract(object):
+class TestDemag(object):
     def test_repr_latex_(self):
         demag = Demag()
         latex_str = demag._repr_latex_()
@@ -23,11 +17,17 @@ class TestDemagAbstract(object):
         assert 'M_\\text{s}' in latex_str
         assert '\\frac{1}{2}' in latex_str
 
-    def test_abstract_class(self):
-        with pytest.raises(TypeError):
-            demagabstract = DemagAbstract()
+    def test_abstract_script_method(self):
+        with pytest.raises(NotImplementedError):
+            demag = Demag()
+            demag.script()
 
     def test_name(self):
         demag = Demag()
 
         assert demag._name == 'demag'
+
+    def test_repr(self):
+        demag = Demag()
+
+        assert repr(demag) == 'Demag()'

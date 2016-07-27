@@ -20,9 +20,10 @@ class Exchange(EnergyTerm):
         self.A = A
 
     def __repr__(self):
+        """A representation method."""
         return "Exchange(A={})".format(self.A)
 
     def script(self):
-        """This needs to be provided by the specific micromagnetic
+        """This method should be provided by the specific micromagnetic
         calculator"""
-        raise NotImplementedError()
+        raise NotImplementedError

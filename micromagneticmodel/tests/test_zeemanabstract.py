@@ -56,3 +56,12 @@ class TestZeemanAbstract(object):
             zeeman = Zeeman(H)
 
             assert zeeman._name == 'zeeman'
+
+    def test_repr(self):
+        for H in self.valid_args:
+            zeeman = Zeeman(H)
+
+            assert repr(zeeman) == 'Zeeman(H={})'.format(H)
+
+        zeeman = Zeeman(H=(1, 0, 1))
+        assert repr(zeeman) == "Zeeman(H=(1, 0, 1))"

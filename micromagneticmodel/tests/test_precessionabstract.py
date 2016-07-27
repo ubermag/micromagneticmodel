@@ -44,3 +44,12 @@ class TestPrecessionAbstract(object):
             precession = Precession(gamma)
 
             assert precession._name == 'precession'
+
+    def test_repr(self):
+        for gamma in self.valid_args:
+            precession = Precession(gamma)
+
+            assert repr(precession) == 'Precession(gamma={})'.format(gamma)
+
+        precession = Precession(2.211e5)
+        assert repr(precession) == 'Precession(gamma=221100.0)'

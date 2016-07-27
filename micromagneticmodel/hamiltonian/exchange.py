@@ -3,7 +3,7 @@ from micromagneticmodel.hamiltonian import EnergyTerm
 
 
 class Exchange(EnergyTerm):
-    _name = 'exchange'
+    _name = "exchange"
     _latex_str = ("$A [(\\nabla m_{x})^{2} + "
                   "(\\nabla m_{y})^{2} + "
                   "(\\nabla m_{z})^{2}]$")
@@ -19,8 +19,14 @@ class Exchange(EnergyTerm):
             raise ValueError('A must be a positive real number.')
         self.A = A
 
-    def __repr__(self):
-        """A representation method."""
+    @property
+    def _repr_str(self):
+        """A representation string property.
+        
+        Returns:
+           A representation string.
+
+        """
         return "Exchange(A={})".format(self.A)
 
     def script(self):

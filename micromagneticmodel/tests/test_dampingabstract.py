@@ -45,3 +45,12 @@ class TestDampingAbstract(object):
             damping = Damping(alpha)
 
             assert damping._name == 'damping'
+
+    def test_repr(self):
+        for alpha in self.valid_args:
+            damping = Damping(alpha)
+
+            assert repr(damping) == 'Damping(alpha={})'.format(alpha)
+
+        damping = Damping(0.05)
+        assert repr(damping) == 'Damping(alpha=0.05)'

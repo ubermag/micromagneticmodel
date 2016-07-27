@@ -49,3 +49,6 @@ class TestExchange(object):
             exchange = Exchange(A)
 
             assert repr(exchange) == 'Exchange(A={})'.format(A)
+
+        exchange = Exchange(8.78e-12)
+        assert repr(exchange) == "Exchange(A=8.78e-12)"

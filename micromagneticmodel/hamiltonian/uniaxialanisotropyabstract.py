@@ -4,9 +4,9 @@ from micromagneticmodel.hamiltonian import EnergyTerm
 
 
 class UniaxialAnisotropyAbstract(EnergyTerm):
-    _name = 'uniaxialanisotropy'
-    _latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
-
+    _name = "uniaxialanisotropy"
+    _latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
+    
     def __init__(self, K, u):
         """A uniaxial anisotropy energy abstract class.
 
@@ -24,3 +24,13 @@ class UniaxialAnisotropyAbstract(EnergyTerm):
             raise ValueError('All elements of u must be real numbers.')
         self.K = K
         self.u = u
+
+    @property
+    def _repr_str(self):
+        """A representation string property.
+        
+        Returns:
+           A representation string.
+
+        """
+        return "UniaxialAnisotropy(K={}, u={})".format(self.K, self.u)

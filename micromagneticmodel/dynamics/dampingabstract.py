@@ -17,3 +17,13 @@ class DampingAbstract(DynamicsTerm):
         if not isinstance(alpha, Real) or alpha <= 0:
             raise ValueError('alpha must be a positive real number.')
         self.alpha = alpha
+
+    @property
+    def _repr_str(self):
+        """A representation string property.
+        
+        Returns:
+           A representation string.
+
+        """
+        return "Damping(alpha={})".format(self.alpha)

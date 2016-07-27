@@ -65,3 +65,15 @@ class TestUniaxialAnisotropy(object):
             anisotropy = UniaxialAnisotropy(K, u)
 
             assert anisotropy._name == 'uniaxialanisotropy'
+
+    def test_repr(self):
+        for arg in self.valid_args:
+            K = arg[0]
+            u = arg[1]
+            anisotropy = UniaxialAnisotropy(K, u)
+
+            exp_str = "UniaxialAnisotropy(K={}, u={})".format(K, u)
+            assert repr(anisotropy) == exp_str
+            
+        anisotropy = UniaxialAnisotropy(1000, (0, 0, 1))
+        assert repr(anisotropy) == "UniaxialAnisotropy(K=1000, u=(0, 0, 1))"

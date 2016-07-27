@@ -101,6 +101,17 @@ class TestHamiltonian(object):
         for term in self.invalid_terms:
             with pytest.raises(TypeError):
                 hamiltonian += term
+
+    def test_repr(self):
+        hamiltonian = self.exchange + self.zeeman + \
+                      self.uniaxialanisotropy + self.demag
+
+        exp_str = ("Exchange(A=1e-12) + "
+                   "Zeeman(H=(0, 0, 1200000.0)) + "
+                   "UniaxialAnisotropy(K=10000.0, u=(0, 1, 0)) + "
+                   "Demag()")
+        assert repr(hamiltonian) == exp_str
+
     """
     def test_calculator_script(self):
         hamiltonian = self.exchange + self.zeeman + \

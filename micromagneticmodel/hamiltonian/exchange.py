@@ -2,7 +2,7 @@ from numbers import Real
 from micromagneticmodel.hamiltonian import EnergyTerm
 
 
-class ExchangeAbstract(EnergyTerm):
+class Exchange(EnergyTerm):
     _name = 'exchange'
     _latex_str = ("$A [(\\nabla m_{x})^{2} + "
                   "(\\nabla m_{y})^{2} + "
@@ -22,7 +22,7 @@ class ExchangeAbstract(EnergyTerm):
     def __repr__(self):
         return "Exchange(A={})".format(self.A)
 
-    def calculator_script(self):
+    def script(self):
         """This needs to be provided by the specific micromagnetic
         calculator"""
         raise NotImplementedError()

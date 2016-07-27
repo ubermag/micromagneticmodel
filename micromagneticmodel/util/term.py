@@ -9,9 +9,6 @@ class Term(object):
     def __init__(self): pass
 
     @abc.abstractmethod
-    def calculator_script(self): pass
-
-    @abc.abstractmethod
     def _name(self): pass
 
     @abc.abstractmethod
@@ -20,14 +17,17 @@ class Term(object):
     @abc.abstractmethod
     def __add__(self, other): pass
 
+    @abc.abstractmethod
+    def __repr__(self): pass
+
+    @abc.abstractmethod
+    def script(self): pass
+    
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""
         other.add(self)
         return other
 
     def _repr_latex_(self):
-        """A LaTeX representation method."""
+        """A LaTeX representation method in Jupyter notebook."""
         return self._latex_str
-
-    @abc.abstractmethod
-    def __repr__(self): pass

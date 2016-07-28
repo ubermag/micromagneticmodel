@@ -9,11 +9,6 @@ class Demag(EnergyTerm):
     def __init__(self):
         """Abstract demagnetisation energy class."""
         pass
-    
-    def script(self):
-        """This method should be provided by the specific micromagnetic
-        calculator"""
-        raise NotImplementedError
 
     @property
     def _repr_str(self):

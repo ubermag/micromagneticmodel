@@ -113,5 +113,7 @@ class Mesh(object):
 
         plt.show()
 
-    @abc.abstractmethod
-    def calculator_script(self): pass
+    def script(self):
+        """This method should be implemented by a specific
+        micromagnetic calculator"""
+        raise NotImplementedError

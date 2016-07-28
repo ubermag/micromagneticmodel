@@ -1,14 +1,8 @@
 import pytest
-from micromagneticmodel.mesh import MeshAbstract
+from micromagneticmodel.mesh import Mesh
 
 
-class Mesh(MeshAbstract):
-    """Implementation of the abstract class for testing."""
-    def calculator_script(self):
-        raise NotImplementedError()
-
-
-class TestMeshAbstract(object):
+class TestMesh(object):
     def setup(self):
         self.valid_args = [[(0, 0, 0),
                             (5, 5, 5),
@@ -48,15 +42,6 @@ class TestMeshAbstract(object):
                              [(-1.5e-9, -5e-9, 0),
                               (1.5e-9, 15e-9, 16e-9),
                               1]]
-
-    def test_abstract_class(self):
-        for arg in self.valid_args:
-            with pytest.raises(TypeError):
-                cmin = arg[0]
-                cmax = arg[1]
-                d = arg[2]
-
-                meshabstract = MeshAbstract(cmin, cmax, d)
 
     def test_init_valid_args(self):
         for arg in self.valid_args:
@@ -98,3 +83,13 @@ class TestMeshAbstract(object):
             mesh = Mesh(cmin, cmax, d)
 
             mesh.plot_mesh()
+
+    def test_script(self):
+        for arg in self.valid_args:
+            cmin = arg[0]
+            cmax = arg[1]
+            d = arg[2]
+
+            mesh = Mesh(cmin, cmax, d)
+            with pytest.raises(NotImplementedError):
+                mesh.script()

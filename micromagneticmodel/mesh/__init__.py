@@ -1,1 +1,1 @@
-from .meshabstract import MeshAbstract
+from .meshabstract import Mesh

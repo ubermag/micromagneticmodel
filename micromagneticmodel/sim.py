@@ -4,12 +4,12 @@ from numbers import Real
 from finitedifferencefield import Field
 from micromagneticmodel.hamiltonian import Hamiltonian
 from micromagneticmodel.dynamics import Dynamics
-from micromagneticmodel.mesh import MeshAbstract
-from micromagneticmodel.hamiltonian import ZeemanAbstract
+from micromagneticmodel.mesh import Mesh
+from micromagneticmodel.hamiltonian import Zeeman
 
 
 @six.add_metaclass(abc.ABCMeta)
-class SimAbstract(object):
+class Sim(object):
     def __init__(self, mesh, Ms, name=None):
         if not isinstance(mesh, MeshAbstract):
             raise ValueError('mesh must be of type MeshAbstract.')

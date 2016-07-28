@@ -45,7 +45,7 @@ def plot_cube(ax, cmin, cmax, color='blue', linewidth=2):
 
 
 @six.add_metaclass(abc.ABCMeta)
-class MeshAbstract(object):
+class Mesh(object):
     _name = 'mesh'
 
     def __init__(self, cmin, cmax, d):

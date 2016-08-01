@@ -5,8 +5,6 @@
 language: python
 python:
   - "3.5"
-  - "3.4"
-  - "2.7"
 # Install any dependencies for running the tests:
 install: pip install codecov pytest-cov matplotlib tornado ipython ipykernel six
 # command to run tests

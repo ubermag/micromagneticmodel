@@ -25,7 +25,7 @@ class TestDemag(object):
     def test_name(self):
         demag = Demag()
 
-        assert demag._name == 'demag'
+        assert demag.name == 'demag'
 
     def test_repr(self):
         demag = Demag()

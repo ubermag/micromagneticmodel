@@ -4,7 +4,7 @@ from micromagneticmodel.dynamics import DynamicsTerm
 
 class Dynamics(TermSum):
     _lefthandside = '$\\frac{\partial \mathbf{m}}{\partial t}='
-    
+
     def add(self, term):
         """Add a dynamics term to hamiltonian.
 

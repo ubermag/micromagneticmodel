@@ -17,7 +17,7 @@ class TestDamping(object):
 
     def test_init_invalid_args(self):
         for alpha in self.invalid_args:
-            with pytest.raises(ValueError):
+            with pytest.raises(Exception):
                 damping = Damping(alpha)
 
     def test_repr_latex_(self):
@@ -38,7 +38,7 @@ class TestDamping(object):
         for alpha in self.valid_args:
             damping = Damping(alpha)
 
-            assert damping._name == 'damping'
+            assert damping.name == 'damping'
 
     def test_repr(self):
         for alpha in self.valid_args:

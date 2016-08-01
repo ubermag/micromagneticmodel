@@ -1,4 +1,5 @@
 import numbers
+import numpy as np
 
 
 class Descriptor:
@@ -9,7 +10,7 @@ class Descriptor:
 
     def __set__(self, instance, value):
         instance.__dict__[self.name] = value
-        
+
     def __delete__(self, instance):
         raise AttributeError('Deleting attribute not allowed')
 
@@ -28,23 +29,23 @@ class Unsigned(Descriptor):
         if value < 0:
             raise ValueError('Expected >= 0')
         super().__set__(instance, value)
-    
-    
+
+
 class Real(Typed):
     expected_type = numbers.Real
 
 
 class String(Typed):
     expected_type = str
-    
+
 
 class UnsignedReal(Real, Unsigned):
     pass
 
 
 class Vector3D(Typed):
-    expected_type = tuple
-    
+    expected_type = (list, tuple, np.ndarray)
+
     def __set__(self, instance, value):
         if len(value) != 3:
             raise ValueError('Expected 3D vector.')
@@ -66,6 +67,6 @@ def typesystem(**kwargs):
                 setattr(cls, key, value)
             else:
                 setattr(cls, key, value(key))
-        
+
         return cls
     return decorate

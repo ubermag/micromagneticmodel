@@ -1,13 +1,14 @@
-import numpy as np
-from numbers import Real
 from micromagneticmodel.hamiltonian import EnergyTerm
+from micromagneticmodel.util.typesystem import Real, String, \
+    RealVector3D, typesystem
 
 
+@typesystem(K=Real,
+            u=RealVector3D,
+            name=String,
+            latex_str=String)
 class UniaxialAnisotropy(EnergyTerm):
-    _name = "uniaxialanisotropy"
-    _latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
-    
-    def __init__(self, K, u):
+    def __init__(self, K, u, name='uniaxialanisotropy'):
         """A uniaxial anisotropy energy abstract class.
 
         Args:
@@ -15,22 +16,17 @@ class UniaxialAnisotropy(EnergyTerm):
             u (tuple, list, np.ndarray): Easy axis
 
         """
-        if not isinstance(K, Real):
-            raise ValueError('K must be a positive real number.')
-        if not isinstance(u, (tuple, list, np.ndarray)) or len(u) != 3:
-            raise ValueError('u must be a 3-element tuple, '
-                             'list, or np.ndarray.')
-        if not all([isinstance(i, Real) for i in u]):
-            raise ValueError('All elements of u must be real numbers.')
         self.K = K
         self.u = u
+        self.name = name
+        self.latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
 
     @property
     def _repr_str(self):
         """A representation string property.
-        
+
         Returns:
            A representation string.
 
         """
-        return "UniaxialAnisotropy(K={}, u={})".format(self.K, self.u)
+        return 'UniaxialAnisotropy(K={}, u={})'.format(self.K, self.u)

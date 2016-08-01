@@ -23,7 +23,7 @@ class TestExchange(object):
 
     def test_init_invalid_args(self):
         for A in self.invalid_args:
-            with pytest.raises(ValueError):
+            with pytest.raises(Exception):
                 exchange = Exchange(A)
 
     def test_repr_latex_(self):
@@ -42,7 +42,7 @@ class TestExchange(object):
         for A in self.valid_args:
             exchange = Exchange(A)
 
-            assert exchange._name == 'exchange'
+            assert exchange.name == 'exchange'
 
     def test_repr(self):
         for A in self.valid_args:

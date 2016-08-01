@@ -33,7 +33,7 @@ class TestUniaxialAnisotropy(object):
         for arg in self.invalid_args:
             K = arg[0]
             u = arg[1]
-            with pytest.raises(ValueError):
+            with pytest.raises(Exception):
                 anisotropy = UniaxialAnisotropy(K, u)
 
     def test_repr_latex(self):
@@ -58,7 +58,7 @@ class TestUniaxialAnisotropy(object):
             u = arg[1]
             anisotropy = UniaxialAnisotropy(K, u)
 
-            assert anisotropy._name == 'uniaxialanisotropy'
+            assert anisotropy.name == 'uniaxialanisotropy'
 
     def test_repr(self):
         for arg in self.valid_args:
@@ -68,7 +68,7 @@ class TestUniaxialAnisotropy(object):
 
             exp_str = "UniaxialAnisotropy(K={}, u={})".format(K, u)
             assert repr(anisotropy) == exp_str
-            
+
         anisotropy = UniaxialAnisotropy(1000, (0, 0, 1))
         assert repr(anisotropy) == "UniaxialAnisotropy(K=1000, u=(0, 0, 1))"
 

@@ -1,29 +1,28 @@
-from numbers import Real
 from micromagneticmodel.dynamics import DynamicsTerm
+from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
+@typesystem(alpha=UnsignedReal,
+            name=String)
 class Damping(DynamicsTerm):
-    _name = 'damping'
-    _latex_str = ("$\\alpha \mathbf{m} \\times"
-                  "\\frac{\partial \mathbf{m}}{\partial t}$")
-
-    def __init__(self, alpha):
+    def __init__(self, alpha, name='damping'):
         """A damping dynamics term class.
 
         Args:
             alpha (Real): Gilbert damping
 
         """
-        if not isinstance(alpha, Real) or alpha <= 0:
-            raise ValueError('alpha must be a positive real number.')
         self.alpha = alpha
+        self.name = name
+        self.latex_str = ('$\\alpha \mathbf{m} \\times'
+                          '\\frac{\partial \mathbf{m}}{\partial t}$')
 
     @property
     def _repr_str(self):
         """A representation string property.
-        
+
         Returns:
            A representation string.
 
         """
-        return "Damping(alpha={})".format(self.alpha)
+        return 'Damping(alpha={})'.format(self.alpha)

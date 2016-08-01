@@ -30,7 +30,7 @@ class TestHamiltonian(object):
             assert isinstance(hamiltonian, Hamiltonian)
             assert isinstance(hamiltonian.terms, list)
             assert hamiltonian.terms[-1] == term
-            assert hamiltonian.terms[-1]._name == term._name
+            assert hamiltonian.terms[-1].name == term.name
 
         assert len(hamiltonian.terms) == 4
 
@@ -50,7 +50,7 @@ class TestHamiltonian(object):
             assert isinstance(hamiltonian, Hamiltonian)
             assert isinstance(hamiltonian.terms, list)
             assert hamiltonian.terms[-1] == term
-            assert hamiltonian.terms[-1]._name == term._name
+            assert hamiltonian.terms[-1].name == term.name
 
         assert len(hamiltonian.terms) == 4
 

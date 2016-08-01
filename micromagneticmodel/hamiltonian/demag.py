@@ -1,14 +1,15 @@
 from micromagneticmodel.hamiltonian import EnergyTerm
+from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
+@typesystem(name=String,
+            latex_str=String)
 class Demag(EnergyTerm):
-    _name = "demag"
-    _latex_str = ("$-\\frac{1}{2}\mu_{0}M_\\text{s}"
-                  "\mathbf{m} \cdot \mathbf{H}_\\text{d}$")
-
-    def __init__(self):
+    def __init__(self, name='demag'):
         """Abstract demagnetisation energy class."""
-        pass
+        self.name = name
+        self.latex_str = ('$-\\frac{1}{2}\mu_{0}M_\\text{s}'
+                          '\mathbf{m} \cdot \mathbf{H}_\\text{d}$')
 
     @property
     def _repr_str(self):
@@ -18,4 +19,4 @@ class Demag(EnergyTerm):
            A representation string.
 
         """
-        return "Demag()"
+        return 'Demag()'

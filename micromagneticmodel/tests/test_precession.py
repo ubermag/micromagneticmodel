@@ -17,7 +17,8 @@ class TestPrecession(object):
 
     def test_init_invalid_args(self):
         for gamma in self.invalid_args:
-            with pytest.raises(ValueError):
+            print(gamma)
+            with pytest.raises(Exception):
                 precession = Precession(gamma)
 
     def test_repr_latex_(self):
@@ -37,7 +38,7 @@ class TestPrecession(object):
         for gamma in self.valid_args:
             precession = Precession(gamma)
 
-            assert precession._name == 'precession'
+            assert precession.name == 'precession'
 
     def test_repr(self):
         for gamma in self.valid_args:

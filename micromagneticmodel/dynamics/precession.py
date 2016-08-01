@@ -1,28 +1,28 @@
-from numbers import Real
 from micromagneticmodel.dynamics import DynamicsTerm
+from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
+@typesystem(gamma=UnsignedReal,
+            name=String)
 class Precession(DynamicsTerm):
-    _name = "precession"
-    _latex_str = ("$-\gamma \mathbf{m} \\times \mathbf{H}_\\text{eff}$")
-    
-    def __init__(self, gamma):
+    def __init__(self, gamma, name='precession'):
         """A precession dynamics term class.
 
         Args:
             gamma (Real): gyrotropic ratio (m/As)
 
         """
-        if not isinstance(gamma, Real) or gamma <= 0:
-            raise ValueError("gamma must be a positive real number.")
         self.gamma = gamma
+        self.name = name
+        self.latex_str = ('$-\gamma \mathbf{m} \\times '
+                          '\mathbf{H}_\\text{eff}$')
 
     @property
     def _repr_str(self):
         """A representation string property.
-        
+
         Returns:
            A representation string.
 
         """
-        return "Precession(gamma={})".format(self.gamma)
+        return 'Precession(gamma={})'.format(self.gamma)

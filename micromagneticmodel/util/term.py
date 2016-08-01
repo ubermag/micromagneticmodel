@@ -8,14 +8,8 @@ class Term(object):
     def __init__(self): pass
 
     @abc.abstractmethod
-    def _name(self): pass
-
-    @abc.abstractmethod
-    def _latex_str(self): pass
-
-    @abc.abstractmethod
     def _repr_str(self): pass
-    
+
     @abc.abstractmethod
     def __add__(self, other): pass
 
@@ -25,8 +19,8 @@ class Term(object):
 
     def _repr_latex_(self):
         """A LaTeX representation method in Jupyter notebook."""
-        return self._latex_str
-    
+        return self.latex_str
+
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""
         other.add(self)

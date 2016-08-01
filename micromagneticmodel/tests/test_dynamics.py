@@ -23,7 +23,7 @@ class TestDynamics(object):
             assert isinstance(dynamics, Dynamics)
             assert isinstance(dynamics.terms, list)
             assert dynamics.terms[-1] == term
-            assert dynamics.terms[-1]._name == term._name
+            assert dynamics.terms[-1].name == term.name
 
         assert len(dynamics.terms) == 2
 
@@ -42,7 +42,7 @@ class TestDynamics(object):
             assert isinstance(dynamics, Dynamics)
             assert isinstance(dynamics.terms, list)
             assert dynamics.terms[-1] == term
-            assert dynamics.terms[-1]._name == term._name
+            assert dynamics.terms[-1].name == term.name
 
         assert len(dynamics.terms) == 2
 

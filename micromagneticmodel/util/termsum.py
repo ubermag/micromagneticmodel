@@ -18,9 +18,9 @@ class TermSum(object):
         s = self._lefthandside
 
         for term in self.terms:
-            if term._latex_str[1] != "-" and s[-1] != "=":
+            if term.latex_str[1] != "-" and s[-1] != "=":
                 s += "+"
-            s += term._latex_str[1:-1]
+            s += term.latex_str[1:-1]
 
         if self.terms == []:
             s += "0"
@@ -35,7 +35,7 @@ class TermSum(object):
 
     def _repr_latex_(self):
         return self.latex_str
-    
+
     def __iadd__(self, other):
         self.add(other)
         return self

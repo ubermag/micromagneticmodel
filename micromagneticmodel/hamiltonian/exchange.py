@@ -1,30 +1,30 @@
-from numbers import Real
 from micromagneticmodel.hamiltonian import EnergyTerm
+from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
+@typesystem(A=UnsignedReal,
+            name=String,
+            latex_str=String)
 class Exchange(EnergyTerm):
-    _name = "exchange"
-    _latex_str = ("$A [(\\nabla m_{x})^{2} + "
-                  "(\\nabla m_{y})^{2} + "
-                  "(\\nabla m_{z})^{2}]$")
-
-    def __init__(self, A):
+    def __init__(self, A, name='exchange'):
         """An exchange energy class.
 
         Args:
             A (Real): exchange energy constant (J/m)
 
         """
-        if not isinstance(A, Real) or A <= 0:
-            raise ValueError('A must be a positive real number.')
         self.A = A
+        self.name = name
+        self.latex_str = ('$A [(\\nabla m_{x})^{2} + '
+                          '(\\nabla m_{y})^{2} + '
+                          '(\\nabla m_{z})^{2}]$')
 
     @property
     def _repr_str(self):
         """A representation string property.
-        
+
         Returns:
            A representation string.
 
         """
-        return "Exchange(A={})".format(self.A)
+        return 'Exchange(A={})'.format(self.A)

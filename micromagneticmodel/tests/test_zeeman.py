@@ -27,7 +27,7 @@ class TestZeeman(object):
 
     def test_init_invalid_args(self):
         for H in self.invalid_args:
-            with pytest.raises(ValueError):
+            with pytest.raises(Exception):
                 zeeman = Zeeman(H)
 
     def test_repr_latex(self):
@@ -36,7 +36,6 @@ class TestZeeman(object):
             latex_str = zeeman._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
             assert latex_str[0] == latex_str[-1] == '$'
             assert latex_str[1] == '-'
             assert '\\mu_{0}' in latex_str
@@ -49,7 +48,7 @@ class TestZeeman(object):
         for H in self.valid_args:
             zeeman = Zeeman(H)
 
-            assert zeeman._name == 'zeeman'
+            assert zeeman.name == 'zeeman'
 
     def test_repr(self):
         for H in self.valid_args:

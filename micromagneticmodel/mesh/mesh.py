@@ -69,26 +69,34 @@ class Mesh(object):
         if not isinstance(cmin, (list, tuple, np.ndarray)) or len(cmin) != 3:
             raise ValueError('cmin must be a 3-element tuple, '
                              'list, or np.ndarray.')
+
         if not all([isinstance(i, Real) for i in cmin]):
             raise ValueError('All elements of cmin must be real numbers.')
+
         if not isinstance(cmax, (list, tuple, np.ndarray)) or len(cmax) != 3:
             raise ValueError('cmax must be a 3-element tuple, '
                              'list, or np.ndarray.')
+        
         if not all([isinstance(i, Real) for i in cmax]):
             raise ValueError('All elements of cmax must be real numbers.')
+
+        # check that d is sequence and of length 3
         if not isinstance(d, (list, tuple, np.ndarray)) or len(d) != 3:
             raise ValueError('d must be a 3-element tuple, '
                              'list, or np.ndarray.')
+        # check that cell size d is number and non-negative
         if not all([isinstance(i, Real) and i >= 0 for i in d]):
             raise ValueError('All d elements must be positive real numbers.')
+        # check whether cell size is larger than domain
         for i in range(3):
-            print("Checking i = {}".format(i))
             if d[i] > abs(cmax[i] - cmin[i]):
                 msg = "discretisation cell index d[{}]={} ".format(i, d[i])
                 msg += "is greater than simulation domain = cmax[{}] - cmin[{}] ".format(i, i)
                 msg += "= {}".format(abs(cmax[i] - cmin[i]))
                 raise ValueError(msg)
-        
+
+        # check that simulation domain can be divided into chunks of
+        # given cell size
         if d[0] - tol > cmax[0]-cmin[0] % d[0] > tol or \
            d[1] - tol > cmax[1]-cmin[1] % d[1] > tol or \
            d[2] - tol > cmax[2]-cmin[2] % d[2] > tol:

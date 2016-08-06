@@ -93,3 +93,32 @@ class TestMesh(object):
             mesh = Mesh(cmin, cmax, d)
             with pytest.raises(NotImplementedError):
                 mesh.script()
+
+    def test_sensible_error_message_if_cell_too_large(self):
+        cmin = (0, 0, 0)
+        cmax = (1., 1., 1.)
+
+        d = (2, 1, 1)
+        with pytest.raises(ValueError) as excinfo:
+            mymesh = Mesh(cmin, cmax, d)
+        print(excinfo)
+        assert 'cell' in str(excinfo.value)
+        assert 'greater' in str(excinfo.value)
+        assert 'domain' in str(excinfo.value)
+        # index should be mentioned
+        assert '0' in str(excinfo.value)
+        
+        # now do the same for y and z components
+        for i in [1, 2]:
+            d = [1., 1., 1.]
+            d[i] = 100.
+            with pytest.raises(ValueError) as excinfo:
+                mymesh = Mesh(cmin, cmax, d)
+            print(excinfo)                
+            assert 'cell' in str(excinfo.value)
+            assert 'greater' in str(excinfo.value)
+            assert 'domain' in str(excinfo.value)
+            # index should be mentioned
+            assert str(i) in str(excinfo.value)
+
+

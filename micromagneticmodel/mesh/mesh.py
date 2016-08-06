@@ -81,6 +81,14 @@ class Mesh(object):
                              'list, or np.ndarray.')
         if not all([isinstance(i, Real) and i >= 0 for i in d]):
             raise ValueError('All d elements must be positive real numbers.')
+        for i in range(3):
+            print("Checking i = {}".format(i))
+            if d[i] > abs(cmax[i] - cmin[i]):
+                msg = "discretisation cell index d[{}]={} ".format(i, d[i])
+                msg += "is greater than simulation domain = cmax[{}] - cmin[{}] ".format(i, i)
+                msg += "= {}".format(abs(cmax[i] - cmin[i]))
+                raise ValueError(msg)
+        
         if d[0] - tol > cmax[0]-cmin[0] % d[0] > tol or \
            d[1] - tol > cmax[1]-cmin[1] % d[1] > tol or \
            d[2] - tol > cmax[2]-cmin[2] % d[2] > tol:

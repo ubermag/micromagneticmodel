@@ -122,3 +122,34 @@ class TestMesh(object):
             assert str(i) in str(excinfo.value)
 
 
+    @pytest.skip
+    def test_sensible_error_message_if_domain_not_multiple_cell_size(self):
+        """This tests or the code needs some work"""
+        cmin = (0, 0, 0)
+        cmax = (10., 10., 10.)
+
+        d = (3., 1., 1.)
+        with pytest.raises(ValueError) as excinfo:
+            mymesh = Mesh(cmin, cmax, d)
+        print(excinfo)
+        assert 'domain' in str(excinfo.value)
+        assert 'not' in str(excinfo.value)
+        assert 'multiple' in str(excinfo.value)
+        assert 'cell' in str(excinfo.value)        
+        # index should be mentioned
+        assert '0' in str(excinfo.value)
+        
+        # now do the same for y and z components
+        for i in [1, 2]:
+            d = [1., 1., 1.]
+            d[i] = 100.
+            with pytest.raises(ValueError) as excinfo:
+                mymesh = Mesh(cmin, cmax, d)
+
+            assert 'domain' in str(excinfo.value)
+            assert 'not' in str(excinfo.value)
+            assert 'multiple' in str(excinfo.value)
+            assert 'cell' in str(excinfo.value)        
+            # index should be mentioned
+            assert '0' in str(excinfo.value)
+

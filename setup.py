@@ -13,7 +13,7 @@ setup(
     url = 'https://github.com/joommf/micromagneticmodel',
     download_url = 'https://github.com/joommf/micromagneticmodel/tarball/0.1',
     packages=['micromagneticmodel',
-              'micromagneticmodel.energies',
+              'micromagneticmodel.hamiltonian',
               'micromagneticmodel.dynamics'],
     classifiers=[
         'License :: OSI Approved :: BSD License',

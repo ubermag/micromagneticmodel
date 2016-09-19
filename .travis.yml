@@ -6,7 +6,7 @@ language: python
 python:
   - "3.5"
 # Install any dependencies for running the tests:
-install: pip install codecov pytest-cov matplotlib tornado ipython ipykernel six finitedifferencefield
+install: pip install codecov pytest-cov matplotlib tornado ipython ipykernel six https://github.com/joommf/discretisedfield.git
 # command to run tests
 script: py.test --cov=micromagneticmodel --cov-config .coveragerc
 after_success:

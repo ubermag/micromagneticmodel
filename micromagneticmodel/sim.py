@@ -1,11 +1,11 @@
 import abc
 import six
 from numbers import Real
-from finitedifferencefield import Field
+from discretisedfield import Field
 from micromagneticmodel.hamiltonian import Hamiltonian
 from micromagneticmodel.dynamics import Dynamics
-from micromagneticmodel.mesh import Mesh
 from micromagneticmodel.hamiltonian import Zeeman
+from discretisedfield.mesh import Mesh
 
 
 @six.add_metaclass(abc.ABCMeta)

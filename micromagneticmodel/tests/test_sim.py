@@ -1,9 +1,10 @@
 import pytest
+from discretisedfield.mesh import Mesh
 
 
 @pytest.fixture
 def mesh():
-    from micromagneticmodel.mesh import Mesh
+    from discretisedfield.mesh import Mesh
     cmin = (0, 0, 0)
     cmax = (1., 1., 1.)
     #d = (2, 2, 2)

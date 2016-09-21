@@ -1,10 +1,10 @@
+import micromagneticmodel.util.typesystem as ts
 from micromagneticmodel.hamiltonian import EnergyTerm
-from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
-@typesystem(A=UnsignedReal,
-            name=String,
-            latex_str=String)
+@ts.typesystem(A=ts.UnsignedReal,
+               name=ts.String,
+               latex_str=ts.String)
 class Exchange(EnergyTerm):
     def __init__(self, A, name='exchange'):
         """An exchange energy class.

@@ -1,11 +1,10 @@
+import micromagneticmodel.util.typesystem as ts
 from micromagneticmodel.hamiltonian import EnergyTerm
-from micromagneticmodel.util.typesystem import RealVector3D, UnsignedReal, \
-    String, typesystem
 
 
-@typesystem(H=RealVector3D,
-            name=String,
-            latex_str=String)
+@ts.typesystem(H=ts.RealVector3D,
+               name=ts.String,
+               latex_str=ts.String)
 class Zeeman(EnergyTerm):
     def __init__(self, H, name='zeeman'):
         """A Zeeman energy class.

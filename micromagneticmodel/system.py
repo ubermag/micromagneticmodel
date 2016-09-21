@@ -2,7 +2,6 @@ from numbers import Real
 from discretisedfield import Field
 from .hamiltonian import Hamiltonian
 from .dynamics import Dynamics
-from .hamiltonian import Zeeman
 from .util.typesystem import String, PositiveReal, typesystem
 from discretisedfield import Mesh, Field
 
@@ -29,8 +28,6 @@ class System:
 
     @m.setter
     def m(self, value):
-        m_field = Field(self.mesh, dim=3, value=value)
+        m_field = Field(self.mesh, dim=3)
+        m_field.set(value)
         self._m = m_field
-
-    def energy(self):
-        raise NotImplementedError

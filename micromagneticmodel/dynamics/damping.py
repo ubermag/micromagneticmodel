@@ -1,9 +1,9 @@
+import micromagneticmodel.util.typesystem as ts
 from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
-from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
-@typesystem(alpha=UnsignedReal,
-            name=String)
+@ts.typesystem(alpha=ts.UnsignedReal,
+               name=ts.String)
 class Damping(DynamicsTerm):
     latex_str = ('$\\alpha \mathbf{m} \\times'
                  '\\frac{\partial \mathbf{m}}{\partial t}$')

@@ -1,11 +1,10 @@
+import micromagneticmodel.util.typesystem as ts
 from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
-from micromagneticmodel.util.typesystem import Real, String, \
-    RealVector3D, typesystem
 
 
-@typesystem(K=Real,
-            u=RealVector3D,
-            name=String)
+@ts.typesystem(K=ts.Real,
+               u=ts.RealVector(size=3),
+               name=ts.String)
 class UniaxialAnisotropy(EnergyTerm):
     latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
 

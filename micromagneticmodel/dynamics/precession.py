@@ -1,9 +1,9 @@
+import micromagneticmodel.util.typesystem as ts
 from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
-from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 
-@typesystem(gamma=UnsignedReal,
-            name=String)
+@ts.typesystem(gamma=ts.UnsignedReal,
+               name=ts.String)
 class Precession(DynamicsTerm):
     latex_str = ('$-\gamma \mathbf{m} \\times '
                  '\mathbf{H}_\\text{eff}$')

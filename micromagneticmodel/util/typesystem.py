@@ -38,6 +38,18 @@ class Positive(Descriptor):
         super().__set__(instance, value)
 
 
+class MaxSized(Descriptor):
+    def __init__(self, name=None, **opts):
+        if 'size' not in opts:
+            raise TypeError('missing size option')
+        super().__init__(name, **opts)
+
+    def __set__(self, instance, value):
+        if len(value) != self.size:
+            raise ValueError('size must be < ' + str(self.size))
+        super().__set__(instance, value)
+
+
 class Real(Typed):
     expected_type = numbers.Real
 
@@ -62,23 +74,22 @@ class PositiveReal(Real, Positive):
     pass
 
 
-class Vector3D(Typed):
+class Vector(Typed):
     expected_type = (list, tuple, np.ndarray)
 
-    def __set__(self, instance, value):
-        if len(value) != 3:
-            raise TypeError('Expected 3D vector.')
-        super().__set__(instance, value)
+
+class SizedVector(Vector, MaxSized):
+    pass
 
 
-class RealVector3D(Vector3D):
+class RealVector(SizedVector):
     def __set__(self, instance, value):
         if not all([isinstance(i, numbers.Real) for i in value]):
             raise TypeError('Expected Real vector components.')
         super().__set__(instance, value)
 
 
-class PositiveRealVector3D(RealVector3D):
+class PositiveRealVector(RealVector):
     def __set__(self, instance, value):
         if not all([i > 0 for i in value]):
             raise TypeError('Expected Positive vector components.')

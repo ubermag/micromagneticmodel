@@ -1,6 +1,6 @@
 class Driver(object):
     def __init__(self, system):
-        raise NotImplementedError
+        self.system = system
 
     def drive(self):
         raise NotImplementedError

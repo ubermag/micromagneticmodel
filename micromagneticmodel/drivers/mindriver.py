@@ -1,4 +1,4 @@
-from .drivers import Driver
+from .driver import Driver
 
 
 class MinDriver(Driver):

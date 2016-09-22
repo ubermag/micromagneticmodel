@@ -1,4 +1,4 @@
-class Driver(metaclass=abc.ABCMeta):
+class Driver(object):
     def __init__(self, system):
         raise NotImplementedError
 

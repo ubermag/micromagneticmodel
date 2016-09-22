@@ -38,6 +38,10 @@ class TestSystem:
 
         assert system.name == 'test_sim'
 
+    def test_invalid_args(self):
+        with pytest.raises(TypeError):
+            system = System('a', 1, name='wrong_mesh')
+
     def test_set_m(self):
         m_list = [(0, 0.1, 0),
                   (1, 0, 0),
@@ -60,3 +64,10 @@ class TestSystem:
 
         with pytest.raises(TypeError):
             system.m = 'a'
+
+    def test_total_energy(self):
+        system = System(self.mesh, 1, name='test_sim')
+
+        with pytest.raises(NotImplementedError):
+            system.total_energy()
+        

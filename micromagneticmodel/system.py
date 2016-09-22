@@ -11,7 +11,7 @@ from discretisedfield import Mesh, Field
 class System:
     def __init__(self, mesh, Ms, name=None):
         if not isinstance(mesh, Mesh):
-            raise ValueError('mesh must be of type Mesh.')
+            raise TypeError('mesh must be of type Mesh.')
 
         self.mesh = mesh
         self.Ms = Ms

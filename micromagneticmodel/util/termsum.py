@@ -1,9 +1,7 @@
-import six
 import abc
 
 
-@six.add_metaclass(abc.ABCMeta)
-class TermSum(object):
+class TermSum(metaclass=abc.ABCMeta):
     def __init__(self):
         self.terms = []
 

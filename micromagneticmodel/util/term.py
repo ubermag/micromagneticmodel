@@ -1,9 +1,7 @@
-import six
 import abc
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Term(object):
+class Term(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def __init__(self): pass
 

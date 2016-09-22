@@ -13,10 +13,10 @@ class TestSystem:
         d = (0.2, 0.2, 0.2)
 
         self.mesh = Mesh(c1, c2, d)
-    
+
     def test_init(self):
         Ms = 8.6e5
-        
+
         system = System(self.mesh, Ms, name='test_sim')
 
         assert system.mesh.c1 == (0, 0, 0)
@@ -70,4 +70,3 @@ class TestSystem:
 
         with pytest.raises(NotImplementedError):
             system.total_energy()
-        

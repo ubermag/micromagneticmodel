@@ -8,7 +8,7 @@ class TermSum(metaclass=abc.ABCMeta):
     def __repr__(self):
         """A representation method."""
         return self._repr_str
-    
+
     @property
     def _repr_str(self):
         """Property creating and returning representation string."""

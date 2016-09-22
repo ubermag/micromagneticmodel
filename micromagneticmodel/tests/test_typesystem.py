@@ -1,6 +1,7 @@
 import pytest
 import micromagneticmodel.util.typesystem as ts
 
+
 def test_typesystem():
     @ts.typesystem(a=ts.Real,
                    b=ts.Int,
@@ -44,7 +45,7 @@ def test_typesystem():
     assert dc.g == g
     assert dc.h == h
     assert dc.i == i
-            
+
     # Valid settings
     dc.a = 77.4
     assert dc.a == 77.4
@@ -89,10 +90,10 @@ def test_typesystem():
     with pytest.raises(AttributeError):
         del dc.i
 
+
 def test_missing_size_option():
     with pytest.raises(TypeError):
         @ts.typesystem(a=ts.SizedVector)
         class DummyClass:
             def __init__(self, a):
                 self.a = a
-    

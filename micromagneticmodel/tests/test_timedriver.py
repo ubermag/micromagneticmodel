@@ -1,6 +1,7 @@
 import pytest
 from micromagneticmodel.drivers import TimeDriver
 
+
 class TestTimeDriver:
     def setup(self):
         self.td = TimeDriver(None)

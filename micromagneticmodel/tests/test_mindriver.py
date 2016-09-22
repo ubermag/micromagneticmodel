@@ -1,6 +1,7 @@
 import pytest
 from micromagneticmodel.drivers import MinDriver
 
+
 class TestMinDriver:
     def setup(self):
         self.md = MinDriver(None)

@@ -1,4 +1,4 @@
-from micromagneticmodel.dynamics import DynamicsTerm
+from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
 from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 

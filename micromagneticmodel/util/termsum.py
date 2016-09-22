@@ -19,9 +19,6 @@ class TermSum(metaclass=abc.ABCMeta):
         """A LaTeX representation method in Jupyter notebook."""
         return self.latex_str
 
-    @abc.abstractmethod
-    def _lefthandside(self): pass
-
     @property
     def latex_str(self):
         s = self._lefthandside
@@ -38,9 +35,13 @@ class TermSum(metaclass=abc.ABCMeta):
         return s
 
     @abc.abstractmethod
+    def _lefthandside(self): pass
+
+    @abc.abstractmethod
     def add(self, term): pass
 
     def __iadd__(self, other):
+        """Implementation for += operation."""
         self.add(other)
         return self
 

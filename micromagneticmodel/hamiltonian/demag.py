@@ -1,4 +1,4 @@
-from micromagneticmodel.hamiltonian import EnergyTerm
+from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
 from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 
 

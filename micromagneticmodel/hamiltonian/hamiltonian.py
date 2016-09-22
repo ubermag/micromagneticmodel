@@ -1,5 +1,5 @@
-from micromagneticmodel.hamiltonian import energyterm
 from micromagneticmodel.util import TermSum
+from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
 
 
 class Hamiltonian(TermSum):
@@ -12,6 +12,6 @@ class Hamiltonian(TermSum):
             term (EnergyTerm): energy term to be added
 
         """
-        if not isinstance(term, energyterm.EnergyTerm):
+        if not isinstance(term, EnergyTerm):
             raise TypeError('Only energy terms can be added to hamiltonian.')
         self.terms.append(term)

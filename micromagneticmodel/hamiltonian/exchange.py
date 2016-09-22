@@ -1,5 +1,5 @@
 import micromagneticmodel.util.typesystem as ts
-from micromagneticmodel.hamiltonian import EnergyTerm
+from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
 
 
 @ts.typesystem(A=ts.UnsignedReal,

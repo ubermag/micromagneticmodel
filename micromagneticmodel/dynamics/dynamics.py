@@ -1,5 +1,5 @@
 from micromagneticmodel.util import TermSum
-from micromagneticmodel.dynamics import DynamicsTerm
+from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
 
 
 class Dynamics(TermSum):

@@ -1,13 +1,13 @@
+import .util.typesystem as ts
 from numbers import Real
 from discretisedfield import Field
 from .hamiltonian import Hamiltonian
 from .dynamics import Dynamics
-from .util.typesystem import String, PositiveReal, typesystem
 from discretisedfield import Mesh, Field
 
 
-@typesystem(Ms=PositiveReal,
-            name=String)
+@ts.typesystem(Ms=ts.PositiveReal,
+               name=ts.String)
 class System:
     def __init__(self, mesh, Ms, name=None):
         if not isinstance(mesh, Mesh):

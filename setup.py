@@ -15,7 +15,8 @@ setup(
     packages=['micromagneticmodel',
               'micromagneticmodel.hamiltonian',
               'micromagneticmodel.dynamics',
-              'micromagneticmodel.util'],
+              'micromagneticmodel.util',
+              'micromagneticmodel.tests'],
     classifiers=[
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python :: 2.7',

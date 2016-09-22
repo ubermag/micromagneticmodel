@@ -35,10 +35,10 @@ class TermSum(metaclass=abc.ABCMeta):
         return s
 
     @abc.abstractmethod
-    def _lefthandside(self): pass
+    def _lefthandside(self): pass  # pragma: no cover
 
     @abc.abstractmethod
-    def add(self, term): pass
+    def add(self, term): pass  # pragma: no cover
 
     def __iadd__(self, other):
         """Implementation for += operation."""

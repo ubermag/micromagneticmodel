@@ -31,3 +31,6 @@ class System:
         m_field = Field(self.mesh, dim=3)
         m_field.set(value)
         self._m = m_field
+
+    def total_energy(self):
+        raise NotImplementedError

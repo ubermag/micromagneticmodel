@@ -1,4 +1,4 @@
-import .util.typesystem as ts
+import micromagneticmodel.util.typesystem as ts
 from numbers import Real
 from discretisedfield import Field
 from .hamiltonian import Hamiltonian

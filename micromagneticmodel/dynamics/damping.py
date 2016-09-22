@@ -5,6 +5,9 @@ from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 @typesystem(alpha=UnsignedReal,
             name=String)
 class Damping(DynamicsTerm):
+    latex_str = ('$\\alpha \mathbf{m} \\times'
+                 '\\frac{\partial \mathbf{m}}{\partial t}$')
+
     def __init__(self, alpha, name='damping'):
         """A damping dynamics term class.
 
@@ -14,8 +17,6 @@ class Damping(DynamicsTerm):
         """
         self.alpha = alpha
         self.name = name
-        self.latex_str = ('$\\alpha \mathbf{m} \\times'
-                          '\\frac{\partial \mathbf{m}}{\partial t}$')
 
     @property
     def _repr_str(self):

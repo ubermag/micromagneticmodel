@@ -5,8 +5,19 @@ class TermSum(metaclass=abc.ABCMeta):
     def __init__(self):
         self.terms = []
 
-    @abc.abstractmethod
-    def add(self, term): pass
+    def __repr__(self):
+        """A representation method."""
+        return self._repr_str
+    
+    @property
+    def _repr_str(self):
+        """Property creating and returning representation string."""
+        terms_repr = [term._repr_str for term in self.terms]
+        return " + ".join(terms_repr)
+
+    def _repr_latex_(self):
+        """A LaTeX representation method in Jupyter notebook."""
+        return self.latex_str
 
     @abc.abstractmethod
     def _lefthandside(self): pass
@@ -26,20 +37,12 @@ class TermSum(metaclass=abc.ABCMeta):
 
         return s
 
-    @property
-    def _repr_str(self):
-        terms_repr = [term._repr_str for term in self.terms]
-        return " + ".join(terms_repr)
-
-    def _repr_latex_(self):
-        return self.latex_str
+    @abc.abstractmethod
+    def add(self, term): pass
 
     def __iadd__(self, other):
         self.add(other)
         return self
-
-    def __repr__(self):
-        return self._repr_str
 
     def script(self):
         """This method should be provided by the specific micromagnetic

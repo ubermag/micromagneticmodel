@@ -3,9 +3,10 @@ from micromagneticmodel.hamiltonian import EnergyTerm
 
 
 @ts.typesystem(H=ts.RealVector3D,
-               name=ts.String,
-               latex_str=ts.String)
+               name=ts.String)
 class Zeeman(EnergyTerm):
+    latex_str = '$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$'
+
     def __init__(self, H, name='zeeman'):
         """A Zeeman energy class.
 
@@ -14,7 +15,6 @@ class Zeeman(EnergyTerm):
         """
         self.H = H
         self.name = name
-        self.latex_str = '$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$'
 
     @property
     def _repr_str(self):

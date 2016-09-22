@@ -5,9 +5,10 @@ from micromagneticmodel.util.typesystem import Real, String, \
 
 @typesystem(K=Real,
             u=RealVector3D,
-            name=String,
-            latex_str=String)
+            name=String)
 class UniaxialAnisotropy(EnergyTerm):
+    latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
+
     def __init__(self, K, u, name='uniaxialanisotropy'):
         """A uniaxial anisotropy energy abstract class.
 
@@ -19,7 +20,6 @@ class UniaxialAnisotropy(EnergyTerm):
         self.K = K
         self.u = u
         self.name = name
-        self.latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
 
     @property
     def _repr_str(self):

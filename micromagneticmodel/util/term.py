@@ -5,19 +5,22 @@ class Term(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def __init__(self): pass
 
-    @abc.abstractmethod
-    def _repr_str(self): pass
-
-    @abc.abstractmethod
-    def __add__(self, other): pass
-
     def __repr__(self):
         """A representation method."""
         return self._repr_str
 
+    @abc.abstractmethod
+    def _repr_str(self): pass
+
     def _repr_latex_(self):
         """A LaTeX representation method in Jupyter notebook."""
         return self.latex_str
+
+    @abc.abstractmethod
+    def latex_str(self): pass
+
+    @abc.abstractmethod
+    def __add__(self, other): pass
 
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""

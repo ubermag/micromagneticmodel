@@ -5,6 +5,9 @@ from micromagneticmodel.util.typesystem import UnsignedReal, String, typesystem
 @typesystem(gamma=UnsignedReal,
             name=String)
 class Precession(DynamicsTerm):
+    latex_str = ('$-\gamma \mathbf{m} \\times '
+                 '\mathbf{H}_\\text{eff}$')
+
     def __init__(self, gamma, name='precession'):
         """A precession dynamics term class.
 
@@ -14,8 +17,6 @@ class Precession(DynamicsTerm):
         """
         self.gamma = gamma
         self.name = name
-        self.latex_str = ('$-\gamma \mathbf{m} \\times '
-                          '\mathbf{H}_\\text{eff}$')
 
     @property
     def _repr_str(self):

@@ -15,3 +15,10 @@ class Hamiltonian(TermSum):
         if not isinstance(term, EnergyTerm):
             raise TypeError('Only energy terms can be added to hamiltonian.')
         self.terms.append(term)
+
+    def script(self):
+        script = ""
+        for term in self.terms:
+            script += term.script()
+
+        return script

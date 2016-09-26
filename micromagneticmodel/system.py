@@ -29,9 +29,11 @@ class System:
 
     @m.setter
     def m(self, value):
-        m_field = Field(self.mesh, dim=3)
-        m_field.set(value)
-        self._m = m_field
+        if isinstance(value, Field):
+            self._m = value
+        else:
+            m_field = Field(self.mesh, dim=3, value=value)
+            self._m = m_field
 
     def total_energy(self):
         raise NotImplementedError

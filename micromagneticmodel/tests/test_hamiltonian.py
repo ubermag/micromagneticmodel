@@ -102,5 +102,5 @@ class TestHamiltonian(object):
 
     def test_script(self):
         hamiltonian = Hamiltonian()
-        with pytest.raises(NotImplementedError):
-            hamiltonian.script()
+
+        assert hamiltonian.script() == ""

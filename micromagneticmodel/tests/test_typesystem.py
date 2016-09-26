@@ -11,9 +11,10 @@ def test_typesystem():
                    f=ts.Vector,
                    g=ts.SizedVector(size=2),
                    h=ts.RealVector(size=3),
-                   i=ts.PositiveRealVector(size=3))
+                   i=ts.PositiveRealVector(size=3),
+                   j=ts.TypedAttribute(expected_type=dict))
     class DummyClass:
-        def __init__(self, a, b, c, d, e, f, g, h, i):
+        def __init__(self, a, b, c, d, e, f, g, h, i, j):
             self.a = a
             self.b = b
             self.c = c
@@ -23,6 +24,7 @@ def test_typesystem():
             self.g = g
             self.h = h
             self.i = i
+            self.j = j
 
     a = 1.7
     b = 2
@@ -33,7 +35,8 @@ def test_typesystem():
     g = (1, 2)
     h = (-1, 2, 3.1)
     i = (1, 2, 31.1)
-    dc = DummyClass(a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h, i=i)
+    j = {}
+    dc = DummyClass(a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h, i=i, j=j)
 
     # Simple assertions
     assert dc.a == a
@@ -45,6 +48,7 @@ def test_typesystem():
     assert dc.g == g
     assert dc.h == h
     assert dc.i == i
+    assert dc.j == j
 
     # Valid settings
     dc.a = 77.4
@@ -65,6 +69,8 @@ def test_typesystem():
     assert dc.h == (-5, 6, 8)
     dc.i = (1, 2, 3.2)
     assert dc.i == (1, 2, 3.2)
+    dc.j = {'a': 1}
+    assert dc.j == {'a': 1}
 
     # Invalid settings
     with pytest.raises(TypeError):
@@ -85,6 +91,8 @@ def test_typesystem():
         dc.h = (-5, 6, 8, 9)
     with pytest.raises(TypeError):
         dc.i = (1, -2, 3.2)
+    with pytest.raises(TypeError):
+        dc.j = 5
 
     # Attempt deleting attribute
     with pytest.raises(AttributeError):
@@ -97,3 +105,13 @@ def test_missing_size_option():
         class DummyClass:
             def __init__(self, a):
                 self.a = a
+
+
+def test_missing_expected_type_option():
+    with pytest.raises(TypeError):
+        @ts.typesystem(a=ts.TypedAttribute)
+        class DummyClass:
+            def __init__(self, a):
+                self.a = a
+
+

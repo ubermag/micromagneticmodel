@@ -15,6 +15,7 @@ setup(
     packages=['micromagneticmodel',
               'micromagneticmodel.hamiltonian',
               'micromagneticmodel.dynamics',
+              'micromagneticmodel.drivers',
               'micromagneticmodel.util',
               'micromagneticmodel.tests'],
     classifiers=[

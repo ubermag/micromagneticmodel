@@ -1,26 +1,27 @@
 import micromagneticmodel.util.typesystem as ts
-from numbers import Real
 from discretisedfield import Field
 from .hamiltonian import Hamiltonian
 from .dynamics import Dynamics
 from discretisedfield import Mesh, Field
 
 
-@ts.typesystem(Ms=ts.PositiveReal,
-               name=ts.String)
+@ts.typesystem(name=ts.String,
+               mesh=ts.TypedAttribute(expected_type=Mesh),
+               hamiltonian=ts.TypedAttribute(expected_type=Hamiltonian),
+               dynamics=ts.TypedAttribute(expected_type=Dynamics))
 class System:
-    def __init__(self, mesh, Ms, name=None):
-        if not isinstance(mesh, Mesh):
-            raise TypeError('mesh must be of type Mesh.')
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            if key in ["mesh", "hamiltonian", "dynamics", "m", "name"]:
+                setattr(self, key, value)
+            else:
+                raise AttributeError("Unexpected kwarg {}.".format(key))
 
-        self.mesh = mesh
-        self.Ms = Ms
-        self.name = name
+        if "hamiltonian" not in self.__dict__:
+            self.hamiltonian = Hamiltonian()
 
-        self.hamiltonian = Hamiltonian()
-        self.dynamics = Dynamics()
-
-        self.m = Field(self.mesh, dim=3)
+        if "dynamics" not in self.__dict__:
+            self.dynamics = Dynamics()
 
     @property
     def m(self):

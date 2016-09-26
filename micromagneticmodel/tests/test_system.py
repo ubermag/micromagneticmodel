@@ -18,7 +18,7 @@ class TestSystem:
     def test_init(self):
         system = System(name="test_sim")
         system.mesh = self.mesh
-        
+
         assert system.mesh.c1 == (0, 0, 0)
         assert system.mesh.c2 == (1, 1, 1)
         assert system.mesh.d == (0.2, 0.2, 0.2)
@@ -38,7 +38,7 @@ class TestSystem:
     def test_wrong_kwargs(self):
         with pytest.raises(AttributeError):
             system = System(name="wrong_mesh", attr="a")
-            
+
     def test_invalid_mesh(self):
         with pytest.raises(TypeError):
             system = System(mesh="a", name="wrong_mesh")
@@ -52,7 +52,7 @@ class TestSystem:
                   np.array([0, 1, 2])]
 
         system = System(mesh=self.mesh, name="test_sim")
-        
+
         for m in m_list:
             system.m = m
 

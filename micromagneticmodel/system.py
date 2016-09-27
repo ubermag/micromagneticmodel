@@ -35,5 +35,8 @@ class System:
             m_field = Field(self.mesh, dim=3, value=value)
             self._m = m_field
 
+    def script(self):
+        raise NotImplementedError
+
     def total_energy(self):
         raise NotImplementedError

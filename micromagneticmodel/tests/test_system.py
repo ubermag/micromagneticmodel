@@ -71,3 +71,9 @@ class TestSystem:
 
         with pytest.raises(NotImplementedError):
             system.total_energy()
+
+    def test_script(self):
+        system = System(mesh=self.mesh, name="test_sim")
+
+        with pytest.raises(NotImplementedError):
+            system.script()

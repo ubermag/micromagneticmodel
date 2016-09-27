@@ -102,5 +102,31 @@ class TestHamiltonian(object):
 
     def test_script(self):
         hamiltonian = Hamiltonian()
-
         assert hamiltonian.script() == ""
+
+        hamiltonian = self.exchange + self.uniaxialanisotropy
+        with pytest.raises(NotImplementedError):
+            hamiltonian.script()
+
+    def test_getattr(self):
+        hamiltonian = self.exchange + self.zeeman + \
+                      self.uniaxialanisotropy + self.demag
+
+        assert isinstance(hamiltonian.exchange, Exchange)
+        assert hamiltonian.exchange.A == 1e-12
+
+        assert isinstance(hamiltonian.zeeman, Zeeman)
+        assert hamiltonian.zeeman.H == (0, 0, 1.2e6)
+
+        assert isinstance(hamiltonian.uniaxialanisotropy,
+                          UniaxialAnisotropy)
+        assert hamiltonian.uniaxialanisotropy.K == 1e4
+        assert hamiltonian.uniaxialanisotropy.u == (0, 1, 0)
+
+        assert isinstance(hamiltonian.demag, Demag)
+
+    def test_getattr_error(self):
+        hamiltonian = self.exchange + self.zeeman
+
+        with pytest.raises(AttributeError):
+            demag = hamiltonian.demag

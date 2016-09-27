@@ -49,7 +49,8 @@ class TestSystem:
                   (0, 1, 0),
                   (0, 0, 1),
                   [1, 2, 3],
-                  np.array([0, 1, 2])]
+                  np.array([0, 1, 2]),
+                  Field(self.mesh, dim=3, value=(0, 0, 1))]
 
         system = System(mesh=self.mesh, name="test_sim")
 
@@ -57,8 +58,7 @@ class TestSystem:
             system.m = m
 
             assert isinstance(system.m, Field)
-            for i in range(3):
-                system.m.average()[i] == m[i]
+            assert len(system.m.average()) == 3
 
     def test_set_wrong_m(self):
         system = System(mesh=self.mesh, name="test_sim")

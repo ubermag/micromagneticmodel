@@ -1,15 +1,11 @@
 import pytest
-from micromagneticmodel import System
 from micromagneticmodel.drivers import TimeDriver
 
 
 class TestTimeDriver:
     def setup(self):
-        system = System()
-        self.driver = TimeDriver(system, t=1e-9, n=200, name="driver")
+        self.td = TimeDriver(t=1e-9, n=100)
 
     def test_init(self):
-        assert isinstance(self.driver.system, System)
-        assert self.driver.name == "driver"
-        assert self.driver.t == 1e-9
-        assert self.driver.n == 200
+        assert self.td.t == 1e-9
+        assert self.td.n == 100

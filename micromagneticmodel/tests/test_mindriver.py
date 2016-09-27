@@ -1,12 +1,10 @@
 import pytest
-from micromagneticmodel import System
 from micromagneticmodel.drivers import MinDriver
 
 
 class TestMinDriver:
     def setup(self):
-        system = System()
-        self.driver = MinDriver(system)
+        self.md = MinDriver(mxHxm=0.01)
 
     def test_init(self):
-        assert isinstance(self.driver.system, System)
+        assert self.md.mxHxm == 0.01

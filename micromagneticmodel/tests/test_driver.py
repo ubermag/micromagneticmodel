@@ -1,15 +1,12 @@
 import pytest
-from micromagneticmodel import System
 from micromagneticmodel.drivers import Driver
 
 
 class TestDriver:
     def setup(self):
-        system = System()
-        self.driver = Driver(system, a=1, b=2, c='c')
+        self.driver = Driver(a=1, b=2, c='c')
 
     def test_init(self):
-        assert isinstance(self.driver.system, System)
         assert self.driver.a == 1
         assert self.driver.b == 2
         assert self.driver.c == "c"

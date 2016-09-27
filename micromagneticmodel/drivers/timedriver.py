@@ -1,4 +1,4 @@
-from .driver import Driver
+from micromagneticmodel.drivers import Driver
 
 
 class TimeDriver(Driver):

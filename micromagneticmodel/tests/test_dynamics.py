@@ -91,3 +91,18 @@ class TestDynamics(object):
         dynamics = Dynamics()
         with pytest.raises(NotImplementedError):
             dynamics.script()
+
+    def test_getattr(self):
+        dynamics = self.precession + self.damping
+
+        assert isinstance(dynamics.precession, Precession)
+        assert dynamics.precession.gamma == 2.21e5
+
+        assert isinstance(dynamics.damping, Damping)
+        assert dynamics.damping.alpha == 0.5
+
+    def test_getattr_error(self):
+        dynamics = self.precession + self.damping
+
+        with pytest.raises(AttributeError):
+            stt = dynamics.stt

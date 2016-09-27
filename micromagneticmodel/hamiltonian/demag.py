@@ -4,10 +4,10 @@ from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
 
 @ts.typesystem(name=ts.String)
 class Demag(EnergyTerm):
-    latex_str = ('$-\\frac{1}{2}\mu_{0}M_\\text{s}'
-                 '\mathbf{m} \cdot \mathbf{H}_\\text{d}$')
+    latex_str = ("$-\\frac{1}{2}\mu_{0}M_\\text{s}"
+                 "\mathbf{m} \cdot \mathbf{H}_\\text{d}$")
 
-    def __init__(self, name='demag'):
+    def __init__(self, name="demag"):
         """Abstract demagnetisation energy class."""
         self.name = name
 
@@ -19,4 +19,4 @@ class Demag(EnergyTerm):
            A representation string.
 
         """
-        return 'Demag()'
+        return "Demag()"

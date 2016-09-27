@@ -45,6 +45,12 @@ class TermSum(metaclass=abc.ABCMeta):
         self.add(other)
         return self
 
+    def __getattr__(self, name):
+        for term in self.terms:
+            if term.name == name:
+                return term
+        raise AttributeError("Term does not exist.")
+
     def script(self):
         """This method should be provided by the specific micromagnetic
         calculator"""

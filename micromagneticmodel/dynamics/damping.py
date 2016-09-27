@@ -5,10 +5,10 @@ from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
 @ts.typesystem(alpha=ts.UnsignedReal,
                name=ts.String)
 class Damping(DynamicsTerm):
-    latex_str = ('$\\alpha \mathbf{m} \\times'
-                 '\\frac{\partial \mathbf{m}}{\partial t}$')
+    latex_str = ("$\\alpha \mathbf{m} \\times"
+                 "\\frac{\partial \mathbf{m}}{\partial t}$")
 
-    def __init__(self, alpha, name='damping'):
+    def __init__(self, alpha, name="damping"):
         """A damping dynamics term class.
 
         Args:
@@ -26,4 +26,4 @@ class Damping(DynamicsTerm):
            A representation string.
 
         """
-        return 'Damping(alpha={})'.format(self.alpha)
+        return "Damping(alpha={})".format(self.alpha)

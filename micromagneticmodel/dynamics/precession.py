@@ -5,10 +5,10 @@ from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
 @ts.typesystem(gamma=ts.UnsignedReal,
                name=ts.String)
 class Precession(DynamicsTerm):
-    latex_str = ('$-\gamma \mathbf{m} \\times '
-                 '\mathbf{H}_\\text{eff}$')
+    latex_str = ("$-\gamma \mathbf{m} \\times "
+                 "\mathbf{H}_\\text{eff}$")
 
-    def __init__(self, gamma, name='precession'):
+    def __init__(self, gamma, name="precession"):
         """A precession dynamics term class.
 
         Args:
@@ -26,4 +26,4 @@ class Precession(DynamicsTerm):
            A representation string.
 
         """
-        return 'Precession(gamma={})'.format(self.gamma)
+        return "Precession(gamma={})".format(self.gamma)

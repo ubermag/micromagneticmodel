@@ -1,5 +1,7 @@
 from micromagneticmodel.util import TermSum
 from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
+from micromagneticmodel.dynamics.precession import Precession
+from micromagneticmodel.dynamics.damping import Damping
 
 
 class Dynamics(TermSum):

@@ -6,9 +6,9 @@ from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
                u=ts.RealVector(size=3),
                name=ts.String)
 class UniaxialAnisotropy(EnergyTerm):
-    latex_str = '$K (\mathbf{m} \cdot \mathbf{u})^{2}$'
+    latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
 
-    def __init__(self, K, u, name='uniaxialanisotropy'):
+    def __init__(self, K, u, name="uniaxialanisotropy"):
         """A uniaxial anisotropy energy abstract class.
 
         Args:
@@ -28,4 +28,4 @@ class UniaxialAnisotropy(EnergyTerm):
            A representation string.
 
         """
-        return 'UniaxialAnisotropy(K={}, u={})'.format(self.K, self.u)
+        return "UniaxialAnisotropy(K={}, u={})".format(self.K, self.u)

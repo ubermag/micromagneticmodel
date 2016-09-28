@@ -3,9 +3,11 @@ language: python
 python:
   - "3.5"
 
-install: pip install codecov pytest-cov tornado ipython ipykernel matplotlib git+git://github.com/joommf/discretisedfield.git
+install:
+  pip install codecov pytest-cov tornado ipython ipykernel matplotlib git+git://github.com/joommf/discretisedfield.git
 
-script: py.test --cov=micromagneticmodel --cov-config .coveragerc
+script:
+  py.test --cov=micromagneticmodel --cov-config .coveragerc
 
 after_success:
   codecov

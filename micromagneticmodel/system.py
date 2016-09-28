@@ -1,13 +1,11 @@
 import importlib
-from discretisedfield import Field
-from .hamiltonian import Hamiltonian, EnergyTerm
-from .dynamics import Dynamics, DynamicsTerm
-from discretisedfield import Mesh, Field
+import discretisedfield as df
+import micromagneticmodel as mm
 import micromagneticmodel.util.typesystem as ts
 
 
 @ts.typesystem(name=ts.String,
-               mesh=ts.TypedAttribute(expected_type=Mesh))
+               mesh=ts.TypedAttribute(expected_type=df.Mesh))
 class System:
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
@@ -16,11 +14,11 @@ class System:
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
 
-        selfmodule = importlib.__import__(self.__class__.__module__)
+        self.selfmodule = importlib.__import__(self.__class__.__module__)
         if "hamiltonian" not in self.__dict__:
-            self.hamiltonian = selfmodule.Hamiltonian()
+            self.hamiltonian = self.selfmodule.Hamiltonian()
         if "dynamics" not in self.__dict__:
-            self.dynamics = selfmodule.Dynamics()
+            self.dynamics = self.selfmodule.Dynamics()
 
     @property
     def hamiltonian(self):
@@ -28,10 +26,10 @@ class System:
 
     @hamiltonian.setter
     def hamiltonian(self, value):
-        if isinstance(value, Hamiltonian):
+        if isinstance(value, mm.Hamiltonian):
             self._hamiltonian = value
-        elif isinstance(value, EnergyTerm):
-            hamiltonian = Hamiltonian()
+        elif isinstance(value, mm.EnergyTerm):
+            hamiltonian = self.selfmodule.Hamiltonian()
             hamiltonian += value
             self._hamiltonian = hamiltonian
         else:
@@ -43,10 +41,10 @@ class System:
 
     @dynamics.setter
     def dynamics(self, value):
-        if isinstance(value, Dynamics):
+        if isinstance(value, mm.Dynamics):
             self._dynamics = value
-        elif isinstance(value, DynamicsTerm):
-            dynamics = Dynamics()
+        elif isinstance(value, mm.DynamicsTerm):
+            dynamics = self.selfmodule.Dynamics()
             dynamics += value
             self._dynamics = dynamics
         else:
@@ -58,10 +56,10 @@ class System:
 
     @m.setter
     def m(self, value):
-        if isinstance(value, Field):
+        if isinstance(value, df.Field):
             self._m = value
         else:
-            m_field = Field(self.mesh, dim=3, value=value)
+            m_field = df.Field(self.mesh, dim=3, value=value)
             self._m = m_field
 
     def script(self):

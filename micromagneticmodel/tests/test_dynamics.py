@@ -1,13 +1,13 @@
 import pytest
-from micromagneticmodel.dynamics import Precession, Damping, Dynamics
+import micromagneticmodel as mm
 
 
 class TestDynamics(object):
     def setup(self):
         gamma = 2.21e5
-        self.precession = Precession(gamma)
+        self.precession = mm.Precession(gamma)
         alpha = 0.5
-        self.damping = Damping(alpha)
+        self.damping = mm.Damping(alpha)
 
         self.terms = [self.precession,
                       self.damping]
@@ -16,11 +16,10 @@ class TestDynamics(object):
                               [self.precession, self.damping]]
 
     def test_add_terms(self):
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         for term in self.terms:
             dynamics.add(term)
-
-            assert isinstance(dynamics, Dynamics)
+            assert isinstance(dynamics, mm.Dynamics)
             assert isinstance(dynamics.terms, list)
             assert dynamics.terms[-1] == term
             assert dynamics.terms[-1].name == term.name
@@ -30,23 +29,23 @@ class TestDynamics(object):
     def test_add_sum_of_terms(self):
         dynamics = self.precession + self.damping
 
-        assert isinstance(dynamics, Dynamics)
+        assert isinstance(dynamics, mm.Dynamics)
         assert isinstance(dynamics.terms, list)
         assert len(dynamics.terms) == 2
 
     def test_add_dynamics(self):
         term_sum = self.precession + self.damping
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         dynamics += term_sum
 
         assert len(dynamics.terms) == 2
 
     def test_iadd(self):
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         for term in self.terms:
             dynamics += term
 
-            assert isinstance(dynamics, Dynamics)
+            assert isinstance(dynamics, mm.Dynamics)
             assert isinstance(dynamics.terms, list)
             assert dynamics.terms[-1] == term
             assert dynamics.terms[-1].name == term.name
@@ -54,7 +53,7 @@ class TestDynamics(object):
         assert len(dynamics.terms) == 2
 
     def test_repr_latex(self):
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         latex_str = dynamics._repr_latex_()
         assert latex_str[0] == latex_str[-1] == '$'
         assert latex_str.count('$') == 2
@@ -79,14 +78,14 @@ class TestDynamics(object):
         assert latex_str.count('\partial') == 4
 
     def test_add_exception(self):
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         for term in self.invalid_terms:
             with pytest.raises(TypeError):
                 dynamics += term
 
     def test_repr(self):
         gamma = 2.21e5
-        self.precession = Precession(gamma)
+        self.precession = mm.Precession(gamma)
         alpha = 0.5
         dynamics = self.precession + self.damping
 
@@ -95,17 +94,17 @@ class TestDynamics(object):
         assert repr(dynamics) == exp_str
 
     def test_script(self):
-        dynamics = Dynamics()
+        dynamics = mm.Dynamics()
         with pytest.raises(NotImplementedError):
             dynamics.script()
 
     def test_getattr(self):
         dynamics = self.precession + self.damping
 
-        assert isinstance(dynamics.precession, Precession)
+        assert isinstance(dynamics.precession, mm.Precession)
         assert dynamics.precession.gamma == 2.21e5
 
-        assert isinstance(dynamics.damping, Damping)
+        assert isinstance(dynamics.damping, mm.Damping)
         assert dynamics.damping.alpha == 0.5
 
     def test_getattr_error(self):

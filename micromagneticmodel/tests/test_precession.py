@@ -1,6 +1,6 @@
 import pytest
-from numbers import Real
-from micromagneticmodel.dynamics import Precession
+import numbers
+import micromagneticmodel as mm
 
 
 class TestPrecession(object):
@@ -10,20 +10,19 @@ class TestPrecession(object):
 
     def test_init_valid_args(self):
         for gamma in self.valid_args:
-            precession = Precession(gamma)
-
+            precession = mm.Precession(gamma)
             assert precession.gamma == gamma
-            assert isinstance(precession.gamma, Real)
+            assert isinstance(precession.gamma, numbers.Real)
 
     def test_init_invalid_args(self):
         for gamma in self.invalid_args:
             print(gamma)
             with pytest.raises(Exception):
-                precession = Precession(gamma)
+                precession = mm.Precession(gamma)
 
     def test_repr_latex_(self):
         for gamma in self.valid_args:
-            precession = Precession(gamma)
+            precession = mm.Precession(gamma)
             latex_str = precession._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -36,21 +35,19 @@ class TestPrecession(object):
 
     def test_name(self):
         for gamma in self.valid_args:
-            precession = Precession(gamma)
-
+            precession = mm.Precession(gamma)
             assert precession.name == 'precession'
 
     def test_repr(self):
         for gamma in self.valid_args:
-            precession = Precession(gamma)
-
+            precession = mm.Precession(gamma)
             assert repr(precession) == 'Precession(gamma={})'.format(gamma)
 
-        precession = Precession(2.211e5)
+        precession = mm.Precession(2.211e5)
         assert repr(precession) == 'Precession(gamma=221100.0)'
 
     def test_script(self):
         for gamma in self.valid_args:
-            precession = Precession(gamma)
+            precession = mm.Precession(gamma)
             with pytest.raises(NotImplementedError):
                 precession.script()

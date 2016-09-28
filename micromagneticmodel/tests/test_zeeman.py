@@ -1,7 +1,7 @@
 import pytest
+import numbers
 import numpy as np
-from numbers import Real
-from micromagneticmodel.hamiltonian import Zeeman
+import micromagneticmodel as mm
 
 
 class TestZeeman(object):
@@ -19,20 +19,19 @@ class TestZeeman(object):
 
     def test_init_valid_args(self):
         for H in self.valid_args:
-            zeeman = Zeeman(H)
-
+            zeeman = mm.Zeeman(H)
             assert isinstance(zeeman.H, (tuple, list, np.ndarray))
             assert len(zeeman.H) == 3
-            assert all([isinstance(i, Real) for i in zeeman.H])
+            assert all([isinstance(i, numbers.Real) for i in zeeman.H])
 
     def test_init_invalid_args(self):
         for H in self.invalid_args:
             with pytest.raises(Exception):
-                zeeman = Zeeman(H)
+                zeeman = mm.Zeeman(H)
 
     def test_repr_latex(self):
         for H in self.valid_args:
-            zeeman = Zeeman(H)
+            zeeman = mm.Zeeman(H)
             latex_str = zeeman._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -46,21 +45,19 @@ class TestZeeman(object):
 
     def test_name(self):
         for H in self.valid_args:
-            zeeman = Zeeman(H)
-
+            zeeman = mm.Zeeman(H)
             assert zeeman.name == 'zeeman'
 
     def test_repr(self):
         for H in self.valid_args:
-            zeeman = Zeeman(H)
-
+            zeeman = mm.Zeeman(H)
             assert repr(zeeman) == 'Zeeman(H={})'.format(H)
 
-        zeeman = Zeeman(H=(1, 0, 1))
+        zeeman = mm.Zeeman(H=(1, 0, 1))
         assert repr(zeeman) == "Zeeman(H=(1, 0, 1))"
 
     def test_script(self):
         for H in self.valid_args:
-            zeeman = Zeeman(H)
+            zeeman = mm.Zeeman(H)
             with pytest.raises(NotImplementedError):
                 zeeman.script()

@@ -1,6 +1,6 @@
 import pytest
-from numbers import Real
-from micromagneticmodel.dynamics import Damping
+import numbers
+import micromagneticmodel as mm
 
 
 class TestDamping(object):
@@ -10,19 +10,19 @@ class TestDamping(object):
 
     def test_init_valid_args(self):
         for alpha in self.valid_args:
-            damping = Damping(alpha)
+            damping = mm.Damping(alpha)
 
             assert damping.alpha == alpha
-            assert isinstance(damping.alpha, Real)
+            assert isinstance(damping.alpha, numbers.Real)
 
     def test_init_invalid_args(self):
         for alpha in self.invalid_args:
             with pytest.raises(Exception):
-                damping = Damping(alpha)
+                damping = mm.Damping(alpha)
 
     def test_repr_latex_(self):
         for alpha in self.valid_args:
-            damping = Damping(alpha)
+            damping = mm.Damping(alpha)
             latex_str = damping._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -36,21 +36,19 @@ class TestDamping(object):
 
     def test_name(self):
         for alpha in self.valid_args:
-            damping = Damping(alpha)
-
+            damping = mm.Damping(alpha)
             assert damping.name == 'damping'
 
     def test_repr(self):
         for alpha in self.valid_args:
-            damping = Damping(alpha)
-
+            damping = mm.Damping(alpha)
             assert repr(damping) == 'Damping(alpha={})'.format(alpha)
 
-        damping = Damping(0.05)
+        damping = mm.Damping(0.05)
         assert repr(damping) == 'Damping(alpha=0.05)'
 
     def test_script(self):
         for alpha in self.valid_args:
-            damping = Damping(alpha)
+            damping = mm.Damping(alpha)
             with pytest.raises(NotImplementedError):
                 damping.script()

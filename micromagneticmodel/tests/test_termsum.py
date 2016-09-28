@@ -1,8 +1,8 @@
 import pytest
-from micromagneticmodel.util import TermSum
+import micromagneticmodel as mm
 
 
 class TestTermSum(object):
     def test_abstract_class(self):
         with pytest.raises(TypeError):
-                termsum = TermSum()
+                termsum = mm.util.TermSum()

@@ -1,10 +1,10 @@
 import pytest
-from micromagneticmodel.hamiltonian import Demag
+import micromagneticmodel as mm
 
 
 class TestDemag(object):
     def test_repr_latex_(self):
-        demag = Demag()
+        demag = mm.Demag()
         latex_str = demag._repr_latex_()
 
         # Assert some characteristics of LaTeX string.
@@ -19,20 +19,18 @@ class TestDemag(object):
 
     def test_abstract_script_method(self):
         with pytest.raises(NotImplementedError):
-            demag = Demag()
+            demag = mm.Demag()
             demag.script()
 
     def test_name(self):
-        demag = Demag()
-
+        demag = mm.Demag()
         assert demag.name == 'demag'
 
     def test_repr(self):
-        demag = Demag()
-
+        demag = mm.Demag()
         assert repr(demag) == 'Demag()'
 
     def test_script(self):
-        demag = Demag()
+        demag = mm.Demag()
         with pytest.raises(NotImplementedError):
             demag.script()

@@ -1,8 +1,8 @@
 import pytest
-from micromagneticmodel.util import Term
+import micromagneticmodel as mm
 
 
 class TestTerm(object):
     def test_abstract_class(self):
         with pytest.raises(TypeError):
-                term = Term()
+                term = mm.util.Term()

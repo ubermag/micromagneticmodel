@@ -1,6 +1,6 @@
 import pytest
-from numbers import Real
-from micromagneticmodel.hamiltonian import Exchange
+import numbers
+import micromagneticmodel as mm
 
 
 class TestExchange(object):
@@ -11,24 +11,23 @@ class TestExchange(object):
     def test_abstract_script_method(self):
         for A in self.valid_args:
             with pytest.raises(NotImplementedError):
-                exchange = Exchange(A)
+                exchange = mm.Exchange(A)
                 exchange.script()
 
     def test_init_valid_args(self):
         for A in self.valid_args:
-            exchange = Exchange(A)
-
+            exchange = mm.Exchange(A)
             assert exchange.A == A
-            assert isinstance(exchange.A, Real)
+            assert isinstance(exchange.A, numbers.Real)
 
     def test_init_invalid_args(self):
         for A in self.invalid_args:
             with pytest.raises(Exception):
-                exchange = Exchange(A)
+                exchange = mm.Exchange(A)
 
     def test_repr_latex_(self):
         for A in self.valid_args:
-            exchange = Exchange(A)
+            exchange = mm.Exchange(A)
             latex_str = exchange._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -40,21 +39,19 @@ class TestExchange(object):
 
     def test_name(self):
         for A in self.valid_args:
-            exchange = Exchange(A)
-
+            exchange = mm.Exchange(A)
             assert exchange.name == 'exchange'
 
     def test_repr(self):
         for A in self.valid_args:
-            exchange = Exchange(A)
-
+            exchange = mm.Exchange(A)
             assert repr(exchange) == 'Exchange(A={})'.format(A)
 
-        exchange = Exchange(8.78e-12)
+        exchange = mm.Exchange(8.78e-12)
         assert repr(exchange) == "Exchange(A=8.78e-12)"
 
     def test_script(self):
         for A in self.valid_args:
-            exchange = Exchange(A)
+            exchange = mm.Exchange(A)
             with pytest.raises(NotImplementedError):
                 exchange.script()

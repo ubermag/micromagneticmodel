@@ -38,7 +38,7 @@ class TermSum(metaclass=abc.ABCMeta):
     def _lefthandside(self): pass  # pragma: no cover
 
     @abc.abstractmethod
-    def add(self, term): pass  # pragma: no cover
+    def add(self, value): pass  # pragma: no cover
 
     def __iadd__(self, other):
         """Implementation for += operation."""

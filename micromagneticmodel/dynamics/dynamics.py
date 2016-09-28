@@ -7,14 +7,19 @@ from micromagneticmodel.dynamics.damping import Damping
 class Dynamics(TermSum):
     _lefthandside = '$\\frac{\partial \mathbf{m}}{\partial t}='
 
-    def add(self, term):
-        """Add a dynamics term to hamiltonian.
+    def add(self, value):
+        """Add a dynamics term to dynamics.
 
         Args:
-            term (DynamicsTerm): dynamics term to be added
+            value (DynamicsTerm, Dynamics): dynamics term or dynamics
+              to be added
 
         """
-        if not isinstance(term, DynamicsTerm):
-            raise TypeError("Only DynamicsTerm and Dynamics objects"
+        if isinstance(value, DynamicsTerm):
+            self.terms.append(value)
+        elif isinstance(value, self.__class__):
+            for term in value.terms:
+                self.terms.append(term)
+        else:
+            raise TypeError("Only DynamicsTerm or Dynamics objects"
                             "can be added to dynamics.")
-        self.terms.append(term)

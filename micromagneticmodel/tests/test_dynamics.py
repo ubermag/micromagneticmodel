@@ -15,7 +15,7 @@ class TestDynamics(object):
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.precession, self.damping]]
 
-    def test_add(self):
+    def test_add_terms(self):
         dynamics = Dynamics()
         for term in self.terms:
             dynamics.add(term)
@@ -27,11 +27,18 @@ class TestDynamics(object):
 
         assert len(dynamics.terms) == 2
 
-    def test_add_sum(self):
+    def test_add_sum_of_terms(self):
         dynamics = self.precession + self.damping
 
         assert isinstance(dynamics, Dynamics)
         assert isinstance(dynamics.terms, list)
+        assert len(dynamics.terms) == 2
+
+    def test_add_dynamics(self):
+        term_sum = self.precession + self.damping
+        dynamics = Dynamics()
+        dynamics += term_sum
+
         assert len(dynamics.terms) == 2
 
     def test_iadd(self):

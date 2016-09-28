@@ -22,7 +22,7 @@ class TestHamiltonian(object):
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.exchange, self.zeeman]]
 
-    def test_add(self):
+    def test_add_terms(self):
         hamiltonian = Hamiltonian()
         for term in self.terms:
             hamiltonian.add(term)
@@ -34,13 +34,20 @@ class TestHamiltonian(object):
 
         assert len(hamiltonian.terms) == 4
 
-    def test_add_sum(self):
+    def test_add_sum_of_terms(self):
         hamiltonian = self.exchange + self.zeeman + \
                       self.uniaxialanisotropy + self.demag
 
         assert isinstance(hamiltonian, Hamiltonian)
         assert isinstance(hamiltonian.terms, list)
         assert len(hamiltonian.terms) == 4
+
+    def test_add_hamiltonian(self):
+        term_sum = self.exchange + self.zeeman
+        hamiltonian = Hamiltonian()
+        hamiltonian += term_sum
+
+        assert len(hamiltonian.terms) == 2
 
     def test_iadd(self):
         hamiltonian = Hamiltonian()

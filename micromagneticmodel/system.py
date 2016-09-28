@@ -1,3 +1,4 @@
+import importlib
 import micromagneticmodel.util.typesystem as ts
 from discretisedfield import Field
 from .hamiltonian import Hamiltonian
@@ -17,11 +18,11 @@ class System:
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
 
+        selfmodule = importlib.__import__(self.__class__.__module__)
         if "hamiltonian" not in self.__dict__:
-            self.hamiltonian = Hamiltonian()
-
+            self.hamiltonian = selfmodule.Hamiltonian()
         if "dynamics" not in self.__dict__:
-            self.dynamics = Dynamics()
+            self.dynamics = selfmodule.Dynamics()
 
     @property
     def m(self):

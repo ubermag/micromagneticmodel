@@ -100,14 +100,6 @@ class TestHamiltonian(object):
                    "Demag()")
         assert repr(hamiltonian) == exp_str
 
-    def test_script(self):
-        hamiltonian = Hamiltonian()
-        assert hamiltonian.script() == ""
-
-        hamiltonian = self.exchange + self.uniaxialanisotropy
-        with pytest.raises(NotImplementedError):
-            hamiltonian.script()
-
     def test_getattr(self):
         hamiltonian = self.exchange + self.zeeman + \
                       self.uniaxialanisotropy + self.demag

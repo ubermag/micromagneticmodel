@@ -1,6 +1,7 @@
 import numpy as np
-from micromagneticmodel.consts import mu0
+import micromagneticmodel.consts as mcc
 
 
-def test_mu0():
-    assert mu0 == 4*np.pi*1e-7  # magnetic constant (N/A**2)
+class TestConsts:
+    def test_mu0(self):
+        assert mcc.mu0 == 4*np.pi*1e-7  # magnetic constant (N/A**2)

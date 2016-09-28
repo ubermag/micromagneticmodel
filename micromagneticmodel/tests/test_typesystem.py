@@ -113,5 +113,3 @@ def test_missing_expected_type_option():
         class DummyClass:
             def __init__(self, a):
                 self.a = a
-
-

@@ -10,17 +10,12 @@ setup(
     long_description=readme,
     author='Computational Modelling Group',
     author_email='fangohr@soton.ac.uk',
-    url = 'https://github.com/joommf/micromagneticmodel',
-    download_url = 'https://github.com/joommf/micromagneticmodel/tarball/0.1',
+    url='https://github.com/joommf/micromagneticmodel',
+    download_url='https://github.com/joommf/micromagneticmodel/tarball/0.1',
     packages=['micromagneticmodel',
-              'micromagneticmodel.hamiltonian',
-              'micromagneticmodel.dynamics',
-              'micromagneticmodel.drivers',
-              'micromagneticmodel.util',
               'micromagneticmodel.tests'],
     classifiers=[
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
     ]
 )

@@ -3,8 +3,8 @@ import numpy as np
 from discretisedfield import Mesh, Field
 from micromagneticmodel import System
 from micromagneticmodel.hamiltonian import Hamiltonian
-from micromagneticmodel.dynamics import Dynamics
-from micromagneticmodel.hamiltonian import Exchange, Demag
+from micromagneticmodel import Dynamics, Precession
+from micromagneticmodel import Exchange, Demag
 
 
 class TestSystem:
@@ -65,6 +65,32 @@ class TestSystem:
 
         with pytest.raises(TypeError):
             system.m = "a"
+
+    def test_set_hamiltonian_with_energyterm(self):
+        system = System()
+        assert isinstance(system.hamiltonian, Hamiltonian)
+        system.hamiltonian = Exchange(1e-12)
+        assert isinstance(system.hamiltonian, Hamiltonian)
+        assert len(system.hamiltonian.terms) == 1
+
+    def test_set_hamiltonian_wrong(self):
+        system = System()
+        assert isinstance(system.hamiltonian, Hamiltonian)
+        with pytest.raises(TypeError):
+            system.hamiltonian = 1
+
+    def test_set_dynamics_with_dynamicsterm(self):
+        system = System()
+        assert isinstance(system.dynamics, Dynamics)
+        system.dynamics = Precession(2.211e5)
+        assert isinstance(system.dynamics, Dynamics)
+        assert len(system.dynamics.terms) == 1
+
+    def test_set_dynamics_wrong(self):
+        system = System()
+        assert isinstance(system.dynamics, Dynamics)
+        with pytest.raises(TypeError):
+            system.dynamics = 1
 
     def test_total_energy(self):
         system = System(mesh=self.mesh, name="test_sim")

@@ -1,15 +1,13 @@
 import importlib
-import micromagneticmodel.util.typesystem as ts
 from discretisedfield import Field
-from .hamiltonian import Hamiltonian
-from .dynamics import Dynamics
+from .hamiltonian import Hamiltonian, EnergyTerm
+from .dynamics import Dynamics, DynamicsTerm
 from discretisedfield import Mesh, Field
+import micromagneticmodel.util.typesystem as ts
 
 
 @ts.typesystem(name=ts.String,
-               mesh=ts.TypedAttribute(expected_type=Mesh),
-               hamiltonian=ts.TypedAttribute(expected_type=Hamiltonian),
-               dynamics=ts.TypedAttribute(expected_type=Dynamics))
+               mesh=ts.TypedAttribute(expected_type=Mesh))
 class System:
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
@@ -23,6 +21,36 @@ class System:
             self.hamiltonian = selfmodule.Hamiltonian()
         if "dynamics" not in self.__dict__:
             self.dynamics = selfmodule.Dynamics()
+
+    @property
+    def hamiltonian(self):
+        return self._hamiltonian
+
+    @hamiltonian.setter
+    def hamiltonian(self, value):
+        if isinstance(value, Hamiltonian):
+            self._hamiltonian = value
+        elif isinstance(value, EnergyTerm):
+            hamiltonian = Hamiltonian()
+            hamiltonian += value
+            self._hamiltonian = hamiltonian
+        else:
+            raise TypeError("Expected EnergyTerm or Hamiltonian.")
+
+    @property
+    def dynamics(self):
+        return self._dynamics
+
+    @dynamics.setter
+    def dynamics(self, value):
+        if isinstance(value, Dynamics):
+            self._dynamics = value
+        elif isinstance(value, DynamicsTerm):
+            dynamics = Dynamics()
+            dynamics += value
+            self._dynamics = dynamics
+        else:
+            raise TypeError("Expected DynamicsTerm or Dynamics.")
 
     @property
     def m(self):

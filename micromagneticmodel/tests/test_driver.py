@@ -1,10 +1,10 @@
 import pytest
-from micromagneticmodel.drivers import Driver
+import micromagneticmodel as mm
 
 
 class TestDriver:
     def setup(self):
-        self.driver = Driver(a=1, b=2, c='c')
+        self.driver = mm.Driver(a=1, b=2, c='c')
 
     def test_init(self):
         assert self.driver.a == 1

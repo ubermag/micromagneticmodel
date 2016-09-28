@@ -1,10 +1,10 @@
 import pytest
-from micromagneticmodel.drivers import MinDriver
+import micromagneticmodel as mm
 
 
 class TestMinDriver:
     def setup(self):
-        self.md = MinDriver(mxHxm=0.01)
+        self.md = mm.MinDriver(mxHxm=0.01)
 
     def test_init(self):
         assert self.md.mxHxm == 0.01

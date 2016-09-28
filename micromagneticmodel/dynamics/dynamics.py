@@ -15,6 +15,6 @@ class Dynamics(TermSum):
 
         """
         if not isinstance(term, DynamicsTerm):
-            raise TypeError("Only dynamics terms can be added to the "
-                            "equation of motion.")
+            raise TypeError("Only DynamicsTerm and Dynamics objects"
+                            "can be added to dynamics.")
         self.terms.append(term)

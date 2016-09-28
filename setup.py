@@ -14,7 +14,9 @@ setup(
     download_url='https://github.com/joommf/micromagneticmodel/tarball/0.1',
     packages=['micromagneticmodel',
               'micromagneticmodel.util',
-              'micromagneticmodel.consts',
+              'micromagneticmodel.hamiltonian',
+              'micromagneticmodel.dynamics',
+              'micromagneticmodel.drivers',
               'micromagneticmodel.tests'],
     classifiers=[
         'License :: OSI Approved :: BSD License',

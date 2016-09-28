@@ -1,3 +1,4 @@
+import micromagneticmodel.util  # to avoid import order conflicts
 from .hamiltonian import EnergyTerm, Exchange, \
     UniaxialAnisotropy, Demag, Zeeman, Hamiltonian
 from .dynamics import DynamicsTerm, Precession, \

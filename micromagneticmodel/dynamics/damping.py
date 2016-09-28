@@ -1,5 +1,5 @@
 import micromagneticmodel.util.typesystem as ts
-from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
+from .dynamicsterm import DynamicsTerm
 
 
 @ts.typesystem(alpha=ts.UnsignedReal,

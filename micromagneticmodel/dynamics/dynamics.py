@@ -1,10 +1,8 @@
-from micromagneticmodel.util import TermSum
-from micromagneticmodel.dynamics.dynamicsterm import DynamicsTerm
-from micromagneticmodel.dynamics.precession import Precession
-from micromagneticmodel.dynamics.damping import Damping
+import micromagneticmodel as mm
+from .dynamicsterm import DynamicsTerm
 
 
-class Dynamics(TermSum):
+class Dynamics(mm.util.TermSum):
     _lefthandside = '$\\frac{\partial \mathbf{m}}{\partial t}='
 
     def add(self, value):

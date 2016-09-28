@@ -1,10 +1,10 @@
-from micromagneticmodel.util import Term
+import micromagneticmodel as mm
 
 
-class DynamicsTerm(Term):
+class DynamicsTerm(mm.util.Term):
     def __add__(self, other):
         """Addition for creating a sum of dynamics terms."""
-        from micromagneticmodel.dynamics import Dynamics
+        from .dynamics import Dynamics
         dynamics = Dynamics()
         dynamics.add(self)
         dynamics.add(other)

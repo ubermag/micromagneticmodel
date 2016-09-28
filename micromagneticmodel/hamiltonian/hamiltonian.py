@@ -1,8 +1,8 @@
-from micromagneticmodel.util import TermSum
-from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
+import micromagneticmodel as mm
+from .energyterm import EnergyTerm
 
 
-class Hamiltonian(TermSum):
+class Hamiltonian(mm.util.TermSum):
     _lefthandside = '$\\mathcal{H}='
 
     def add(self, value):

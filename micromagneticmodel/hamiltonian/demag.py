@@ -1,5 +1,5 @@
 import micromagneticmodel.util.typesystem as ts
-from micromagneticmodel.hamiltonian.energyterm import EnergyTerm
+from .energyterm import EnergyTerm
 
 
 @ts.typesystem(name=ts.String)

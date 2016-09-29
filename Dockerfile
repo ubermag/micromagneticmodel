@@ -7,6 +7,6 @@ RUN apt-get update -y && \
     python3 -m pip install --upgrade pip pytest-cov codecov \
       git+git://github.com/joommf/discretisedfield.git
 
-WORKDIR cd /usr/local/
+WORKDIR /usr/local/
 
 RUN git clone https://github.com/joommf/micromagneticmodel.git

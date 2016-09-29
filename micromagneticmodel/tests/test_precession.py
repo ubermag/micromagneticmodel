@@ -16,7 +16,6 @@ class TestPrecession(object):
 
     def test_init_invalid_args(self):
         for gamma in self.invalid_args:
-            print(gamma)
             with pytest.raises(Exception):
                 precession = mm.Precession(gamma)
 

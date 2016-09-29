@@ -7,6 +7,12 @@ RUN apt-get update -y && \
     python3 -m pip install --upgrade pip pytest-cov codecov \
       git+git://github.com/joommf/discretisedfield.git
 
+# Set locale environment variables for nbval tests.
+RUN locale-gen en_GB.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:en
+ENV LC_ALL en_GB.UTF-8
+
 WORKDIR /usr/local/
 
 RUN git clone https://github.com/joommf/micromagneticmodel.git

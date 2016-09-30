@@ -5,13 +5,13 @@ with open('README.rst') as f:
 
 setup(
     name="micromagneticmodel",
-    version="0.5.1",
+    version="0.5.2",
     description="A Python-based micromagnetic model.",
     long_description=readme,
     author="Computational Modelling Group",
     author_email="fangohr@soton.ac.uk",
     url="https://github.com/joommf/micromagneticmodel",
-    download_url="https://github.com/joommf/micromagneticmodel/tarball/0.5.1",
+    download_url="https://github.com/joommf/micromagneticmodel/tarball/0.5.2",
     packages=["micromagneticmodel",
               "micromagneticmodel.util",
               "micromagneticmodel.hamiltonian",

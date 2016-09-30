@@ -55,3 +55,9 @@ class TestExchange(object):
             exchange = mm.Exchange(A)
             with pytest.raises(NotImplementedError):
                 exchange.script()
+
+    def test_energy(self):
+        for A in self.valid_args:
+            exchange = mm.Exchange(A)
+            with pytest.raises(NotImplementedError):
+                exchange.energy()

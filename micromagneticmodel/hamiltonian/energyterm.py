@@ -10,3 +10,6 @@ class EnergyTerm(mm.util.Term):
         hamiltonian.add(self)
         hamiltonian.add(other)
         return hamiltonian
+
+    def energy(self):
+        raise NotImplementedError

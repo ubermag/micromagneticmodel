@@ -64,6 +64,3 @@ class System:
 
     def script(self):
         raise NotImplementedError
-
-    def total_energy(self):
-        raise NotImplementedError

@@ -21,3 +21,6 @@ class Hamiltonian(mm.util.TermSum):
         else:
             raise TypeError("Only EnergyTerm or Hamiltonian objects"
                             "can be added to hamiltonian.")
+
+    def energy(self):
+        raise NotImplementedError

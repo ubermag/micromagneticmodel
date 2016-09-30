@@ -128,3 +128,9 @@ class TestHamiltonian(object):
 
         with pytest.raises(AttributeError):
             demag = hamiltonian.demag
+
+    def test_getattr_error(self):
+        hamiltonian = self.exchange + self.zeeman
+
+        with pytest.raises(NotImplementedError):
+            demag = hamiltonian.energy()

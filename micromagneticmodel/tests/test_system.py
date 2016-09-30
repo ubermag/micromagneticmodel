@@ -89,12 +89,6 @@ class TestSystem:
         with pytest.raises(TypeError):
             system.dynamics = 1
 
-    def test_total_energy(self):
-        system = mm.System(mesh=self.mesh, name="test_sim")
-
-        with pytest.raises(NotImplementedError):
-            system.total_energy()
-
     def test_script(self):
         system = mm.System(mesh=self.mesh, name="test_sim")
 

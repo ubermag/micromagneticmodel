@@ -6,3 +6,8 @@ from .dynamics import DynamicsTerm, Precession, \
     Damping, Dynamics
 from .drivers import Driver, MinDriver, TimeDriver
 from .system import System
+
+
+def test():
+    import pytest
+    pytest.main()

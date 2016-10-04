@@ -1,4 +1,4 @@
-import micromagneticmodel.util.typesystem as ts
+import joommfutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 

@@ -6,19 +6,19 @@ import micromagneticmodel as mm
 
 class TestSystem:
     def setup(self):
-        c1 = (0, 0, 0)
-        c2 = (1., 1., 1.)
-        d = (0.2, 0.2, 0.2)
+        p1 = (0, 0, 0)
+        p2 = (1., 1., 1.)
+        cell = (0.2, 0.2, 0.2)
 
-        self.mesh = df.Mesh(c1, c2, d)
+        self.mesh = df.Mesh(p1, p2, cell)
 
     def test_init(self):
         system = mm.System(name="test_sim")
         system.mesh = self.mesh
 
-        assert system.mesh.c1 == (0, 0, 0)
-        assert system.mesh.c2 == (1, 1, 1)
-        assert system.mesh.d == (0.2, 0.2, 0.2)
+        assert system.mesh.p1 == (0, 0, 0)
+        assert system.mesh.p2 == (1, 1, 1)
+        assert system.mesh.cell == (0.2, 0.2, 0.2)
         assert system.mesh.domain_centre() == (0.5, 0.5, 0.5)
 
         assert isinstance(system.hamiltonian, mm.Hamiltonian)

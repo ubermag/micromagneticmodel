@@ -2,7 +2,7 @@ import micromagneticmodel.util.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(name=ts.String)
+@ts.typesystem(name=ts.ObjectName)
 class Demag(EnergyTerm):
     latex_str = ("$-\\frac{1}{2}\mu_{0}M_\\text{s}"
                  "\mathbf{m} \cdot \mathbf{H}_\\text{d}$")

@@ -4,7 +4,7 @@ from .energyterm import EnergyTerm
 
 @ts.typesystem(K=ts.Real,
                u=ts.RealVector(size=3),
-               name=ts.String)
+               name=ts.ObjectName)
 class UniaxialAnisotropy(EnergyTerm):
     latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
 

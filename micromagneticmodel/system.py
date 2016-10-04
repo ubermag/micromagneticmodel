@@ -4,7 +4,7 @@ import micromagneticmodel as mm
 import micromagneticmodel.util.typesystem as ts
 
 
-@ts.typesystem(name=ts.String,
+@ts.typesystem(name=ts.ObjectName,
                mesh=ts.TypedAttribute(expected_type=df.Mesh))
 class System:
     def __init__(self, **kwargs):

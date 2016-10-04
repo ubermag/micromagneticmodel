@@ -3,7 +3,7 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(A=ts.UnsignedReal,
-               name=ts.String)
+               name=ts.ObjectName)
 class Exchange(EnergyTerm):
     latex_str = ("$A [(\\nabla m_{x})^{2} + "
                  "(\\nabla m_{y})^{2} + "

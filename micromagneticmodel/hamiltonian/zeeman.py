@@ -3,7 +3,7 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(H=ts.RealVector(size=3),
-               name=ts.String)
+               name=ts.ObjectName)
 class Zeeman(EnergyTerm):
     latex_str = "$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$"
 

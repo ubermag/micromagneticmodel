@@ -18,7 +18,8 @@ setup(
               "micromagneticmodel.dynamics",
               "micromagneticmodel.drivers",
               "micromagneticmodel.tests"],
-    install_requires=["discretisedfield"],
+    install_requires=["discretisedfield",
+                      "joommfutil"],
     classifiers=["License :: OSI Approved :: BSD License",
                  "Programming Language :: Python :: 3"]
 )

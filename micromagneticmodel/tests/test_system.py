@@ -19,7 +19,7 @@ class TestSystem:
         assert system.mesh.p1 == (0, 0, 0)
         assert system.mesh.p2 == (1, 1, 1)
         assert system.mesh.cell == (0.2, 0.2, 0.2)
-        assert system.mesh.domain_centre() == (0.5, 0.5, 0.5)
+        assert system.mesh.centre() == (0.5, 0.5, 0.5)
 
         assert isinstance(system.hamiltonian, mm.Hamiltonian)
         assert system.hamiltonian.terms == []

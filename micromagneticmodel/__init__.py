@@ -10,4 +10,4 @@ from .system import System
 
 def test():
     import pytest  # pragma: no cover
-    pytest.main()  # pragma: no cover
+    pytest.main(["--pyargs", "micromagneticmodel"])  # pragma: no cover

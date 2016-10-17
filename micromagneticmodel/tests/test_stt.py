@@ -27,7 +27,7 @@ class TestSTT(object):
     def test_init_invalid_args(self):
         for arg in self.invalid_args:
             u, beta = arg
-            
+
             with pytest.raises(Exception):
                 stt = mm.STT(gamma)
 
@@ -60,7 +60,7 @@ class TestSTT(object):
             stt = mm.STT(u, beta)
 
             assert repr(stt) == "STT(u={}, beta={})".format(u, beta)
-            
+
         stt = mm.STT((1, 2, 3), 15)
         assert repr(stt) == 'STT(u=(1, 2, 3), beta=15)'
 

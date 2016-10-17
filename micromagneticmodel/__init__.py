@@ -1,4 +1,4 @@
-from .consts import mu0
+from .consts import mu0, e, muB, kB
 import micromagneticmodel.util  # to avoid import order conflicts
 from .hamiltonian import EnergyTerm, Exchange, \
     UniaxialAnisotropy, Demag, Zeeman, Hamiltonian

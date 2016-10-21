@@ -8,9 +8,10 @@ install:
 
 script:
   - ci_env=`bash <(curl -s https://codecov.io/env)`
-  - docker run -e ci_env -ti dockertestimage /bin/bash -c
-     "python3 -m pytest --cov=micromagneticmodel --cov-config .coveragerc &&
-      bash <(curl -s https://codecov.io/bash) -t 0d9dd293-acd4-4368-b081-88a560ebe35a"
+  - docker run -e ci_env -ti -d --name testcontainer dockertestimage
+  - docker exec testcontainer make travis-build
+  - docker stop testcontainer
+  - docker rm testcontainer
 
 notifications:
   slack: joommf:eqKxGPXuUP3LxnOfxg7GWgDF

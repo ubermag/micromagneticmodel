@@ -1,18 +1,17 @@
-from setuptools import setup, find_packages
+import setuptools
 
 with open('README.rst') as f:
     readme = f.read()
 
-setup(
+setuptools.setup(
     name='micromagneticmodel',
     version='0.5.4.3',
     description='A Python-based micromagnetic model.',
     long_description=readme,
-    url='https://github.com/joommf/micromagneticmodel',
-    author='Computational Modelling Group',
-    author_email='fangohr@soton.ac.uk',
-    download_url='https://github.com/joommf/micromagneticmodel/tarball/0.5.4.3',
-    packages=find_packages(),
+    url='https://joommf.github.io',
+    author='Marijan Beg, Ryan A. Pepper, and Hans Fangohr',
+    author_email='jupyteroommf@gmail.com',
+    packages=setuptools.find_packages(),
     install_requires=['discretisedfield'],
     classifiers=['Development Status :: 3 - Alpha',
                  'License :: OSI Approved :: BSD License',

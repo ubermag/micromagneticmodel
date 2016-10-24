@@ -13,5 +13,3 @@ hbar = h/(2*math.pi)  # reduced Planck constant (Js)
 gamma = g*e/(2*me)  # gyrotropic ratio (C/kg)
 muB = gamma*hbar  # Bohr magneton (J/T)
 gamma0 = gamma*mu0  # LLG precession term gamma (m/As)
-
-print(gamma0)

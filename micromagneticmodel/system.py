@@ -21,11 +21,11 @@ class System:
 
     @property
     def mesh(self):
-        raise ValueError("Mesh removed.")
+        raise ValueError("Mesh is not a part of system any more.")
 
     @mesh.setter
     def mesh(self, value):
-        raise ValueError("Mesh removed.")
+        raise ValueError("Mesh must not be a part of system any more.")
 
     @property
     def hamiltonian(self):

@@ -15,9 +15,9 @@ class System:
 
         self.selfmodule = importlib.__import__(self.__class__.__module__)
         if "hamiltonian" not in self.__dict__:
-            self.hamiltonian = self.selfmodule.Hamiltonian()
+            self.hamiltonian = 0
         if "dynamics" not in self.__dict__:
-            self.dynamics = self.selfmodule.Dynamics()
+            self.dynamics = 0
 
     @property
     def mesh(self):
@@ -33,7 +33,9 @@ class System:
 
     @hamiltonian.setter
     def hamiltonian(self, value):
-        if isinstance(value, mm.Hamiltonian):
+        if value == 0:
+            self._hamiltonian = self.selfmodule.Hamiltonian()
+        elif isinstance(value, mm.Hamiltonian):
             self._hamiltonian = value
         elif isinstance(value, mm.EnergyTerm):
             hamiltonian = self.selfmodule.Hamiltonian()
@@ -48,7 +50,9 @@ class System:
 
     @dynamics.setter
     def dynamics(self, value):
-        if isinstance(value, mm.Dynamics):
+        if value == 0:
+            self._dynamics = self.selfmodule.Dynamics()
+        elif isinstance(value, mm.Dynamics):
             self._dynamics = value
         elif isinstance(value, mm.DynamicsTerm):
             dynamics = self.selfmodule.Dynamics()

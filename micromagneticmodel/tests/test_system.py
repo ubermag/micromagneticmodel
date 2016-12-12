@@ -51,6 +51,16 @@ class TestSystem:
         assert isinstance(system.hamiltonian, mm.Hamiltonian)
         assert len(system.hamiltonian.terms) == 1
 
+    def test_set_hamiltonian_with_zero(self):
+        system = mm.System()
+        system.hamiltonian = mm.Exchange(1e-12) + mm.Demag()
+        assert isinstance(system.hamiltonian, mm.Hamiltonian)
+        assert len(system.hamiltonian.terms) == 2
+
+        system.hamiltonian = 0
+        assert isinstance(system.hamiltonian, mm.Hamiltonian)
+        assert len(system.hamiltonian.terms) == 0
+
     def test_set_hamiltonian_wrong(self):
         system = mm.System()
         assert isinstance(system.hamiltonian, mm.Hamiltonian)
@@ -64,6 +74,16 @@ class TestSystem:
         assert isinstance(system.dynamics, mm.Dynamics)
         assert len(system.dynamics.terms) == 1
 
+    def test_set_dynamics_with_zero(self):
+        system = mm.System()
+        system.dynamics = mm.Precession(2e5) + mm.Damping(0.1)
+        assert isinstance(system.dynamics, mm.Dynamics)
+        assert len(system.dynamics.terms) == 2
+
+        system.dynamics = 0
+        assert isinstance(system.dynamics, mm.Dynamics)
+        assert len(system.dynamics.terms) == 0
+        
     def test_set_dynamics_wrong(self):
         system = mm.System()
         assert isinstance(system.dynamics, mm.Dynamics)

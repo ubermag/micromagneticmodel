@@ -14,12 +14,6 @@ class TestSystem:
 
     def test_init(self):
         system = mm.System(name="test_sim")
-        system.mesh = self.mesh
-
-        assert system.mesh.p1 == (0, 0, 0)
-        assert system.mesh.p2 == (1, 1, 1)
-        assert system.mesh.cell == (0.2, 0.2, 0.2)
-        assert system.mesh.centre == (0.5, 0.5, 0.5)
 
         assert isinstance(system.hamiltonian, mm.Hamiltonian)
         assert system.hamiltonian.terms == []
@@ -36,29 +30,16 @@ class TestSystem:
         with pytest.raises(AttributeError):
             system = mm.System(name="wrong_mesh", attr="a")
 
-    def test_invalid_mesh(self):
-        with pytest.raises(TypeError):
-            system = mm.System(mesh="a", name="wrong_mesh")
-
     def test_set_m(self):
-        m_list = [(0, 0.1, 0),
-                  (1, 0, 0),
-                  (0, 1, 0),
-                  (0, 0, 1),
-                  [1, 2, 3],
-                  np.array([0, 1, 2]),
-                  df.Field(self.mesh, dim=3, value=(0, 0, 1))]
+        system = mm.System(name="test_sim")
 
-        system = mm.System(mesh=self.mesh, name="test_sim")
+        system.m = df.Field(self.mesh, dim=3, value=(0, 0, 1))
 
-        for m in m_list:
-            system.m = m
-
-            assert isinstance(system.m, df.Field)
-            assert len(system.m.average) == 3
+        assert isinstance(system.m, df.Field)
+        assert len(system.m.average) == 3
 
     def test_set_wrong_m(self):
-        system = mm.System(mesh=self.mesh, name="test_sim")
+        system = mm.System(name="test_sim")
 
         with pytest.raises(TypeError):
             system.m = "a"
@@ -90,7 +71,7 @@ class TestSystem:
             system.dynamics = 1
 
     def test_script(self):
-        system = mm.System(mesh=self.mesh, name="test_sim")
+        system = mm.System(name="test_sim")
 
         with pytest.raises(NotImplementedError):
             system.script()

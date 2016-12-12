@@ -4,12 +4,11 @@ import micromagneticmodel as mm
 import joommfutil.typesystem as ts
 
 
-@ts.typesystem(name=ts.ObjectName,
-               mesh=ts.TypedAttribute(expected_type=df.Mesh))
+@ts.typesystem(name=ts.ObjectName)
 class System:
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
-            if key in ["mesh", "hamiltonian", "dynamics", "m", "name"]:
+            if key in ["hamiltonian", "dynamics", "m", "name"]:
                 setattr(self, key, value)
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
@@ -19,6 +18,14 @@ class System:
             self.hamiltonian = self.selfmodule.Hamiltonian()
         if "dynamics" not in self.__dict__:
             self.dynamics = self.selfmodule.Dynamics()
+
+    @property
+    def mesh(self):
+        raise ValueError("Mesh removed.")
+
+    @mesh.setter
+    def mesh(self, value):
+        raise ValueError("Mesh removed.")
 
     @property
     def hamiltonian(self):
@@ -59,8 +66,7 @@ class System:
         if isinstance(value, df.Field):
             self._m = value
         else:
-            m_field = df.Field(self.mesh, dim=3, value=value)
-            self._m = m_field
+            raise TypeError("Unsupported type(m)={}".format(type(value)))
 
     def script(self):
         raise NotImplementedError

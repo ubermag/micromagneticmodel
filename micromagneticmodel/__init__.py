@@ -4,7 +4,7 @@ from .hamiltonian import EnergyTerm, Exchange, \
     UniaxialAnisotropy, Demag, Zeeman, Hamiltonian
 from .dynamics import DynamicsTerm, Precession, \
     Damping, STT, Dynamics
-from .drivers import Driver, MinDriver, TimeDriver
+from .drivers import Driver, MinDriver, TimeDriver, HysteresisDriver
 from .system import System
 
 

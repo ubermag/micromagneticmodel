@@ -33,14 +33,11 @@ class System:
 
     @hamiltonian.setter
     def hamiltonian(self, value):
+        self._hamiltonian = self.selfmodule.Hamiltonian()
         if value == 0:
-            self._hamiltonian = self.selfmodule.Hamiltonian()
-        elif isinstance(value, mm.Hamiltonian):
-            self._hamiltonian = value
-        elif isinstance(value, mm.EnergyTerm):
-            hamiltonian = self.selfmodule.Hamiltonian()
-            hamiltonian += value
-            self._hamiltonian = hamiltonian
+            pass
+        elif isinstance(value, (mm.EnergyTerm, mm.Hamiltonian)):
+            self._hamiltonian += value
         else:
             raise TypeError("Expected EnergyTerm or Hamiltonian.")
 
@@ -50,14 +47,11 @@ class System:
 
     @dynamics.setter
     def dynamics(self, value):
+        self._dynamics = self.selfmodule.Dynamics()
         if value == 0:
-            self._dynamics = self.selfmodule.Dynamics()
-        elif isinstance(value, mm.Dynamics):
-            self._dynamics = value
-        elif isinstance(value, mm.DynamicsTerm):
-            dynamics = self.selfmodule.Dynamics()
-            dynamics += value
-            self._dynamics = dynamics
+            pass
+        elif isinstance(value, (mm.DynamicsTerm, mm.Dynamics)):
+            self._dynamics += value
         else:
             raise TypeError("Expected DynamicsTerm or Dynamics.")
 

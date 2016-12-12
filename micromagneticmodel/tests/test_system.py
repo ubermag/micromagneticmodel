@@ -83,7 +83,7 @@ class TestSystem:
         system.dynamics = 0
         assert isinstance(system.dynamics, mm.Dynamics)
         assert len(system.dynamics.terms) == 0
-        
+
     def test_set_dynamics_wrong(self):
         system = mm.System()
         assert isinstance(system.dynamics, mm.Dynamics)

@@ -39,7 +39,7 @@ class System:
         elif isinstance(value, (mm.EnergyTerm, mm.Hamiltonian)):
             self._hamiltonian += value
         else:
-            raise TypeError("Expected EnergyTerm or Hamiltonian.")
+            raise TypeError("Unsupported type(value)={}".format(type(value)))
 
     @property
     def dynamics(self):
@@ -53,7 +53,7 @@ class System:
         elif isinstance(value, (mm.DynamicsTerm, mm.Dynamics)):
             self._dynamics += value
         else:
-            raise TypeError("Expected DynamicsTerm or Dynamics.")
+            raise TypeError("Unsupported type(value)={}".format(type(value)))
 
     @property
     def m(self):

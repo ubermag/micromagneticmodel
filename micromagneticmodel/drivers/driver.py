@@ -6,5 +6,6 @@ class Driver:
     def drive(self):
         raise NotImplementedError
 
+    @property
     def script(self):
         raise NotImplementedError

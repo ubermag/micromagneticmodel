@@ -17,4 +17,4 @@ class TestDriver:
 
     def test_script(self):
         with pytest.raises(NotImplementedError):
-            self.driver.script()
+            script = self.driver.script

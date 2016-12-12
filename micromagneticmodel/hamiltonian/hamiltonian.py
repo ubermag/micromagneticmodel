@@ -22,5 +22,14 @@ class Hamiltonian(mm.util.TermSum):
             raise TypeError("Only EnergyTerm or Hamiltonian objects"
                             "can be added to hamiltonian.")
 
+    @property
     def energy(self):
+        raise NotImplementedError
+
+    @property
+    def energy_density(self):
+        raise NotImplementedError
+
+    @property
+    def effective_field(self):
         raise NotImplementedError

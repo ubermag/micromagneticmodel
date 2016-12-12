@@ -69,4 +69,4 @@ class TestSTT(object):
             u, beta = arg
             stt = mm.STT(u, beta)
             with pytest.raises(NotImplementedError):
-                stt.script()
+                script = stt.script

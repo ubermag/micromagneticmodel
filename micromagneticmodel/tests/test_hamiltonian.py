@@ -134,3 +134,8 @@ class TestHamiltonian(object):
 
         with pytest.raises(NotImplementedError):
             demag = hamiltonian.energy()
+
+    def test_script(self):
+        hamiltonian = mm.Hamiltonian()
+        with pytest.raises(NotImplementedError):
+            script = hamiltonian.script

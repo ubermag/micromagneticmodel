@@ -93,11 +93,6 @@ class TestDynamics(object):
                    "Damping(alpha=0.5)")
         assert repr(dynamics) == exp_str
 
-    def test_script(self):
-        dynamics = mm.Dynamics()
-        with pytest.raises(NotImplementedError):
-            dynamics.script()
-
     def test_getattr(self):
         dynamics = self.precession + self.damping
 
@@ -112,3 +107,8 @@ class TestDynamics(object):
 
         with pytest.raises(AttributeError):
             stt = dynamics.stt
+
+    def test_script(self):
+        dynamics = mm.Dynamics()
+        with pytest.raises(NotImplementedError):
+            script = dynamics.script

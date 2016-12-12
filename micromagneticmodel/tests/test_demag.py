@@ -17,11 +17,6 @@ class TestDemag(object):
         assert 'M_\\text{s}' in latex_str
         assert '\\frac{1}{2}' in latex_str
 
-    def test_abstract_script_method(self):
-        with pytest.raises(NotImplementedError):
-            demag = mm.Demag()
-            demag.script()
-
     def test_name(self):
         demag = mm.Demag()
         assert demag.name == 'demag'
@@ -33,4 +28,4 @@ class TestDemag(object):
     def test_script(self):
         demag = mm.Demag()
         with pytest.raises(NotImplementedError):
-            demag.script()
+            script = demag.script

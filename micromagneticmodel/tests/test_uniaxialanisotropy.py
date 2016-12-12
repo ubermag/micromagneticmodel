@@ -75,4 +75,4 @@ class TestUniaxialAnisotropy(object):
             u = arg[1]
             anisotropy = mm.UniaxialAnisotropy(K, u)
             with pytest.raises(NotImplementedError):
-                anisotropy.script()
+                script = anisotropy.script

@@ -49,4 +49,4 @@ class TestPrecession(object):
         for gamma in self.valid_args:
             precession = mm.Precession(gamma)
             with pytest.raises(NotImplementedError):
-                precession.script()
+                script = precession.script

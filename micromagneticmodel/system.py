@@ -72,5 +72,6 @@ class System:
         else:
             raise TypeError("Unsupported type(m)={}".format(type(value)))
 
+    @property
     def script(self):
         raise NotImplementedError

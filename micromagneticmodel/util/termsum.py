@@ -51,6 +51,7 @@ class TermSum(metaclass=abc.ABCMeta):
                 return term
         raise AttributeError("Term does not exist.")
 
+    @property
     def script(self):
         """This method should be provided by the specific micromagnetic
         calculator"""

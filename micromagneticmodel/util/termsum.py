@@ -43,12 +43,12 @@ class TermSum(metaclass=abc.ABCMeta):
     def add(self, value):
         """Add Term or TermSum to the TermSum"""
         if isinstance(value, self._terms_type):
-            setattr(value, "termsum", self)
+            setattr(value, "_termsum", self)
             self.terms.append(value)
             setattr(self, value.name, value)
         elif isinstance(value, self.__class__):
             for term in value.terms:
-                setattr(term, "termsum", self)
+                setattr(term, "_termsum", self)
                 self.terms.append(term)
                 setattr(self, term.name, term)
         else:

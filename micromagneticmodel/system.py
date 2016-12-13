@@ -26,7 +26,7 @@ class System:
     @hamiltonian.setter
     def hamiltonian(self, value):
         self._hamiltonian = self.selfmodule.Hamiltonian()
-        setattr(self._hamiltonian, "system", self)
+        setattr(self._hamiltonian, "_system", self)
         if value == 0:
             pass
         elif isinstance(value, (mm.EnergyTerm, mm.Hamiltonian)):
@@ -41,7 +41,7 @@ class System:
     @dynamics.setter
     def dynamics(self, value):
         self._dynamics = self.selfmodule.Dynamics()
-        setattr(self._dynamics, "system", self)
+        setattr(self._dynamics, "_system", self)
         if value == 0:
             pass
         elif isinstance(value, (mm.DynamicsTerm, mm.Dynamics)):

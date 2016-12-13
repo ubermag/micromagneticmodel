@@ -1,5 +1,4 @@
 import abc
-import importlib
 
 
 class TermSum(metaclass=abc.ABCMeta):
@@ -43,8 +42,7 @@ class TermSum(metaclass=abc.ABCMeta):
 
     def add(self, value):
         """Add Term or TermSum to the TermSum"""
-        selfmodule = importlib.__import__(self.__class__.__module__)
-        if isinstance(value, getattr(selfmodule, self._terms_type)):
+        if isinstance(value, self._terms_type):
             self.terms.append(value)
         elif isinstance(value, self.__class__):
             for term in value.terms:

@@ -48,7 +48,7 @@ class TermSum(metaclass=abc.ABCMeta):
         elif isinstance(value, self.__class__):
             for term in value.terms:
                 self.terms.append(term)
-                setattr(self, term.name, value)
+                setattr(self, term.name, term)
         else:
             msg = ("Cannot add type(value)={} "
                    "to {}.".format(value, self.__class__))

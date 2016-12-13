@@ -1,4 +1,5 @@
 import abc
+import importlib
 
 
 class Term(metaclass=abc.ABCMeta):
@@ -20,7 +21,15 @@ class Term(metaclass=abc.ABCMeta):
     def latex_str(self): pass  # pragma: no cover
 
     @abc.abstractmethod
-    def __add__(self, other): pass  # pragma: no cover
+    def _termsum_type(self): pass  # pragma: no cover
+
+    def __add__(self, other):
+        """Addition operation."""
+        selfmodule = importlib.__import__(self.__class__.__module__)
+        termsum = getattr(selfmodule, self._termsum_type)()
+        termsum.add(self)
+        termsum.add(other)
+        return termsum
 
     def __radd__(self, other):
         """Reverse addition for creating a list of energy objects."""

@@ -5,7 +5,7 @@ class EnergyProperties:
     @property
     def data(self):
         selfmodule = importlib.__import__(self.__class__.__module__)
-        data = selfmodule.Data(self.termsum.system, self.__class__.__name__)
+        return selfmodule.Data(self.termsum.system, self.__class__.__name__)
     
     @property
     def energy(self):

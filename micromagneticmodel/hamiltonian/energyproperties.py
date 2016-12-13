@@ -3,15 +3,18 @@ import importlib
 
 class EnergyProperties:
     @property
+    def data(self):
+        selfmodule = importlib.__import__(self.__class__.__module__)
+        data = selfmodule.Data(self.termsum.system, self.__class__.__name__)
+    
+    @property
     def energy(self):
-        raise NotImplementedError
+        return self.data.energy
 
     @property
     def energy_density(self):
-        raise NotImplementedError
+        return self.data.energy_density
 
     @property
     def effective_field(self):
-        selfmodule = importlib.__import__(self.__class__.__module__)
-        data = selfmodule.Data(self.termsum.system, self.__class__.__name__)
-        return data.effective_field
+        return self.data.effective_field

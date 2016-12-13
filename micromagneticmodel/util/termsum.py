@@ -48,7 +48,7 @@ class TermSum(metaclass=abc.ABCMeta):
             setattr(self, value.name, value)
         elif isinstance(value, self.__class__):
             for term in value.terms:
-                setattr(value, "termsum", self)
+                setattr(term, "termsum", self)
                 self.terms.append(term)
                 setattr(self, term.name, term)
         else:

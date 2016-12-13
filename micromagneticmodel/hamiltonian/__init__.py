@@ -1,3 +1,4 @@
+from .energyproperties import EnergyProperties
 from .energyterm import EnergyTerm
 from .exchange import Exchange
 from .zeeman import Zeeman

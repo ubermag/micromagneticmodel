@@ -1,6 +1,6 @@
 from .consts import mu0, e, me, kB, h, g, hbar, gamma, muB, gamma0
 import micromagneticmodel.util  # to avoid import order conflicts
-from .hamiltonian import EnergyTerm, Exchange, \
+from .hamiltonian import EnergyProperties, EnergyTerm, Exchange, \
     UniaxialAnisotropy, Demag, Zeeman, Hamiltonian
 from .dynamics import DynamicsTerm, Precession, \
     Damping, STT, Dynamics

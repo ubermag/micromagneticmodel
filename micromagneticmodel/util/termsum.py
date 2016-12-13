@@ -37,6 +37,9 @@ class TermSum(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _lefthandside(self): pass  # pragma: no cover
 
+    @abc.abstractmethod
+    def _terms_type(self): pass  # pragma: no cover
+
     def add(self, value):
         """Add Term or TermSum to the TermSum"""
         if isinstance(value, self._terms_type):

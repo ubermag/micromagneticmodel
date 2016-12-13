@@ -44,9 +44,11 @@ class TermSum(metaclass=abc.ABCMeta):
         """Add Term or TermSum to the TermSum"""
         if isinstance(value, self._terms_type):
             self.terms.append(value)
+            setattr(self, value.name, value)
         elif isinstance(value, self.__class__):
             for term in value.terms:
                 self.terms.append(term)
+                setattr(self, term.name, value)
         else:
             msg = ("Cannot add type(value)={} "
                    "to {}.".format(value, self.__class__))
@@ -56,12 +58,6 @@ class TermSum(metaclass=abc.ABCMeta):
         """Implementation for += operation."""
         self.add(other)
         return self
-
-    def __getattr__(self, name):
-        for term in self.terms:
-            if term.name == name:
-                return term
-        raise AttributeError("Term does not exist.")
 
     @property
     def script(self):

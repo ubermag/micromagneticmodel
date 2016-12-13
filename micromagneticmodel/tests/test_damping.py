@@ -3,7 +3,7 @@ import numbers
 import micromagneticmodel as mm
 
 
-class TestDamping(object):
+class TestDamping:
     def setup(self):
         self.valid_args = [1, 2.0, 5e-11, 1e-12, 1e-13, 1e-14, 1e6]
         self.invalid_args = [-1, -2.1, 'a', (1, 2), -3.6e-6, '0', [1, 2, 3]]

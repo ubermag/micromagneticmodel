@@ -3,7 +3,7 @@ import numbers
 import micromagneticmodel as mm
 
 
-class TestSTT(object):
+class TestSTT:
     def setup(self):
         self.valid_args = [((1, -2, 3), 1),
                            ((-1.0, 0, 1e-6), 2.0),

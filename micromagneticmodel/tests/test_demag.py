@@ -2,7 +2,7 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestDemag(object):
+class TestDemag:
     def test_repr_latex_(self):
         demag = mm.Demag()
         latex_str = demag._repr_latex_()
@@ -29,3 +29,18 @@ class TestDemag(object):
         demag = mm.Demag()
         with pytest.raises(NotImplementedError):
             script = demag.script
+
+    def test_energy(self):
+        demag = mm.Demag()
+        with pytest.raises(NotImplementedError):
+            energy = demag.energy
+
+    def test_energy_denisty(self):
+        demag = mm.Demag()
+        with pytest.raises(NotImplementedError):
+            energy_density = demag.energy_density
+
+    def test_effective_field(self):
+        demag = mm.Demag()
+        with pytest.raises(NotImplementedError):
+            effective_field = demag.effective_field

@@ -2,7 +2,7 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestHamiltonian(object):
+class TestHamiltonian:
     def setup(self):
         A = 1e-12
         self.exchange = mm.Exchange(A)
@@ -139,3 +139,18 @@ class TestHamiltonian(object):
         hamiltonian = mm.Hamiltonian()
         with pytest.raises(NotImplementedError):
             script = hamiltonian.script
+
+    def test_energy(self):
+        hamiltonian = mm.Hamiltonian()
+        with pytest.raises(NotImplementedError):
+            energy = hamiltonian.energy
+
+    def test_energy_denisty(self):
+        hamiltonian = mm.Hamiltonian()
+        with pytest.raises(NotImplementedError):
+            energy_density = hamiltonian.energy_density
+
+    def test_effective_field(self):
+        hamiltonian = mm.Hamiltonian()
+        with pytest.raises(NotImplementedError):
+            effective_field = hamiltonian.effective_field

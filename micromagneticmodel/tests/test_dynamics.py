@@ -2,7 +2,7 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestDynamics(object):
+class TestDynamics:
     def setup(self):
         gamma = 2.21e5
         self.precession = mm.Precession(gamma)

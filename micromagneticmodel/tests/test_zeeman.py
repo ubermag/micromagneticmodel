@@ -4,7 +4,7 @@ import numpy as np
 import micromagneticmodel as mm
 
 
-class TestZeeman(object):
+class TestZeeman:
     def setup(self):
         self.valid_args = [(1, 1.4, 1),
                            (0, 0, 1),
@@ -61,3 +61,21 @@ class TestZeeman(object):
             zeeman = mm.Zeeman(H)
             with pytest.raises(NotImplementedError):
                 script = zeeman.script
+
+    def test_energy(self):
+        for H in self.valid_args:
+            zeeman = mm.Zeeman(H)
+            with pytest.raises(NotImplementedError):
+                energy = zeeman.energy
+
+    def test_energy_denisty(self):
+        for H in self.valid_args:
+            zeeman = mm.Zeeman(H)
+            with pytest.raises(NotImplementedError):
+                energy_density = zeeman.energy_density
+
+    def test_effective_field(self):
+        for H in self.valid_args:
+            zeeman = mm.Zeeman(H)
+            with pytest.raises(NotImplementedError):
+                effective_field = zeeman.effective_field

@@ -3,7 +3,7 @@ import numbers
 import micromagneticmodel as mm
 
 
-class TestExchange(object):
+class TestExchange:
     def setup(self):
         self.valid_args = [1, 2.0, 5e-11, 1e-12, 1e-13, 1e-14, 1e6]
         self.invalid_args = [-1, -2.1, 'a', (1, 2), -3.6e-6, '0', [1, 2, 3]]
@@ -54,4 +54,16 @@ class TestExchange(object):
         for A in self.valid_args:
             exchange = mm.Exchange(A)
             with pytest.raises(NotImplementedError):
-                exchange.energy()
+                energy = exchange.energy
+
+    def test_energy_density(self):
+        for A in self.valid_args:
+            exchange = mm.Exchange(A)
+            with pytest.raises(NotImplementedError):
+                energy_density = exchange.energy_density
+
+    def test_effective_field(self):
+        for A in self.valid_args:
+            exchange = mm.Exchange(A)
+            with pytest.raises(NotImplementedError):
+                effective_field = exchange.effective_field

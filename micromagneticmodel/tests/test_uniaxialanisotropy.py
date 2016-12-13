@@ -4,7 +4,7 @@ import numpy as np
 import micromagneticmodel as mm
 
 
-class TestUniaxialAnisotropy(object):
+class TestUniaxialAnisotropy:
     def setup(self):
         self.valid_args = [(1, (0, 1, 0)),
                            (5e6, [1, 1, 1]),
@@ -18,9 +18,7 @@ class TestUniaxialAnisotropy(object):
                              ((1, 0, 0), (0, 0, 1))]
 
     def test_init_valid_args(self):
-        for arg in self.valid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             assert anisotropy.K == K
             assert isinstance(anisotropy.K, numbers.Real)
@@ -29,16 +27,12 @@ class TestUniaxialAnisotropy(object):
             assert all([isinstance(i, numbers.Real) for i in anisotropy.u])
 
     def test_init_invalid_args(self):
-        for arg in self.invalid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.invalid_args:
             with pytest.raises(Exception):
                 anisotropy = mm.UniaxialAnisotropy(K, u)
 
     def test_repr_latex(self):
-        for arg in self.valid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             latex_str = anisotropy._repr_latex_()
 
@@ -52,16 +46,12 @@ class TestUniaxialAnisotropy(object):
             assert '\cdot' in latex_str
 
     def test_name(self):
-        for arg in self.valid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             assert anisotropy.name == 'uniaxialanisotropy'
 
     def test_repr(self):
-        for arg in self.valid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             exp_str = "UniaxialAnisotropy(K={}, u={})".format(K, u)
             assert repr(anisotropy) == exp_str
@@ -70,9 +60,25 @@ class TestUniaxialAnisotropy(object):
         assert repr(anisotropy) == "UniaxialAnisotropy(K=1000, u=(0, 0, 1))"
 
     def test_script(self):
-        for arg in self.valid_args:
-            K = arg[0]
-            u = arg[1]
+        for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             with pytest.raises(NotImplementedError):
                 script = anisotropy.script
+
+    def test_energy(self):
+        for K, u in self.valid_args:
+            anisotropy = mm.UniaxialAnisotropy(K, u)
+            with pytest.raises(NotImplementedError):
+                energy = anisotropy.energy
+
+    def test_energy_denisty(self):
+        for K, u in self.valid_args:
+            anisotropy = mm.UniaxialAnisotropy(K, u)
+            with pytest.raises(NotImplementedError):
+                energy_density = anisotropy.energy_density
+
+    def test_effective_field(self):
+        for K, u in self.valid_args:
+            anisotropy = mm.UniaxialAnisotropy(K, u)
+            with pytest.raises(NotImplementedError):
+                effective_field = anisotropy.effective_field

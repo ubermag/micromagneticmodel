@@ -9,7 +9,6 @@ class TestSystem:
         p1 = (0, 0, 0)
         p2 = (1., 1., 1.)
         cell = (0.2, 0.2, 0.2)
-
         self.mesh = df.Mesh(p1, p2, cell)
 
     def test_init(self):

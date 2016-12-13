@@ -29,18 +29,3 @@ class TestDemag:
         demag = mm.Demag()
         with pytest.raises(NotImplementedError):
             script = demag.script
-
-    def test_energy(self):
-        demag = mm.Demag()
-        with pytest.raises(NotImplementedError):
-            energy = demag.energy
-
-    def test_energy_denisty(self):
-        demag = mm.Demag()
-        with pytest.raises(NotImplementedError):
-            energy_density = demag.energy_density
-
-    def test_effective_field(self):
-        demag = mm.Demag()
-        with pytest.raises(NotImplementedError):
-            effective_field = demag.effective_field

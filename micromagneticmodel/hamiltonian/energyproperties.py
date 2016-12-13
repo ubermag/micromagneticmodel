@@ -1,3 +1,6 @@
+import importlib
+
+
 class EnergyProperties:
     @property
     def energy(self):
@@ -9,4 +12,6 @@ class EnergyProperties:
 
     @property
     def effective_field(self):
-        raise NotImplementedError
+        selfmodule = importlib.__import__(self.__class__.__module__)
+        data = selfmodule.Data(self.termsum.system, self.__class__.__name__)
+        return data.effective_field

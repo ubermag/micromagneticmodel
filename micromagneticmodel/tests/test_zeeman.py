@@ -61,21 +61,3 @@ class TestZeeman:
             zeeman = mm.Zeeman(H)
             with pytest.raises(NotImplementedError):
                 script = zeeman.script
-
-    def test_energy(self):
-        for H in self.valid_args:
-            zeeman = mm.Zeeman(H)
-            with pytest.raises(NotImplementedError):
-                energy = zeeman.energy
-
-    def test_energy_denisty(self):
-        for H in self.valid_args:
-            zeeman = mm.Zeeman(H)
-            with pytest.raises(NotImplementedError):
-                energy_density = zeeman.energy_density
-
-    def test_effective_field(self):
-        for H in self.valid_args:
-            zeeman = mm.Zeeman(H)
-            with pytest.raises(NotImplementedError):
-                effective_field = zeeman.effective_field

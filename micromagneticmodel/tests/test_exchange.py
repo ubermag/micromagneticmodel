@@ -49,21 +49,3 @@ class TestExchange:
             exchange = mm.Exchange(A)
             with pytest.raises(NotImplementedError):
                 script = exchange.script
-
-    def test_energy(self):
-        for A in self.valid_args:
-            exchange = mm.Exchange(A)
-            with pytest.raises(NotImplementedError):
-                energy = exchange.energy
-
-    def test_energy_density(self):
-        for A in self.valid_args:
-            exchange = mm.Exchange(A)
-            with pytest.raises(NotImplementedError):
-                energy_density = exchange.energy_density
-
-    def test_effective_field(self):
-        for A in self.valid_args:
-            exchange = mm.Exchange(A)
-            with pytest.raises(NotImplementedError):
-                effective_field = exchange.effective_field

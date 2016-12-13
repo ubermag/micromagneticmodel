@@ -64,21 +64,3 @@ class TestUniaxialAnisotropy:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             with pytest.raises(NotImplementedError):
                 script = anisotropy.script
-
-    def test_energy(self):
-        for K, u in self.valid_args:
-            anisotropy = mm.UniaxialAnisotropy(K, u)
-            with pytest.raises(NotImplementedError):
-                energy = anisotropy.energy
-
-    def test_energy_denisty(self):
-        for K, u in self.valid_args:
-            anisotropy = mm.UniaxialAnisotropy(K, u)
-            with pytest.raises(NotImplementedError):
-                energy_density = anisotropy.energy_density
-
-    def test_effective_field(self):
-        for K, u in self.valid_args:
-            anisotropy = mm.UniaxialAnisotropy(K, u)
-            with pytest.raises(NotImplementedError):
-                effective_field = anisotropy.effective_field

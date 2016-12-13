@@ -139,18 +139,3 @@ class TestHamiltonian:
         hamiltonian = mm.Hamiltonian()
         with pytest.raises(NotImplementedError):
             script = hamiltonian.script
-
-    def test_energy(self):
-        hamiltonian = mm.Hamiltonian()
-        with pytest.raises(NotImplementedError):
-            energy = hamiltonian.energy
-
-    def test_energy_denisty(self):
-        hamiltonian = mm.Hamiltonian()
-        with pytest.raises(NotImplementedError):
-            energy_density = hamiltonian.energy_density
-
-    def test_effective_field(self):
-        hamiltonian = mm.Hamiltonian()
-        with pytest.raises(NotImplementedError):
-            effective_field = hamiltonian.effective_field

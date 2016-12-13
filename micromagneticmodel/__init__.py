@@ -6,6 +6,7 @@ from .dynamics import DynamicsTerm, Precession, \
     Damping, STT, Dynamics
 from .drivers import Driver, MinDriver, TimeDriver, HysteresisDriver
 from .system import System
+from .data import Data
 
 
 def test():

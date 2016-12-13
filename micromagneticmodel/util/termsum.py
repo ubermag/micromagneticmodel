@@ -37,8 +37,17 @@ class TermSum(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _lefthandside(self): pass  # pragma: no cover
 
-    @abc.abstractmethod
-    def add(self, value): pass  # pragma: no cover
+    def add(self, value):
+        """Add Term or TermSum to the TermSum"""
+        if isinstance(value, self._terms_type):
+            self.terms.append(value)
+        elif isinstance(value, self.__class__):
+            for term in value.terms:
+                self.terms.append(term)
+        else:
+            msg = ("Cannot add type(value)={} "
+                   "to {}.".format(value, self.__class__))
+            raise TypeError(msg)
 
     def __iadd__(self, other):
         """Implementation for += operation."""

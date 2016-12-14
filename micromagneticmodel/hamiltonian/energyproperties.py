@@ -6,9 +6,10 @@ class EnergyProperties:
     def _data(self):
         module = importlib.__import__(self.__class__.__module__)
         if self.__class__.__name__ == "Hamiltonian":
-            return module.Data(self._system, self.__class__.__name__)
+            system = self._system
         else:
-            return module.Data(self._termsum._system, self.__class__.__name__)
+            system = self._termsum._system
+        return module.Data(system, self.__class__.__name__)
 
     @property
     def energy(self):

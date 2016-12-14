@@ -13,7 +13,7 @@ class System:
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
 
-        self.selfmodule = importlib.__import__(self.__class__.__module__)
+        self.module = importlib.__import__(self.__class__.__module__)
         if "hamiltonian" not in self.__dict__:
             self.hamiltonian = 0
         if "dynamics" not in self.__dict__:
@@ -25,7 +25,7 @@ class System:
 
     @hamiltonian.setter
     def hamiltonian(self, value):
-        self._hamiltonian = self.selfmodule.Hamiltonian()
+        self._hamiltonian = self.module.Hamiltonian()
         setattr(self._hamiltonian, "_system", self)
         if value == 0:
             pass
@@ -40,7 +40,7 @@ class System:
 
     @dynamics.setter
     def dynamics(self, value):
-        self._dynamics = self.selfmodule.Dynamics()
+        self._dynamics = self.module.Dynamics()
         setattr(self._dynamics, "_system", self)
         if value == 0:
             pass

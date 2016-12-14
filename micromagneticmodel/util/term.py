@@ -25,8 +25,8 @@ class Term(metaclass=abc.ABCMeta):
 
     def __add__(self, other):
         """Addition operation."""
-        selfmodule = importlib.__import__(self.__class__.__module__)
-        termsum = getattr(selfmodule, self._termsum_type)()
+        module = importlib.__import__(self.__class__.__module__)
+        termsum = getattr(module, self._termsum_type)()
         termsum.add(self)
         termsum.add(other)
         return termsum

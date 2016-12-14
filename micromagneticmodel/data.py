@@ -1,7 +1,7 @@
 class Data:
-    def __init__(self, system, interaction):
+    def __init__(self, system, cls):
         self.system = system
-        self.interaction = interaction
+        self.cls = cls
 
     @property
     def energy(self):

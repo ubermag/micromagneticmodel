@@ -4,7 +4,7 @@ import micromagneticmodel as mm
 
 class TestData:
     def setup(self):
-        self.data = mm.Data(system=None, interaction=None)
+        self.data = mm.Data(system=None, cls=None)
 
     def test_energy(self):
         with pytest.raises(NotImplementedError):

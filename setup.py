@@ -5,7 +5,7 @@ with open("README.rst") as f:
 
 setuptools.setup(
     name="micromagneticmodel",
-    version="0.5.6",
+    version="0.6",
     description="A Python-based micromagnetic model.",
     long_description=readme,
     url="https://joommf.github.io",

@@ -7,5 +7,5 @@ class Driver:
         raise NotImplementedError
 
     @property
-    def script(self):
+    def _script(self):
         raise NotImplementedError

@@ -62,7 +62,7 @@ class TermSum(metaclass=abc.ABCMeta):
         return self
 
     @property
-    def script(self):
+    def _script(self):
         """This method should be provided by the specific micromagnetic
         calculator"""
         raise NotImplementedError

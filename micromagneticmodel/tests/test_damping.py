@@ -23,16 +23,16 @@ class TestDamping:
     def test_repr_latex_(self):
         for alpha in self.valid_args:
             damping = mm.Damping(alpha)
-            latex_str = damping._repr_latex_()
+            latex = damping._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert '\\alpha' in latex_str
-            assert '\mathbf{m}' in latex_str
-            assert '\\frac' in latex_str
-            assert '\\times' in latex_str
-            assert latex_str.count('\partial') == 2
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert '\\alpha' in latex
+            assert '\mathbf{m}' in latex
+            assert '\\frac' in latex
+            assert '\\times' in latex
+            assert latex.count('\partial') == 2
 
     def test_name(self):
         for alpha in self.valid_args:
@@ -51,4 +51,4 @@ class TestDamping:
         for alpha in self.valid_args:
             damping = mm.Damping(alpha)
             with pytest.raises(NotImplementedError):
-                script = damping.script
+                script = damping._script

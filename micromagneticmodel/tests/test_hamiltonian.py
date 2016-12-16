@@ -132,4 +132,4 @@ class TestHamiltonian:
     def test_script(self):
         hamiltonian = mm.Hamiltonian()
         with pytest.raises(NotImplementedError):
-            script = hamiltonian.script
+            script = hamiltonian._script

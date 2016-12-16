@@ -93,4 +93,4 @@ class TestSystem:
         system = mm.System(name="test_sim")
 
         with pytest.raises(NotImplementedError):
-            script = system.script
+            script = system._script

@@ -5,17 +5,17 @@ import micromagneticmodel as mm
 class TestDemag:
     def test_repr_latex_(self):
         demag = mm.Demag()
-        latex_str = demag._repr_latex_()
+        latex = demag._repr_latex_()
 
         # Assert some characteristics of LaTeX string.
-        assert isinstance(latex_str, str)
-        assert latex_str[0] == latex_str[-1] == '$'
-        assert '\\mu_{0}' in latex_str
-        assert '\mathbf{H}_\\text{d}' in latex_str
-        assert '\mathbf{m}' in latex_str
-        assert '\cdot' in latex_str
-        assert 'M_\\text{s}' in latex_str
-        assert '\\frac{1}{2}' in latex_str
+        assert isinstance(latex, str)
+        assert latex[0] == latex[-1] == '$'
+        assert '\\mu_{0}' in latex
+        assert '\mathbf{H}_\\text{d}' in latex
+        assert '\mathbf{m}' in latex
+        assert '\cdot' in latex
+        assert 'M_\\text{s}' in latex
+        assert '\\frac{1}{2}' in latex
 
     def test_name(self):
         demag = mm.Demag()
@@ -28,4 +28,4 @@ class TestDemag:
     def test_script(self):
         demag = mm.Demag()
         with pytest.raises(NotImplementedError):
-            script = demag.script
+            script = demag._script

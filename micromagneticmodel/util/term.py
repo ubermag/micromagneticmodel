@@ -37,7 +37,7 @@ class Term(metaclass=abc.ABCMeta):
         return other
 
     @property
-    def script(self):
+    def _script(self):
         """This method should be provided by the specific micromagnetic
         calculator"""
         raise NotImplementedError

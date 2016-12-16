@@ -22,15 +22,15 @@ class TestPrecession:
     def test_repr_latex_(self):
         for gamma in self.valid_args:
             precession = mm.Precession(gamma)
-            latex_str = precession._repr_latex_()
+            latex = precession._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert '\gamma' in latex_str
-            assert '\mathbf{m}' in latex_str
-            assert '\mathbf{H}_\\text{eff}' in latex_str
-            assert '\\times' in latex_str
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert '\gamma' in latex
+            assert '\mathbf{m}' in latex
+            assert '\mathbf{H}_\\text{eff}' in latex
+            assert '\\times' in latex
 
     def test_name(self):
         for gamma in self.valid_args:
@@ -49,4 +49,4 @@ class TestPrecession:
         for gamma in self.valid_args:
             precession = mm.Precession(gamma)
             with pytest.raises(NotImplementedError):
-                script = precession.script
+                script = precession._script

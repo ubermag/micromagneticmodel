@@ -54,28 +54,28 @@ class TestDynamics:
 
     def test_repr_latex(self):
         dynamics = mm.Dynamics()
-        latex_str = dynamics._repr_latex_()
-        assert latex_str[0] == latex_str[-1] == '$'
-        assert latex_str.count('$') == 2
-        assert '\\frac' in latex_str
-        assert latex_str[-2] == '0'
+        latex = dynamics._repr_latex_()
+        assert latex[0] == latex[-1] == '$'
+        assert latex.count('$') == 2
+        assert '\\frac' in latex
+        assert latex[-2] == '0'
 
         for term in self.terms:
             dynamics._add(term)
 
-        latex_str = dynamics._repr_latex_()
+        latex = dynamics._repr_latex_()
 
-        assert latex_str[0] == latex_str[-1] == '$'
-        assert latex_str.count('$') == 2
-        assert '-\gamma' in latex_str
-        assert '\mathbf{m}' in latex_str
-        assert '\mathbf{H}_\\text{eff}' in latex_str
-        assert '\\times' in latex_str
-        assert '\\alpha' in latex_str
-        assert latex_str.count('-') == 1
-        assert latex_str.count('+') == 1
-        assert latex_str.count('=') == 1
-        assert latex_str.count('\partial') == 4
+        assert latex[0] == latex[-1] == '$'
+        assert latex.count('$') == 2
+        assert '-\gamma' in latex
+        assert '\mathbf{m}' in latex
+        assert '\mathbf{H}_\\text{eff}' in latex
+        assert '\\times' in latex
+        assert '\\alpha' in latex
+        assert latex.count('-') == 1
+        assert latex.count('+') == 1
+        assert latex.count('=') == 1
+        assert latex.count('\partial') == 4
 
     def test_add_exception(self):
         dynamics = mm.Dynamics()
@@ -111,4 +111,4 @@ class TestDynamics:
     def test_script(self):
         dynamics = mm.Dynamics()
         with pytest.raises(NotImplementedError):
-            script = dynamics.script
+            script = dynamics._script

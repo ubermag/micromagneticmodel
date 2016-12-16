@@ -60,4 +60,4 @@ class TestZeeman:
         for H in self.valid_args:
             zeeman = mm.Zeeman(H)
             with pytest.raises(NotImplementedError):
-                script = zeeman.script
+                script = zeeman._script

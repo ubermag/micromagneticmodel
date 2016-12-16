@@ -35,17 +35,17 @@ class TestSTT:
         for arg in self.valid_args:
             u, beta = arg
             stt = mm.STT(u, beta)
-            latex_str = stt._repr_latex_()
+            latex = stt._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert '\\beta' in latex_str
-            assert '\mathbf{m}' in latex_str
-            assert '\mathbf{u}' in latex_str
-            assert '\\times' in latex_str
-            assert '\\boldsymbol' in latex_str
-            assert '\\nabla' in latex_str
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert '\\beta' in latex
+            assert '\mathbf{m}' in latex
+            assert '\mathbf{u}' in latex
+            assert '\\times' in latex
+            assert '\\boldsymbol' in latex
+            assert '\\nabla' in latex
 
     def test_name(self):
         for arg in self.valid_args:
@@ -69,4 +69,4 @@ class TestSTT:
             u, beta = arg
             stt = mm.STT(u, beta)
             with pytest.raises(NotImplementedError):
-                script = stt.script
+                script = stt._script

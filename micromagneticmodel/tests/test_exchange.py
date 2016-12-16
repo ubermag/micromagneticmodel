@@ -22,14 +22,14 @@ class TestExchange:
     def test_repr_latex_(self):
         for A in self.valid_args:
             exchange = mm.Exchange(A)
-            latex_str = exchange._repr_latex_()
+            latex = exchange._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert '\\nabla' in latex_str
-            assert 'A' in latex_str
-            assert latex_str.count('+') == 2
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert '\\nabla' in latex
+            assert 'A' in latex
+            assert latex.count('+') == 2
 
     def test_name(self):
         for A in self.valid_args:
@@ -48,4 +48,4 @@ class TestExchange:
         for A in self.valid_args:
             exchange = mm.Exchange(A)
             with pytest.raises(NotImplementedError):
-                script = exchange.script
+                script = exchange._script

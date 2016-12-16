@@ -34,16 +34,16 @@ class TestUniaxialAnisotropy:
     def test_repr_latex(self):
         for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
-            latex_str = anisotropy._repr_latex_()
+            latex = anisotropy._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert isinstance(latex_str, str)
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert 'K' in latex_str
-            assert '\mathbf{u}' in latex_str
-            assert '\mathbf{m}' in latex_str
-            assert '^{2}' in latex_str
-            assert '\cdot' in latex_str
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert 'K' in latex
+            assert '\mathbf{u}' in latex
+            assert '\mathbf{m}' in latex
+            assert '^{2}' in latex
+            assert '\cdot' in latex
 
     def test_name(self):
         for K, u in self.valid_args:
@@ -63,4 +63,4 @@ class TestUniaxialAnisotropy:
         for K, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K, u)
             with pytest.raises(NotImplementedError):
-                script = anisotropy.script
+                script = anisotropy._script

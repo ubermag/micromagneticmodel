@@ -6,7 +6,7 @@ from .energyterm import EnergyTerm
                u=ts.RealVector(size=3),
                name=ts.ObjectName)
 class UniaxialAnisotropy(EnergyTerm):
-    latex_str = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
+    _latex = "$K (\mathbf{m} \cdot \mathbf{u})^{2}$"
 
     def __init__(self, K, u, name="uniaxialanisotropy"):
         """A uniaxial anisotropy energy abstract class.
@@ -21,7 +21,7 @@ class UniaxialAnisotropy(EnergyTerm):
         self.name = name
 
     @property
-    def _repr_str(self):
+    def _repr(self):
         """A representation string property.
 
         Returns:

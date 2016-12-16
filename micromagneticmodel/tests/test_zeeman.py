@@ -32,16 +32,16 @@ class TestZeeman:
     def test_repr_latex(self):
         for H in self.valid_args:
             zeeman = mm.Zeeman(H)
-            latex_str = zeeman._repr_latex_()
+            latex = zeeman._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
-            assert latex_str[0] == latex_str[-1] == '$'
-            assert latex_str[1] == '-'
-            assert '\\mu_{0}' in latex_str
-            assert '\mathbf{H}' in latex_str
-            assert '\mathbf{m}' in latex_str
-            assert '\cdot' in latex_str
-            assert 'M_\\text{s}' in latex_str
+            assert latex[0] == latex[-1] == '$'
+            assert latex[1] == '-'
+            assert '\\mu_{0}' in latex
+            assert '\mathbf{H}' in latex
+            assert '\mathbf{m}' in latex
+            assert '\cdot' in latex
+            assert 'M_\\text{s}' in latex
 
     def test_name(self):
         for H in self.valid_args:

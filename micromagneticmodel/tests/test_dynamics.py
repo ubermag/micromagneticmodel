@@ -18,7 +18,7 @@ class TestDynamics:
     def test_add_terms(self):
         dynamics = mm.Dynamics()
         for term in self.terms:
-            dynamics.add(term)
+            dynamics._add(term)
             assert isinstance(dynamics, mm.Dynamics)
             assert isinstance(dynamics.terms, list)
             assert dynamics.terms[-1] == term
@@ -61,7 +61,7 @@ class TestDynamics:
         assert latex_str[-2] == '0'
 
         for term in self.terms:
-            dynamics.add(term)
+            dynamics._add(term)
 
         latex_str = dynamics._repr_latex_()
 

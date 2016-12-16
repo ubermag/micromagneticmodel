@@ -5,8 +5,8 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(alpha=ts.UnsignedReal,
                name=ts.ObjectName)
 class Damping(DynamicsTerm):
-    latex_str = ("$\\alpha \mathbf{m} \\times"
-                 "\\frac{\partial \mathbf{m}}{\partial t}$")
+    _latex = ("$\\alpha \mathbf{m} \\times"
+              "\\frac{\partial \mathbf{m}}{\partial t}$")
 
     def __init__(self, alpha, name="damping"):
         """A damping dynamics term class.
@@ -19,7 +19,7 @@ class Damping(DynamicsTerm):
         self.name = name
 
     @property
-    def _repr_str(self):
+    def _repr(self):
         """A representation string property.
 
         Returns:

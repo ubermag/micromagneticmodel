@@ -6,9 +6,9 @@ from .dynamicsterm import DynamicsTerm
                beta=ts.Real,
                name=ts.ObjectName)
 class STT(DynamicsTerm):
-    latex_str = ("$-(\mathbf{u} \cdot \\boldsymbol\\nabla)\mathbf{m} + "
-                 "\\beta\mathbf{m} \\times \\big[(\mathbf{u} \cdot "
-                 "\\boldsymbol\\nabla)\mathbf{m}\\big]$")
+    _latex = ("$-(\mathbf{u} \cdot \\boldsymbol\\nabla)\mathbf{m} + "
+              "\\beta\mathbf{m} \\times \\big[(\mathbf{u} \cdot "
+              "\\boldsymbol\\nabla)\mathbf{m}\\big]$")
 
     def __init__(self, u, beta, name="stt"):
         """A spin transfer torque term.
@@ -23,7 +23,7 @@ class STT(DynamicsTerm):
         self.name = name
 
     @property
-    def _repr_str(self):
+    def _repr(self):
         """A representation string property.
 
         Returns:

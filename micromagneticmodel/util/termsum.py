@@ -5,28 +5,26 @@ class TermSum(metaclass=abc.ABCMeta):
     def __init__(self):
         self.terms = []
 
-    def __repr__(self):
-        """A representation method."""
-        return self._repr_str
+    @abc.abstractmethod
+    def _lefthandside(self): pass  # pragma: no cover
+
+    @abc.abstractmethod
+    def _terms_type(self): pass  # pragma: no cover
 
     @property
-    def _repr_str(self):
+    def _repr(self):
         """Property creating and returning representation string."""
-        terms_repr = [term._repr_str for term in self.terms]
+        terms_repr = [term._repr for term in self.terms]
         return " + ".join(terms_repr)
 
-    def _repr_latex_(self):
-        """A LaTeX representation method in Jupyter notebook."""
-        return self.latex_str
-
     @property
-    def latex_str(self):
+    def _latex(self):
         s = self._lefthandside
 
         for term in self.terms:
-            if term.latex_str[1] != "-" and s[-1] != "=":
+            if term._latex[1] != "-" and s[-1] != "=":
                 s += "+"
-            s += term.latex_str[1:-1]
+            s += term._latex[1:-1]
 
         if self.terms == []:
             s += "0"
@@ -34,13 +32,15 @@ class TermSum(metaclass=abc.ABCMeta):
 
         return s
 
-    @abc.abstractmethod
-    def _lefthandside(self): pass  # pragma: no cover
+    def __repr__(self):
+        """A representation method."""
+        return self._repr
 
-    @abc.abstractmethod
-    def _terms_type(self): pass  # pragma: no cover
+    def _repr_latex_(self):
+        """A LaTeX representation method in Jupyter notebook."""
+        return self._latex
 
-    def add(self, value):
+    def _add(self, value):
         """Add Term or TermSum to the TermSum"""
         if isinstance(value, self._terms_type):
             setattr(value, "_termsum", self)
@@ -58,7 +58,7 @@ class TermSum(metaclass=abc.ABCMeta):
 
     def __iadd__(self, other):
         """Implementation for += operation."""
-        self.add(other)
+        self._add(other)
         return self
 
     @property

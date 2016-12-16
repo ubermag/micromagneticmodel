@@ -24,7 +24,7 @@ class TestHamiltonian:
     def test_add_terms(self):
         hamiltonian = mm.Hamiltonian()
         for term in self.terms:
-            hamiltonian.add(term)
+            hamiltonian._add(term)
 
             assert isinstance(hamiltonian, mm.Hamiltonian)
             assert isinstance(hamiltonian.terms, list)
@@ -62,33 +62,33 @@ class TestHamiltonian:
 
     def test_repr_latex(self):
         hamiltonian = mm.Hamiltonian()
-        latex_str = hamiltonian._repr_latex_()
-        assert latex_str[0] == latex_str[-1] == '$'
-        assert latex_str.count('$') == 2
-        assert '\\mathcal{H}' in latex_str
-        assert latex_str[-2] == '0'
+        latex = hamiltonian._repr_latex_()
+        assert latex[0] == latex[-1] == '$'
+        assert latex.count('$') == 2
+        assert '\\mathcal{H}' in latex
+        assert latex[-2] == '0'
 
         for term in self.terms:
-            hamiltonian.add(term)
+            hamiltonian._add(term)
 
-        latex_str = hamiltonian._repr_latex_()
+        latex = hamiltonian._repr_latex_()
 
-        assert latex_str[0] == latex_str[-1] == '$'
-        assert latex_str.count('$') == 2
-        assert '\\mathcal{H}=' in latex_str
-        assert 'A' in latex_str
-        assert '\mathbf{m}' in latex_str
-        assert '\mathbf{H}' in latex_str
-        assert '\mathbf{u}' in latex_str
-        assert 'K' in latex_str
-        assert '\mathbf{H}_\\text{d}' in latex_str
-        assert '\cdot' in latex_str
-        assert '\\frac{1}{2}' in latex_str
-        assert 'M_\\text{s}' in latex_str
-        assert latex_str.count('-') == 2
-        assert latex_str.count('+') == 3
-        assert latex_str.count('=') == 1
-        assert latex_str.count('\\nabla') == 3
+        assert latex[0] == latex[-1] == '$'
+        assert latex.count('$') == 2
+        assert '\\mathcal{H}=' in latex
+        assert 'A' in latex
+        assert '\mathbf{m}' in latex
+        assert '\mathbf{H}' in latex
+        assert '\mathbf{u}' in latex
+        assert 'K' in latex
+        assert '\mathbf{H}_\\text{d}' in latex
+        assert '\cdot' in latex
+        assert '\\frac{1}{2}' in latex
+        assert 'M_\\text{s}' in latex
+        assert latex.count('-') == 2
+        assert latex.count('+') == 3
+        assert latex.count('=') == 1
+        assert latex.count('\\nabla') == 3
 
     def test_add_exception(self):
         hamiltonian = mm.Hamiltonian()

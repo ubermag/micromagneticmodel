@@ -1,3 +1,4 @@
+import pkg_resources as pr
 from .consts import mu0, e, me, kB, h, g, hbar, gamma, muB, gamma0
 import micromagneticmodel.util  # to avoid import order conflicts
 from .hamiltonian import EnergyProperties, EnergyTerm, Exchange, \
@@ -8,6 +9,8 @@ from .drivers import Driver, MinDriver, TimeDriver, HysteresisDriver
 from .system import System
 from .data import Data
 
+
+__version__ = pr.get_distribution("micromagneticmodel").version
 
 def test():
     import pytest  # pragma: no cover

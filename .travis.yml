@@ -3,9 +3,6 @@ sudo: required
 services:
   - docker
 
-env:
-  - JOOMMF_CHANNEL = joommf:eqKxGPXuUP3LxnOfxg7GWgDF
-
 install:
   - docker build -t dockertestimage .
 
@@ -17,4 +14,4 @@ script:
   - docker rm testcontainer
 
 notifications:
-  slack: JOOMMF_CHANNEL
+  slack: joommf:eqKxGPXuUP3LxnOfxg7GWgDF

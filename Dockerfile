@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 RUN apt-get update -y
 RUN apt-get install -y git python3-pip curl
-RUN python3 -m pip install --upgrade pip pytest-cov nbval ipython ipykernel\
+RUN python3 -m pip install --upgrade pip pytest-cov nbval ipython ipykernel \
       git+git://github.com/joommf/joommfutil.git \
       git+git://github.com/joommf/discretisedfield.git
 

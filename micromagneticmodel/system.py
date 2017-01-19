@@ -6,9 +6,11 @@ import joommfutil.typesystem as ts
 
 @ts.typesystem(name=ts.ObjectName)
 class System:
+    attributes = ["hamiltonian", "dynamics", "m", "name"]
+
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
-            if key in ["hamiltonian", "dynamics", "m", "name"]:
+            if key in System.attributes:
                 setattr(self, key, value)
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
@@ -63,3 +65,12 @@ class System:
     @property
     def _script(self):
         raise NotImplementedError
+
+    def __repr__(self):
+        r = ["System object '{}':".format(self.name)]
+        for attribute in System.attributes:
+            if attribute == 'name':
+                continue
+            r.append("\t{:11}: {}".format(attribute,
+                                          getattr(self, attribute, "")))
+        return "\n".join(r)

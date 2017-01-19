@@ -94,3 +94,16 @@ class TestSystem:
 
         with pytest.raises(NotImplementedError):
             script = system._script
+
+    def test_repr(self):
+        # 'empty' system object
+        system = mm.System()
+        r = repr(system)
+        assert 'hamiltonian' in r
+        assert 'dynamics' in r
+        assert 'System' in r
+
+        # system object with name
+        system = mm.System(name='testname')
+        r = repr(system)
+        assert 'testname' in r

@@ -67,8 +67,10 @@ class System:
         raise NotImplementedError
 
     def __repr__(self):
-
-        return "repr"
-
-    def __str__(self):
-        return "str"
+        r = ["System object '{}':".format(self.name)]
+        for attribute in System.attributes:
+            if attribute == 'name':
+                continue
+            r.append("\t{:11}: {}".format(attribute,
+                                          getattr(self, attribute, "")))
+        return "\n".join(r)

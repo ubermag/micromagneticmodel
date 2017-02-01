@@ -2,6 +2,7 @@ from .test_exchange import TestExchange
 from .test_zeeman import TestZeeman
 from .test_uniaxialanisotropy import TestUniaxialAnisotropy
 from .test_demag import TestDemag
+from .test_dmi import TestDMI
 from .test_hamiltonian import TestHamiltonian
 from .test_precession import TestPrecession
 from .test_damping import TestDamping

@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(D=ts.Real,
                name=ts.ObjectName)
 class DMI(EnergyTerm):
-    _latex = ("$D \mathbf{m}(\\nabla \\times \mathbf{m})$")
+    _latex = ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
 
     def __init__(self, D, name="dmi"):
         """A DMI energy class.

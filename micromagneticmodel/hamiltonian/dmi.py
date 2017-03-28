@@ -5,9 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(D=ts.Real,
                name=ts.ObjectName)
 class DMI(EnergyTerm):
-    _latex = ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
-
-    def __init__(self, D, name="dmi"):
+    def __init__(self, D, name="dmi", kind="bulk"):
         """A DMI energy class.
 
         Args:
@@ -16,6 +14,17 @@ class DMI(EnergyTerm):
         """
         self.D = D
         self.name = name
+        self.kind = kind
+
+    @property
+    def _latex(self):
+        if self.kind == "bulk":
+            return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
+        elif self.kind == "interfacial":
+            return ("$D \\left[ \\left( m_{x} \\frac{ \\partial m_{z}}{\\partial x} "
+                    "- m_{z}\\frac{\\partial m_{x}}{\\partial x} \\right)"
+                    "+ \\left( m_{y}\\frac{\partial m_{z}}{\\partial y}"
+                    "- m_{z}\\frac{\\partial m_{y}}{\\partial y} \\right)\\right]$")
 
     @property
     def _repr(self):
@@ -25,4 +34,4 @@ class DMI(EnergyTerm):
            A representation string.
 
         """
-        return "DMI(D={})".format(self.D)
+        return "DMI(D={}, kind=\"{}\")".format(self.D, self.kind)

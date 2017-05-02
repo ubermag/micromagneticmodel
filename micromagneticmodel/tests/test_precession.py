@@ -28,6 +28,8 @@ class TestPrecession:
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
             assert '\gamma' in latex
+            assert '^{*}' in latex
+            assert '_{0}' in latex
             assert '\mathbf{m}' in latex
             assert '\mathbf{H}_\\text{eff}' in latex
             assert '\\times' in latex

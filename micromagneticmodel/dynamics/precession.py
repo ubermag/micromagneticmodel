@@ -5,7 +5,7 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(gamma=ts.UnsignedReal,
                name=ts.ObjectName)
 class Precession(DynamicsTerm):
-    _latex = ("$-\gamma \mathbf{m} \\times "
+    _latex = ("$-\gamma_{0}^{*} \mathbf{m} \\times "
               "\mathbf{H}_\\text{eff}$")
 
     def __init__(self, gamma, name="precession"):

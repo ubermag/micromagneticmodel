@@ -8,9 +8,13 @@ class TestDynamics:
         self.precession = mm.Precession(gamma)
         alpha = 0.5
         self.damping = mm.Damping(alpha)
-
+        u = (0, 0, 500)
+        beta = 0.2
+        self.stt = mm.STT(u=u, beta=beta)
+        
         self.terms = [self.precession,
-                      self.damping]
+                      self.damping,
+                      self.stt]
 
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.precession, self.damping]]
@@ -24,21 +28,21 @@ class TestDynamics:
             assert dynamics.terms[-1] == term
             assert dynamics.terms[-1].name == term.name
 
-        assert len(dynamics.terms) == 2
+        assert len(dynamics.terms) == 3
 
     def test_add_sum_of_terms(self):
-        dynamics = self.precession + self.damping
+        dynamics = self.precession + self.damping + self.stt
 
         assert isinstance(dynamics, mm.Dynamics)
         assert isinstance(dynamics.terms, list)
-        assert len(dynamics.terms) == 2
+        assert len(dynamics.terms) == 3
 
     def test_add_dynamics(self):
-        term_sum = self.precession + self.damping
+        term_sum = self.precession + self.damping + self.stt
         dynamics = mm.Dynamics()
         dynamics += term_sum
 
-        assert len(dynamics.terms) == 2
+        assert len(dynamics.terms) == 3
 
     def test_iadd(self):
         dynamics = mm.Dynamics()
@@ -50,7 +54,7 @@ class TestDynamics:
             assert dynamics.terms[-1] == term
             assert dynamics.terms[-1].name == term.name
 
-        assert len(dynamics.terms) == 2
+        assert len(dynamics.terms) == 3
 
     def test_repr_latex(self):
         dynamics = mm.Dynamics()
@@ -90,7 +94,8 @@ class TestDynamics:
         dynamics = self.precession + self.damping
 
         exp_str = ("Precession(gamma=221000.0, name=\"precession\") + "
-                   "Damping(alpha=0.5, name=\"damping\")")
+                   "Damping(alpha=0.5, name=\"damping\") + "
+                   "STT(u=(0, 0, 500), beta=0.2, name=\"stt\")")
         assert repr(dynamics) == exp_str
 
     def test_getattr(self):
@@ -101,6 +106,10 @@ class TestDynamics:
 
         assert isinstance(dynamics.damping, mm.Damping)
         assert dynamics.damping.alpha == 0.5
+
+        assert isinstance(dynamics.stt, mm.STT)
+        assert dynamics.damping.u == (0, 0, 500)
+        assert dynamics.damping.beta == 0.2
 
     def test_getattr_error(self):
         dynamics = self.precession + self.damping

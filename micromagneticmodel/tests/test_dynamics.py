@@ -76,8 +76,8 @@ class TestDynamics:
         assert '\mathbf{H}_\\text{eff}' in latex
         assert '\\times' in latex
         assert '\\alpha' in latex
-        assert latex.count('-') == 1
-        assert latex.count('+') == 1
+        assert latex.count('-') == 2
+        assert latex.count('+') == 2
         assert latex.count('=') == 1
         assert latex.count('\partial') == 4
 
@@ -88,10 +88,7 @@ class TestDynamics:
                 dynamics += term
 
     def test_repr(self):
-        gamma = 2.21e5
-        self.precession = mm.Precession(gamma)
-        alpha = 0.5
-        dynamics = self.precession + self.damping
+        dynamics = self.precession + self.damping + self.stt
 
         exp_str = ("Precession(gamma=221000.0, name=\"precession\") + "
                    "Damping(alpha=0.5, name=\"damping\") + "
@@ -99,7 +96,7 @@ class TestDynamics:
         assert repr(dynamics) == exp_str
 
     def test_getattr(self):
-        dynamics = self.precession + self.damping
+        dynamics = self.precession + self.damping + self.stt
 
         assert isinstance(dynamics.precession, mm.Precession)
         assert dynamics.precession.gamma == 2.21e5
@@ -108,8 +105,8 @@ class TestDynamics:
         assert dynamics.damping.alpha == 0.5
 
         assert isinstance(dynamics.stt, mm.STT)
-        assert dynamics.damping.u == (0, 0, 500)
-        assert dynamics.damping.beta == 0.2
+        assert dynamics.stt.u == (0, 0, 500)
+        assert dynamics.stt.beta == 0.2
 
     def test_getattr_error(self):
         dynamics = self.precession + self.damping

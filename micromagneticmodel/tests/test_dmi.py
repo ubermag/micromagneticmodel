@@ -16,7 +16,6 @@ class TestDMI:
 
     def test_init_invalid_args(self):
         for D in self.invalid_args:
-            print(D)
             with pytest.raises(Exception):
                 dmi = mm.DMI(D)
 

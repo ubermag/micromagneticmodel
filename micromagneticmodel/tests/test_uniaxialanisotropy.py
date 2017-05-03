@@ -7,9 +7,9 @@ import micromagneticmodel as mm
 class TestUniaxialAnisotropy:
     def setup(self):
         self.valid_args = [(1, 5, (0, 1, 0)),
-                           (5e6, 1e5, [1, 1, 1]),
+                           (5e6, 0, [1, 1, 1]),
                            (-25.6e-3, -2e-9, np.array([0, 0, 1])),
-                           (1.5, 11, [1e6, 1e6, 5e9])]
+                           (1.5, 0, [1e6, 1e6, 5e9])]
         self.invalid_args = [('1', 5e6, (0, 1, 0)),
                              (5e6, 1e6, '(1, 1, 1)'),
                              (1e-3, 11, (0, 0, 0, 1)),
@@ -43,12 +43,13 @@ class TestUniaxialAnisotropy:
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
             assert 'K_{1}' in latex
-            assert 'K_{2}' in latex
             assert '\mathbf{u}' in latex
             assert '\mathbf{m}' in latex
             assert '^{2}' in latex
-            assert '^{4}' in latex
             assert '\cdot' in latex
+            if K2 != 0:
+                assert 'K_{2}' in latex
+                assert '^{4}' in latex
 
     def test_name(self):
         for K1, K2, u in self.valid_args:

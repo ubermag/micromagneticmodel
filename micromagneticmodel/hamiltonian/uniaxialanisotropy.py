@@ -42,6 +42,5 @@ class UniaxialAnisotropy(EnergyTerm):
             A representation string.
 
         """
-        return "UniaxialAnisotropy(K1={}, K2={}, u={})".format(self.K1,
-                                                               self.K2,
-                                                               self.u)
+        return ("UniaxialAnisotropy(K1={}, K2={}, u={}, "
+                "name=\"{}\")").format(self.K1, self.K2, self.u, self.name)

@@ -102,7 +102,8 @@ class TestHamiltonian:
 
         exp_str = ("Exchange(A=1e-12) + "
                    "Zeeman(H=(0, 0, 1200000.0)) + "
-                   "UniaxialAnisotropy(K1=10000.0, K2=0, u=(0, 1, 0)) + "
+                   "UniaxialAnisotropy(K1=10000.0, K2=0, u=(0, 1, 0), "
+                   "name=\"uniaxialanisotropy\") + "
                    "Demag()")
         assert repr(hamiltonian) == exp_str
 

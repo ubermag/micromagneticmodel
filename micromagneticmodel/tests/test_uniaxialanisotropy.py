@@ -26,7 +26,7 @@ class TestUniaxialAnisotropy:
             assert isinstance(anisotropy.K1, numbers.Real)
             assert isinstance(anisotropy.K2, numbers.Real)
             assert isinstance(anisotropy.u, (tuple, list, np.ndarray))
-            assert len(u) == 3
+            assert len(anisotropy.u) == 3
             assert all([isinstance(i, numbers.Real) for i in anisotropy.u])
 
     def test_init_invalid_args(self):
@@ -58,11 +58,13 @@ class TestUniaxialAnisotropy:
     def test_repr(self):
         for K1, K2, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K1=K1, K2=K2, u=u)
-            exp_str = "UniaxialAnisotropy(K1={}, K2={}, u={})".format(K1, K2, u)
+            exp_str = ("UniaxialAnisotropy(K1={}, K2={}, u={}, "
+                       "name=\"{}\")").format(K1, K2, u, "uniaxialanisotropy")
             assert repr(anisotropy) == exp_str
 
-        anisotropy = mm.UniaxialAnisotropy(1000, (0, 0, 1))
-        assert repr(anisotropy) == "UniaxialAnisotropy(K1=1000, K2=0, u=(0, 0, 1))"
+        anisotropy = mm.UniaxialAnisotropy(1000, (0, 0, 1), name="test_name")
+        assert repr(anisotropy) == ("UniaxialAnisotropy(K1=1000, K2=0, "
+                                    "u=(0, 0, 1), name=\"test_name\")")
 
     def test_script(self):
         for K1, K2, u in self.valid_args:

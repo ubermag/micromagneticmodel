@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(K1=ts.Real,
                u1=ts.RealVector(size=3),
                u2=ts.RealVector(size=3),
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class CubicAnisotropy(EnergyTerm):
     def __init__(self, K1, u1, u2, name="cubicanisotropy"):
         """Cubic anisotropy energy abstract class.

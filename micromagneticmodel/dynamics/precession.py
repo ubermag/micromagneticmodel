@@ -3,7 +3,7 @@ from .dynamicsterm import DynamicsTerm
 
 
 @ts.typesystem(gamma=ts.UnsignedReal,
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class Precession(DynamicsTerm):
     _latex = ("$-\gamma_{0}^{*} \mathbf{m} \\times "
               "\mathbf{H}_\\text{eff}$")

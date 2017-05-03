@@ -3,7 +3,7 @@ from .dynamicsterm import DynamicsTerm
 
 
 @ts.typesystem(alpha=ts.UnsignedReal,
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class Damping(DynamicsTerm):
     _latex = ("$\\alpha \mathbf{m} \\times"
               "\\frac{\partial \mathbf{m}}{\partial t}$")

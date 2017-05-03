@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(K1=ts.Real,
                K2=ts.Real,
                u=ts.RealVector(size=3),
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class UniaxialAnisotropy(EnergyTerm):
     def __init__(self, K1, u, K2=0, name="uniaxialanisotropy"):
         """Uniaxial anisotropy energy abstract class.

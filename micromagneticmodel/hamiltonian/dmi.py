@@ -3,7 +3,7 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(D=ts.Real,
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class DMI(EnergyTerm):
     def __init__(self, D, kind="bulk", name="dmi"):
         """A DMI energy class.

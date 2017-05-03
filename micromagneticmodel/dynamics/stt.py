@@ -4,7 +4,7 @@ from .dynamicsterm import DynamicsTerm
 
 @ts.typesystem(u=ts.RealVector(size=3),
                beta=ts.Real,
-               name=ts.ObjectName)
+               name=ts.ConstantObjectName)
 class STT(DynamicsTerm):
     _latex = ("$-(\mathbf{u} \cdot \\boldsymbol\\nabla)\mathbf{m} + "
               "\\beta\mathbf{m} \\times \\big[(\mathbf{u} \cdot "

@@ -42,10 +42,11 @@ class TestPrecession:
     def test_repr(self):
         for gamma in self.valid_args:
             precession = mm.Precession(gamma)
-            assert repr(precession) == 'Precession(gamma={})'.format(gamma)
+            assert repr(precession) == ('Precession(gamma={}, '
+                                        'name=\"{}\")').format(gamma, "precession")
 
-        precession = mm.Precession(2.211e5)
-        assert repr(precession) == 'Precession(gamma=221100.0)'
+        precession = mm.Precession(gamma=2.211e5, name="test_name")
+        assert repr(precession) == 'Precession(gamma=221100.0, name=\"test_name\")'
 
     def test_script(self):
         for gamma in self.valid_args:

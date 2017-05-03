@@ -67,7 +67,7 @@ class TestDynamics:
 
         assert latex[0] == latex[-1] == '$'
         assert latex.count('$') == 2
-        assert '-\gamma' in latex
+        assert '-\gamma_{0}^{*}' in latex
         assert '\mathbf{m}' in latex
         assert '\mathbf{H}_\\text{eff}' in latex
         assert '\\times' in latex
@@ -89,8 +89,8 @@ class TestDynamics:
         alpha = 0.5
         dynamics = self.precession + self.damping
 
-        exp_str = ("Precession(gamma=221000.0) + "
-                   "Damping(alpha=0.5)")
+        exp_str = ("Precession(gamma=221000.0, name=\"precession\") + "
+                   "Damping(alpha=0.5, name=\"damping\")")
         assert repr(dynamics) == exp_str
 
     def test_getattr(self):

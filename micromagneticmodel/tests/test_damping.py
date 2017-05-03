@@ -42,10 +42,11 @@ class TestDamping:
     def test_repr(self):
         for alpha in self.valid_args:
             damping = mm.Damping(alpha)
-            assert repr(damping) == 'Damping(alpha={})'.format(alpha)
+            assert repr(damping) == ('Damping(alpha={}, '
+                                     'name=\"damping\")').format(alpha)
 
-        damping = mm.Damping(0.05)
-        assert repr(damping) == 'Damping(alpha=0.05)'
+        damping = mm.Damping(alpha=0.05, name="test_name")
+        assert repr(damping) == 'Damping(alpha=0.05, name=\"test_name\")'
 
     def test_script(self):
         for alpha in self.valid_args:

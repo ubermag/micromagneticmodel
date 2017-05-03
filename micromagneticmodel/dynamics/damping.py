@@ -26,4 +26,4 @@ class Damping(DynamicsTerm):
            A representation string.
 
         """
-        return "Damping(alpha={})".format(self.alpha)
+        return "Damping(alpha={}, name=\"{}\")".format(self.alpha, self.name)

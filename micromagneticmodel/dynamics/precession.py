@@ -26,4 +26,4 @@ class Precession(DynamicsTerm):
            A representation string.
 
         """
-        return "Precession(gamma={})".format(self.gamma)
+        return "Precession(gamma={}, name=\"{}\")".format(self.gamma, self.name)

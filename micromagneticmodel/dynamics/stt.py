@@ -30,4 +30,5 @@ class STT(DynamicsTerm):
            A representation string.
 
         """
-        return "STT(u={}, beta={})".format(self.u, self.beta)
+        return ("STT(u={}, beta={}, "
+                "name=\"{}\")").format(self.u, self.beta, self.name)

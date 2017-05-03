@@ -59,10 +59,10 @@ class TestSTT:
             u, beta = arg
             stt = mm.STT(u, beta)
 
-            assert repr(stt) == "STT(u={}, beta={})".format(u, beta)
+            assert repr(stt) == "STT(u={}, beta={}, name=\"stt\")".format(u, beta)
 
-        stt = mm.STT((1, 2, 3), 15)
-        assert repr(stt) == 'STT(u=(1, 2, 3), beta=15)'
+        stt = mm.STT((1, 2, 3), 15, name="test_name")
+        assert repr(stt) == 'STT(u=(1, 2, 3), beta=15, name=\"test_name\")'
 
     def test_script(self):
         for arg in self.valid_args:

@@ -19,4 +19,4 @@ class Demag(EnergyTerm):
            A representation string.
 
         """
-        return "Demag()"
+        return "Demag(name=\"{}\")".format(self.name)

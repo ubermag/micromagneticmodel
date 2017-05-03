@@ -39,10 +39,11 @@ class TestExchange:
     def test_repr(self):
         for A in self.valid_args:
             exchange = mm.Exchange(A)
-            assert repr(exchange) == 'Exchange(A={})'.format(A)
+            assert repr(exchange) == ('Exchange(A={}, '
+                                      'name=\"{}\")').format(A, "exchange")
 
-        exchange = mm.Exchange(8.78e-12)
-        assert repr(exchange) == "Exchange(A=8.78e-12)"
+        exchange = mm.Exchange(8.78e-12, name="test_name")
+        assert repr(exchange) == "Exchange(A=8.78e-12, name=\"test_name\")"
 
     def test_script(self):
         for A in self.valid_args:

@@ -50,10 +50,12 @@ class TestDMI:
     def test_repr(self):
         for D in self.valid_args:
             dmi = mm.DMI(D, kind="bulk")
-            assert repr(dmi) == 'DMI(D={}, kind=\"bulk\")'.format(D)
+            assert repr(dmi) == ('DMI(D={}, kind=\"bulk\", '
+                                 'name=\"{}\")').format(D, "dmi")
 
-            dmi = mm.DMI(D, kind="interfacial")
-            assert repr(dmi) == "DMI(D={}, kind=\"interfacial\")".format(D)
+            dmi = mm.DMI(D, kind="interfacial", name="test_name")
+            assert repr(dmi) == ("DMI(D={}, kind=\"interfacial\", "
+                                 "name=\"test_name\")").format(D)
 
     def test_script(self):
         for D in self.valid_args:

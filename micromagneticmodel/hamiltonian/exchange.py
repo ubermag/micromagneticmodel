@@ -27,4 +27,4 @@ class Exchange(EnergyTerm):
            A representation string.
 
         """
-        return "Exchange(A={})".format(self.A)
+        return "Exchange(A={}, name=\"{}\")".format(self.A, self.name)

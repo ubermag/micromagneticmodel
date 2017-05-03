@@ -23,7 +23,7 @@ class TestDemag:
 
     def test_repr(self):
         demag = mm.Demag()
-        assert repr(demag) == 'Demag()'
+        assert repr(demag) == 'Demag(name=\"demag\")'
 
     def test_script(self):
         demag = mm.Demag()

@@ -100,11 +100,11 @@ class TestHamiltonian:
         hamiltonian = self.exchange + self.zeeman + \
                       self.uniaxialanisotropy + self.demag
 
-        exp_str = ("Exchange(A=1e-12) + "
-                   "Zeeman(H=(0, 0, 1200000.0)) + "
+        exp_str = ("Exchange(A=1e-12, name=\"exchange\") + "
+                   "Zeeman(H=(0, 0, 1200000.0), name=\"zeeman\") + "
                    "UniaxialAnisotropy(K1=10000.0, K2=0, u=(0, 1, 0), "
                    "name=\"uniaxialanisotropy\") + "
-                   "Demag()")
+                   "Demag(name=\"demag\")")
         assert repr(hamiltonian) == exp_str
 
     def test_getattr(self):

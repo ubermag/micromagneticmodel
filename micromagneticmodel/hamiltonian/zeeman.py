@@ -24,4 +24,4 @@ class Zeeman(EnergyTerm):
            A representation string.
 
         """
-        return "Zeeman(H={})".format(self.H)
+        return "Zeeman(H={}, name=\"{}\")".format(self.H, self.name)

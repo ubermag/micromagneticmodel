@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(D=ts.Real,
                name=ts.ObjectName)
 class DMI(EnergyTerm):
-    def __init__(self, D, name="dmi", kind="bulk"):
+    def __init__(self, D, kind="bulk", name="dmi"):
         """A DMI energy class.
 
         Args:
@@ -34,4 +34,5 @@ class DMI(EnergyTerm):
            A representation string.
 
         """
-        return "DMI(D={}, kind=\"{}\")".format(self.D, self.kind)
+        return ("DMI(D={}, kind=\"{}\", "
+                "name=\"{}\")").format(self.D, self.kind, self.name)

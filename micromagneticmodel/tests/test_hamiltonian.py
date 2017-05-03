@@ -5,12 +5,12 @@ import micromagneticmodel as mm
 class TestHamiltonian:
     def setup(self):
         A = 1e-12
-        self.exchange = mm.Exchange(A)
+        self.exchange = mm.Exchange(A=A)
         H = (0, 0, 1.2e6)
-        self.zeeman = mm.Zeeman(H)
-        K = 1e4
+        self.zeeman = mm.Zeeman(H=H)
+        K1 = 1e4
         u = (0, 1, 0)
-        self.uniaxialanisotropy = mm.UniaxialAnisotropy(K, u)
+        self.uniaxialanisotropy = mm.UniaxialAnisotropy(K1=K1, u=u)
         self.demag = mm.Demag()
 
         self.terms = [self.exchange,
@@ -85,8 +85,8 @@ class TestHamiltonian:
         assert '\cdot' in latex
         assert '\\frac{1}{2}' in latex
         assert 'M_\\text{s}' in latex
-        assert latex.count('-') == 2
-        assert latex.count('+') == 3
+        assert latex.count('-') == 3
+        assert latex.count('+') == 2
         assert latex.count('=') == 1
         assert latex.count('\\nabla') == 3
 
@@ -102,7 +102,7 @@ class TestHamiltonian:
 
         exp_str = ("Exchange(A=1e-12) + "
                    "Zeeman(H=(0, 0, 1200000.0)) + "
-                   "UniaxialAnisotropy(K=10000.0, u=(0, 1, 0)) + "
+                   "UniaxialAnisotropy(K1=10000.0, K2=0, u=(0, 1, 0)) + "
                    "Demag()")
         assert repr(hamiltonian) == exp_str
 
@@ -118,7 +118,7 @@ class TestHamiltonian:
 
         assert isinstance(hamiltonian.uniaxialanisotropy,
                           mm.UniaxialAnisotropy)
-        assert hamiltonian.uniaxialanisotropy.K == 1e4
+        assert hamiltonian.uniaxialanisotropy.K1 == 1e4
         assert hamiltonian.uniaxialanisotropy.u == (0, 1, 0)
 
         assert isinstance(hamiltonian.demag, mm.Demag)

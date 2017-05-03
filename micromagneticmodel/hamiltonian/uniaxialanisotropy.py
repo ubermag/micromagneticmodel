@@ -17,6 +17,13 @@ class UniaxialAnisotropy(EnergyTerm):
         u : (3,) array_like
             Uniaxial anisotropy axis
 
+        Examples
+        --------
+        Creating a uniaxial anisotropy object
+
+        >>> import micromagneticmodel as mm
+        >>> ua = mm.UniaxialAnisotropy(K1=5e6, K2=1e3, u=(0, 0, 1))
+
         """
         self.K1 = K1
         self.K2 = K2

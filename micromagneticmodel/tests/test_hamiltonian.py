@@ -9,14 +9,24 @@ class TestHamiltonian:
         H = (0, 0, 1.2e6)
         self.zeeman = mm.Zeeman(H=H)
         K1 = 1e4
+        K2 = 3e2
         u = (0, 1, 0)
-        self.uniaxialanisotropy = mm.UniaxialAnisotropy(K1=K1, u=u)
+        self.uniaxialanisotropy = mm.UniaxialAnisotropy(K1=K1, K2=K2, u=u)
         self.demag = mm.Demag()
+        D = 1e-3
+        kind = "bulk"
+        self.dmi = mm.DMI(D=D, kind=kind)
+        K1 = 5e6
+        u1 = (0, 0, 1)
+        u2 = (0, 1, 0)
+        self.cubicanisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
 
         self.terms = [self.exchange,
                       self.zeeman,
                       self.uniaxialanisotropy,
-                      self.demag]
+                      self.demag,
+                      self.dmi,
+                      self.cubicanisotropy]
 
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.exchange, self.zeeman]]
@@ -31,15 +41,16 @@ class TestHamiltonian:
             assert hamiltonian.terms[-1] == term
             assert hamiltonian.terms[-1].name == term.name
 
-        assert len(hamiltonian.terms) == 4
+        assert len(hamiltonian.terms) == 6
 
     def test_add_sum_of_terms(self):
         hamiltonian = self.exchange + self.zeeman + \
-                      self.uniaxialanisotropy + self.demag
+                      self.uniaxialanisotropy + self.demag + \
+                      self.dmi + self.cubicanisotropy
 
         assert isinstance(hamiltonian, mm.Hamiltonian)
         assert isinstance(hamiltonian.terms, list)
-        assert len(hamiltonian.terms) == 4
+        assert len(hamiltonian.terms) == 6
 
     def test_add_hamiltonian(self):
         term_sum = self.exchange + self.zeeman
@@ -58,7 +69,7 @@ class TestHamiltonian:
             assert hamiltonian.terms[-1] == term
             assert hamiltonian.terms[-1].name == term.name
 
-        assert len(hamiltonian.terms) == 4
+        assert len(hamiltonian.terms) == 6
 
     def test_repr_latex(self):
         hamiltonian = mm.Hamiltonian()
@@ -85,10 +96,11 @@ class TestHamiltonian:
         assert '\cdot' in latex
         assert '\\frac{1}{2}' in latex
         assert 'M_\\text{s}' in latex
-        assert latex.count('-') == 3
-        assert latex.count('+') == 0
+        assert latex.count('-') == 5
+        assert latex.count('+') == 3
         assert latex.count('=') == 1
-        assert latex.count('\\nabla') == 1
+        assert latex.count('\\nabla') == 2
+        assert latex.count('\\times') == 1
 
     def test_add_exception(self):
         hamiltonian = mm.Hamiltonian()
@@ -98,18 +110,23 @@ class TestHamiltonian:
 
     def test_repr(self):
         hamiltonian = self.exchange + self.zeeman + \
-                      self.uniaxialanisotropy + self.demag
+                      self.uniaxialanisotropy + self.demag + \
+                      self.dmi + self.cubicanisotropy
 
         exp_str = ("Exchange(A=1e-12, name=\"exchange\") + "
                    "Zeeman(H=(0, 0, 1200000.0), name=\"zeeman\") + "
-                   "UniaxialAnisotropy(K1=10000.0, K2=0, u=(0, 1, 0), "
+                   "UniaxialAnisotropy(K1=10000.0, K2=300.0, u=(0, 1, 0), "
                    "name=\"uniaxialanisotropy\") + "
-                   "Demag(name=\"demag\")")
+                   "Demag(name=\"demag\") + "
+                   "DMI(D=0.001, kind=\"bulk\", name=\"dmi\") + "
+                   "CubicAnisotropy(K1=5000000.0, u1=(0, 0, 1), u2=(0, 1, 0), "
+                   "name=\"cubicanisotropy\")")
         assert repr(hamiltonian) == exp_str
 
     def test_getattr(self):
-        hamiltonian = self.exchange + self.zeeman + \
-                      self.uniaxialanisotropy + self.demag
+        hamiltonian = mm.Hamiltonian()
+        for term in self.terms:
+            hamiltonian += term
 
         assert isinstance(hamiltonian.exchange, mm.Exchange)
         assert hamiltonian.exchange.A == 1e-12
@@ -123,6 +140,12 @@ class TestHamiltonian:
         assert hamiltonian.uniaxialanisotropy.u == (0, 1, 0)
 
         assert isinstance(hamiltonian.demag, mm.Demag)
+
+        assert isinstance(hamiltonian.cubicanisotropy,
+                          mm.CubicAnisotropy)
+        assert hamiltonian.cubicanisotropy.K1 == 5e6
+        assert hamiltonian.cubicanisotropy.u1 == (0, 0, 1)
+        assert hamiltonian.cubicanisotropy.u2 == (0, 1, 0)
 
     def test_getattr_error(self):
         hamiltonian = self.exchange + self.zeeman

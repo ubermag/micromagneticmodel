@@ -32,12 +32,12 @@ class UniaxialAnisotropy(EnergyTerm):
 
     @property
     def _latex(self):
-        first_term = "$-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2}$"
-        second_term = "$-K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}$"
+        first_term = "-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2}"
+        second_term = "-K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}"
         if self.K2 == 0:
-            return first_term
+            return "${}$".format(first_term)
         else:
-            return first_term + second_term
+            return "${}$".format(first_term+second_term)
 
     @property
     def _repr(self):

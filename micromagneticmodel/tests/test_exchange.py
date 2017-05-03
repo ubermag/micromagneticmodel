@@ -27,9 +27,10 @@ class TestExchange:
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
-            assert '\\nabla' in latex
+            assert latex.count('\\nabla') == 1
             assert 'A' in latex
-            assert latex.count('+') == 2
+            assert '\mathbf{m}' in latex
+            assert latex.count('+') == 0
 
     def test_name(self):
         for A in self.valid_args:

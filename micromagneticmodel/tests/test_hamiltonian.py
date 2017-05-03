@@ -86,9 +86,9 @@ class TestHamiltonian:
         assert '\\frac{1}{2}' in latex
         assert 'M_\\text{s}' in latex
         assert latex.count('-') == 3
-        assert latex.count('+') == 2
+        assert latex.count('+') == 0
         assert latex.count('=') == 1
-        assert latex.count('\\nabla') == 3
+        assert latex.count('\\nabla') == 1
 
     def test_add_exception(self):
         hamiltonian = mm.Hamiltonian()

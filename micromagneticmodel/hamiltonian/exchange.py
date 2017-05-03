@@ -5,9 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(A=ts.UnsignedReal,
                name=ts.ObjectName)
 class Exchange(EnergyTerm):
-    _latex = ("$A [(\\nabla m_{x})^{2} + "
-              "(\\nabla m_{y})^{2} + "
-              "(\\nabla m_{z})^{2}]$")
+    _latex = "$A (\\nabla \mathbf{m})^{2}$"
 
     def __init__(self, A, name="exchange"):
         """An exchange energy class.

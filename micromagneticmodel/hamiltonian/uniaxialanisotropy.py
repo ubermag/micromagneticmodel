@@ -12,10 +12,10 @@ class UniaxialAnisotropy(EnergyTerm):
 
         Parameters
         ----------
-            K1, K2 : Real
-                Uniaxial anisotropy energy constant (J/m**3)
-            u : (3,) array_like
-                uniaxial anisotropy axis
+        K1, K2 : Real
+            Uniaxial anisotropy energy constant (J/m**3)
+        u : (3,) array_like
+            Uniaxial anisotropy axis
 
         """
         self.K1 = K1
@@ -36,8 +36,10 @@ class UniaxialAnisotropy(EnergyTerm):
     def _repr(self):
         """A representation string property.
 
-        Returns:
-           A representation string.
+        Returns
+        -------
+        str
+            A representation string.
 
         """
         return "UniaxialAnisotropy(K1={}, K2={}, u={})".format(self.K1,

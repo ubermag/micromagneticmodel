@@ -5,9 +5,11 @@ class TermSum(metaclass=abc.ABCMeta):
     def __init__(self):
         self.terms = []
 
+    @property
     @abc.abstractmethod
     def _lefthandside(self): pass  # pragma: no cover
 
+    @property
     @abc.abstractmethod
     def _terms_type(self): pass  # pragma: no cover
 

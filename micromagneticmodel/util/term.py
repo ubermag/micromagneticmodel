@@ -6,12 +6,15 @@ class Term(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def __init__(self): pass  # pragma: no cover
 
+    @property
     @abc.abstractmethod
     def _repr(self): pass  # pragma: no cover
 
+    @property
     @abc.abstractmethod
     def _latex(self): pass  # pragma: no cover
 
+    @property
     @abc.abstractmethod
     def _termsum_type(self): pass  # pragma: no cover
 

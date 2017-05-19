@@ -6,16 +6,16 @@ import joommfutil.typesystem as ts
 
 @ts.typesystem(name=ts.ObjectName)
 class System:
-    attributes = ["hamiltonian", "dynamics", "m", "name"]
+    _attributes = ["hamiltonian", "dynamics", "m", "name"]
 
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
-            if key in System.attributes:
+            if key in System._attributes:
                 setattr(self, key, value)
             else:
                 raise AttributeError("Unexpected kwarg {}.".format(key))
 
-        self.module = importlib.__import__(self.__class__.__module__)
+        self._module = importlib.__import__(self.__class__.__module__)
         if "hamiltonian" not in self.__dict__:
             self.hamiltonian = 0
         if "dynamics" not in self.__dict__:
@@ -27,7 +27,7 @@ class System:
 
     @hamiltonian.setter
     def hamiltonian(self, value):
-        self._hamiltonian = self.module.Hamiltonian()
+        self._hamiltonian = self._module.Hamiltonian()
         setattr(self._hamiltonian, "_system", self)
         if value == 0:
             pass
@@ -42,7 +42,7 @@ class System:
 
     @dynamics.setter
     def dynamics(self, value):
-        self._dynamics = self.module.Dynamics()
+        self._dynamics = self._module.Dynamics()
         setattr(self._dynamics, "_system", self)
         if value == 0:
             pass
@@ -68,7 +68,7 @@ class System:
 
     def __repr__(self):
         r = ["System object '{}':".format(self.name)]
-        for attribute in System.attributes:
+        for attribute in System._attributes:
             if attribute == 'name':
                 continue
             r.append("\t{:11}: {}".format(attribute,

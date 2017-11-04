@@ -11,4 +11,4 @@ from .data import Data
 
 def test():
     import pytest  # pragma: no cover
-    pytest.main(["-v", "--pyargs", "micromagneticmodel"])  # pragma: no cover
+    return pytest.main(["-v", "--pyargs", "micromagneticmodel"])  # pragma: no cover

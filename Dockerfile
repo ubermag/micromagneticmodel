@@ -7,6 +7,6 @@ RUN python3 -m pip install --upgrade pip pytest-cov nbval \
       git+git://github.com/joommf/discretisedfield.git
 
 WORKDIR /usr/local
-RUN git clone https://github.com/joommf/micromagneticmodel.git
+COPY . /usr/local/micromagneticmodel/
 WORKDIR /usr/local/micromagneticmodel
 RUN python3 -m pip install .

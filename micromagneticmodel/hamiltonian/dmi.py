@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(D=ts.Real,
                name=ts.ConstantObjectName)
 class DMI(EnergyTerm):
-    def __init__(self, D, kind="bulk", name="dmi"):
+    def __init__(self, D, crystalclass="t", name="dmi"):
         """A DMI energy class.
 
         Args:
@@ -14,13 +14,13 @@ class DMI(EnergyTerm):
         """
         self.D = D
         self.name = name
-        self.kind = kind
+        self.crystalclass = crystalclass
 
     @property
     def _latex(self):
-        if self.kind == "bulk":
+        if self.crystalclass == "t" or self.crystalclass == "o":
             return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
-        elif self.kind == "interfacial":
+        elif self.crystalclass == "cnv":
             return ("$D \\left[ \\left( m_{x} \\frac{ \\partial m_{z}}{\\partial x} "
                     "- m_{z}\\frac{\\partial m_{x}}{\\partial x} \\right)"
                     "+ \\left( m_{y}\\frac{\partial m_{z}}{\\partial y}"
@@ -34,5 +34,5 @@ class DMI(EnergyTerm):
            A representation string.
 
         """
-        return ("DMI(D={}, kind=\"{}\", "
-                "name=\"{}\")").format(self.D, self.kind, self.name)
+        return ("DMI(D={}, crystalclass=\"{}\", "
+                "name=\"{}\")").format(self.D, self.crystalclass, self.name)

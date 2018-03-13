@@ -21,7 +21,7 @@ class TestDMI:
 
     def test_repr_latex_(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D, kind="bulk")
+            dmi = mm.DMI(D, crystalclass="t")
             latex = dmi._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -31,7 +31,7 @@ class TestDMI:
             assert 'D' in latex
             assert latex.count('\mathbf{m}') == 2
 
-            dmi = mm.DMI(D, kind="interfacial")
+            dmi = mm.DMI(D, crystalclass="cnv")
             latex = dmi._repr_latex_()
 
             # Assert some characteristics of LaTeX string.
@@ -48,12 +48,12 @@ class TestDMI:
 
     def test_repr(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D, kind="bulk")
-            assert repr(dmi) == ('DMI(D={}, kind=\"bulk\", '
+            dmi = mm.DMI(D, crystalclass="t")
+            assert repr(dmi) == ('DMI(D={}, crystalclass=\"t\", '
                                  'name=\"{}\")').format(D, "dmi")
 
-            dmi = mm.DMI(D, kind="interfacial", name="test_name")
-            assert repr(dmi) == ("DMI(D={}, kind=\"interfacial\", "
+            dmi = mm.DMI(D, crystalclass="d2d", name="test_name")
+            assert repr(dmi) == ("DMI(D={}, crystalclass=\"d2d\", "
                                  "name=\"test_name\")").format(D)
 
     def test_script(self):

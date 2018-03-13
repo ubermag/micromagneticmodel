@@ -14,8 +14,8 @@ class TestHamiltonian:
         self.uniaxialanisotropy = mm.UniaxialAnisotropy(K1=K1, K2=K2, u=u)
         self.demag = mm.Demag()
         D = 1e-3
-        kind = "bulk"
-        self.dmi = mm.DMI(D=D, kind=kind)
+        crystalclass = "t"
+        self.dmi = mm.DMI(D=D, crystalclass=crystalclass)
         K1 = 5e6
         u1 = (0, 0, 1)
         u2 = (0, 1, 0)
@@ -118,7 +118,7 @@ class TestHamiltonian:
                    "UniaxialAnisotropy(K1=10000.0, K2=300.0, u=(0, 1, 0), "
                    "name=\"uniaxialanisotropy\") + "
                    "Demag(name=\"demag\") + "
-                   "DMI(D=0.001, kind=\"bulk\", name=\"dmi\") + "
+                   "DMI(D=0.001, crystalclass=\"t\", name=\"dmi\") + "
                    "CubicAnisotropy(K1=5000000.0, u1=(0, 0, 1), u2=(0, 1, 0), "
                    "name=\"cubicanisotropy\")")
         assert repr(hamiltonian) == exp_str

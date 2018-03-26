@@ -3,7 +3,8 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(D=ts.Real,
-               crystalclass=ts.FromSet(allowed_values={"cnv", "t", "o", "d2d"}),
+               crystalclass=ts.FromSet(allowed_values={"cnv", "t",
+                                                       "o", "d2d"}),
                name=ts.ConstantObjectName)
 class DMI(EnergyTerm):
     def __init__(self, D, crystalclass="t", name="dmi"):
@@ -25,8 +26,9 @@ class DMI(EnergyTerm):
             return ("$D ( \mathbf{m} \\cdot \\nabla m_{z} "
                     "- m_{z} \\nabla \\cdot \mathbf{m}$ )$")
         else:
-            return ("$D\mathbf{m} \\cdot \\left( \\frac{\\partial \mathbf{m}}{\\partial x} "
-                    "\\times \hat{x} - \\frac{\\partial \mathbf{m}}{\\partial y} "
+            return ("$D\mathbf{m} \\cdot \\left( \\frac{\\partial "
+                    "\mathbf{m}}{\\partial x} \\times \hat{x} - "
+                    "\\frac{\\partial \mathbf{m}}{\\partial y} "
                     "\\times \hat{y} \\right)$")
 
     @property

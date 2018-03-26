@@ -23,7 +23,7 @@ class TestDMI:
         for D in self.valid_args:
             dmi = mm.DMI(D, crystalclass="T")
             latex = dmi._repr_latex_()
-            
+
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == "$"
@@ -33,7 +33,7 @@ class TestDMI:
 
             dmi = mm.DMI(D, crystalclass="cnv")
             latex = dmi._repr_latex_()
-            
+
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
@@ -43,7 +43,7 @@ class TestDMI:
 
             dmi = mm.DMI(D, crystalclass="d2d")
             latex = dmi._repr_latex_()
-            
+
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'

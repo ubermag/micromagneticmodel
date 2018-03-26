@@ -11,7 +11,7 @@ class TestDynamics:
         u = (0, 0, 500)
         beta = 0.2
         self.stt = mm.STT(u=u, beta=beta)
-        
+
         self.terms = [self.precession,
                       self.damping,
                       self.stt]

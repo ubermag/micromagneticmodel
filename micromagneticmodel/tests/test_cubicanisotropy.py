@@ -53,7 +53,6 @@ class TestCubicAnisotropy:
             assert latex.count("\mathbf{u}_{2}") == 2
             assert latex.count("\mathbf{u}_{3}") == 2
 
-
     def test_name(self):
         for K1, u1, u2 in self.valid_args:
             anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)

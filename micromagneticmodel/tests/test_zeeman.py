@@ -51,7 +51,8 @@ class TestZeeman:
     def test_repr(self):
         for H in self.valid_args:
             zeeman = mm.Zeeman(H)
-            assert repr(zeeman) == 'Zeeman(H={}, name=\"{}\")'.format(H, "zeeman")
+            assert repr(zeeman) == ('Zeeman(H={}, '
+                                    'name=\"{}\")'.format(H, "zeeman"))
 
         zeeman = mm.Zeeman(H=(1, 0, 1), name="test_name")
         assert repr(zeeman) == "Zeeman(H=(1, 0, 1), name=\"test_name\")"

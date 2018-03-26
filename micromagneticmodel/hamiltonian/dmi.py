@@ -13,8 +13,8 @@ class DMI(EnergyTerm):
 
         """
         self.D = D
+        self.crystalclass = crystalclass.lower()
         self.name = name
-        self.crystalclass = crystalclass
 
     @property
     def _latex(self):

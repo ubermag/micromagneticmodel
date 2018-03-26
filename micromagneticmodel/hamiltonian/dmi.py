@@ -3,6 +3,7 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(D=ts.Real,
+               crystalclass=ts.FromSet(allowed_values={"cnv", "t", "o", "d2d"}),
                name=ts.ConstantObjectName)
 class DMI(EnergyTerm):
     def __init__(self, D, crystalclass="t", name="dmi"):
@@ -18,13 +19,15 @@ class DMI(EnergyTerm):
 
     @property
     def _latex(self):
-        if self.crystalclass == "t" or self.crystalclass == "o":
+        if self.crystalclass in ["t", "o"]:
             return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
         elif self.crystalclass == "cnv":
-            return ("$D \\left[ \\left( m_{x} \\frac{ \\partial m_{z}}{\\partial x} "
-                    "- m_{z}\\frac{\\partial m_{x}}{\\partial x} \\right)"
-                    "+ \\left( m_{y}\\frac{\partial m_{z}}{\\partial y}"
-                    "- m_{z}\\frac{\\partial m_{y}}{\\partial y} \\right)\\right]$")
+            return ("$D ( \mathbf{m} \\cdot \\nabla m_{z} "
+                    "- m_{z} \\nabla \\cdot \mathbf{m}$ )$")
+        else:
+            return ("$D\mathbf{m} \\cdot \\left( \\frac{\\partial \mathbf{m}}{\\partial x} "
+                    "\\times \hat{x} - \\frac{\\partial \mathbf{m}}{\\partial y} "
+                    "\\times \hat{y} \\right)$")
 
     @property
     def _repr(self):

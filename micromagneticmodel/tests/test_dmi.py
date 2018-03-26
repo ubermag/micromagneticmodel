@@ -21,25 +21,36 @@ class TestDMI:
 
     def test_repr_latex_(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D, crystalclass="t")
+            dmi = mm.DMI(D, crystalclass="T")
             latex = dmi._repr_latex_()
-
+            
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert '\\nabla' in latex
+            assert latex[0] == "$"
+            assert latex[-1] == "$"
             assert 'D' in latex
             assert latex.count('\mathbf{m}') == 2
 
             dmi = mm.DMI(D, crystalclass="cnv")
             latex = dmi._repr_latex_()
+            
+            # Assert some characteristics of LaTeX string.
+            assert isinstance(latex, str)
+            assert latex[0] == latex[-1] == '$'
+            assert '\\nabla' in latex
+            assert 'D' in latex
+            assert latex.count('\\frac') == 0
 
+            dmi = mm.DMI(D, crystalclass="d2d")
+            latex = dmi._repr_latex_()
+            
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
             assert '\\partial' in latex
+            assert '\\hat' in latex
             assert 'D' in latex
-            assert latex.count('\\frac') == 4
+            assert latex.count('\\frac') == 2
 
     def test_name(self):
         for D in self.valid_args:

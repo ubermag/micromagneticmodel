@@ -4,7 +4,8 @@ from .energyterm import EnergyTerm
 
 @ts.typesystem(D=ts.Real,
                crystalclass=ts.FromSet(allowed_values={"cnv", "t",
-                                                       "o", "d2d"}),
+                                                       "o", "d2d",
+                                                       "interfacial"}),
                name=ts.ConstantObjectName)
 class DMI(EnergyTerm):
     def __init__(self, D, crystalclass="t", name="dmi"):
@@ -22,7 +23,7 @@ class DMI(EnergyTerm):
     def _latex(self):
         if self.crystalclass in ["t", "o"]:
             return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
-        elif self.crystalclass == "cnv":
+        elif self.crystalclass in ["cnv", "interfacial"]:
             return ("$D ( \mathbf{m} \\cdot \\nabla m_{z} "
                     "- m_{z} \\nabla \\cdot \mathbf{m} )$")
         else:

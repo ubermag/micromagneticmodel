@@ -24,7 +24,7 @@ class DMI(EnergyTerm):
             return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
         elif self.crystalclass == "cnv":
             return ("$D ( \mathbf{m} \\cdot \\nabla m_{z} "
-                    "- m_{z} \\nabla \\cdot \mathbf{m}$ )$")
+                    "- m_{z} \\nabla \\cdot \mathbf{m} )$")
         else:
             return ("$D\mathbf{m} \\cdot \\left( \\frac{\\partial "
                     "\mathbf{m}}{\\partial x} \\times \hat{x} - "

@@ -5,11 +5,11 @@ with open("README.rst") as f:
 
 setuptools.setup(
     name="micromagneticmodel",
-    version="0.7.6",
+    version="0.8",
     description="A Python-based micromagnetic model.",
     long_description=readme,
     url="https://joommf.github.io",
-    author="Marijan Beg, Ryan A. Pepper, and Hans Fangohr",
+    author="Marijan Beg and Hans Fangohr",
     author_email="jupyteroommf@gmail.com",
     packages=setuptools.find_packages(),
     install_requires=["discretisedfield"],

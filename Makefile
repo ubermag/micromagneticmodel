@@ -6,7 +6,6 @@ PYTHON?=python3
 test:
 	$(PYTHON) -m pytest
 
-# call test() function of module (as user would)
 test-test:
 	$(PYTHON) -c "import micromagneticmodel as m; import sys; sys.exit(m.test())"
 
@@ -32,13 +31,6 @@ travis-build:
 	docker run -e ci_env -ti -d --name testcontainer dockertestimage
 	docker exec testcontainer make test-all
 	docker exec testcontainer make upload-coverage
-	docker stop testcontainer
-	docker rm testcontainer
-
-test-docker:
-	docker build -t dockertestimage .
-	docker run -ti -d --name testcontainer dockertestimage
-	docker exec testcontainer make test-all
 	docker stop testcontainer
 	docker rm testcontainer
 

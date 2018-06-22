@@ -13,6 +13,10 @@ class DMI(EnergyTerm):
 
         Args:
             D (Real): DMI energy constant (J/m**2)
+            
+            crystalclass (string): Type of crystal class.
+            Possible values are:
+                "cnv", "t", "o", "d2d", "interfacial"
 
         """
         self.D = D

@@ -55,7 +55,7 @@ For further information on the `conda` package, dependency, and environment mana
 
 ## Updating
 
-If you used pip to install `micromagneticmodel`, you can update to the latest released version in [PyPI](https://pypi.org/) by running
+If you used pip to install `micromagneticmodel`, you can update to the latest released version in [PyPI](https://pypi.org/project/micromagneticmodel/) by running
 
     python3 -m pip install --upgrade micromagneticmodel
 

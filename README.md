@@ -21,6 +21,8 @@ Marijan Beg<sup>1,2</sup>, Ryan A. Pepper<sup>2</sup>, Thomas Kluyver<sup>1</sup
 
 - Interface for for micromagnetic simulation tools
 
+- Mechanism for defining micromagnetic system, its Hamiltonian, and its dynamics equation
+
 It is available on all major operating systems (Windows, MacOS, Linux) and requires Python 3.5 or higher.
 
 ## Installation

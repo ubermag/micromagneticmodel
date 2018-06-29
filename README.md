@@ -67,7 +67,7 @@ On the other hand, if you used `conda` for installation, update `micromagneticmo
 
 The most recent development version of `micromagneticmodel` that is not yet released can be installed/updated with
 
-    git clone https://github.com/joommf/micromagneticmodel
+    git clone https://github.com/joommf/micromagneticmodel.git
     python3 -m pip install --upgrade micromagneticmodel
 
 **Note**: If you do not have `git` on your system, it can be installed by following the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).

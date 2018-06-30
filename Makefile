@@ -7,18 +7,18 @@ test:
 	$(PYTHON) -m pytest
 
 test-test:
-	$(PYTHON) -c "import micromagneticmodel as m; import sys; sys.exit(m.test())"
+	$(PYTHON) -c "import sys; import $(PROJECT); sys.exit($(PROJECT).test())"
 
 test-coverage:
 	$(PYTHON) -m pytest --cov=$(PROJECT) --cov-config .coveragerc
 
-test-ipynb:
-	$(PYTHON) -m pytest --nbval $(IPYNBPATH)
-
 test-docs:
 	$(PYTHON) -m pytest --doctest-modules --ignore=$(PROJECT)/tests $(PROJECT)
 
-test-all: test-test test-coverage test-ipynb test-docs
+test-ipynb:
+	$(PYTHON) -m pytest --nbval $(IPYNBPATH)
+
+test-all: test-test test-coverage test-docs test-ipynb
 
 upload-coverage: SHELL:=/bin/bash
 upload-coverage:
@@ -34,10 +34,16 @@ travis-build:
 	docker stop testcontainer
 	docker rm testcontainer
 
+test-docker:
+	docker build -t dockertestimage .
+	docker run -ti -d --name testcontainer dockertestimage
+	docker exec testcontainer make test-all
+	docker stop testcontainer
+	docker rm testcontainer
+
 build-dists:
 	rm -rf dist/
-	$(PYTHON) setup.py sdist
-	$(PYTHON) setup.py bdist_wheel
+	$(PYTHON) setup.py sdist bdist_wheel
 
 release: build-dists
 	twine upload dist/*

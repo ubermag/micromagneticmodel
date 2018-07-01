@@ -1,3 +1,4 @@
+import pytest
 import pkg_resources
 from .consts import mu0, e, me, kB, h, g, hbar, gamma, muB, gamma0
 import micromagneticmodel.util  # to avoid import order conflicts
@@ -11,7 +12,6 @@ from .data import Data
 
 
 def test():
-    import pytest  # pragma: no cover
     return pytest.main(["-v", "--pyargs", "micromagneticmodel"])  # pragma: no cover
 
 __version__ = pkg_resources.get_distribution(__name__).version

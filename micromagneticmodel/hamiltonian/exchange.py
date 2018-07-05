@@ -2,8 +2,8 @@ import joommfutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(A=ts.UnsignedReal,
-               name=ts.ConstantObjectName)
+@ts.typesystem(A=ts.Scalar(unsigned=True),
+               name=ts.Name(const=True))
 class Exchange(EnergyTerm):
     _latex = "$A (\\nabla \mathbf{m})^{2}$"
 

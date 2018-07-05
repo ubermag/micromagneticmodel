@@ -2,10 +2,10 @@ import joommfutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(K1=ts.Real,
-               K2=ts.Real,
-               u=ts.RealVector(size=3),
-               name=ts.ConstantObjectName)
+@ts.typesystem(K1=ts.Scalar,
+               K2=ts.Scalar,
+               u=ts.Vector(size=3),
+               name=ts.Name(const=True))
 class UniaxialAnisotropy(EnergyTerm):
     def __init__(self, K1, u, K2=0, name="uniaxialanisotropy"):
         """Uniaxial anisotropy energy abstract class.

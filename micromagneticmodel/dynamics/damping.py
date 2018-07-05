@@ -2,8 +2,8 @@ import joommfutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
-@ts.typesystem(alpha=ts.UnsignedReal,
-               name=ts.ConstantObjectName)
+@ts.typesystem(alpha=ts.Scalar(unsigned=True),
+               name=ts.Name(const=True))
 class Damping(DynamicsTerm):
     _latex = ("$\\alpha \mathbf{m} \\times"
               "\\frac{\partial \mathbf{m}}{\partial t}$")

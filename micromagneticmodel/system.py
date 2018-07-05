@@ -4,7 +4,7 @@ import micromagneticmodel as mm
 import joommfutil.typesystem as ts
 
 
-@ts.typesystem(name=ts.ObjectName)
+@ts.typesystem(name=ts.Name(const=True))
 class System:
     _attributes = ["hamiltonian", "dynamics", "m", "name"]
 

@@ -2,9 +2,9 @@ import joommfutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
-@ts.typesystem(u=ts.RealVector(size=3),
-               beta=ts.Real,
-               name=ts.ConstantObjectName)
+@ts.typesystem(u=ts.Vector(size=3),
+               beta=ts.Scalar,
+               name=ts.Name(const=True))
 class STT(DynamicsTerm):
     _latex = ("$-(\mathbf{u} \cdot \\boldsymbol\\nabla)\mathbf{m} + "
               "\\beta\mathbf{m} \\times \\big[(\mathbf{u} \cdot "

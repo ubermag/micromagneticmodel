@@ -2,8 +2,8 @@ import joommfutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(H=ts.RealVector(size=3),
-               name=ts.ConstantObjectName)
+@ts.typesystem(H=ts.Vector(size=3),
+               name=ts.Name(const=True))
 class Zeeman(EnergyTerm):
     _latex = "$-\mu_{0}M_\\text{s} \mathbf{m} \cdot \mathbf{H}$"
 

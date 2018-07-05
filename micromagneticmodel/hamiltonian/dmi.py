@@ -2,11 +2,11 @@ import joommfutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(D=ts.Real,
-               crystalclass=ts.FromSet(allowed_values={"cnv", "t",
-                                                       "o", "d2d",
-                                                       "interfacial"}),
-               name=ts.ConstantObjectName)
+@ts.typesystem(D=ts.Scalar,
+               crystalclass=ts.InSet(allowed_values={"cnv", "t",
+                                                     "o", "d2d",
+                                                     "interfacial"}),
+               name=ts.Name(constant=True))
 class DMI(EnergyTerm):
     def __init__(self, D, crystalclass="t", name="dmi"):
         """A DMI energy class.

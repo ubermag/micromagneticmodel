@@ -2,8 +2,8 @@ import joommfutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
-@ts.typesystem(gamma=ts.UnsignedReal,
-               name=ts.ConstantObjectName)
+@ts.typesystem(gamma=ts.Scalar(unsigned=True),
+               name=ts.Name(const=True))
 class Precession(DynamicsTerm):
     _latex = ("$-\gamma_{0}^{*} \mathbf{m} \\times "
               "\mathbf{H}_\\text{eff}$")

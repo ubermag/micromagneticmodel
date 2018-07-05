@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setuptools.setup(
     name='micromagneticmodel',
-    version='0.8.1',
+    version='0.8.2',
     description=('Python based micromagnetic model providing interface '
                  'to micromagnetic simulation tools.'),
     long_description=long_description,

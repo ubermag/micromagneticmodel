@@ -21,6 +21,8 @@ class System:
         if "dynamics" not in self.__dict__:
             self.dynamics = 0
 
+        self.run_number = 0
+
     @property
     def hamiltonian(self):
         return self._hamiltonian

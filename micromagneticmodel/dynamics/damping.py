@@ -5,10 +5,10 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(alpha=ts.Scalar(unsigned=True),
                name=ts.Name(const=True))
 class Damping(DynamicsTerm):
-    _latex = ("$\\alpha \mathbf{m} \\times"
-              "\\frac{\partial \mathbf{m}}{\partial t}$")
+    _latex = (r'$\alpha \mathbf{m} \times'
+              r'\frac{\partial \mathbf{m}}{\partial t}$')
 
-    def __init__(self, alpha, name="damping"):
+    def __init__(self, alpha, name='damping'):
         """A damping dynamics term class.
 
         Args:
@@ -26,4 +26,4 @@ class Damping(DynamicsTerm):
            A representation string.
 
         """
-        return "Damping(alpha={}, name=\"{}\")".format(self.alpha, self.name)
+        return 'Damping(alpha={}, name=\'{}\')'.format(self.alpha, self.name)

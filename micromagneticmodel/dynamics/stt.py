@@ -6,11 +6,11 @@ from .dynamicsterm import DynamicsTerm
                beta=ts.Scalar,
                name=ts.Name(const=True))
 class STT(DynamicsTerm):
-    _latex = ("$-(\mathbf{u} \cdot \\boldsymbol\\nabla)\mathbf{m} + "
-              "\\beta\mathbf{m} \\times \\big[(\mathbf{u} \cdot "
-              "\\boldsymbol\\nabla)\mathbf{m}\\big]$")
+    _latex = (r'$-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
+              r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
+              r'\boldsymbol\nabla)\mathbf{m}\big]$')
 
-    def __init__(self, u, beta, name="stt"):
+    def __init__(self, u, beta, name='stt'):
         """A spin transfer torque term.
 
         Args:
@@ -30,5 +30,5 @@ class STT(DynamicsTerm):
            A representation string.
 
         """
-        return ("STT(u={}, beta={}, "
-                "name=\"{}\")").format(self.u, self.beta, self.name)
+        return ('STT(u={}, beta={}, '
+                'name=\'{}\')').format(self.u, self.beta, self.name)

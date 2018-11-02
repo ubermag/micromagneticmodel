@@ -10,7 +10,7 @@ class TestSTT:
                            ((0, 0, 0), 5e-11),
                            ((11, 2, 19), -1e-12)]
         self.invalid_args = [((1, -2), 1),
-                             ((-1.0, 0, 1e-6), "2.0"),
+                             ((-1.0, 0, 1e-6), '2.0'),
                              ((0, 0, 0, 9), 5e-11),
                              ((11, 2, 19), -1e-12+2j)]
 
@@ -40,12 +40,12 @@ class TestSTT:
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
-            assert '\\beta' in latex
-            assert '\mathbf{m}' in latex
-            assert '\mathbf{u}' in latex
-            assert '\\times' in latex
-            assert '\\boldsymbol' in latex
-            assert '\\nabla' in latex
+            assert r'\beta' in latex
+            assert r'\mathbf{m}' in latex
+            assert r'\mathbf{u}' in latex
+            assert r'\times' in latex
+            assert r'\boldsymbol' in latex
+            assert r'\nabla' in latex
 
     def test_name(self):
         for arg in self.valid_args:
@@ -59,11 +59,11 @@ class TestSTT:
             u, beta = arg
             stt = mm.STT(u, beta)
 
-            assert repr(stt) == ("STT(u={}, beta={}, "
-                                 "name=\"stt\")".format(u, beta))
+            assert repr(stt) == ('STT(u={}, beta={}, '
+                                 'name=\'stt\')'.format(u, beta))
 
-        stt = mm.STT((1, 2, 3), 15, name="test_name")
-        assert repr(stt) == 'STT(u=(1, 2, 3), beta=15, name=\"test_name\")'
+        stt = mm.STT((1, 2, 3), 15, name='test_name')
+        assert repr(stt) == 'STT(u=(1, 2, 3), beta=15, name=\'test_name\')'
 
     def test_script(self):
         for arg in self.valid_args:

@@ -27,12 +27,12 @@ class TestPrecession:
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
-            assert '\gamma' in latex
+            assert r'\gamma' in latex
             assert '^{*}' in latex
             assert '_{0}' in latex
-            assert '\mathbf{m}' in latex
-            assert '\mathbf{H}_\\text{eff}' in latex
-            assert '\\times' in latex
+            assert r'\mathbf{m}' in latex
+            assert r'\mathbf{H}_\text{eff}' in latex
+            assert r'\times' in latex
 
     def test_name(self):
         for gamma in self.valid_args:
@@ -43,12 +43,12 @@ class TestPrecession:
         for gamma in self.valid_args:
             precession = mm.Precession(gamma)
             assert repr(precession) == ('Precession(gamma={}, '
-                                        'name=\"{}\")').format(gamma,
-                                                               "precession")
+                                        'name=\'{}\')').format(gamma,
+                                                               'precession')
 
-        precession = mm.Precession(gamma=2.211e5, name="test_name")
+        precession = mm.Precession(gamma=2.211e5, name='test_name')
         assert repr(precession) == ('Precession(gamma=221100.0, '
-                                    'name=\"test_name\")')
+                                    'name=\'test_name\')')
 
     def test_script(self):
         for gamma in self.valid_args:

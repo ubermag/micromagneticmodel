@@ -5,10 +5,10 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(gamma=ts.Scalar(unsigned=True),
                name=ts.Name(const=True))
 class Precession(DynamicsTerm):
-    _latex = ("$-\gamma_{0}^{*} \mathbf{m} \\times "
-              "\mathbf{H}_\\text{eff}$")
+    _latex = (r'$-\gamma_{0}^{*} \mathbf{m} \times '
+              r'\mathbf{H}_\text{eff}$')
 
-    def __init__(self, gamma, name="precession"):
+    def __init__(self, gamma, name='precession'):
         """A precession dynamics term class.
 
         Args:
@@ -26,4 +26,4 @@ class Precession(DynamicsTerm):
            A representation string.
 
         """
-        return "Precession(gamma={}, name=\"{}\")".format(self.gamma, self.name)
+        return 'Precession(gamma={}, name=\'{}\')'.format(self.gamma, self.name)

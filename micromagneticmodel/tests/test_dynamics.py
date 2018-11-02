@@ -71,15 +71,15 @@ class TestDynamics:
 
         assert latex[0] == latex[-1] == '$'
         assert latex.count('$') == 2
-        assert '-\gamma_{0}^{*}' in latex
-        assert '\mathbf{m}' in latex
-        assert '\mathbf{H}_\\text{eff}' in latex
-        assert '\\times' in latex
-        assert '\\alpha' in latex
+        assert r'-\gamma_{0}^{*}' in latex
+        assert r'\mathbf{m}' in latex
+        assert r'\mathbf{H}_\text{eff}' in latex
+        assert r'\times' in latex
+        assert r'\alpha' in latex
         assert latex.count('-') == 2
         assert latex.count('+') == 2
         assert latex.count('=') == 1
-        assert latex.count('\partial') == 4
+        assert latex.count(r'\partial') == 4
 
     def test_add_exception(self):
         dynamics = mm.Dynamics()
@@ -90,9 +90,9 @@ class TestDynamics:
     def test_repr(self):
         dynamics = self.precession + self.damping + self.stt
 
-        exp_str = ("Precession(gamma=221000.0, name=\"precession\") + "
-                   "Damping(alpha=0.5, name=\"damping\") + "
-                   "STT(u=(0, 0, 500), beta=0.2, name=\"stt\")")
+        exp_str = ('Precession(gamma=221000.0, name=\'precession\') + '
+                   'Damping(alpha=0.5, name=\'damping\') + '
+                   'STT(u=(0, 0, 500), beta=0.2, name=\'stt\')')
         assert repr(dynamics) == exp_str
 
     def test_getattr(self):

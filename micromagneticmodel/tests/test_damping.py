@@ -28,11 +28,11 @@ class TestDamping:
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
-            assert '\\alpha' in latex
-            assert '\mathbf{m}' in latex
-            assert '\\frac' in latex
-            assert '\\times' in latex
-            assert latex.count('\partial') == 2
+            assert r'\alpha' in latex
+            assert r'\mathbf{m}' in latex
+            assert r'\frac' in latex
+            assert r'\times' in latex
+            assert latex.count(r'\partial') == 2
 
     def test_name(self):
         for alpha in self.valid_args:
@@ -43,10 +43,10 @@ class TestDamping:
         for alpha in self.valid_args:
             damping = mm.Damping(alpha)
             assert repr(damping) == ('Damping(alpha={}, '
-                                     'name=\"damping\")').format(alpha)
+                                     'name=\'damping\')').format(alpha)
 
-        damping = mm.Damping(alpha=0.05, name="test_name")
-        assert repr(damping) == 'Damping(alpha=0.05, name=\"test_name\")'
+        damping = mm.Damping(alpha=0.05, name='test_name')
+        assert repr(damping) == 'Damping(alpha=0.05, name=\'test_name\')'
 
     def test_script(self):
         for alpha in self.valid_args:

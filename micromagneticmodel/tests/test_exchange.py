@@ -27,9 +27,9 @@ class TestExchange:
             # Assert some characteristics of LaTeX string.
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
-            assert latex.count('\\nabla') == 1
+            assert latex.count(r'\nabla') == 1
             assert 'A' in latex
-            assert '\mathbf{m}' in latex
+            assert r'\mathbf{m}' in latex
             assert latex.count('+') == 0
 
     def test_name(self):
@@ -41,10 +41,10 @@ class TestExchange:
         for A in self.valid_args:
             exchange = mm.Exchange(A)
             assert repr(exchange) == ('Exchange(A={}, '
-                                      'name=\"{}\")').format(A, "exchange")
+                                      'name=\'{}\')').format(A, 'exchange')
 
-        exchange = mm.Exchange(8.78e-12, name="test_name")
-        assert repr(exchange) == "Exchange(A=8.78e-12, name=\"test_name\")"
+        exchange = mm.Exchange(8.78e-12, name='test_name')
+        assert repr(exchange) == 'Exchange(A=8.78e-12, name=\'test_name\')'
 
     def test_script(self):
         for A in self.valid_args:

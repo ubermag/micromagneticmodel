@@ -37,11 +37,11 @@ class TestZeeman:
             # Assert some characteristics of LaTeX string.
             assert latex[0] == latex[-1] == '$'
             assert latex[1] == '-'
-            assert '\\mu_{0}' in latex
-            assert '\mathbf{H}' in latex
-            assert '\mathbf{m}' in latex
-            assert '\cdot' in latex
-            assert 'M_\\text{s}' in latex
+            assert r'\mu_{0}' in latex
+            assert r'\mathbf{H}' in latex
+            assert r'\mathbf{m}' in latex
+            assert r'\cdot' in latex
+            assert r'M_\text{s}' in latex
 
     def test_name(self):
         for H in self.valid_args:
@@ -52,10 +52,10 @@ class TestZeeman:
         for H in self.valid_args:
             zeeman = mm.Zeeman(H)
             assert repr(zeeman) == ('Zeeman(H={}, '
-                                    'name=\"{}\")'.format(H, "zeeman"))
+                                    'name=\'{}\')'.format(H, 'zeeman'))
 
-        zeeman = mm.Zeeman(H=(1, 0, 1), name="test_name")
-        assert repr(zeeman) == "Zeeman(H=(1, 0, 1), name=\"test_name\")"
+        zeeman = mm.Zeeman(H=(1, 0, 1), name='test_name')
+        assert repr(zeeman) == 'Zeeman(H=(1, 0, 1), name=\'test_name\')'
 
     def test_script(self):
         for H in self.valid_args:

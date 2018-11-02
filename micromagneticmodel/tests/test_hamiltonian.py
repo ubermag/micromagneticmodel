@@ -14,7 +14,7 @@ class TestHamiltonian:
         self.uniaxialanisotropy = mm.UniaxialAnisotropy(K1=K1, K2=K2, u=u)
         self.demag = mm.Demag()
         D = 1e-3
-        crystalclass = "t"
+        crystalclass = 't'
         self.dmi = mm.DMI(D=D, crystalclass=crystalclass)
         K1 = 5e6
         u1 = (0, 0, 1)
@@ -76,7 +76,7 @@ class TestHamiltonian:
         latex = hamiltonian._repr_latex_()
         assert latex[0] == latex[-1] == '$'
         assert latex.count('$') == 2
-        assert '\\mathcal{H}' in latex
+        assert r'\mathcal{H}' in latex
         assert latex[-2] == '0'
 
         for term in self.terms:
@@ -86,21 +86,21 @@ class TestHamiltonian:
 
         assert latex[0] == latex[-1] == '$'
         assert latex.count('$') == 2
-        assert '\\mathcal{H}=' in latex
+        assert r'\mathcal{H}=' in latex
         assert 'A' in latex
-        assert '\mathbf{m}' in latex
-        assert '\mathbf{H}' in latex
-        assert '\mathbf{u}' in latex
+        assert r'\mathbf{m}' in latex
+        assert r'\mathbf{H}' in latex
+        assert r'\mathbf{u}' in latex
         assert 'K' in latex
-        assert '\mathbf{H}_\\text{d}' in latex
+        assert r'\mathbf{H}_\text{d}' in latex
         assert '\cdot' in latex
-        assert '\\frac{1}{2}' in latex
-        assert 'M_\\text{s}' in latex
+        assert r'\frac{1}{2}' in latex
+        assert r'M_\text{s}' in latex
         assert latex.count('-') == 5
         assert latex.count('+') == 3
         assert latex.count('=') == 1
-        assert latex.count('\\nabla') == 2
-        assert latex.count('\\times') == 1
+        assert latex.count(r'\nabla') == 2
+        assert latex.count(r'\times') == 1
 
     def test_add_exception(self):
         hamiltonian = mm.Hamiltonian()
@@ -113,14 +113,14 @@ class TestHamiltonian:
                       self.uniaxialanisotropy + self.demag + \
                       self.dmi + self.cubicanisotropy
 
-        exp_str = ("Exchange(A=1e-12, name=\"exchange\") + "
-                   "Zeeman(H=(0, 0, 1200000.0), name=\"zeeman\") + "
-                   "UniaxialAnisotropy(K1=10000.0, K2=300.0, u=(0, 1, 0), "
-                   "name=\"uniaxialanisotropy\") + "
-                   "Demag(name=\"demag\") + "
-                   "DMI(D=0.001, crystalclass=\"t\", name=\"dmi\") + "
-                   "CubicAnisotropy(K1=5000000.0, u1=(0, 0, 1), u2=(0, 1, 0), "
-                   "name=\"cubicanisotropy\")")
+        exp_str = ('Exchange(A=1e-12, name=\'exchange\') + '
+                   'Zeeman(H=(0, 0, 1200000.0), name=\'zeeman\') + '
+                   'UniaxialAnisotropy(K1=10000.0, K2=300.0, u=(0, 1, 0), '
+                   'name=\'uniaxialanisotropy\') + '
+                   'Demag(name=\'demag\') + '
+                   'DMI(D=0.001, crystalclass=\'t\', name=\'dmi\') + '
+                   'CubicAnisotropy(K1=5000000.0, u1=(0, 0, 1), u2=(0, 1, 0), '
+                   'name=\'cubicanisotropy\')')
         assert repr(hamiltonian) == exp_str
 
     def test_getattr(self):

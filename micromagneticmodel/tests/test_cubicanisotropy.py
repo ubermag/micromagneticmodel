@@ -44,14 +44,14 @@ class TestCubicAnisotropy:
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
             assert 'K_{1}' in latex
-            assert '\mathbf{u}_{1}' in latex
-            assert '\mathbf{u}_{2}' in latex
-            assert '\mathbf{m}' in latex
+            assert r'\mathbf{u}_{1}' in latex
+            assert r'\mathbf{u}_{2}' in latex
+            assert r'\mathbf{m}' in latex
             assert '^{2}' in latex
-            assert '\cdot' in latex
-            assert latex.count("\mathbf{u}_{1}") == 2
-            assert latex.count("\mathbf{u}_{2}") == 2
-            assert latex.count("\mathbf{u}_{3}") == 2
+            assert r'\cdot' in latex
+            assert latex.count(r'\mathbf{u}_{1}') == 2
+            assert latex.count(r'\mathbf{u}_{2}') == 2
+            assert latex.count(r'\mathbf{u}_{3}') == 2
 
     def test_name(self):
         for K1, u1, u2 in self.valid_args:
@@ -61,14 +61,14 @@ class TestCubicAnisotropy:
     def test_repr(self):
         for K1, u1, u2 in self.valid_args:
             anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
-            exp_str = ("CubicAnisotropy(K1={}, u1={}, u2={}, "
-                       "name=\"{}\")").format(K1, u1, u2, "cubicanisotropy")
+            exp_str = ('CubicAnisotropy(K1={}, u1={}, u2={}, '
+                       'name=\'{}\')').format(K1, u1, u2, 'cubicanisotropy')
             assert repr(anisotropy) == exp_str
 
         anisotropy = mm.CubicAnisotropy(1000, (0, 1, 0), (0, 0, 1),
-                                        name="test_name")
-        assert repr(anisotropy) == ("CubicAnisotropy(K1=1000, u1=(0, 1, 0), "
-                                    "u2=(0, 0, 1), name=\"test_name\")")
+                                        name='test_name')
+        assert repr(anisotropy) == ('CubicAnisotropy(K1=1000, u1=(0, 1, 0), '
+                                    'u2=(0, 0, 1), name=\'test_name\')')
 
     def test_script(self):
         for K1, u1, u2 in self.valid_args:

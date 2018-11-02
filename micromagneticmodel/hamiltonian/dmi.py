@@ -3,12 +3,12 @@ from .energyterm import EnergyTerm
 
 
 @ts.typesystem(D=ts.Scalar,
-               crystalclass=ts.InSet(allowed_values={"cnv", "t",
-                                                     "o", "d2d",
-                                                     "interfacial"}),
+               crystalclass=ts.InSet(allowed_values={'cnv', 't',
+                                                     'o', 'd2d',
+                                                     'interfacial'}),
                name=ts.Name(constant=True))
 class DMI(EnergyTerm):
-    def __init__(self, D, crystalclass="t", name="dmi"):
+    def __init__(self, D, crystalclass='t', name='dmi'):
         """A DMI energy class.
 
         Args:
@@ -16,7 +16,7 @@ class DMI(EnergyTerm):
             
             crystalclass (string): Type of crystal class.
             Possible values are:
-                "cnv", "t", "o", "d2d", "interfacial"
+                'cnv', 't', 'o', 'd2d', 'interfacial'
 
         """
         self.D = D
@@ -25,16 +25,16 @@ class DMI(EnergyTerm):
 
     @property
     def _latex(self):
-        if self.crystalclass in ["t", "o"]:
-            return ("$D \mathbf{m} \\cdot (\\nabla \\times \mathbf{m})$")
-        elif self.crystalclass in ["cnv", "interfacial"]:
-            return ("$D ( \mathbf{m} \\cdot \\nabla m_{z} "
-                    "- m_{z} \\nabla \\cdot \mathbf{m} )$")
+        if self.crystalclass in ['t', 'o']:
+            return r'$D \mathbf{m} \cdot (\nabla \times \mathbf{m})$'
+        elif self.crystalclass in ['cnv', 'interfacial']:
+            return (r'$D ( \mathbf{m} \cdot \nabla m_{z} '
+                    r'- m_{z} \nabla \cdot \mathbf{m} )$')
         else:
-            return ("$D\mathbf{m} \\cdot \\left( \\frac{\\partial "
-                    "\mathbf{m}}{\\partial x} \\times \hat{x} - "
-                    "\\frac{\\partial \mathbf{m}}{\\partial y} "
-                    "\\times \hat{y} \\right)$")
+            return (r'$D\mathbf{m} \cdot \left( \frac{\partial '
+                    r'\mathbf{m}}{\partial x} \times \hat{x} - '
+                    r'\frac{\partial \mathbf{m}}{\partial y} '
+                    r'\times \hat{y} \right)$')
 
     @property
     def _repr(self):
@@ -44,5 +44,5 @@ class DMI(EnergyTerm):
            A representation string.
 
         """
-        return ("DMI(D={}, crystalclass=\"{}\", "
-                "name=\"{}\")").format(self.D, self.crystalclass, self.name)
+        return ('DMI(D={}, crystalclass=\'{}\', '
+                'name=\'{}\')').format(self.D, self.crystalclass, self.name)

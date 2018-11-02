@@ -5,7 +5,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(A=ts.Scalar(unsigned=True),
                name=ts.Name(const=True))
 class Exchange(EnergyTerm):
-    _latex = "$A (\\nabla \mathbf{m})^{2}$"
+    _latex = r'$A (\nabla \mathbf{m})^{2}$'
 
     def __init__(self, A, name="exchange"):
         """An exchange energy class.
@@ -25,4 +25,4 @@ class Exchange(EnergyTerm):
            A representation string.
 
         """
-        return "Exchange(A={}, name=\"{}\")".format(self.A, self.name)
+        return 'Exchange(A={}, name=\'{}\')'.format(self.A, self.name)

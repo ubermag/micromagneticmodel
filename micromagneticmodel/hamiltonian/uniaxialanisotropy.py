@@ -7,7 +7,7 @@ from .energyterm import EnergyTerm
                u=ts.Vector(size=3),
                name=ts.Name(const=True))
 class UniaxialAnisotropy(EnergyTerm):
-    def __init__(self, K1, u, K2=0, name="uniaxialanisotropy"):
+    def __init__(self, K1, u, K2=0, name='uniaxialanisotropy'):
         """Uniaxial anisotropy energy abstract class.
 
         Parameters
@@ -32,12 +32,12 @@ class UniaxialAnisotropy(EnergyTerm):
 
     @property
     def _latex(self):
-        first_term = "-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2}"
-        second_term = "-K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}"
+        first_term = r'-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2}'
+        second_term = r'-K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}'
         if self.K2 == 0:
-            return "${}$".format(first_term)
+            return '${}$'.format(first_term)
         else:
-            return "${}$".format(first_term+second_term)
+            return '${}$'.format(first_term+second_term)
 
     @property
     def _repr(self):
@@ -49,5 +49,5 @@ class UniaxialAnisotropy(EnergyTerm):
             A representation string.
 
         """
-        return ("UniaxialAnisotropy(K1={}, K2={}, u={}, "
-                "name=\"{}\")").format(self.K1, self.K2, self.u, self.name)
+        return ('UniaxialAnisotropy(K1={}, K2={}, u={}, '
+                'name=\'{}\')').format(self.K1, self.K2, self.u, self.name)

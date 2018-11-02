@@ -43,10 +43,10 @@ class TestUniaxialAnisotropy:
             assert isinstance(latex, str)
             assert latex[0] == latex[-1] == '$'
             assert 'K_{1}' in latex
-            assert '\mathbf{u}' in latex
-            assert '\mathbf{m}' in latex
+            assert r'\mathbf{u}' in latex
+            assert r'\mathbf{m}' in latex
             assert '^{2}' in latex
-            assert '\cdot' in latex
+            assert r'\cdot' in latex
             if K2 != 0:
                 assert 'K_{2}' in latex
                 assert '^{4}' in latex
@@ -59,13 +59,13 @@ class TestUniaxialAnisotropy:
     def test_repr(self):
         for K1, K2, u in self.valid_args:
             anisotropy = mm.UniaxialAnisotropy(K1=K1, K2=K2, u=u)
-            exp_str = ("UniaxialAnisotropy(K1={}, K2={}, u={}, "
-                       "name=\"{}\")").format(K1, K2, u, "uniaxialanisotropy")
+            exp_str = ('UniaxialAnisotropy(K1={}, K2={}, u={}, '
+                       'name=\'{}\')').format(K1, K2, u, 'uniaxialanisotropy')
             assert repr(anisotropy) == exp_str
 
-        anisotropy = mm.UniaxialAnisotropy(1000, (0, 0, 1), name="test_name")
-        assert repr(anisotropy) == ("UniaxialAnisotropy(K1=1000, K2=0, "
-                                    "u=(0, 0, 1), name=\"test_name\")")
+        anisotropy = mm.UniaxialAnisotropy(1000, (0, 0, 1), name='test_name')
+        assert repr(anisotropy) == ('UniaxialAnisotropy(K1=1000, K2=0, '
+                                    'u=(0, 0, 1), name=\'test_name\')')
 
     def test_script(self):
         for K1, K2, u in self.valid_args:

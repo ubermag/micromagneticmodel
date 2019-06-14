@@ -8,12 +8,12 @@ Marijan Beg<sup>1,2</sup>, Ryan A. Pepper<sup>2</sup>, Thomas Kluyver<sup>1</sup
 | --- | --- |
 | Latest release | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
 |                | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
-| Build | [![Build Status](https://travis-ci.org/joommf/micromagneticmodel.svg?branch=master)](https://travis-ci.org/joommf/micromagneticmodel) |
+| Build | [![Build Status](https://travis-ci.org/ubermag/micromagneticmodel.svg?branch=master)](https://travis-ci.org/ubermag/micromagneticmodel) |
 |       | [![Build status](https://ci.appveyor.com/api/projects/status/8umknqjg7cvlupsk?svg=true)](https://ci.appveyor.com/project/marijanbeg/micromagneticmodel) |
-| Coverage | [![codecov](https://codecov.io/gh/joommf/micromagneticmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/joommf/micromagneticmodel) |
+| Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/ubermag/micromagneticmodel) |
 | Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](http://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |
-| Binder | [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/joommf/micromagneticmodel/master?filepath=index.ipynb) |
-| Dependecies | [![Requirements Status](https://requires.io/github/joommf/micromagneticmodel/requirements.svg?branch=master)](https://requires.io/github/joommf/micromagneticmodel/requirements/?branch=master) |
+| Binder | [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=index.ipynb) |
+| Dependecies | [![Requirements Status](https://requires.io/github/ubermag/micromagneticmodel/requirements.svg?branch=master)](https://requires.io/github/ubermag/micromagneticmodel/requirements/?branch=master) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |
 
 ## About
@@ -70,14 +70,14 @@ On the other hand, if you used `conda` for installation, update `micromagneticmo
 
 The most recent development version of `micromagneticmodel` that is not yet released can be installed/updated with
 
-    git clone https://github.com/joommf/micromagneticmodel.git
+    git clone https://github.com/ubermag/micromagneticmodel.git
     python3 -m pip install --upgrade micromagneticmodel
 
 **Note**: If you do not have `git` on your system, it can be installed by following the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 ## Binder
 
-`micromagneticmodel` can be used in the cloud via Binder. This does not require you to have anything installed and no files will be created on your machine. To use `micromagneticmodel` in the cloud, follow this [link](https://mybinder.org/v2/gh/joommf/micromagneticmodel/master?filepath=index.ipynb).
+`micromagneticmodel` can be used in the cloud via Binder. This does not require you to have anything installed and no files will be created on your machine. To use `micromagneticmodel` in the cloud, follow this [link](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=index.ipynb).
 
 ## Documentation
 
@@ -85,7 +85,7 @@ Documentation for `micromagneticmodel` is available [here](http://micromagneticm
 
 ## Support
 
-If you require support on installation or usage of `micromagneticmodel` or if you want to report a problem, you are welcome to raise an issue in our [joommf/help](https://github.com/joommf/help) repository.
+If you require support on installation or usage of `micromagneticmodel` or if you want to report a problem, you are welcome to raise an issue in our [ubermag/help](https://github.com/ubermag/help) repository.
 
 ## License
 

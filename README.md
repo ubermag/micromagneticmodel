@@ -11,7 +11,7 @@ Marijan Beg<sup>1,2</sup>, Thomas Kluyver<sup>1</sup>, and Hans Fangohr<sup>1,2<
 | Build | [![Build Status](https://travis-ci.org/ubermag/micromagneticmodel.svg?branch=master)](https://travis-ci.org/ubermag/micromagneticmodel) |
 |       | [![Build status](https://ci.appveyor.com/api/projects/status/jyka9mj2qpfwfa4g?svg=true)](https://ci.appveyor.com/project/marijanbeg/micromagneticmodel) |
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/ubermag/micromagneticmodel) |
-| Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](http://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |
+| Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](https://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |
 | Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=docs%2Fipynb%2Findex.ipynb) |
 | Platforms | [![Platforms](https://anaconda.org/conda-forge/micromagneticmodel/badges/platforms.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Downloads | [![Downloads](https://anaconda.org/conda-forge/micromagneticmodel/badges/downloads.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |

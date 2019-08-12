@@ -9,7 +9,7 @@ class TestSystem:
         p1 = (0, 0, 0)
         p2 = (1., 1., 1.)
         cell = (0.2, 0.2, 0.2)
-        self.mesh = df.Mesh(p1, p2, cell)
+        self.mesh = df.Mesh(p1=p1, p2=p2, cell=cell)
 
     def test_init(self):
         system = mm.System(name="test_sim")

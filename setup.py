@@ -6,13 +6,12 @@ with open('README.md', encoding='utf-8') as f:
 setuptools.setup(
     name='micromagneticmodel',
     version='0.8.4',
-    description=('Python based micromagnetic model providing interface '
-                 'to micromagnetic simulation tools.'),
+    description=('Python domain-specific language for '
+                 'defining micromagnetic models'),
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://joommf.github.io',
-    author='Marijan Beg, Ryan A. Pepper, Thomas Kluyver, and Hans Fangohr',
-    author_email='jupyteroommf@gmail.com',
+    url='https://ubermag.github.io',
+    author='Marijan Beg, Thomas Kluyver, and Hans Fangohr',
     packages=setuptools.find_packages(),
     install_requires=['discretisedfield'],
     classifiers=['Development Status :: 3 - Alpha',

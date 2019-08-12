@@ -13,6 +13,8 @@ Marijan Beg<sup>1,2</sup>, Thomas Kluyver<sup>1</sup>, and Hans Fangohr<sup>1,2<
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/ubermag/micromagneticmodel) |
 | Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](http://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |
 | Binder | [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=index.ipynb) |
+| Platforms | [![Platforms](https://anaconda.org/conda-forge/micromagneticmodel/badges/platforms.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
+| Downloads | [![Downloads](https://anaconda.org/conda-forge/micromagneticmodel/badges/downloads.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |
 
 ## About
@@ -25,66 +27,21 @@ Marijan Beg<sup>1,2</sup>, Thomas Kluyver<sup>1</sup>, and Hans Fangohr<sup>1,2<
 
 It is available on all major operating systems (Windows, MacOS, Linux) and requires Python 3.5 or higher.
 
-## Installation
+## Installation, testing, and upgrade
 
-We recommend installing `micromagneticmodel` by using either of the `pip` or `conda` package managers.
-
-#### Python requirements
-
-Before installing `micromagneticmodel` via `pip`, please make sure you have Python 3.5 or higher on your system. You can check that by running
-
-    python3 --version
-
-If you are on Linux, it is likely that you already have Python installed. However, on MacOS and Windows, this is usually not the case. If you do not have Python 3.5 or higher on your machine, we strongly recommend installing the [Anaconda](https://www.anaconda.com/) Python distribution. [Download Anaconda](https://www.anaconda.com/download) for your operating system and follow instructions on the download page. Further information about installing Anaconda can be found [here](https://conda.io/docs/user-guide/install/download.html).
-
-#### `pip`
-
-After installing Anaconda on MacOS or Windows, `pip` will also be installed. However, on Linux, if you do not already have `pip`, you can install it with
-
-    sudo apt install python3-pip
-
-To install the `micromagneticmodel` version currently in the Python Package Index repository [PyPI](https://pypi.org/project/micromagneticmodel/) on all operating systems run:
-
-    python3 -m pip install micromagneticmodel
-
-#### `conda`
-
-`micromagneticmodel` is installed using `conda` by running
-
-    conda install --channel conda-forge micromagneticmodel
-
-For further information on the `conda` package, dependency, and environment management, please have a look at its [documentation](https://conda.io/docs/). 
-
-## Updating
-
-If you used pip to install `micromagneticmodel`, you can update to the latest released version in [PyPI](https://pypi.org/project/micromagneticmodel/) by running
-
-    python3 -m pip install --upgrade micromagneticmodel
-
-On the other hand, if you used `conda` for installation, update `micromagneticmodel` with
-
-    conda upgrade micromagneticmodel
-
-#### Development version
-
-The most recent development version of `micromagneticmodel` that is not yet released can be installed/updated with
-
-    git clone https://github.com/ubermag/micromagneticmodel.git
-    python3 -m pip install --upgrade micromagneticmodel
-
-**Note**: If you do not have `git` on your system, it can be installed by following the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+We support installation using `conda` and `pip` package managers. Instructions can be found [here](https://micromagneticmodel.readthedocs.io/en/latest/ipynb/00-tutorial-installation-testing-upgrade.html).
 
 ## Binder
 
-`micromagneticmodel` can be used in the cloud via Binder. This does not require you to have anything installed and no files will be created on your machine. To use `micromagneticmodel` in the cloud, follow this [link](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=index.ipynb).
+This package can be used in the cloud via Binder. This does not require you to have anything installed and no files will be created on your machine. To access Binder, use this [link](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/master?filepath=docs%2Fipynb%2Findex.ipynb).
 
 ## Documentation
 
-Documentation for `micromagneticmodel` is available [here](http://micromagneticmodel.readthedocs.io/en/latest/?badge=latest), where APIs and tutorials (in the form of Jupyter notebooks) are available.
+Documentation is available [here](https://micromagneticmodel.readthedocs.io/en/latest/), where APIs and tutorials as Jupyter notebooks are available.
 
 ## Support
 
-If you require support on installation or usage of `micromagneticmodel` or if you want to report a problem, you are welcome to raise an issue in our [ubermag/help](https://github.com/ubermag/help) repository.
+If you require support or have any questions, you are welcome to raise an issue in our [ubermag/help](https://github.com/ubermag/help) repository.
 
 ## License
 
@@ -92,7 +49,7 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 ## How to cite
 
-If you use `micromagneticmodel` in your research, please cite it as:
+If you use this package in your research, please cite it as:
 
 1. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [AIP Advances, 7, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
 
@@ -100,4 +57,4 @@ If you use `micromagneticmodel` in your research, please cite it as:
 
 ## Acknowledgements
 
-`micromagneticmodel` was developed as a part of [OpenDreamKit](http://opendreamkit.org/) – Horizon 2020 European Research Infrastructure project (676541).
+Developed as a part of [OpenDreamKit](http://opendreamkit.org/) – Horizon 2020 European Research Infrastructure project (676541).

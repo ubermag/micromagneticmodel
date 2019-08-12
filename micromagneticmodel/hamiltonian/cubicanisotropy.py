@@ -1,4 +1,4 @@
-import joommfutil.typesystem as ts
+import ubermagutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 

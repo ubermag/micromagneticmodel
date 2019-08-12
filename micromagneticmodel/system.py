@@ -1,7 +1,7 @@
 import importlib
 import discretisedfield as df
 import micromagneticmodel as mm
-import joommfutil.typesystem as ts
+import ubermagutil.typesystem as ts
 
 
 @ts.typesystem(name=ts.Name(const=True))

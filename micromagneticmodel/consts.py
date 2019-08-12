@@ -1,7 +1,7 @@
 import math
 
 # Fundamental constants
-mu0 = 4 * math.pi * 1e-7  # magnetic constant (N/A**2)
+mu0 = 4*math.pi*1e-7  # magnetic constant (N/A**2)
 e = 1.6021766208e-19  # elementary charge (C)
 me = 9.1093835611e-31  # electron mass (kg)
 kB = 1.3806485279e-23  # Boltzmann constant (J/K)

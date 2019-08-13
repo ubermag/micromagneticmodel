@@ -11,3 +11,14 @@ API Reference
    energyproperties
    energyterm
    dynamicsterm
+   exchange
+   zeeman
+   dmi
+   demag
+   uniaxialanisotropy
+   cubicanisotropy
+   hamiltonian
+   precession
+   damping
+   stt
+   dynamics

@@ -30,8 +30,8 @@ class Zeeman(EnergyTerm):
         name : str
             Name of the energy term.
 
-        Example
-        -------
+        Examples
+        --------
         1. Initialising the Zeeman energy term.
         
         >>> import micromagneticmodel as mm

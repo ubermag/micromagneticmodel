@@ -34,9 +34,9 @@ class DMI(EnergyTerm):
         name : str
             Name of the energy term.
 
-        Example
-        -------
-        1. Initialising the exchange energy term.
+        Examples
+        --------
+        1. Initialising the Dzyaloshinskii-Moriya energy term.
         
         >>> import micromagneticmodel as mm
         ...

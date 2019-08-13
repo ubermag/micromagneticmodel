@@ -29,8 +29,8 @@ class Exchange(EnergyTerm):
         name : str
             Name of the energy term.
 
-        Example
-        -------
+        Examples
+        --------
         1. Initialising the exchange energy term.
         
         >>> import micromagneticmodel as mm

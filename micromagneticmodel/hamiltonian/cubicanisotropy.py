@@ -41,8 +41,8 @@ class CubicAnisotropy(EnergyTerm):
         name : str
             Name of the energy term.
 
-        Example
-        -------
+        Examples
+        --------
         1. Initialising the cubic anisotropy energy term.
         
         >>> import micromagneticmodel as mm

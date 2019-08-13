@@ -14,8 +14,8 @@ class Demag(EnergyTerm):
         not take any mandatory arguments. However, any parameters
         required by a specific micromagnetic calculator can be passed.
 
-        Example
-        -------
+        Examples
+        --------
         1. Initialising the demagnetisation energy term.
         
         >>> import micromagneticmodel as mm

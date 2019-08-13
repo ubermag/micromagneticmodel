@@ -8,3 +8,6 @@ API Reference
    term
    termsum
    data
+   energyproperties
+   energyterm
+   dynamicsterm

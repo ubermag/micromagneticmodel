@@ -1,77 +1,71 @@
 import pytest
 import numbers
 import numpy as np
+import discretisedfield as df
 import micromagneticmodel as mm
 
 
 class TestCubicAnisotropy:
     def setup(self):
         self.valid_args = [(1, (1, 0, 0), (0, 1, 0)),
-                           (5e6, [1, 0, 1], [1, 1, 1]),
-                           (-25.6e-3, (1, 0, 1), np.array([0, 0, -1])),
-                           (1.5, [1e-6, 0, 0], [1e6, 1e6, 5e9])]
+                           (5e6, (-1, 1, -1), [1, 1, 1]),
+                           (-25.6e-3, (1, 0, 1), np.array([0, 0, 1])),
+                           (1.5, (0, 0, 1), [1e6, 1e6, 5e9]),
+                           ({'r1': 1e6, 'r2': 2e6},
+                            (1, 0, 0), (0, 0, 1)),
+                           (0, {'r1': (1, 0, 0), 'r2': (0, 0, 1)},
+                            (0, 0, 1)),
+                           (1e6, (0, 0, 1),
+                            {'r1': (0, 0, 1), 'r2': (1, 0, 0)})]
         self.invalid_args = [('1', (1, 0, 0), (0, 1, 0)),
-                             (5e6, (-1, 0, -1), '(1, 1, 1)'),
+                             (5e6, 1e6, '(1, 1, 1)'),
                              (1e-3, (1, 0, 0), (0, 0, 0, 1)),
-                             (5, (1, 0, 0), 5.0),
-                             (-7e3, (0, 0, 1), ('1', 2e6, 0)),
-                             ((1, 0, 0), (0, 0, 1), (0, 0, 1)),
+                             (5, 3.14, 5.0),
+                             (-7e3, 2.7e4, ('1', 2e6, 0)),
+                             ((1, 0, 0), 1e9, (0, 0, 1)),
                              (1, (5, 0), (0, 1, 0))]
 
     def test_init_valid_args(self):
         for K1, u1, u2 in self.valid_args:
-            anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
-            assert anisotropy.K1 == K1
-            assert isinstance(anisotropy.K1, numbers.Real)
-            assert isinstance(anisotropy.u1, (tuple, list, np.ndarray))
-            assert isinstance(anisotropy.u2, (tuple, list, np.ndarray))
-            assert len(anisotropy.u1) == 3
-            assert len(anisotropy.u2) == 3
-            assert all([isinstance(i, numbers.Real) for i in anisotropy.u1])
-            assert all([isinstance(i, numbers.Real) for i in anisotropy.u2])
+            term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
+            assert term.K1 == K1
+            assert np.all(term.u1 == u1)
+            assert np.all(term.u2 == u2)
+            assert isinstance(term.u1, (tuple, list, np.ndarray, dict))
+            assert isinstance(term.u2, (tuple, list, np.ndarray, dict))
+            assert term.name == 'cubicanisotropy'
 
     def test_init_invalid_args(self):
         for K1, u1, u2 in self.invalid_args:
             with pytest.raises(Exception):
-                anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
+                term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
 
-    def test_repr_latex(self):
+    def test_repr_latex_(self):
         for K1, u1, u2 in self.valid_args:
-            anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
-            latex = anisotropy._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert 'K_{1}' in latex
-            assert r'\mathbf{u}_{1}' in latex
-            assert r'\mathbf{u}_{2}' in latex
-            assert r'\mathbf{m}' in latex
-            assert '^{2}' in latex
-            assert r'\cdot' in latex
-            assert latex.count(r'\mathbf{u}_{1}') == 2
-            assert latex.count(r'\mathbf{u}_{2}') == 2
-            assert latex.count(r'\mathbf{u}_{3}') == 2
-
-    def test_name(self):
-        for K1, u1, u2 in self.valid_args:
-            anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
-            assert anisotropy.name == 'cubicanisotropy'
+            term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
+            assert isinstance(term._repr_latex_(), str)
 
     def test_repr(self):
         for K1, u1, u2 in self.valid_args:
-            anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
-            exp_str = ('CubicAnisotropy(K1={}, u1={}, u2={}, '
-                       'name=\'{}\')').format(K1, u1, u2, 'cubicanisotropy')
-            assert repr(anisotropy) == exp_str
-
-        anisotropy = mm.CubicAnisotropy(1000, (0, 1, 0), (0, 0, 1),
-                                        name='test_name')
-        assert repr(anisotropy) == ('CubicAnisotropy(K1=1000, u1=(0, 1, 0), '
-                                    'u2=(0, 0, 1), name=\'test_name\')')
+            term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
+            assert isinstance(repr(term), str)
 
     def test_script(self):
         for K1, u1, u2 in self.valid_args:
-            anisotropy = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
+            term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2)
             with pytest.raises(NotImplementedError):
-                script = anisotropy._script
+                script = term._script
+
+    def test_field(self):
+        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
+        field = df.Field(mesh, dim=3, value=(0, 0, 1e6))
+        term = mm.CubicAnisotropy(K1=field, u1=(1, 0, 0),
+                                  u2=(0, 0, 1))
+        assert isinstance(term.K1, df.Field)
+
+    def test_kwargs(self):
+        for K1, u1, u2 in self.valid_args:
+            term = mm.CubicAnisotropy(K1=K1, u1=u1, u2=u2,
+                                      e=1, something='a')
+            assert term.e == 1
+            assert term.something == 'a'

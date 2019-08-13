@@ -5,10 +5,11 @@ import micromagneticmodel as mm
 class TestEnergyProperties:
     def setup(self):
         self.system = mm.System()
-        self.system.hamiltonian = mm.Exchange(A=1)
+        self.system.hamiltonian = mm.Exchange(A=1e-12)
 
     def test_data(self):
-        assert isinstance(self.system.hamiltonian.exchange._data, mm.Data)
+        assert isinstance(self.system.hamiltonian.exchange._data,
+                          mm.Data)
         assert isinstance(self.system.hamiltonian._data, mm.Data)
 
     def test_energy(self):

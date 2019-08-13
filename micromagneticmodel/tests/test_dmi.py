@@ -1,74 +1,51 @@
 import pytest
 import numbers
+import discretisedfield as df
 import micromagneticmodel as mm
 
 
 class TestDMI:
     def setup(self):
-        self.valid_args = [-1, 2.0, 5e-11, -1e-12, 1e-13, 1e-14, -1e6]
-        self.invalid_args = ['a', (1, 2), '0', [1, 2, 3]]
+        self.valid_args = [1, 2.0, 5e-11, 1e6, {'a': 1, 'b': 1e-12}]
+        self.invalid_args = ['a', (1, 2), {}, '0',
+                             [1, 2, 3], {'a b': -1, 'b': 3}]
 
     def test_init_valid_args(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D)
-            assert dmi.D == D
-            assert isinstance(dmi.D, numbers.Real)
+            term = mm.DMI(D=D, crystalclass='D2d')
+            assert term.D == D
+            assert isinstance(term.D, (numbers.Real, dict))
+            assert term.name == 'dmi'
 
     def test_init_invalid_args(self):
         for D in self.invalid_args:
             with pytest.raises(Exception):
-                dmi = mm.DMI(D)
+                term = mm.DMI(D=D, crystalclass='Cnv')
 
     def test_repr_latex_(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D, crystalclass='T')
-            latex = dmi._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == '$'
-            assert latex[-1] == '$'
-            assert 'D' in latex
-            assert latex.count(r'\mathbf{m}') == 2
-
-            dmi = mm.DMI(D, crystalclass='cnv')
-            latex = dmi._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert r'\nabla' in latex
-            assert 'D' in latex
-            assert latex.count(r'\frac') == 0
-
-            dmi = mm.DMI(D, crystalclass='d2d')
-            latex = dmi._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert r'\partial' in latex
-            assert r'\hat' in latex
-            assert 'D' in latex
-            assert latex.count(r'\frac') == 2
-
-    def test_name(self):
-        for D in self.valid_args:
-            dmi = mm.DMI(D)
-            assert dmi.name == 'dmi'
+            term = mm.DMI(D=D, crystalclass='O')
+            assert isinstance(term._repr_latex_(), str)
 
     def test_repr(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D, crystalclass='t')
-            assert repr(dmi) == ('DMI(D={}, crystalclass=\'t\', '
-                                 'name=\'{}\')').format(D, 'dmi')
-
-            dmi = mm.DMI(D, crystalclass='d2d', name='test_name')
-            assert repr(dmi) == ('DMI(D={}, crystalclass=\'d2d\', '
-                                 'name=\'test_name\')').format(D)
+            term = mm.DMI(D=D, crystalclass='T')
+            assert isinstance(repr(term), str)
 
     def test_script(self):
         for D in self.valid_args:
-            dmi = mm.DMI(D)
+            term = mm.DMI(D=D, crystalclass='Cnv')
             with pytest.raises(NotImplementedError):
-                script = dmi._script
+                script = term._script
+
+    def test_field(self):
+        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
+        field = df.Field(mesh, dim=1, value=1)
+        term = mm.DMI(D=field, crystalclass='D2d')
+        assert isinstance(term.D, df.Field)
+
+    def test_kwargs(self):
+        for D in self.valid_args:
+            term = mm.DMI(D=D, e=1, something='a')
+            assert term.e == 1
+            assert term.something == 'a'

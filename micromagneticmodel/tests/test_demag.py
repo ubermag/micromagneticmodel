@@ -9,13 +9,6 @@ class TestDemag:
 
         # Assert some characteristics of LaTeX string.
         assert isinstance(latex, str)
-        assert latex[0] == latex[-1] == '$'
-        assert r'\mu_{0}' in latex
-        assert r'\mathbf{H}_\text{d}' in latex
-        assert r'\mathbf{m}' in latex
-        assert r'\cdot' in latex
-        assert r'M_\text{s}' in latex
-        assert r'\frac{1}{2}' in latex
 
     def test_name(self):
         demag = mm.Demag()

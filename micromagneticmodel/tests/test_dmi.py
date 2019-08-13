@@ -31,6 +31,10 @@ class TestDMI:
         for D in self.valid_args:
             term = mm.DMI(D=D, crystalclass='T')
             assert isinstance(repr(term), str)
+            term = mm.DMI(D=D, crystalclass='Cnv')
+            assert isinstance(repr(term), str)
+            term = mm.DMI(D=D, crystalclass='D2d')
+            assert isinstance(repr(term), str)
 
     def test_script(self):
         for D in self.valid_args:

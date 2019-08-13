@@ -21,11 +21,9 @@ Marijan Beg<sup>1,2</sup>, Thomas Kluyver<sup>1</sup>, and Hans Fangohr<sup>1,2<
 
 `micromagneticmodel` is a Python package that provides:
 
-- Interface for for micromagnetic simulation tools
+- Domain-specific language for defining micromagnetic model.
 
-- Mechanism for defining micromagnetic system, its Hamiltonian, and its dynamics equation
-
-It is available on all major operating systems (Windows, MacOS, Linux) and requires Python 3.5 or higher.
+It is available on all major operating systems (Windows, MacOS, Linux) and requires Python 3.6 or higher.
 
 ## Installation, testing, and upgrade
 

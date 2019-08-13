@@ -56,6 +56,9 @@ class TestHamiltonian:
         hamiltonian = mm.Hamiltonian()
         latex = hamiltonian._repr_latex_()
         assert isinstance(latex, str)
+        hamiltonian += mm.Exchange(A=1e-12)
+        latex = hamiltonian._repr_latex_()
+        assert isinstance(latex, str)
 
     def test_add_exception(self):
         hamiltonian = mm.Hamiltonian()

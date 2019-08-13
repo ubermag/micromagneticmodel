@@ -49,4 +49,3 @@ class TestExchange:
             term = mm.Exchange(A=A, e=1, something='a')
             assert term.e == 1
             assert term.something == 'a'
-            

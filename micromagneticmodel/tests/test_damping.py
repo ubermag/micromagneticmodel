@@ -1,55 +1,51 @@
 import pytest
 import numbers
+import discretisedfield as df
 import micromagneticmodel as mm
 
 
 class TestDamping:
     def setup(self):
-        self.valid_args = [1, 2.0, 5e-11, 1e-12, 1e-13, 1e-14, 1e6]
-        self.invalid_args = [-1, -2.1, 'a', (1, 2), -3.6e-6, '0', [1, 2, 3]]
+        self.valid_args = [1, 2.0, 5e-11, 1e6, {'a': 1, 'b': 1e-12}]
+        self.invalid_args = [-1, -2.1, 'a', (1, 2), -3.6e-6, '0',
+                             [1, 2, 3], {'a': -1, 'b': 3}]
 
     def test_init_valid_args(self):
         for alpha in self.valid_args:
-            damping = mm.Damping(alpha)
-
-            assert damping.alpha == alpha
-            assert isinstance(damping.alpha, numbers.Real)
+            term = mm.Damping(alpha=alpha)
+            assert term.alpha == alpha
+            assert isinstance(term.alpha, (numbers.Real, dict))
+            assert term.name == 'damping'
 
     def test_init_invalid_args(self):
         for alpha in self.invalid_args:
             with pytest.raises(Exception):
-                damping = mm.Damping(alpha)
+                term = mm.Damping(alpha=alpha)
 
     def test_repr_latex_(self):
         for alpha in self.valid_args:
-            damping = mm.Damping(alpha)
-            latex = damping._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert r'\alpha' in latex
-            assert r'\mathbf{m}' in latex
-            assert r'\frac' in latex
-            assert r'\times' in latex
-            assert latex.count(r'\partial') == 2
-
-    def test_name(self):
-        for alpha in self.valid_args:
-            damping = mm.Damping(alpha)
-            assert damping.name == 'damping'
+            term = mm.Damping(alpha=alpha)
+            assert isinstance(term._repr_latex_(), str)
 
     def test_repr(self):
         for alpha in self.valid_args:
-            damping = mm.Damping(alpha)
-            assert repr(damping) == ('Damping(alpha={}, '
-                                     'name=\'damping\')').format(alpha)
-
-        damping = mm.Damping(alpha=0.05, name='test_name')
-        assert repr(damping) == 'Damping(alpha=0.05, name=\'test_name\')'
+            term = mm.Damping(alpha=alpha)
+            assert isinstance(repr(term), str)
 
     def test_script(self):
         for alpha in self.valid_args:
-            damping = mm.Damping(alpha)
+            term = mm.Damping(alpha=alpha)
             with pytest.raises(NotImplementedError):
-                script = damping._script
+                script = term._script
+
+    def test_field(self):
+        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
+        field = df.Field(mesh, dim=1, value=1)
+        term = mm.Damping(alpha=field)
+        assert isinstance(term.alpha, df.Field)
+
+    def test_kwargs(self):
+        for alpha in self.valid_args:
+            term = mm.Damping(alpha=alpha, e=1, something='a')
+            assert term.e == 1
+            assert term.something == 'a'

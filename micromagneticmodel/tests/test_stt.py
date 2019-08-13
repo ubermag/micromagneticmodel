@@ -1,5 +1,6 @@
 import pytest
 import numbers
+import discretisedfield as df
 import micromagneticmodel as mm
 
 
@@ -8,66 +9,50 @@ class TestSTT:
         self.valid_args = [((1, -2, 3), 1),
                            ((-1.0, 0, 1e-6), 2.0),
                            ((0, 0, 0), 5e-11),
-                           ((11, 2, 19), -1e-12)]
+                           ((11, 2, 19), -1e-12),
+                           ((0, 0, 1), {'r1': 1, 'r2': 2})]
         self.invalid_args = [((1, -2), 1),
                              ((-1.0, 0, 1e-6), '2.0'),
                              ((0, 0, 0, 9), 5e-11),
-                             ((11, 2, 19), -1e-12+2j)]
+                             ((11, 2, 19), -1e-12+2j),
+                             ((0, 0, 1), {'r1 2': 1, 'r2': 2})]
 
     def test_init_valid_args(self):
-        for arg in self.valid_args:
-            u, beta = arg
-            stt = mm.STT(u, beta)
-
-            assert stt.u == u
-            assert isinstance(stt.u, tuple)
-            assert stt.beta == beta
-            assert isinstance(stt.beta, numbers.Real)
+        for u, beta in self.valid_args:
+            term = mm.STT(u=u, beta=beta)
+            assert term.beta == beta
+            assert isinstance(term.beta, (numbers.Real, dict))
+            assert term.name == 'stt'
 
     def test_init_invalid_args(self):
-        for arg in self.invalid_args:
-            u, beta = arg
-
+        for u, beta in self.invalid_args:
             with pytest.raises(Exception):
-                stt = mm.STT(gamma)
+                term = mm.STT(u=u, beta=beta)
 
     def test_repr_latex_(self):
-        for arg in self.valid_args:
-            u, beta = arg
-            stt = mm.STT(u, beta)
-            latex = stt._repr_latex_()
-
-            # Assert some characteristics of LaTeX string.
-            assert isinstance(latex, str)
-            assert latex[0] == latex[-1] == '$'
-            assert r'\beta' in latex
-            assert r'\mathbf{m}' in latex
-            assert r'\mathbf{u}' in latex
-            assert r'\times' in latex
-            assert r'\boldsymbol' in latex
-            assert r'\nabla' in latex
-
-    def test_name(self):
-        for arg in self.valid_args:
-            u, beta = arg
-            stt = mm.STT(u, beta)
-
-            assert stt.name == 'stt'
+        for u, beta in self.valid_args:
+            term = mm.STT(u=u, beta=beta)
+            assert isinstance(term._repr_latex_(), str)
 
     def test_repr(self):
-        for arg in self.valid_args:
-            u, beta = arg
-            stt = mm.STT(u, beta)
-
-            assert repr(stt) == ('STT(u={}, beta={}, '
-                                 'name=\'stt\')'.format(u, beta))
-
-        stt = mm.STT((1, 2, 3), 15, name='test_name')
-        assert repr(stt) == 'STT(u=(1, 2, 3), beta=15, name=\'test_name\')'
+        for u, beta in self.valid_args:
+            term = mm.STT(u=u, beta=beta)
+            assert isinstance(repr(term), str)
 
     def test_script(self):
-        for arg in self.valid_args:
-            u, beta = arg
-            stt = mm.STT(u, beta)
+        for u, beta in self.valid_args:
+            term = mm.STT(u=u, beta=beta)
             with pytest.raises(NotImplementedError):
-                script = stt._script
+                script = term._script
+
+    def test_field(self):
+        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
+        field = df.Field(mesh, dim=1, value=1)
+        term = mm.STT(u=(1, 0, 0), beta=field)
+        assert isinstance(term.beta, df.Field)
+
+    def test_kwargs(self):
+        for u, beta in self.valid_args:
+            term = mm.STT(u=u, beta=beta, e=1, something='a')
+            assert term.e == 1
+            assert term.something == 'a'

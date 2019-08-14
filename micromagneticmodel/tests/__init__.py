@@ -10,7 +10,5 @@ from .test_damping import TestDamping
 from .test_stt import TestSTT
 from .test_dynamics import TestDynamics
 from .test_driver import TestDriver
-from .test_mindriver import TestMinDriver
-from .test_timedriver import TestTimeDriver
 from .test_system import TestSystem
 from .test_consts import TestConsts

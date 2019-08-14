@@ -17,7 +17,7 @@ class Demag(EnergyTerm):
         Examples
         --------
         1. Initialising the demagnetisation energy term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> demag = mm.Demag()

@@ -11,7 +11,7 @@ class Hamiltonian(mm.util.TermSum, EnergyProperties):
     Examples
     --------
     1. Setting up the Hamiltonian.
-        
+
     >>> import micromagneticmodel as mm
     ...
     >>> hamiltonian = mm.Hamiltonian()

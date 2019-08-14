@@ -32,7 +32,7 @@ class Exchange(EnergyTerm):
         Examples
         --------
         1. Initialising the exchange energy term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> exchange1 = mm.Exchange(A=1e-12)

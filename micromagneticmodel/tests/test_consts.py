@@ -1,5 +1,6 @@
 import importlib
 
+
 class TestConsts:
     def test_consts(self):
         self.module = importlib.__import__(self.__class__.__module__)

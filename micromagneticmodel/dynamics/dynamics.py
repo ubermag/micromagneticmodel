@@ -10,7 +10,7 @@ class Dynamics(mm.util.TermSum):
     Examples
     --------
     1. Setting up the dynamics equation.
-        
+
     >>> import micromagneticmodel as mm
     ...
     >>> dynamics = mm.Dynamics()
@@ -18,5 +18,5 @@ class Dynamics(mm.util.TermSum):
     >>> dynamics += mm.Damping(alpha=0.1)
 
     """
-    _lefthandside = '$\\frac{\partial \mathbf{m}}{\partial t}='
+    _lefthandside = r'$\frac{\partial \mathbf{m}}{\partial t}='
     _terms_type = DynamicsTerm

@@ -142,7 +142,7 @@ class System:
 
     def __repr__(self):
         """Representation string.
-        
+
         Returns
         -------
         str

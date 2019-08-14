@@ -33,7 +33,7 @@ class Damping(DynamicsTerm):
         Examples
         --------
         1. Initialising the damping dynamics term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> damping1 = mm.Damping(alpha=0.1)

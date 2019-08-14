@@ -99,4 +99,3 @@ class TestSystem:
         system = mm.System()
         r = repr(system)
         assert 'System' in repr(system)
-

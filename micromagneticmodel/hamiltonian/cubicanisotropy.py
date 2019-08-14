@@ -44,7 +44,7 @@ class CubicAnisotropy(EnergyTerm):
         Examples
         --------
         1. Initialising the cubic anisotropy energy term.
-        
+
         >>> import micromagneticmodel as mm
         >>> import discretisedfield as df
         ...

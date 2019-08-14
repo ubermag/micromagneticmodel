@@ -45,7 +45,7 @@ class UniaxialAnisotropy(EnergyTerm):
         Examples
         --------
         1. Initialising the uniaxial anisotropy energy term.
-        
+
         >>> import micromagneticmodel as mm
         >>> import discretisedfield as df
         ...

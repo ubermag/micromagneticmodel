@@ -33,7 +33,7 @@ class Precession(DynamicsTerm):
         Examples
         --------
         1. Initialising the precession dynamics term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> precession1 = mm.Precession(gamma=mm.consts.gamma0)

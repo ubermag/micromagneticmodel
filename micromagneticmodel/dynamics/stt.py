@@ -44,7 +44,7 @@ class STT(DynamicsTerm):
         Examples
         --------
         1. Initialising the STT dynamics term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> stt1 = mm.STT(u=(1, 0, 0), beta=0.5)

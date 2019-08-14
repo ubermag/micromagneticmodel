@@ -33,7 +33,7 @@ class Zeeman(EnergyTerm):
         Examples
         --------
         1. Initialising the Zeeman energy term.
-        
+
         >>> import micromagneticmodel as mm
         >>> import discretisedfield as df
         ...

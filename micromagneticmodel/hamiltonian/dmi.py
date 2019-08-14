@@ -37,7 +37,7 @@ class DMI(EnergyTerm):
         Examples
         --------
         1. Initialising the Dzyaloshinskii-Moriya energy term.
-        
+
         >>> import micromagneticmodel as mm
         ...
         >>> dmi1 = mm.DMI(D=1e-3, crystalclass='Cnv')

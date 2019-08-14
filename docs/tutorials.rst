@@ -14,5 +14,6 @@ Tutorials
    ipynb/05-tutorial-dynamics-terms
    ipynb/06-tutorial-driver
    ipynb/07-tutorial-constants
-   ipynb/08-tutorial-other
+   ipynb/08-tutorial-defining-system.ipynb
+   ipynb/09-tutorial-other
 

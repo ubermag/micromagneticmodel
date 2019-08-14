@@ -59,4 +59,4 @@ class Damping(DynamicsTerm):
             A representation string.
 
         """
-        return 'Damping(alpha={self.alpha}, name=\'{self.name}\')'
+        return f'Damping(alpha={self.alpha}, name=\'{self.name}\')'

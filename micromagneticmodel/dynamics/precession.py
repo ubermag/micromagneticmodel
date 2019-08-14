@@ -37,7 +37,7 @@ class Precession(DynamicsTerm):
         >>> import micromagneticmodel as mm
         ...
         >>> precession1 = mm.Precession(gamma=mm.consts.gamma0)
-        >>> precession2 = mm.Precession(gamma={'r1': 1,
+        >>> precession2 = mm.Precession(gamma={'r1:r2': 1,
         ...                                    'r2': 2})
         >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
         ...                cell=(1e-9, 1e-9, 1e-9))

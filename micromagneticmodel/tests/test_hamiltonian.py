@@ -56,7 +56,8 @@ class TestHamiltonian:
         hamiltonian = mm.Hamiltonian()
         latex = hamiltonian._repr_latex_()
         assert isinstance(latex, str)
-        hamiltonian += mm.Exchange(A=1e-12)
+        hamiltonian = mm.Demag() + mm.Exchange(A=1e-12) + \
+            mm.Zeeman(H=(0, 0, 1e6))
         latex = hamiltonian._repr_latex_()
         assert isinstance(latex, str)
 

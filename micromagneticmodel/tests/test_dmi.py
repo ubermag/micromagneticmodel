@@ -26,14 +26,14 @@ class TestDMI:
         for D in self.valid_args:
             term = mm.DMI(D=D, crystalclass='O')
             assert isinstance(term._repr_latex_(), str)
+            term = mm.DMI(D=D, crystalclass='Cnv')
+            assert isinstance(term._repr_latex_(), str)
+            term = mm.DMI(D=D, crystalclass='D2d')
+            assert isinstance(term._repr_latex_(), str)
 
     def test_repr(self):
         for D in self.valid_args:
             term = mm.DMI(D=D, crystalclass='T')
-            assert isinstance(repr(term), str)
-            term = mm.DMI(D=D, crystalclass='Cnv')
-            assert isinstance(repr(term), str)
-            term = mm.DMI(D=D, crystalclass='D2d')
             assert isinstance(repr(term), str)
 
     def test_script(self):

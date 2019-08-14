@@ -14,7 +14,7 @@ class Dynamics(mm.util.TermSum):
     >>> import micromagneticmodel as mm
     ...
     >>> dynamics = mm.Dynamics()
-    >>> dynamics += mm.Precession(gamma=mm.gamma0)
+    >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
     >>> dynamics += mm.Damping(alpha=0.1)
 
     """

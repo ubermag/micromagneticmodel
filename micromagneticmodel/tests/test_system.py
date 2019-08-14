@@ -12,7 +12,7 @@ class TestSystem:
         self.mesh = df.Mesh(p1=p1, p2=p2, cell=cell)
 
     def test_init(self):
-        system = mm.System(name="test_sim")
+        system = mm.System(name='test_sim')
 
         assert isinstance(system.hamiltonian, mm.Hamiltonian)
         assert system.hamiltonian.terms == []
@@ -23,14 +23,14 @@ class TestSystem:
         assert isinstance(system.dynamics, mm.Dynamics)
         assert system.dynamics.terms == []
 
-        assert system.name == "test_sim"
+        assert system.name == 'test_sim'
 
     def test_wrong_kwargs(self):
         with pytest.raises(AttributeError):
-            system = mm.System(name="wrong_mesh", attr="a")
+            system = mm.System(name='wrong_mesh', attr='a')
 
     def test_set_m(self):
-        system = mm.System(name="test_sim")
+        system = mm.System(name='test_sim')
 
         system.m = df.Field(self.mesh, dim=3, value=(0, 0, 1))
 
@@ -38,10 +38,10 @@ class TestSystem:
         assert len(system.m.average) == 3
 
     def test_set_wrong_m(self):
-        system = mm.System(name="test_sim")
+        system = mm.System(name='test_sim')
 
         with pytest.raises(TypeError):
-            system.m = "a"
+            system.m = 'a'
 
     def test_set_hamiltonian_with_energyterm(self):
         system = mm.System()
@@ -90,20 +90,13 @@ class TestSystem:
             system.dynamics = 1
 
     def test_script(self):
-        system = mm.System(name="test_sim")
+        system = mm.System(name='test_sim')
 
         with pytest.raises(NotImplementedError):
             script = system._script
 
     def test_repr(self):
-        # 'empty' system object
         system = mm.System()
         r = repr(system)
-        assert 'hamiltonian' in r
-        assert 'dynamics' in r
-        assert 'System' in r
+        assert 'System' in repr(system)
 
-        # system object with name
-        system = mm.System(name='testname')
-        r = repr(system)
-        assert 'testname' in r

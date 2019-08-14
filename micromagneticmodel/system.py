@@ -67,6 +67,10 @@ class System:
             else:
                 raise AttributeError('Unexpected kwarg {}.'.format(key))
 
+        if not hasattr(self, 'hamiltonian'):
+            self.hamiltonian = 0
+        if not hasattr(self, 'dynamics'):
+            self.dynamics = 0
         self.drive_number = 0
 
     @property

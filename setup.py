@@ -13,6 +13,7 @@ setuptools.setup(
     url='https://ubermag.github.io',
     author='Marijan Beg, Thomas Kluyver, and Hans Fangohr',
     packages=setuptools.find_packages(),
+    include_package_data = True,
     install_requires=['discretisedfield'],
     classifiers=['Development Status :: 3 - Alpha',
                  'License :: OSI Approved :: BSD License',

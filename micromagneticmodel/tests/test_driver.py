@@ -16,6 +16,12 @@ def test_init():
 
 
 def test_script():
-    driver = MyDriver(arg1=1, arg2='abc')
+    driver = mm.Driver()
     with pytest.raises(NotImplementedError):
         script = driver._script
+
+
+def test_drive():
+    driver = mm.Driver()
+    with pytest.raises(NotImplementedError):
+        script = driver.drive()

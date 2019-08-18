@@ -6,6 +6,7 @@ from .hamiltonian import EnergyTerm, Exchange, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Hamiltonian
 from .dynamics import DynamicsTerm, Precession, \
     Damping, STT, Dynamics
+from .evolvers import Evolver
 from .drivers import Driver
 from .system import System
 from .data import Data

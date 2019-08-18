@@ -6,8 +6,7 @@ from .energyterm import EnergyTerm
 @ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(),
                               otherwise=df.Field),
                crystalclass=ts.InSet(allowed_values={'cnv', 't',
-                                                     'o', 'd2d',
-                                                     'interfacial'}),
+                                                     'o', 'd2d'}),
                name=ts.Name(constant=True))
 class DMI(EnergyTerm):
     def __init__(self, D, crystalclass='t', name='dmi', **kwargs):

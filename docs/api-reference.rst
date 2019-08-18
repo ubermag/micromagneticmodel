@@ -23,4 +23,5 @@ API Reference
    stt
    dynamics
    system
+   evolver
    driver

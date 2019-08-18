@@ -2,11 +2,9 @@ class Driver:
     def __init__(self, **kwargs):
         """Driver class.
 
-        Different driver classes (`micromagneticmodel.TimeDriver`,
-        `micromagneticmodel.MinDriver`, and
-        `micromagneticmodel.HysteresisDriver`) are derived from this
-        one. This class accepts any keyword argument that could be
-        required by a derived driver.
+        Different driver classes are derived from this one. This class
+        accepts any keyword argument that could be required by a
+        derived driver.
 
         """
         self.__dict__.update(kwargs)

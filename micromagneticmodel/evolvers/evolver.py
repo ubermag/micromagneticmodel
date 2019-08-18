@@ -1,4 +1,6 @@
 class Evolver:
+    _allowed_kwargs = []
+
     def __init__(self, **kwargs):
         """Evolver class.
 
@@ -7,7 +9,12 @@ class Evolver:
         derived evolver.
 
         """
-        self.__dict__.update(kwargs)
+        for key, value in kwargs.items():
+            if key in self._allowed_kwargs:
+                self.__dict__[key] = value
+            else:
+                msg = f'Attribute {key} is not allowed.'
+                raise AttributeError(msg)
 
     @property
     def _script(self):

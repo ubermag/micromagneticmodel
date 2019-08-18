@@ -2,19 +2,20 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestDriver:
-    def setup(self):
-        self.driver = mm.Driver(a=1, b=2, c='c')
+class MyDriver(mm.Driver):
+    _allowed_kwargs = ['arg1', 'arg2']
 
-    def test_init(self):
-        assert self.driver.a == 1
-        assert self.driver.b == 2
-        assert self.driver.c == 'c'
+    
+def test_init():
+    driver = MyDriver(arg1=1, arg2='abc')
+    assert driver.arg1 == 1
+    assert driver.arg2 == 'abc'
+    
+    with pytest.raises(AttributeError):
+        driver = MyDriver(arg1=1, arg2='abc', arg3=3)
 
-    def test_drive(self):
-        with pytest.raises(NotImplementedError):
-            self.driver.drive()
 
-    def test_script(self):
-        with pytest.raises(NotImplementedError):
-            script = self.driver._script
+def test_script():
+    driver = MyDriver(arg1=1, arg2='abc')
+    with pytest.raises(NotImplementedError):
+        script = driver._script

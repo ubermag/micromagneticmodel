@@ -2,15 +2,20 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestEvolver:
-    def setup(self):
-        self.evolver = mm.Evolver(a=1, b=2, c='c')
+class MyEvolver(mm.Evolver):
+    _allowed_kwargs = ['arg1', 'arg2']
 
-    def test_init(self):
-        assert self.evolver.a == 1
-        assert self.evolver.b == 2
-        assert self.evolver.c == 'c'
+    
+def test_init():
+    evolver = MyEvolver(arg1=1, arg2='abc')
+    assert evolver.arg1 == 1
+    assert evolver.arg2 == 'abc'
+    
+    with pytest.raises(AttributeError):
+        evolver = MyEvolver(arg1=1, arg2='abc', arg3=3)
 
-    def test_script(self):
-        with pytest.raises(NotImplementedError):
-            script = self.evolver._script
+
+def test_script():
+    evolver = MyEvolver(arg1=1, arg2='abc')
+    with pytest.raises(NotImplementedError):
+        script = evolver._script

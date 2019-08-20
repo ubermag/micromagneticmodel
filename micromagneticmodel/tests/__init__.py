@@ -1,13 +1,1 @@
-from .test_exchange import TestExchange
-from .test_zeeman import TestZeeman
-from .test_uniaxialanisotropy import TestUniaxialAnisotropy
-from .test_cubicanisotropy import TestCubicAnisotropy
-from .test_demag import TestDemag
-from .test_dmi import TestDMI
-from .test_hamiltonian import TestHamiltonian
-from .test_precession import TestPrecession
-from .test_damping import TestDamping
-from .test_stt import TestSTT
-from .test_dynamics import TestDynamics
-from .test_system import TestSystem
-from .test_consts import TestConsts
+

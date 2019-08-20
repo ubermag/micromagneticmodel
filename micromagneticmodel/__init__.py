@@ -5,7 +5,7 @@ import micromagneticmodel.util  # to avoid import order conflicts
 from .hamiltonian import EnergyTerm, Exchange, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Hamiltonian
 from .dynamics import DynamicsTerm, Precession, \
-    Damping, STT, Dynamics
+    Damping, ZhangLi, Dynamics
 from .evolvers import Evolver
 from .drivers import Driver
 from .system import System

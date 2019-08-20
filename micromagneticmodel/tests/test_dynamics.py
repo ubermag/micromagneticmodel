@@ -8,9 +8,9 @@ class TestDynamics:
         self.precession = mm.Precession(gamma)
         alpha = {'r1': 1, 'r2': 0.5}
         self.damping = mm.Damping(alpha)
-        u = (0, 0, 500)
+        u = 500
         beta = 0.2
-        self.stt = mm.STT(u=u, beta=beta)
+        self.stt = mm.ZhangLi(u=u, beta=beta)
 
         self.terms = [self.precession,
                       self.damping,
@@ -61,8 +61,8 @@ class TestDynamics:
         assert isinstance(dynamics.damping, mm.Damping)
         assert dynamics.damping.alpha == {'r1': 1, 'r2': 0.5}
 
-        assert isinstance(dynamics.stt, mm.STT)
-        assert dynamics.stt.u == (0, 0, 500)
+        assert isinstance(dynamics.stt, mm.ZhangLi)
+        assert dynamics.stt.u == 500
         assert dynamics.stt.beta == 0.2
 
     def test_getattr_error(self):

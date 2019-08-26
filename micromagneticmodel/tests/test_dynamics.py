@@ -10,11 +10,11 @@ class TestDynamics:
         self.damping = mm.Damping(alpha)
         u = 500
         beta = 0.2
-        self.stt = mm.ZhangLi(u=u, beta=beta)
+        self.zhangli = mm.ZhangLi(u=u, beta=beta)
 
         self.terms = [self.precession,
                       self.damping,
-                      self.stt]
+                      self.zhangli]
 
         self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
                               [self.precession, self.damping]]
@@ -31,7 +31,7 @@ class TestDynamics:
         assert len(dynamics.terms) == 3
 
     def test_add_sum_of_terms(self):
-        dynamics = self.precession + self.damping + self.stt
+        dynamics = self.precession + self.damping + self.zhangli
 
         assert isinstance(dynamics, mm.Dynamics)
         assert isinstance(dynamics.terms, list)
@@ -49,11 +49,11 @@ class TestDynamics:
                 dynamics += term
 
     def test_repr(self):
-        dynamics = self.precession + self.damping + self.stt
+        dynamics = self.precession + self.damping + self.zhangli
         assert isinstance(repr(dynamics), str)
 
     def test_getattr(self):
-        dynamics = self.precession + self.damping + self.stt
+        dynamics = self.precession + self.damping + self.zhangli
 
         assert isinstance(dynamics.precession, mm.Precession)
         assert dynamics.precession.gamma == 2.21e5
@@ -61,15 +61,15 @@ class TestDynamics:
         assert isinstance(dynamics.damping, mm.Damping)
         assert dynamics.damping.alpha == {'r1': 1, 'r2': 0.5}
 
-        assert isinstance(dynamics.stt, mm.ZhangLi)
-        assert dynamics.stt.u == 500
-        assert dynamics.stt.beta == 0.2
+        assert isinstance(dynamics.zhangli, mm.ZhangLi)
+        assert dynamics.zhangli.u == 500
+        assert dynamics.zhangli.beta == 0.2
 
     def test_getattr_error(self):
         dynamics = self.precession + self.damping
 
         with pytest.raises(AttributeError):
-            stt = dynamics.stt
+            zhangli = dynamics.zhangli
 
     def test_script(self):
         dynamics = mm.Dynamics()

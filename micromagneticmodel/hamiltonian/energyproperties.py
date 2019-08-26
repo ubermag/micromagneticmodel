@@ -24,6 +24,9 @@ class EnergyProperties:
     def energy(self):
         """Energy.
 
+        Computes the energy based on the current magnetisation
+        configuration as a part of the system object.
+
         Returns
         -------
         float
@@ -36,10 +39,13 @@ class EnergyProperties:
     def energy_density(self):
         """Energy density.
 
+        Computes the energy density based on the current magnetisation
+        configuration as a part of the system object.
+
         Returns
         -------
-        df.Field
-            Scalar (dim=1) field.
+        discretisedfield.Field
+            Energy density scalar field
 
         """
         return self._data.energy_density
@@ -48,10 +54,13 @@ class EnergyProperties:
     def effective_field(self):
         """Effective field.
 
+        Computes the effective field based on the current
+        magnetisation configuration as a part of the system object.
+
         Returns
         -------
-        df.Field
-            Vector (dim=3) field.
+        discretisedfield.Field
+            Energy density vector (dim=3) field
 
         """
         return self._data.effective_field

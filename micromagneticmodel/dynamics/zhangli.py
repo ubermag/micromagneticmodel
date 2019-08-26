@@ -12,7 +12,7 @@ class ZhangLi(DynamicsTerm):
               r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
               r'\boldsymbol\nabla)\mathbf{m}\big]$')
 
-    def __init__(self, u, beta, name='stt', **kwargs):
+    def __init__(self, u, beta, name='zhangli', **kwargs):
         """Zhang-Li Spin-Transfer Torque (STT) dynamics term.
 
         This object models micromagnetic Zhang-Li STT dynamics

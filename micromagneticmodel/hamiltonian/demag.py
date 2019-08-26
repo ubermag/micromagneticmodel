@@ -10,9 +10,10 @@ class Demag(EnergyTerm):
     def __init__(self, name='demag', **kwargs):
         """Micromagnetic demagnetisation energy term.
 
-        This object models micromagnetic exchange energy term. It does
-        not take any mandatory arguments. However, any parameters
-        required by a specific micromagnetic calculator can be passed.
+        This object models micromagnetic demagnetisation energy
+        term. It does not take any mandatory arguments. However, any
+        parameters required by a specific micromagnetic calculator can
+        be passed.
 
         Examples
         --------

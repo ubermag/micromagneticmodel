@@ -22,7 +22,7 @@ class TestZhangLi:
             term = mm.ZhangLi(u=u, beta=beta)
             assert term.beta == beta
             assert isinstance(term.beta, (numbers.Real, dict))
-            assert term.name == 'stt'
+            assert term.name == 'zhangli'
 
     def test_init_invalid_args(self):
         for u, beta in self.invalid_args:

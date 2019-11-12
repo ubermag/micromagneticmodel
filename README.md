@@ -16,6 +16,7 @@ Marijan Beg<sup>1,2</sup>, Thomas Kluyver<sup>1</sup>, and Hans Fangohr<sup>1,2<
 | Platforms | [![Platforms](https://anaconda.org/conda-forge/micromagneticmodel/badges/platforms.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Downloads | [![Downloads](https://anaconda.org/conda-forge/micromagneticmodel/badges/downloads.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |
+| DOI | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3539480.svg)](https://doi.org/10.5281/zenodo.3539480) |
 
 ## About
 
@@ -51,7 +52,7 @@ If you use this package in your research, please cite it as:
 
 1. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [AIP Advances, 7, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
 
-2. DOI will be available soon
+2. M. Beg, T. Kluyver, and H. Fangohr. ubermag/micromagneticmodel: Python domain-specific language for defining micromagnetic models. Zenodo. http://doi.org/10.5281/zenodo.3539480 (2019).
 
 ## Acknowledgements
 

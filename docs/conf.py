@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'micromagneticmodel'
-copyright = '2019, Marijan Beg, Thomas Kluyver, and Hans Fangohr'
-author = 'Marijan Beg, Thomas Kluyver, and Hans Fangohr'
+copyright = '2019, Marijan Beg and Hans Fangohr'
+author = 'Marijan Beg and Hans Fangohr'
 
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +28,6 @@ author = 'Marijan Beg, Thomas Kluyver, and Hans Fangohr'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.doctest',
               'sphinx.ext.napoleon',
               'sphinx.ext.mathjax',
               'nbsphinx']

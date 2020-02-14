@@ -1,12 +1,17 @@
 import micromagneticmodel as mm
-from .energyproperties import EnergyProperties
 
 
-class EnergyTerm(mm.util.Term, EnergyProperties):
-    """EnergyTerm class from which all energy terms are derived.
-
-    This class is a derived class from `micromagneticmodel.util.Term`
-    and `micromagneticmodel.EnergyProperties`.
+class EnergyTerm(mm.util.Term):
+    """Class from which all energy terms are derived.
 
     """
-    _termsum_type = 'Hamiltonian'
+    _termsum_type = mm.Hamiltonian
+
+    def energy(self):
+        pass
+
+    def energy_density(self):
+        pass
+
+    def effective_field(self):
+        pass

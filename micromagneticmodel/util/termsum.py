@@ -2,26 +2,51 @@ import abc
 
 
 class TermSum(metaclass=abc.ABCMeta):
-    """An abstract class for the implementation of sum classes of
-    individual terms.
-
-    This class should be inherited by a class which implements a
-    particular energy or dynamics term.
+    """An abstract class for deriving term sums.
 
     """
     def __init__(self):
         self.terms = []
 
+    def __repr__(self):
+        """Representation string method.
+
+        Returns
+        -------
+        str
+
+            Representation string.
+
+        """
+        return ' + '.join([repr(term) for term in self.terms])
+
+    def _repr_latex_(self):
+        """LaTeX representation abstract method, rendered inside Jupyter.
+
+        Returns
+        -------
+        str
+
+            LaTeX representation string.
+
+        """
+        reprlatex = self._lefthandside
+        if not self.terms:
+            reprlatex += '0$'
+        else:
+            for term in self.terms:
+                termlatex = term._repr_latex_()
+                termlatex = termlatex.replace('$', '')
+                if termlatex[0] != '-':
+                    reprlatex += f'+ {termlatex}'
+            reprlatex += '$'
+
+        return reprlatex
+
     @property
     @abc.abstractmethod
     def _lefthandside(self):
-        """LaTeX representation string of the `TermSum`.
-
-        It is used to construct the representation LaTeX string
-        returned by `_repr_latex` method inside Jupyter notebook. It
-        describes the left hand side of the expression. This should be
-        implemented in a derived class. It can be implemented as a
-        global class attribute - it does not have to be a property.
+        """Lefthandside of the LaTeX representation string.
 
         """
         pass  # pragma: no cover
@@ -29,124 +54,45 @@ class TermSum(metaclass=abc.ABCMeta):
     @property
     @abc.abstractmethod
     def _terms_type(self):
-        """A class which the summed terms are type of.
-
-        This should be implemented in a derived class. It can be
-        implemented as a global class attribute - it does not have to
-        be a property. For instance, for
-        `micromagneticmodel.Hamiltonian`, this would be an
-        `micromagneticmodel.EnergyTerm`.
+        """A class which can be added to ``TermSum``.
 
         """
         pass  # pragma: no cover
 
-    @property
-    def _repr(self):
-        """Representation string returned by `__repr__` method.
+    def __add__(self, value):
+        """Binary ``+`` operator.
 
-        """
-        terms_repr = [term._repr for term in self.terms]
-        return ' + '.join(terms_repr)
-
-    @property
-    def _latex(self):
-        """Representation string returned by `_repr_latex` method inside
-        Jupyter notebook.
-
-        """
-        s = self._lefthandside
-        for term in self.terms:
-            if term._latex[1] != '-' and s[-1] != '=':
-                s += '+'
-            s += term._latex[1:-1]
-        if self.terms == []:
-            s += '0'
-        s += '$'
-
-        return s
-
-    def __repr__(self):
-        """Representation string.
-
-        This method returns the string that can be copied in another
-        Python script so that exactly the same mesh object could be
-        defined.
-
-        Returns
-        -------
-        str
-            Representation string.
-
-        """
-        return self._repr
-
-    def _repr_latex_(self):
-        """LaTeX representation string.
-
-        This method returns the string that can be rendered as LaTeX
-        representation of the object.
-
-        Returns
-        -------
-        str
-            LaTeX representation string.
-
-        """
-        return self._latex
-
-    def _add(self, value):
-        """Addition operation.
-
-        This method is called when `micromagneticmodel.util.Term` or
-        `micromagneticmodel.util.TermSum` to `self`.
+        It can be applied only between two ``micromagneticmodel.util.TermSum``
+        objects or between ``micromagneticmodel.util.TermSum`` and
+        ``micromagneticmodel.util.Term``.
 
         Parameters
         ----------
-        other : micromagneticmodel.util.Term or TermSum
-            A term or term sum which should be added to `self`.
+        other : micromagneticmodel.util.Term, micromagneticmodel.util.TermSum
+
+            Second operand.
+
+        Returns
+        -------
+        micromagneticmodel.util.TermSum
+
+            Resulting sum.
 
         Raises
         ------
         TypeError
-            If wrong term is attempted to be added.
+
+            If the operator cannot be applied.
 
         """
         if isinstance(value, self._terms_type):
-            setattr(value, '_termsum', self)
+            setattr(value, '_termsum', self)  # to track who it belongs to
             self.terms.append(value)
-            setattr(self, value.name, value)
+            setattr(self, value.name, value)  # to make it accessible by name
         elif isinstance(value, self.__class__):
             for term in value.terms:
-                setattr(term, '_termsum', self)
-                self.terms.append(term)
-                setattr(self, term.name, term)
+                self += term
         else:
-            msg = (f'Cannot add type(value)={value} to {self.__class__}.')
+            msg = (f'Unsupported operand type(s) for +: '
+                   f'{type(self)} and {type(other)}.')
             raise TypeError(msg)
-
-    def __iadd__(self, other):
-        """Overloaded += operation.
-
-        This method is called when `other` is added to `self`.
-
-        Parameters
-        ----------
-        other : micromagneticmodel.util.Term
-            A term to be added to `self`.
-
-        Return
-        ------
-        self
-            It return the object itself.
-
-        """
-        self._add(other)
-        return self
-
-    @property
-    def _script(self):
-        """This method should be implemented by a specific micromagnetic
-        calculator
-
-        """
-        raise NotImplementedError

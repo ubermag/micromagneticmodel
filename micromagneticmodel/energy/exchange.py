@@ -6,8 +6,7 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 @ts.typesystem(A=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                              otherwise=df.Field),
-                              name=ts.Name(const=True))
+                              otherwise=df.Field))
 class Exchange(EnergyTerm):
     """Exchange energy term.
 
@@ -43,7 +42,7 @@ class Exchange(EnergyTerm):
 
     """
     _allowed_attributes = ['A']
-    _reprlatex = r'$A (\nabla \mathbf{m})^{2}$'
+    _reprlatex = r'A (\nabla \mathbf{m})^{2}'
 
     def __repr__(self):
         return f'Exchange(A={self.A})'

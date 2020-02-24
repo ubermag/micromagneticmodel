@@ -18,5 +18,5 @@ class Energy(mm.util.TermSum):
     >>> hamiltonian += mm.Exchange(A=1e-12)
 
     """
-    _lefthandside = '$w='
+    _lefthandside = 'w ='
     _terms_type = EnergyTerm

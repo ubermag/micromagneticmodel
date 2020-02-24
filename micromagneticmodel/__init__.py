@@ -2,7 +2,7 @@ import pytest
 import pkg_resources
 import micromagneticmodel.consts
 import micromagneticmodel.util  # to avoid import order conflicts
-from .energy import Energy, Exchange
+from .energy import Energy, Exchange, Zeeman
 #UniaxialAnisotropy, CubicAnisotropy, Demag, Zeeman, DMI, Hamiltonian
 #from .dynamics import DynamicsTerm, Precession, \
     #Damping, ZhangLi, Dynamics

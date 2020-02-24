@@ -1,16 +1,17 @@
 import abc
+import micromagneticmodel as mm
 
 
 class Term(metaclass=abc.ABCMeta):
-    """An abstract class for deriving both energy and dynamics terms.
+    """An abstract class for deriving all energy and dynamics terms.
 
     """
     def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            if k in self._allowed_attributes:
-                setattr(self, k, v)
+        for key, value in kwargs.items():
+            if key in self._allowed_attributes:
+                setattr(self, key, value)
             else:
-                msg = f'Invalid attribute {k} for {self.__class__}.'
+                msg = f'Invalid attribute {key} for {self.__class__}.'
                 raise ValueError(msg)
 
     @property
@@ -28,6 +29,33 @@ class Term(metaclass=abc.ABCMeta):
 
         """
         pass  # pragma: no cover
+
+    def __eq__(self, other):
+        """Relational operator ``==``.
+
+        Two terms are considered to be equal if all attributes in
+        ``_allowed_attributes`` are equal.
+
+        Parameters
+        ----------
+        other : micromagneticmodel.Term
+
+            Second operand.
+
+        Returns
+        -------
+        bool
+
+            ``True`` if two terms are equal and ``False`` otherwise.
+
+        """
+        if not isinstance(other, self.__class__):
+            return False
+        if all(all([getattr(self, attr) == getattr(other, attr)])
+               for attr in self._allowed_attributes):
+            return True
+        else:
+            return False
 
     def __add__(self, other):
         """Binary ``+`` operator.
@@ -54,40 +82,14 @@ class Term(metaclass=abc.ABCMeta):
             If the operator cannot be applied.
 
         """
-        termsum = self._termsum_type()
-        termsum += self
-        termsum += other
-        return termsum
+        result = getattr(mm, self._termsum_type)()
+        result += self
+        result += other
+
+        return result
 
     def __radd__(self, other):
-        return other + self
-
-    def __eq__(self, other):
-        """Relational operator ``==``.
-
-        Two terms are considered to be equal if all attributes in
-        ``_allowed_attrs`` are equal.
-
-        Parameters
-        ----------
-        other : micromagneticmodel.Term
-
-            Second operand.
-
-        Returns
-        -------
-        bool
-
-            ``True`` if two terms are equal and ``False`` otherwise.
-
-        """
-        if not isinstance(other, self.__class__):
-            return False
-        if all(getattr(self, attr) == getattr(other, attr)
-               for attr in self._allowed_attrs if attr != 'name'):
-            return True
-        else:
-            return False
+        return other + self  # is this necessary?
 
     @abc.abstractmethod
     def __repr__(self):
@@ -122,4 +124,20 @@ class Term(metaclass=abc.ABCMeta):
             LaTeX representation string.
 
         """
-        return self._reprlatex
+        return f'${self._reprlatex}$'
+
+    @property
+    def name(self):
+        """Name.
+
+        Used for accessing individual terms from ``micromagneticmodel.TermSum``
+        objects.
+
+        Returns
+        -------
+        str
+
+            Term name.
+
+        """
+        return self.__class__.__name__.lower()

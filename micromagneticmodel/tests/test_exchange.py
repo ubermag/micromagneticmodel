@@ -14,8 +14,13 @@ class TestExchange:
         for A in self.valid_args:
             term = mm.Exchange(A=A)
             assert term.A == A
-            assert isinstance(term.A, (numbers.Real, dict))
-            assert term.name == 'exchange'
+            assert isinstance(term.A, (numbers.Real, dict, df.Field))
+
+        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
+        field = df.Field(mesh, dim=1, value=5)
+        term = mm.Exchange(A=field)
+        assert isinstance(term.A, df.Field)
+        assert term.A.average == 5
 
     def test_init_invalid_args(self):
         for A in self.invalid_args:
@@ -31,21 +36,3 @@ class TestExchange:
         for A in self.valid_args:
             term = mm.Exchange(A=A)
             assert isinstance(repr(term), str)
-
-    def test_script(self):
-        for A in self.valid_args:
-            term = mm.Exchange(A=A)
-            with pytest.raises(NotImplementedError):
-                script = term._script
-
-    def test_field(self):
-        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        field = df.Field(mesh, dim=1, value=1)
-        term = mm.Exchange(A=field)
-        assert isinstance(term.A, df.Field)
-
-    def test_kwargs(self):
-        for A in self.valid_args:
-            term = mm.Exchange(A=A, e=1, something='a')
-            assert term.e == 1
-            assert term.something == 'a'

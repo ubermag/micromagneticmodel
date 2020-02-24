@@ -1,12 +1,13 @@
-import ubermagutil as uutil
+import ubermagutil as uu
 import discretisedfield as df
+import ubermagutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@uutil.inherit_docs
-@uutil.typesystem.typesystem(A=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                             otherwise=df.Field),
-                             name=ts.Name(const=True))
+@uu.inherit_docs
+@ts.typesystem(A=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
+                              otherwise=df.Field),
+                              name=ts.Name(const=True))
 class Exchange(EnergyTerm):
     """Exchange energy term.
 
@@ -41,8 +42,17 @@ class Exchange(EnergyTerm):
     >>> exchange3 = mm.Exchange(A=field)
 
     """
-    _allowed_atrributes = ['A']
+    _allowed_attributes = ['A']
     _reprlatex = r'$A (\nabla \mathbf{m})^{2}$'
 
     def __repr__(self):
         return f'Exchange(A={self.A})'
+
+    def energy(self, m):
+        raise NotImplementedError
+
+    def density(self, m):
+        raise NotImplementedError
+
+    def effective_field(self, m):
+        raise NotImplementedError

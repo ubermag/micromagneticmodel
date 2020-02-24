@@ -68,39 +68,17 @@ class Term(metaclass=abc.ABCMeta):
         Two terms are considered to be equal if all attributes in
         ``_allowed_attrs`` are equal.
 
-        ``name`` is not considered to be a necessary condition for equality.
-
         Parameters
         ----------
-        other : micromagneticmodel.TermSum
+        other : micromagneticmodel.Term
 
-            Term compared to ``self``.
+            Second operand.
 
         Returns
         -------
         bool
 
             ``True`` if two terms are equal and ``False`` otherwise.
-
-        Example
-        -------
-        1. Check if terms are equal.
-
-        >>> import micromagneticmodel as mm
-        ...
-        >>> exchange1 = mm.Exchange(A=1e-12)
-        >>> exchange2 = mm.Exchange(A=1e-12, name='myexchange')
-        >>> exchange2 = mm.Exchange(A=2e-12)
-        >>> precession1 = mm.Precession(gamma0=mm.gamma0)
-        >>> exchange1 == exchange2  # name is not checked for equality
-        True
-        >>> exchange1 == exchange3
-        False
-        >>> exchange1 != exchange3
-        True
-        >>> exchange1 == precession1
-        False
-        >>> exchange1 != precession1
 
         """
         if not isinstance(other, self.__class__):
@@ -111,26 +89,31 @@ class Term(metaclass=abc.ABCMeta):
         else:
             return False
 
-    @property
     @abc.abstractmethod
-    def _reprlatex(self):
-        """"LaTeX representation abstract method, rendered inside Jupyter. This
-        method has the priority over ``__repr__`` in Jupyter.
+    def __repr__(self):
+        """Representation string.
+
+        Returns
+        -------
+        str
+
+            Representation string.
 
         """
         pass  # pragma: no cover
 
+    @property
     @abc.abstractmethod
-    def __repr__(self):
-        """Representation string abstract method.
+    def _reprlatex(self):
+        """"LaTeX representation abstract method, rendered inside Jupyter and
+        returned by ``micromagneticmodel.Term._repr_latex_``.
 
         """
-        pass
+        pass  # pragma: no cover
 
-    @abc.abstractmethod
     def _repr_latex_(self):
-        """"LaTeX representation abstract method, rendered inside Jupyter. This
-        method has the priority over ``__repr__`` in Jupyter.
+        """"LaTeX representation method, rendered inside Jupyter. This method
+        has the priority over ``__repr__`` in Jupyter.
 
         Returns
         -------
@@ -138,15 +121,5 @@ class Term(metaclass=abc.ABCMeta):
 
             LaTeX representation string.
 
-        Example
-        -------
-        1. Get LaTeX representation string.
-
-        >>> import micromagneticmodel as mm
-        ...
-        >>> exchange = mm.Exchange(A=1e-12)
-        >>> exchange._repr_latex_()
-        '$A (\\nabla \\mathbf{m})^{2}$'
-
         """
-        pass  # pragma: no cover
+        return self._reprlatex

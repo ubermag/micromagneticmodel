@@ -1,3 +1,4 @@
+import abc
 import micromagneticmodel as mm
 
 
@@ -5,13 +6,16 @@ class EnergyTerm(mm.util.Term):
     """A class for deriving all energy terms.
 
     """
-    _termsum_type = mm.Energy
+    _termsum_type = 'Energy'
 
-    def energy(self):
+    @abc.abstractmethod
+    def energy(self, m):
         pass
 
-    def density(self):
+    @abc.abstractmethod
+    def density(self, m):
         pass
 
-    def effective_field(self):
+    @abc.abstractmethod
+    def effective_field(self, m):
         pass

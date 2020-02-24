@@ -1,9 +1,8 @@
 import micromagneticmodel as mm
-from .energyproperties import EnergyProperties
 from .energyterm import EnergyTerm
 
 
-class Energy(mm.util.TermSum, EnergyProperties):
+class Energy(mm.util.TermSum):
     """Hamiltonian class.
 
     This class implements the sum of individual energy terms.

@@ -155,8 +155,11 @@ class Term(metaclass=abc.ABCMeta):
         'Damping(alpha=0.01)'
 
         """
-        attributes = ', '.join([f'{attr}={getattr(self, attr)}'
-                                for attr in self._allowed_attributes])
+        attributes = []
+        for attr in self._allowed_attributes:
+            if hasattr(self, attr):
+                attributes.append(f'{attr}={getattr(self, attr)}')
+        attributes = ', '.join(attributes)
         return f'{self.__class__.__name__}({attributes})'
 
     @property

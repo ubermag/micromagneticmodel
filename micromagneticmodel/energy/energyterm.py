@@ -8,13 +8,11 @@ class EnergyTerm(mm.util.Term):
     """
     _termscontainer_class = 'Energy'
 
-    @abc.abstractmethod
     def energy(self, m):
-        pass
+        raise NotImplementedError  # can be implemented as Heff*m.integrate
 
-    @abc.abstractmethod
     def density(self, m):
-        pass
+        raise NotImplementedError  # can be implemented as Heff*m
 
     @abc.abstractmethod
     def effective_field(self, m):

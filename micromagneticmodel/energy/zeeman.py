@@ -1,56 +1,68 @@
+import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3),
-                              otherwise=df.Field))
+@uu.inherit_docs
+@ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field))
 class Zeeman(EnergyTerm):
     """Zeeman energy term.
 
-    This object models Zeeman energy term. It
-    takes the external field `H` and `name` as input
-    parameters. In addition, any further parameters, required by a
-    specific micromagnetic calculator can be passed.
+    Energy density:
+
+    .. math::
+
+        w_\\text{z} = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}
+
+    Effective field:
+
+    .. math::
+
+        \\mathbf{H}^\\text{z}_\\text{eff} = \\mathbf{H}
 
     Parameters
     ----------
-    H : array_like, dict, discretisedfield.Field
-        A length-3 array_like (tuple, list, `numpy.ndarray`),
-        which consists of `numbers.Real` can be
-        passed. Alternatively, if it is defined per region, a
-        dictionary can be passed, e.g. `H={'region1': (0, 0, 3e6),
-        'region2': (0, 0, -3e6)}`. If it is possible to define the
-        parameter "per cell", `discretisedfield.Field` can be
-        passed.
+    H : (3,) array_like, dict, discretisedfield.Field
+
+        If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
+        passed, which consists of ``numbers.Real``, a spatially constant
+        parameter is defined. For a spatially varying parameter, either a
+        dictionary, e.g. ``H={'region1': (0, 0, 3e6), 'region2': (0, 0, -3e6)}``
+        (if the parameter is defined "per region") or ``discretisedfield.Field``
+        is passed.
 
     Examples
     --------
-    1. Initialising the Zeeman energy term.
+    1. Defining the Zeeman energy term using a vector.
 
     >>> import micromagneticmodel as mm
+    ...
+    >>> zeeman = mm.Zeeman(H=(0, 0, 1e6))
+
+    2. Defining the Zeeman energy term using dictionary.
+
+    >>> zeeman = mm.Zeeman(H={'region1': (0, 0, 1e6), 'region2': (0, 0, -1e6)})
+
+    3. Defining the Zeeman energy term using ``discretisedfield.Field``.
+
     >>> import discretisedfield as df
     ...
-    >>> zeeman1 = mm.Zeeman(H=(0, 0, 1e6), name='myzeeman')
-    >>> zeeman2 = mm.Zeeman(H={'r1': (0, 0, 1e6),
-    ...                        'r2': (0, 0, -1e6)})
-    >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-    ...                cell=(1e-9, 1e-9, 1e-9))
-    >>> field = df.Field(mesh, dim=3, value=(0, 0, 1e6))
-    >>> zeeman3 = mm.Zeeman(H=field)
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> H = df.Field(mesh, dim=1, value=(1e6, -1e6, 0))
+    >>> zeeman = mm.Zeeman(H=H)
+
+    4. An attempt to define the Zeeman energy term using a wrong value.
+
+    >>> zeeman = mm.Zeeman(H=(0, 0, -1e7))  # length-2 vector
+    Traceback (most recent call last):
+    ...
+    ValueError: ...
 
     """
     _allowed_attributes = ['H']
     _reprlatex = r'-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}'
-
-    def __repr__(self):
-        return f'Zeeman(H={self.H})'
-
-    def energy(self, m):
-        raise NotImplementedError
-
-    def density(self, m):
-        raise NotImplementedError
 
     def effective_field(self, m):
         raise NotImplementedError

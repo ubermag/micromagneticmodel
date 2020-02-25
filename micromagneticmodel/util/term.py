@@ -132,7 +132,6 @@ class Term(metaclass=abc.ABCMeta):
 
         return result
 
-    @abc.abstractmethod
     def __repr__(self):
         """Representation string.
 
@@ -157,7 +156,9 @@ class Term(metaclass=abc.ABCMeta):
         'Damping(alpha=0.01)'
 
         """
-        pass  # pragma: no cover
+        attributes = ', '.join([f'{attr}={getattr(self, attr)}'
+                                for attr in self._allowed_attributes])
+        return f'{self.__class__.__name__}({attributes})'
 
     @property
     @abc.abstractmethod

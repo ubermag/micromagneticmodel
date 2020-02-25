@@ -10,48 +10,60 @@ from .energyterm import EnergyTerm
 class Exchange(EnergyTerm):
     """Exchange energy term.
 
-    It takes the exchange energy constant ``A`` and ``name`` as input
-    parameters.
+    Energy density:
+
+    .. math::
+
+        w_\\text{ex} = A (\\nabla \\mathbf{m})^{2}
+
+    Effective field:
+
+    .. math::
+
+        \\mathbf{H}^\\text{ex}_\\text{eff} =
+        \\frac{2A}{\\mu_{0}M_\\text{s}}\\nabla^{2}\\mathbf{m}
 
     Parameters
     ----------
     A : numbers.Real, dict, discretisedfield.Field
 
-        If a single positive value ``numbers.Real`` is passed, spatially
+        If a single positive value ``numbers.Real`` is passed, a spatially
         constant parameter is defined. For a spatially varying parameter, either
         a dictionary, e.g. ``A={'region1': 1e-12, 'region2': 5e-12}`` (if the
         parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
-    name : str, optional
-
-        Name. Defaults to ``'exchange'``.
-
-    Example
-    -------
-    1. Defining the exchange energy term.
+    Examples
+    --------
+    1. Defining the exchange energy term using scalar.
 
     >>> import micromagneticmodel as mm
     ...
-    >>> exchange1 = mm.Exchange(A=1e-12)
-    >>> exchange2 = mm.Exchange(A={'r1': 1e-12, 'r2': 2e-12})
-    >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-    ...                cell=(1e-9, 1e-9, 1e-9))
-    >>> field = df.Field(mesh, dim=1, value=1e12)
-    >>> exchange3 = mm.Exchange(A=field)
+    >>> exchange = mm.Exchange(A=1e-12)
+
+    2. Defining the exchange energy term using dictionary.
+
+    >>> exchange = mm.Exchange(A={'region1': 1e-12, 'region2': 2e-12})
+
+    3. Defining the exchange energy term using ``discretisedfield.Field``.
+
+    >>> import discretisedfield as df
+    ...
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> A = df.Field(mesh, dim=1, value=5e-11)
+    >>> exchange = mm.Exchange(A=A)
+
+    4. An attempt to define the exchange energy term using a wrong value.
+
+    >>> exchange = mm.Exchange(A=-5)  # negative value
+    Traceback (most recent call last):
+    ...
+    ValueError: ...
 
     """
     _allowed_attributes = ['A']
     _reprlatex = r'A (\nabla \mathbf{m})^{2}'
-
-    def __repr__(self):
-        return f'Exchange(A={self.A})'
-
-    def energy(self, m):
-        raise NotImplementedError
-
-    def density(self, m):
-        raise NotImplementedError
 
     def effective_field(self, m):
         raise NotImplementedError

@@ -448,7 +448,7 @@ class TermsContainer(metaclass=abc.ABCMeta):
         >>> # energy  # inside Jupyter
 
         """
-        reprlatex = self._lefthandside
+        reprlatex = self._lhslatex
         if not self._terms:
             reprlatex += '0'
         else:

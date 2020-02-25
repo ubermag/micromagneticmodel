@@ -3,10 +3,10 @@ import micromagneticmodel as mm
 
 
 class EnergyTerm(mm.util.Term):
-    """A class for deriving all energy terms.
+    """A parent class for all energy terms.
 
     """
-    _termsum_type = 'Energy'
+    _termsum_class = 'Energy'
 
     @abc.abstractmethod
     def energy(self, m):

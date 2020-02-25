@@ -19,4 +19,4 @@ class Energy(mm.util.TermSum):
 
     """
     _lefthandside = 'w ='
-    _terms_type = EnergyTerm
+    _terms_class = EnergyTerm

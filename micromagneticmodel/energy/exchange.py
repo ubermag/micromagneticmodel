@@ -16,13 +16,6 @@ class Exchange(EnergyTerm):
 
         w_\\text{ex} = A (\\nabla \\mathbf{m})^{2}
 
-    Effective field:
-
-    .. math::
-
-        \\mathbf{H}^\\text{ex}_\\text{eff} =
-        \\frac{2A}{\\mu_{0}M_\\text{s}}\\nabla^{2}\\mathbf{m}
-
     Parameters
     ----------
     A : numbers.Real, dict, discretisedfield.Field

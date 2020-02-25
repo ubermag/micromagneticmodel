@@ -2,29 +2,28 @@ import abc
 
 
 class TermsContainer(metaclass=abc.ABCMeta):
-    """An abstract class for deriving containers of energy and dynamics terms.
-
-    It can be initialised with a list of energy or dynamics terms.
-
-    Parameters
-    ----------
-    terms : list
-
-        A list of energy or dynamics terms.
-
-    Examples
-    --------
-    1. Defining energy terms container.
-
-    >>> import micromagneticmodel as mm
-    ...
-    >>> terms = [mm.Exchange(A=1e-12), mm.Demag()]
-    >>> energy = mm.Energy(terms=terms)
-    >>> len(energy)  # the number of terms
-    2
-
-    """
     def __init__(self, terms=None):
+        """Terms container can be initialised with a list of energy or dynamics
+        terms.
+
+        Parameters
+        ----------
+        terms : list
+
+            A list of energy or dynamics terms.
+
+        Examples
+        --------
+        1. Defining energy terms container.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> terms = [mm.Exchange(A=1e-12), mm.Demag()]
+        >>> energy = mm.Energy(terms=terms)
+        >>> len(energy)  # the number of terms
+        2
+
+        """
         self._terms = list()
         if terms is not None:
             for term in terms:

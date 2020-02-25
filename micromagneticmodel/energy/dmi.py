@@ -1,78 +1,92 @@
+import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(),
-                              otherwise=df.Field),
+@uu.inherit_docs
+@ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
                crystalclass=ts.Subset(sample_set={'cnv', 't', 'o', 'd2d'},
-                                      unpack=False),
-               name=ts.Name(constant=True))
+                                      unpack=False))
 class DMI(EnergyTerm):
-    def __init__(self, D, crystalclass='t', name='dmi', **kwargs):
-        """Micromagnetic Dzyaloshinskii-Moriya (DM) energy term.
+    """Dzyaloshinskii-Moriya energy term.
 
-        This object models micromagnetic Dzyaloshinskii-Moriya energy
-        term. It takes the DM energy constant `D` and crystallographic
-        class `crystalclass`, and `name` as input parameters. In
-        addition, any further parameters, required by a specific
-        micromagnetic calculator can be passed.
+    Energy density:
 
-        Parameters
-        ----------
-        D : int, float, dict, discretisedfield.Field
-            A single positive value (int, float) can be
-            passed. Alternatively, if it is defined per region, a
-            dictionary can be passed, e.g. `A={'region1': 1e-12,
-            'region2': 5e-12}`. If it is possible to define the
-            parameter "per cell", `discretisedfield.Field` can be
-            passed.
-        crystalclass : str
-            One of the following classes is allowed: `'Cnv'`, `'T'`,
-            `'O'`, `'D2d'`, or `'interfacial'`.
-        name : str
-            Name of the energy term.
+    .. math::
 
-        Examples
-        --------
-        1. Initialising the Dzyaloshinskii-Moriya energy term.
+        w_\\text{dmi}^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times
+        \\mathbf{m})
 
-        >>> import micromagneticmodel as mm
-        ...
-        >>> dmi1 = mm.DMI(D=1e-3, crystalclass='Cnv')
-        >>> dmi2 = mm.DMI(D={'r1': 1e-3, 'r2': 2e-3},
-        ...               crystalclass='D2d')
-        >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-        ...                cell=(1e-9, 1e-9, 1e-9))
-        >>> field = df.Field(mesh, dim=1, value=1e12)
-        >>> dmi3 = mm.DMI(D=field, crystalclass='T')
+    .. math::
 
-        """
-        self.D = D
-        self.crystalclass = crystalclass.lower()
-        self.name = name
-        self.__dict__.update(kwargs)
+        w_\\text{dmi}^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} - m_{z}
+        \\nabla \\cdot \\mathbf{m} )
+
+    .. math::
+
+        w_\\text{dmi}^\\text{D2d} = D \\mathbf{m} \\cdot \\left(
+        \\frac{\\partial \\mathbf{m}}{\\partial x} \\times \\hat{x} -
+        \\frac{\\partial \\mathbf{m}}{\\partial y} \\times \\hat{y} \\right)
+
+    Parameters
+    ----------
+    D : numbers.Real, dict, discretisedfield.Field
+
+        If a single positive value ``numbers.Real`` is passed, a spatially
+        constant parameter is defined. For a spatially varying parameter, either
+        a dictionary, e.g. ``D={'region1': 1e-12, 'region2': 5e-12}`` (if the
+        parameter is defined "per region") or ``discretisedfield.Field`` is
+        passed.
+
+    crystalclass : str
+
+        One of the following crystalographic classes is allowed: ``'Cnv'``,
+        ``'T'``, ``'O'``, or ``'D2d'``.
+
+    Examples
+    --------
+    1. Defining the DMI energy term using scalar.
+
+    >>> import micromagneticmodel as mm
+    ...
+    >>> dmi = mm.DMI(D=1e-3, crystalclass='T')
+
+    2. Defining the DMI energy term using dictionary.
+
+    >>> dmi = mm.DMI(D={'region1': 1e-3, 'region2': 5e-3})
+
+    3. Defining the DMI energy term using ``discretisedfield.Field``.
+
+    >>> import discretisedfield as df
+    ...
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> D = df.Field(mesh, dim=1, value=5.7e-3)
+    >>> dmi = mm.DMI(D=D)
+
+    4. An attempt to define the DMI energy term using a wrong value.
+
+    >>> dmi = mm.DMI(D=(1, 0, 0))  # vector value
+    Traceback (most recent call last):
+    ...
+    TypeError: ...
+
+    """
+    _allowed_attributes = ['D', 'crystalclass']
 
     @property
-    def _latex(self):
+    def _reprlatex(self):
         if self.crystalclass in ['t', 'o']:
-            return r'$D \mathbf{m} \cdot (\nabla \times \mathbf{m})$'
-        elif self.crystalclass in ['cnv', 'interfacial']:
-            return (r'$D ( \mathbf{m} \cdot \nabla m_{z} '
-                    r'- m_{z} \nabla \cdot \mathbf{m} )$')
+            return r'D \mathbf{m} \cdot (\nabla \times \mathbf{m})'
+        elif self.crystalclass in ['cnv']:
+            return (r'D ( \mathbf{m} \cdot \nabla m_{z} '
+                    r'- m_{z} \nabla \cdot \mathbf{m} )')
         else:
-            return (r'$D\mathbf{m} \cdot \left( \frac{\partial '
+            return (r'D\mathbf{m} \cdot \left( \frac{\partial '
                     r'\mathbf{m}}{\partial x} \times \hat{x} - '
                     r'\frac{\partial \mathbf{m}}{\partial y} '
-                    r'\times \hat{y} \right)$')
+                    r'\times \hat{y} \right)')
 
-    @property
-    def _repr(self):
-        """A representation string property.
-
-        Returns:
-           A representation string.
-
-        """
-        return (f'DMI(D={self.D}, crystalclass=\'{self.crystalclass}\', '
-                f'name=\'{self.name}\')')
+    def effective_field(self, m):
+        raise NotImplementedError

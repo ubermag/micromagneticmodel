@@ -1,76 +1,76 @@
+import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(K1=ts.Parameter(descriptor=ts.Scalar(),
-                               otherwise=df.Field),
-               u=ts.Parameter(descriptor=ts.Vector(size=3),
-                              otherwise=df.Field),
-               name=ts.Name(const=True))
+@uu.inherit_docs
+@ts.typesystem(K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+               u=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field))
 class UniaxialAnisotropy(EnergyTerm):
-    def __init__(self, K1, u, name='uniaxialanisotropy',
-                 **kwargs):
-        """Uniaxial anisotropy energy term.
+    """Uniaxial anisotropy energy term.
 
-        This object models aniaxial anisotropy energy term. It takes
-        the anisotropy energy constant `K1` and the anisotropy axis
-        `u`. `name` can also be passed as input parameter. In
-        addition, any further parameters, required by a specific
-        micromagnetic calculator can be passed.
+    Energy density:
 
-        Parameters
-        ----------
-        K1, : int, float, dict, discretisedfield.Field
-            A single positive value (int, float) can be
-            passed. Alternatively, if it is defined per region, a
-            dictionary can be passed, e.g. `K1={'region1': 1e-12,
-            'region2': 5e-12}`. If it is possible to define the
-            parameter "per cell", `discretisedfield.Field` can be
-            passed.
-        u : array_like, dict, discretisedfield.Field
-            A length-3 array_like (tuple, list, `numpy.ndarray`),
-            which consists of `numbers.Real` can be
-            passed. Alternatively, if it is defined per region, a
-            dictionary can be passed, e.g. `H={'region1': (0, 0, 1),
-            'region2': (1, 0, 0)}`. If it is possible to define the
-            parameter "per cell", `discretisedfield.Field` can be
-            passed.
-        name : str
-            Name of the energy term.
+    .. math::
 
-        Examples
-        --------
-        1. Initialising the uniaxial anisotropy energy term.
+        w_\\text{ua} = -K (\\mathbf{m} \\cdot \\mathbf{u})^{2}
 
-        >>> import micromagneticmodel as mm
-        >>> import discretisedfield as df
-        ...
-        >>> ua1 = mm.UniaxialAnisotropy(K1=1e6, u=(0, 0, 1))
-        >>> ua2 = mm.UniaxialAnisotropy(K1={'r1': 1e6, 'r2': 2e6},
-        ...                             u=(0, 0, 1))
-        >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-        ...                cell=(1e-9, 1e-9, 1e-9))
-        >>> field = df.Field(mesh, dim=1, value=3e6)
-        >>> ua3 = mm.UniaxialAnisotropy(K1=field, u=(0, 0, 1))
+    Parameters
+    ----------
+    K, : numbers.Real, dict, discretisedfield.Field
 
-        """
-        self.K1 = K1
-        self.u = u
-        self.name = name
-        self.__dict__.update(kwargs)
+        If a single positive value ``numbers.Real`` is passed, a spatially
+        constant parameter is defined. For a spatially varying parameter, either
+        a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if the
+        parameter is defined "per region") or ``discretisedfield.Field`` is
+        passed.
 
-    @property
-    def _latex(self):
-        return r'$-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2}$'
+    u : (3,) array_like, dict, discretisedfield.Field
 
-    @property
-    def _repr(self):
-        """A representation string property.
+        If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
+        passed, which consists of ``numbers.Real``, a spatially constant
+        parameter is defined. For a spatially varying parameter, either a
+        dictionary, e.g. ``u={'region1': (0, 0, 1), 'region2': (1, 0, 0)}``
+        (if the parameter is defined "per region") or ``discretisedfield.Field``
+        is passed.
 
-        Returns:
-           A representation string.
+    Examples
+    --------
+    1. Defining the uniaxial anisotropy energy term using single values.
 
-        """
-        return (f'UniaxialAnisotropy(K1={self.K1}, '
-                f'u={self.u}, name=\'{self.name}\')')
+    >>> import micromagneticmodel as mm
+    ...
+    >>> ua = mm.UniaxialAnisotropy(K=1e5, u=(0, 0, 1))
+
+    2. Defining the uniaxial anisotropy energy term using dictionary.
+
+    >>> K = {'region1': 1e6, 'region2': 1e5}
+    >>> u = {'region1': (0, 0, 1), 'region2': (1, 0, 0)}
+    >>> ua = mm.UniaxialAnisotropy(K=K, u=u)
+
+    3. Defining the uniaxial anisotropy energy term using
+    ``discretisedfield.Field``.
+
+    >>> import discretisedfield as df
+    ...
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> K = df.Field(mesh, dim=1, value=1e6)
+    >>> u = df.Field(mesh, dim=3, value=(0, 1, 0))
+    >>> ua = mm.UniaxialAnisotropy(K=K, u=u)
+
+    4. An attempt to define the uniaxial anisotropy energy term using a wrong
+    value.
+
+    >>> ua = mm.UniaxialAnisotropy(K=1e5, u=(0, 0, 1, 0))  # length-4 vector
+    Traceback (most recent call last):
+    ...
+    ValueError: ...
+
+    """
+    _allowed_attributes = ['K', 'u']
+    _reprlatex = r'-K (\mathbf{m} \cdot \mathbf{u})^{2}'
+
+    def effective_field(self, m):
+        raise NotImplementedError

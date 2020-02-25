@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.Zeeman
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

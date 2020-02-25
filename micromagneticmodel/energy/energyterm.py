@@ -1,7 +1,9 @@
 import abc
+import ubermagutil as uu
 import micromagneticmodel as mm
 
 
+@uu.inherit_docs
 class EnergyTerm(mm.util.Term):
     """A parent class for all energy terms.
 

@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.CubicAnisotropy
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

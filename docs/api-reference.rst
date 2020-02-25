@@ -6,9 +6,7 @@ API Reference
    :caption: Contents:
 
    term
-   termsum
-   data
-   energyproperties
+   termscontainer
    energyterm
    dynamicsterm
    exchange

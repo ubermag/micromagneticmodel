@@ -1,38 +1,36 @@
-import ubermagutil.typesystem as ts
+import ubermagutil as uu
 from .energyterm import EnergyTerm
 
 
-@ts.typesystem(name=ts.Name(const=True))
+@uu.inherit_docs
 class Demag(EnergyTerm):
-    _latex = (r'$-\frac{1}{2}\mu_{0}M_\text{s}'
-              r'\mathbf{m} \cdot \mathbf{H}_\text{d}$')
+    """Demagnetisation energy term.
 
-    def __init__(self, name='demag', **kwargs):
-        """Micromagnetic demagnetisation energy term.
+    Energy density:
 
-        This object models micromagnetic demagnetisation energy
-        term. It does not take any mandatory arguments. However, any
-        parameters required by a specific micromagnetic calculator can
-        be passed.
+    .. math::
 
-        Examples
-        --------
-        1. Initialising the demagnetisation energy term.
+        w_\\text{d} = -\\frac{1}{2}\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot
+        \\mathbf{H}_\\text{d}
 
-        >>> import micromagneticmodel as mm
-        ...
-        >>> demag = mm.Demag()
+    Parameters
+    ----------
+    asymptotic_radius : numbers.Real, optional
 
-        """
-        self.name = name
-        self.__dict__.update(kwargs)
+        Optional asymptotic radius.
 
-    @property
-    def _repr(self):
-        """A representation string property.
+    Examples
+    --------
+    1. Defining the demagnetisation energy term.
 
-        Returns:
-           A representation string.
+    >>> import micromagneticmodel as mm
+    ...
+    >>> demag = mm.Demag()
 
-        """
-        return f'Demag(name=\'{self.name}\')'
+    """
+    _allowed_attributes = ['asymptotic_radius']
+    _reprlatex = (r'-\frac{1}{2}\mu_{0}M_\text{s}'
+                  r'\mathbf{m} \cdot \mathbf{H}_\text{d}')
+
+    def effective_field(self, m):
+        raise NotImplementedError

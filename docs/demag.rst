@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.Demag
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

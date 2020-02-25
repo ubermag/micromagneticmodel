@@ -33,7 +33,7 @@ class Term(metaclass=abc.ABCMeta):
 
     @property
     @abc.abstractmethod
-    def _termsum_class(self):
+    def _termscontainer_class(self):
         """A class of an object, which is the result of adding terms.
 
         """
@@ -126,7 +126,7 @@ class Term(metaclass=abc.ABCMeta):
         Dynamics
 
         """
-        result = getattr(mm, self._termsum_class)()
+        result = getattr(mm, self._termscontainer_class)()
         result += self
         result += other
 

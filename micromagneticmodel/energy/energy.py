@@ -2,7 +2,7 @@ import micromagneticmodel as mm
 from .energyterm import EnergyTerm
 
 
-class Energy(mm.util.TermSum):
+class Energy(mm.util.TermsContainer):
     """Hamiltonian class.
 
     This class implements the sum of individual energy terms.
@@ -18,5 +18,5 @@ class Energy(mm.util.TermSum):
     >>> hamiltonian += mm.Exchange(A=1e-12)
 
     """
-    _lefthandside = 'w ='
+    _lhslatex = 'w ='
     _terms_class = EnergyTerm

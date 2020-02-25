@@ -9,7 +9,8 @@ def check_term(term):
     assert isinstance(term._allowed_attributes, list)
     assert len(term._allowed_attributes) > 0
 
-    assert isinstance(getattr(mm, term._termsum_class)(), mm.util.TermSum)
+    assert isinstance(getattr(mm, term._termscontainer_class)(),
+                      mm.util.TermsContainer)
 
     assert term == term
     assert term != '5'
@@ -17,7 +18,7 @@ def check_term(term):
 
     assert isinstance(dir(term), list)
 
-    termsum = getattr(mm, term._termsum_class)()
+    termsum = getattr(mm, term._termscontainer_class)()
     termsum += term
     assert len(termsum) == 1
     assert term in termsum
@@ -26,7 +27,7 @@ def check_term(term):
     assert list(termsum) == termsum._terms
 
     # neutral element for addition
-    assert termsum + getattr(mm, term._termsum_class)() == termsum
+    assert termsum + getattr(mm, term._termscontainer_class)() == termsum
 
     assert getattr(termsum, term.name) == term
     assert term.name in dir(termsum)

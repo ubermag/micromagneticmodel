@@ -1,2 +1,2 @@
 from .term import Term
-from .termsum import TermSum
+from .termscontainer import TermsContainer

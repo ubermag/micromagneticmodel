@@ -6,7 +6,7 @@ class EnergyTerm(mm.util.Term):
     """A parent class for all energy terms.
 
     """
-    _termsum_class = 'Energy'
+    _termscontainer_class = 'Energy'
 
     @abc.abstractmethod
     def energy(self, m):

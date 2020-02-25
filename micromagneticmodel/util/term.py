@@ -112,7 +112,7 @@ class Term(metaclass=abc.ABCMeta):
         ...
         >>> terms_sum = exchange + demag
         >>> type(terms_sum)
-        Energy
+        <class 'micromagneticmodel.energy.energy.Energy'>
 
         2. Adding dynamics terms.
 
@@ -123,7 +123,7 @@ class Term(metaclass=abc.ABCMeta):
         ...
         >>> terms_sum = precession + damping
         >>> type(terms_sum)
-        Dynamics
+        <class 'micromagneticmodel.dynamics.dynamics.Dynamics'>
 
         """
         result = getattr(mm, self._termscontainer_class)()
@@ -150,7 +150,6 @@ class Term(metaclass=abc.ABCMeta):
         >>> zeeman = mm.Zeeman(H=(100, 0, 0))
         >>> repr(zeeman)
         'Zeeman(H=(100, 0, 0))'
-        ...
         >>> damping = mm.Damping(alpha=0.01)
         >>> repr(damping)
         'Damping(alpha=0.01)'
@@ -186,8 +185,8 @@ class Term(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> zeeman = mm.Zeeman(H=(100, 0, 0))
-        >>> zeeman._latex_repr_()
-        '-\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}'
+        >>> zeeman._repr_latex_()
+        '$-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
         >>> # zeeman  # inside Jupyter
 
         """
@@ -213,7 +212,7 @@ class Term(metaclass=abc.ABCMeta):
 
         >>> import micromagneticmodel as mm
         ...
-        >>> ua = mm.UniaxialAnisotropy(K1=5e6, u=(0, 0, 1))
+        >>> ua = mm.UniaxialAnisotropy(K=5e6, u=(0, 0, 1))
         >>> ua.name
         'uniaxialanisotropy'
         ...

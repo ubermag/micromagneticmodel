@@ -166,10 +166,10 @@ class TermsContainer(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> dynamics = mm.Dynamics()
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma=500)
         >>> dynamics += mm.Damping(alpha=0.2)
         >>> dynamics.precession
-        Precession(gamma=mm.consts.gamma0)
+        Precession(gamma=500)
         >>> dynamics.damping
         mm.Damping(alpha=0.2)
         >>> dynamics.stt
@@ -442,8 +442,8 @@ class TermsContainer(metaclass=abc.ABCMeta):
         >>> zeeman = mm.Zeeman(H=(100, 0, 0))
         >>> energy = mm.Energy()
         >>> energy += zeeman
-        >>> energy._latex_repr_()
-        '-\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}'
+        >>> energy._repr_latex_()
+        '$w =-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
         >>> # energy  # inside Jupyter
 
         """

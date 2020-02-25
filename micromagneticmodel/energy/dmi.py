@@ -6,7 +6,7 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 @ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               crystalclass=ts.Subset(sample_set={'cnv', 't', 'o', 'd2d'},
+               crystalclass=ts.Subset(sample_set={'Cnv', 'T', 'O', 'D2d'},
                                       unpack=False))
 class DMI(EnergyTerm):
     """Dzyaloshinskii-Moriya energy term.
@@ -77,9 +77,9 @@ class DMI(EnergyTerm):
 
     @property
     def _reprlatex(self):
-        if self.crystalclass in ['t', 'o']:
+        if self.crystalclass in ['T', 'O']:
             return r'D \mathbf{m} \cdot (\nabla \times \mathbf{m})'
-        elif self.crystalclass in ['cnv']:
+        elif self.crystalclass in ['Cnv']:
             return (r'D ( \mathbf{m} \cdot \nabla m_{z} '
                     r'- m_{z} \nabla \cdot \mathbf{m} )')
         else:

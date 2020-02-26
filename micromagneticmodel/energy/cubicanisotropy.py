@@ -13,8 +13,6 @@ from .energyterm import EnergyTerm
 class CubicAnisotropy(EnergyTerm):
     """Cubic anisotropy energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{ca} = -K [(\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}

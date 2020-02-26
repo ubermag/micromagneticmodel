@@ -164,7 +164,7 @@ class Term(metaclass=abc.ABCMeta):
         attributes = []
         for attr in self._allowed_attributes:
             if hasattr(self, attr):
-                if isinstance(attr, str):
+                if isinstance(getattr(self, attr), str):
                     attributes.append(f'{attr}=\'{getattr(self, attr)}\'')
                 else:
                     attributes.append(f'{attr}={getattr(self, attr)}')

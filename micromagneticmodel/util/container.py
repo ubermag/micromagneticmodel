@@ -40,7 +40,8 @@ class Container(metaclass=abc.ABCMeta):
         self._terms = list()
         if terms is not None:
             for term in terms:
-                self += term  # all necessary checks are done by the + operator
+                # all necessary checks are done by the + operator
+                self._terms = (self + term)._terms
 
     @property
     @abc.abstractmethod
@@ -184,7 +185,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> dynamics.precession
         Precession(gamma=500)
         >>> dynamics.damping
-        mm.Damping(alpha=0.2)
+        Damping(alpha=0.2)
         >>> dynamics.stt
         Traceback (most recent call last):
         ...
@@ -389,6 +390,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> len(dynamics)
         1
         >>> damping in dynamics
+        False
 
         """
         result = self.__class__()
@@ -456,7 +458,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> energy = mm.Energy()
         >>> energy += zeeman
         >>> energy._repr_latex_()
-        '$w =-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
+        '$w=-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
         >>> # energy  # inside Jupyter
 
         """

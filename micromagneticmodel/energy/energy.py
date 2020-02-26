@@ -25,5 +25,5 @@ class Energy(mm.util.Container):
     2
 
     """
-    _lhslatex = 'w ='
+    _lhslatex = 'w='
     _term_class = EnergyTerm

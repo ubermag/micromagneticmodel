@@ -1,7 +1,8 @@
+import re
 import pytest
-import numbers
 import discretisedfield as df
 import micromagneticmodel as mm
+from .checks import check_term
 
 
 class TestZhangLi:
@@ -20,39 +21,16 @@ class TestZhangLi:
     def test_init_valid_args(self):
         for u, beta in self.valid_args:
             term = mm.ZhangLi(u=u, beta=beta)
-            assert term.beta == beta
-            assert isinstance(term.beta, (numbers.Real, dict))
+            check_term(term)
+            assert hasattr(term, 'u')
+            assert hasattr(term, 'beta')
             assert term.name == 'zhangli'
+            assert re.search(r'^ZhangLi\(u=.+\, beta=.+\)$', repr(term))
 
     def test_init_invalid_args(self):
         for u, beta in self.invalid_args:
-            with pytest.raises(Exception):
+            with pytest.raises((TypeError, ValueError)):
                 term = mm.ZhangLi(u=u, beta=beta)
 
-    def test_repr_latex_(self):
-        for u, beta in self.valid_args:
-            term = mm.ZhangLi(u=u, beta=beta)
-            assert isinstance(term._repr_latex_(), str)
-
-    def test_repr(self):
-        for u, beta in self.valid_args:
-            term = mm.ZhangLi(u=u, beta=beta)
-            assert isinstance(repr(term), str)
-
-    def test_script(self):
-        for u, beta in self.valid_args:
-            term = mm.ZhangLi(u=u, beta=beta)
-            with pytest.raises(NotImplementedError):
-                script = term._script
-
-    def test_field(self):
-        mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        field = df.Field(mesh, dim=1, value=1)
-        term = mm.ZhangLi(u=field, beta=0.5)
-        assert isinstance(term.u, df.Field)
-
-    def test_kwargs(self):
-        for u, beta in self.valid_args:
-            term = mm.ZhangLi(u=u, beta=beta, e=1, something='a')
-            assert term.e == 1
-            assert term.something == 'a'
+        with pytest.raises(ValueError):
+            term = mm.ZhangLi(wrong=1)

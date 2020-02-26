@@ -25,9 +25,6 @@ def check_term(term):
     assert len(container) == 1
     assert term in container
 
-    # neutral element for addition
-    assert container + getattr(mm, term._container_class)() == container
-
     assert getattr(container, term.name) == term
     assert term.name in dir(container)
 
@@ -53,7 +50,10 @@ def check_container(container):
     assert isinstance(container, mm.util.Container)
     assert isinstance(container._terms, list)
 
-    assert isinstance(container._term_class, mm.util.Term)
+    if isinstance(container, mm.Energy):
+        assert container._term_class.__name__ == 'EnergyTerm'
+    else:
+        assert container._term_class.__name__ == 'DynamicsTerm'
 
     assert isinstance(len(container), int)
     assert len(container) >= 0
@@ -61,11 +61,22 @@ def check_container(container):
     assert isinstance(iter(container), types.GeneratorType)
     assert list(container) == container._terms
 
+    for term in container:
+        assert isinstance(term, mm.util.Term)
+        assert term in container
+        assert isinstance(getattr(container, term.name), mm.util.Term)
+        assert term.name in dir(container)
+
     assert container == container
     assert not container != container
     assert container != '5'
 
-    assert isinstance(dir(term), list)
+    # neutral element for addition
+    assert container + container.__class__() == container
 
-    assert isinstance(iter(container), types.GeneratorType)
-    assert list(container) == container._terms
+    assert isinstance(dir(container), list)
+
+    assert isinstance(repr(container), str)
+
+    assert isinstance(container._repr_latex_(), str)
+    assert re.search(r'^\$.+\$$', container._repr_latex_())

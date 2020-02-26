@@ -53,7 +53,7 @@ class ZhangLi(DynamicsTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ['beta', 'u']
+    _allowed_attributes = ['u', 'beta']
     _reprlatex = (r'$-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
                   r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
                   r'\boldsymbol\nabla)\mathbf{m}\big]$')

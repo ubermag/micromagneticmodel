@@ -5,10 +5,9 @@ import micromagneticmodel.util  # to avoid import order conflicts
 from .energy import Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Energy
 from .dynamics import Precession, Damping, ZhangLi, Dynamics
-#from .evolvers import Evolver
-#from .drivers import Driver
-#from .system import System
-#from .data import Data
+from .evolvers import Evolver
+from .drivers import Driver
+from .system import System
 
 
 def test():

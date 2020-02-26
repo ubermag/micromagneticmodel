@@ -11,8 +11,6 @@ from .energyterm import EnergyTerm
 class DMI(EnergyTerm):
     """Dzyaloshinskii-Moriya energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{dmi}^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times

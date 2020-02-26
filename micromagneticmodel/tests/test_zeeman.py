@@ -1,3 +1,4 @@
+import re
 import pytest
 import numpy as np
 import discretisedfield as df
@@ -8,7 +9,7 @@ from .checks import check_term
 class TestZeeman:
     def setup(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        field = df.Field(mesh, dim=3, value=(0, 0, 1e6))
+        field = df.Field(mesh, dim=3, value=(-1e5, 0, 1e6))
 
         self.valid_args = [(1, 1.4, 1),
                            (0, 0, 1),
@@ -28,9 +29,14 @@ class TestZeeman:
         for H in self.valid_args:
             term = mm.Zeeman(H=H)
             check_term(term)
+            assert hasattr(term, 'H')
             assert term.name == 'zeeman'
+            assert re.search(r'^Zeeman\(H=.+\)$', repr(term))
 
     def test_init_invalid_args(self):
         for H in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Zeeman(H=H)
+
+        with pytest.raises(ValueError):
+            term = mm.Zeeman(wrong=1)

@@ -6,8 +6,6 @@ from .energyterm import EnergyTerm
 class Demag(EnergyTerm):
     """Demagnetisation energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{d} = -\\frac{1}{2}\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot

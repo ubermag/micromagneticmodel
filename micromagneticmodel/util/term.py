@@ -5,17 +5,18 @@ import micromagneticmodel as mm
 class Term(metaclass=abc.ABCMeta):
     """An abstract class for deriving all energy and dynamics terms.
 
-    It can be initialised with keyword arguments defined in
-    ``_allowed_attributes``, which is a list of strings.
-
-    Raises
-    ------
-    ValueError
-
-        If a keyword argument not in ``_allowed_attributes`` is passed.
-
     """
     def __init__(self, **kwargs):
+        """It can be initialised with keyword arguments defined in
+        ``_allowed_attributes``, which is a list of strings.
+
+        Raises
+        ------
+        ValueError
+
+            If a keyword argument not in ``_allowed_attributes`` is passed.
+
+        """
         for key, value in kwargs.items():
             if key in self._allowed_attributes:
                 setattr(self, key, value)
@@ -26,15 +27,16 @@ class Term(metaclass=abc.ABCMeta):
     @property
     @abc.abstractmethod
     def _allowed_attributes(self):
-        """A list of attributes allowed to be set at initialisation.
+        """A list of attributes allowed to be set at initialisation by passing
+        keyword arguments.
 
         """
         pass  # pragma: no cover
 
     @property
     @abc.abstractmethod
-    def _termscontainer_class(self):
-        """A class of an object, which is the result of adding terms.
+    def _container_class(self):
+        """A class of a container, which is the result of adding terms.
 
         """
         pass  # pragma: no cover
@@ -42,8 +44,8 @@ class Term(metaclass=abc.ABCMeta):
     def __eq__(self, other):
         """Relational operator ``==``.
 
-        Two terms are considered to be equal if all attributes in
-        ``_allowed_attributes`` are equal.
+        Two terms are considered to be equal if they are instances of the same
+        class.
 
         Parameters
         ----------
@@ -55,7 +57,8 @@ class Term(metaclass=abc.ABCMeta):
         -------
         bool
 
-            ``True`` if two terms are equal and ``False`` otherwise.
+            ``True`` if two terms are instances of the same class and ``False``
+            otherwise.
 
         Examples
         --------
@@ -65,20 +68,26 @@ class Term(metaclass=abc.ABCMeta):
         ...
         >>> exchange = mm.Exchange(A=1e-12)
         >>> zeeman = mm.Zeeman(H=(0, 0, 1e6))
+        >>> damping = mm.Damping(alpha=0.1)
+        >>> demag = mm.Demag()
+        ...
         >>> exchange == exchange
         True
-        >>> exchange == mm.Exchange(A=5e-11)
-        False
+        >>> exchange == mm.Exchange(A=5e-11)  # only class is checked
+        True
         >>> zeeman != exchange
         True
         >>> zeeman == exchange
         False
+        >>> damping == damping
+        True
+        >>> damping != exchange
+        True
+        >>> demag == exchange
+        False
 
         """
-        if not isinstance(other, self.__class__):
-            return False
-        if all([getattr(self, attr) == getattr(other, attr)]
-               for attr in self._allowed_attributes):
+        if isinstance(other, self.__class__):
             return True
         else:
             return False
@@ -97,7 +106,7 @@ class Term(metaclass=abc.ABCMeta):
 
         Returns
         -------
-        micromagneticmodel.util.TermSum
+        micromagneticmodel.util.Container
 
             Resulting sum.
 
@@ -110,26 +119,23 @@ class Term(metaclass=abc.ABCMeta):
         >>> exchange = mm.Exchange(A=1e-12)
         >>> demag = mm.Demag()
         ...
-        >>> terms_sum = exchange + demag
-        >>> type(terms_sum)
+        >>> container = exchange + demag
+        >>> type(container)
         <class 'micromagneticmodel.energy.energy.Energy'>
 
         2. Adding dynamics terms.
 
-        >>> import micromagneticmodel as mm
-        ...
         >>> precession = mm.Precession(gamma=mm.consts.gamma0)
         >>> damping = mm.Damping(alpha=0.01)
         ...
-        >>> terms_sum = precession + damping
-        >>> type(terms_sum)
+        >>> container = precession + damping
+        >>> type(container)
         <class 'micromagneticmodel.dynamics.dynamics.Dynamics'>
 
         """
-        result = getattr(mm, self._termscontainer_class)()
+        result = getattr(mm, self._container_class)()
         result += self
         result += other
-
         return result
 
     def __repr__(self):
@@ -158,7 +164,10 @@ class Term(metaclass=abc.ABCMeta):
         attributes = []
         for attr in self._allowed_attributes:
             if hasattr(self, attr):
-                attributes.append(f'{attr}={getattr(self, attr)}')
+                if isinstance(attr, str):
+                    attributes.append(f'{attr}=\'{getattr(self, attr)}\'')
+                else:
+                    attributes.append(f'{attr}={getattr(self, attr)}')
         attributes = ', '.join(attributes)
         return f'{self.__class__.__name__}({attributes})'
 
@@ -172,8 +181,8 @@ class Term(metaclass=abc.ABCMeta):
         pass  # pragma: no cover
 
     def _repr_latex_(self):
-        """"LaTeX representation method, rendered inside Jupyter. This method
-        has the priority over ``__repr__`` in Jupyter.
+        """"LaTeX representation method, rendered in Jupyter. This method has
+        the priority over ``__repr__`` in Jupyter.
 
         Returns
         -------
@@ -199,9 +208,9 @@ class Term(metaclass=abc.ABCMeta):
     def name(self):
         """Name.
 
-        Used for accessing individual terms from ``micromagneticmodel.TermSum``
-        objects. The name of the object is the same as the name of the class in
-        lowercase.
+        Used for accessing individual terms from
+        ``micromagneticmodel.Container`` objects. The name of the object is the
+        same as the name of the class in lowercase.
 
         Returns
         -------
@@ -218,7 +227,6 @@ class Term(metaclass=abc.ABCMeta):
         >>> ua = mm.UniaxialAnisotropy(K=5e6, u=(0, 0, 1))
         >>> ua.name
         'uniaxialanisotropy'
-        ...
         >>> damping = mm.Damping(alpha=0.01)
         >>> damping.name
         'damping'

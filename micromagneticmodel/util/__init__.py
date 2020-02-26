@@ -1,2 +1,2 @@
 from .term import Term
-from .termscontainer import TermsContainer
+from .container import Container

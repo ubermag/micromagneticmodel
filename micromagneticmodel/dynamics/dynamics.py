@@ -4,7 +4,7 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-class Dynamics(mm.util.TermsContainer):
+class Dynamics(mm.util.Container):
     """Dynamics terms container class.
 
     Parameters
@@ -26,4 +26,4 @@ class Dynamics(mm.util.TermsContainer):
 
     """
     _lhslatex = r'\frac{\partial \mathbf{m}}{\partial t}='
-    _terms_class = DynamicsTerm
+    _term_class = DynamicsTerm

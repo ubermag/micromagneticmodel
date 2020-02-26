@@ -10,8 +10,6 @@ from .energyterm import EnergyTerm
 class UniaxialAnisotropy(EnergyTerm):
     """Uniaxial anisotropy energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{ua} = -K (\\mathbf{m} \\cdot \\mathbf{u})^{2}

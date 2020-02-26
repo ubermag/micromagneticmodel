@@ -1,16 +1,17 @@
 import abc
 
 
-class TermsContainer(metaclass=abc.ABCMeta):
+class Container(metaclass=abc.ABCMeta):
     def __init__(self, terms=None):
-        """Terms container can be initialised with a list of energy or dynamics
+        """Container can be initialised with a list of either energy or dynamics
         terms.
 
         Parameters
         ----------
-        terms : list
+        terms : list, optional
 
-            A list of energy or dynamics terms.
+            A list of either energy or dynamics terms. Defaults to ``None``. If
+            ``terms`` is not passed, an empty container is initialised.
 
         Examples
         --------
@@ -23,16 +24,28 @@ class TermsContainer(metaclass=abc.ABCMeta):
         >>> len(energy)  # the number of terms
         2
 
+        2. Defining dynamics terms container, by adding terms individually.
+
+        >>> dynamics = mm.Dynamics()
+        >>> len(dynamics)
+        0
+        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> len(dynamics)
+        1
+        >>> dynamics += mm.Damping()
+        >>> len(dynamics)
+        2
+
         """
         self._terms = list()
         if terms is not None:
             for term in terms:
-                self += term  # all necessary checks are done by += operator
+                self += term  # all necessary checks are done by the + operator
 
     @property
     @abc.abstractmethod
-    def _terms_class(self):
-        """The class of terms which can be added to ``TermsContainer``.
+    def _term_class(self):
+        """The class of terms which can be added to ``Container``.
 
         """
         pass  # pragma: no cover
@@ -312,7 +325,7 @@ class TermsContainer(metaclass=abc.ABCMeta):
         for term in self:
             result._terms.append(term)
 
-        if isinstance(other, self._terms_class):
+        if isinstance(other, self._term_class):
             if other in result:
                 msg = (f'Cannot have two {other.__class__} '
                        'terms in the container.')
@@ -382,7 +395,7 @@ class TermsContainer(metaclass=abc.ABCMeta):
         for term in self:
             result._terms.append(term)
 
-        if isinstance(other, self._terms_class):
+        if isinstance(other, self._term_class):
             if other not in result:
                 msg = f'Term {other.__class__} not in {self.__class__}.'
                 raise ValueError(msg)

@@ -1,3 +1,4 @@
+import re
 import types
 import pytest
 import micromagneticmodel as mm
@@ -9,41 +10,62 @@ def check_term(term):
     assert isinstance(term._allowed_attributes, list)
     assert len(term._allowed_attributes) > 0
 
-    assert isinstance(getattr(mm, term._termscontainer_class)(),
-                      mm.util.TermsContainer)
+    if isinstance(term, mm.energy.energyterm.EnergyTerm):
+        assert isinstance(getattr(mm, term._container_class)(), mm.Energy)
+    else:
+        assert isinstance(getattr(mm, term._container_class)(), mm.Dynamics)
 
     assert term == term
-    assert term != '5'
     assert not term != term
+    assert term != '5'
 
-    assert isinstance(dir(term), list)
-
-    termsum = getattr(mm, term._termscontainer_class)()
-    termsum += term
-    assert len(termsum) == 1
-    assert term in termsum
-
-    assert isinstance(iter(termsum), types.GeneratorType)
-    assert list(termsum) == termsum._terms
+    container = getattr(mm, term._container_class)()
+    assert len(container) == 0
+    container += term
+    assert len(container) == 1
+    assert term in container
 
     # neutral element for addition
-    assert termsum + getattr(mm, term._termscontainer_class)() == termsum
+    assert container + getattr(mm, term._container_class)() == container
 
-    assert getattr(termsum, term.name) == term
-    assert term.name in dir(termsum)
+    assert getattr(container, term.name) == term
+    assert term.name in dir(container)
 
-    termsum -= term
-    assert len(termsum) == 0
-    assert term not in termsum
+    container -= term
+    assert len(container) == 0
+    assert term not in container
 
     # Try to add two terms of the same type.
     with pytest.raises(ValueError):
-        termsum = term + term
+        container = term + term
 
     assert isinstance(repr(term), str)
+    assert re.search(r'^.+\(.*\)$', repr(term))
 
     assert isinstance(term._repr_latex_(), str)
-    assert term._repr_latex_().startswith('$')
-    assert term._repr_latex_().endswith('$')
+    assert re.search(r'^\$.+\$$', term._repr_latex_())
 
     assert isinstance(term.name, str)
+    assert re.search(r'\w+', term.name)
+
+
+def check_container(container):
+    assert isinstance(container, mm.util.Container)
+    assert isinstance(container._terms, list)
+
+    assert isinstance(container._term_class, mm.util.Term)
+
+    assert isinstance(len(container), int)
+    assert len(container) >= 0
+
+    assert isinstance(iter(container), types.GeneratorType)
+    assert list(container) == container._terms
+
+    assert container == container
+    assert not container != container
+    assert container != '5'
+
+    assert isinstance(dir(term), list)
+
+    assert isinstance(iter(container), types.GeneratorType)
+    assert list(container) == container._terms

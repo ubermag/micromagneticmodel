@@ -10,8 +10,6 @@ from .energyterm import EnergyTerm
 class Exchange(EnergyTerm):
     """Exchange energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{ex} = A (\\nabla \\mathbf{m})^{2}

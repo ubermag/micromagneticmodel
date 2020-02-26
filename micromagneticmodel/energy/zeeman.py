@@ -9,17 +9,9 @@ from .energyterm import EnergyTerm
 class Zeeman(EnergyTerm):
     """Zeeman energy term.
 
-    Energy density:
-
     .. math::
 
         w_\\text{z} = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}
-
-    Effective field:
-
-    .. math::
-
-        \\mathbf{H}^\\text{z}_\\text{eff} = \\mathbf{H}
 
     Parameters
     ----------

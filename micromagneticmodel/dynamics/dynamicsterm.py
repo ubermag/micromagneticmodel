@@ -1,14 +1,14 @@
 import abc
 import ubermagutil as uu
-import micromagneticmodel as mm
+from ..util import Term
 
 
 @uu.inherit_docs
-class DynamicsTerm(mm.util.Term):
+class DynamicsTerm(Term):
     """A parent class for all dynamics terms.
 
     """
-    _termscontainer_class = 'Dynamics'
+    _container_class = 'Dynamics'
 
     @abc.abstractmethod
     def dmdt(self, m, Heff):

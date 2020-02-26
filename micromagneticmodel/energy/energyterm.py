@@ -1,14 +1,14 @@
 import abc
 import ubermagutil as uu
-import micromagneticmodel as mm
+from ..util import Term
 
 
 @uu.inherit_docs
-class EnergyTerm(mm.util.Term):
+class EnergyTerm(Term):
     """A parent class for all energy terms.
 
     """
-    _termscontainer_class = 'Energy'
+    _container_class = 'Energy'
 
     def energy(self, m):
         raise NotImplementedError  # can be implemented as Heff*m.integrate

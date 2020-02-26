@@ -2,7 +2,7 @@ import pytest
 import micromagneticmodel as mm
 
 
-class TestHamiltonian:
+class TestEnergy:
     def setup(self):
         A = 1e-12
         self.exchange = mm.Exchange(A=A)

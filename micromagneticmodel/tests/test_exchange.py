@@ -1,3 +1,4 @@
+import re
 import pytest
 import discretisedfield as df
 import micromagneticmodel as mm
@@ -17,9 +18,14 @@ class TestExchange:
         for A in self.valid_args:
             term = mm.Exchange(A=A)
             check_term(term)
+            assert hasattr(term, 'A')
             assert term.name == 'exchange'
+            assert re.search(r'^Exchange\(A=.+\)$', repr(term))
 
     def test_init_invalid_args(self):
         for A in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Exchange(A=A)
+
+        with pytest.raises(ValueError):
+            term = mm.Exchange(wrong=1)

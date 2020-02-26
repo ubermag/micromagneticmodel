@@ -4,7 +4,7 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-class Energy(mm.util.TermsContainer):
+class Energy(mm.util.Container):
     """Energy terms container class.
 
     Parameters
@@ -26,4 +26,4 @@ class Energy(mm.util.TermsContainer):
 
     """
     _lhslatex = 'w ='
-    _terms_class = EnergyTerm
+    _term_class = EnergyTerm

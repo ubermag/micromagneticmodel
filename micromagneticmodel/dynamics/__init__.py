@@ -1,3 +1,4 @@
+from .dynamicsterm import DynamicsTerm
 from .precession import Precession
 from .damping import Damping
 from .zhangli import ZhangLi

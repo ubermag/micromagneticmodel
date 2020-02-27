@@ -19,10 +19,10 @@ class Exchange(EnergyTerm):
     A : numbers.Real, dict, discretisedfield.Field
 
         If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter, either
-        a dictionary, e.g. ``A={'region1': 1e-12, 'region2': 5e-12}`` (if the
-        parameter is defined "per region") or ``discretisedfield.Field`` is
-        passed.
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``A={'region1': 1e-12, 'region2': 5e-12}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
     Examples
     --------

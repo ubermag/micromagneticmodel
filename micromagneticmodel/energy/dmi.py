@@ -18,8 +18,8 @@ class DMI(EnergyTerm):
 
     .. math::
 
-        w_\\text{dmi}^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} - m_{z}
-        \\nabla \\cdot \\mathbf{m} )
+        w_\\text{dmi}^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} -
+        m_{z} \\nabla \\cdot \\mathbf{m} )
 
     .. math::
 
@@ -32,10 +32,10 @@ class DMI(EnergyTerm):
     D : numbers.Real, dict, discretisedfield.Field
 
         If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter, either
-        a dictionary, e.g. ``D={'region1': 1e-12, 'region2': 5e-12}`` (if the
-        parameter is defined "per region") or ``discretisedfield.Field`` is
-        passed.
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``D={'region1': 1e-12, 'region2': 5e-12}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
     crystalclass : str
 

@@ -6,7 +6,8 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 @ts.typesystem(K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               u=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field))
+               u=ts.Parameter(descriptor=ts.Vector(size=3),
+                              otherwise=df.Field))
 class UniaxialAnisotropy(EnergyTerm):
     """Uniaxial anisotropy energy term.
 
@@ -19,9 +20,9 @@ class UniaxialAnisotropy(EnergyTerm):
     K, : numbers.Real, dict, discretisedfield.Field
 
         If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter, either
-        a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if the
-        parameter is defined "per region") or ``discretisedfield.Field`` is
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if
+        the parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
     u : (3,) array_like, dict, discretisedfield.Field
@@ -29,9 +30,9 @@ class UniaxialAnisotropy(EnergyTerm):
         If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
         passed, which consists of ``numbers.Real``, a spatially constant
         parameter is defined. For a spatially varying parameter, either a
-        dictionary, e.g. ``u={'region1': (0, 0, 1), 'region2': (1, 0, 0)}``
-        (if the parameter is defined "per region") or ``discretisedfield.Field``
-        is passed.
+        dictionary, e.g. ``u={'region1': (0, 0, 1), 'region2': (1, 0, 0)}`` (if
+        the parameter is defined "per region") or ``discretisedfield.Field`` is
+        passed.
 
     Examples
     --------

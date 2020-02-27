@@ -3,8 +3,8 @@ import abc
 
 class Container(metaclass=abc.ABCMeta):
     def __init__(self, terms=None):
-        """Container can be initialised with a list of either energy or dynamics
-        terms.
+        """Container can be initialised with a list of either energy or
+        dynamics terms.
 
         Parameters
         ----------
@@ -251,8 +251,8 @@ class Container(metaclass=abc.ABCMeta):
         -------
         bool
 
-            ``True`` if two container have the same number of terms and the same
-            types of terms in them and ``False`` otherwise.
+            ``True`` if two container have the same number of terms and the
+            same types of terms in them and ``False`` otherwise.
 
         Examples
         --------
@@ -279,17 +279,17 @@ class Container(metaclass=abc.ABCMeta):
         else:
             return False
 
-
     def __add__(self, other):
         """Binary ``+`` operator.
 
         It can be applied only between ``micromagneticmodel.util.Term`` or
-        ``micromagneticmodel.util.TermsContainer`` objects. If the term with the
-        same name is already present in the container ``ValueError`` is raised.
+        ``micromagneticmodel.util.TermsContainer`` objects. If the term with
+        the same name is already present in the container ``ValueError`` is
+        raised.
 
         Parameters
         ----------
-        other : micromagneticmodel.util.Term, micromagneticmodel.util.TermsContainer
+        other : micromagneticmodel.util.Term, TermsContainer
 
             Second operand.
 
@@ -347,8 +347,8 @@ class Container(metaclass=abc.ABCMeta):
 
         It can be applied only between
         ``micromagneticmodel.util.TermsContainer`` and
-        ``micromagneticmodel.util.Term``. It removes the term with the same name
-        from the container.
+        ``micromagneticmodel.util.Term``. It removes the term with the same
+        name from the container.
 
         Parameters
         ----------
@@ -436,7 +436,10 @@ class Container(metaclass=abc.ABCMeta):
         'Exchange(A=1e-12) + Zeeman(H=(100, 0, 0))'
 
         """
-        return ' + '.join([repr(term) for term in self])
+        if len(self) == 0:
+            return f'{self.__class__.__name__}()'
+        else:
+            return ' + '.join([repr(term) for term in self])
 
     def _repr_latex_(self):
         """"LaTeX representation method, rendered inside Jupyter. This method

@@ -1,6 +1,8 @@
 import re
 import types
 import pytest
+import numbers
+import discretisedfield as df
 import micromagneticmodel as mm
 
 
@@ -20,8 +22,10 @@ def check_term(term):
     assert term != '5'
 
     container = getattr(mm, term._container_class)()
+    check_container(container)
     assert len(container) == 0
     container += term
+    check_container(container)
     assert len(container) == 1
     assert term in container
 
@@ -29,6 +33,7 @@ def check_term(term):
     assert term.name in dir(container)
 
     container -= term
+    check_container(container)
     assert len(container) == 0
     assert term not in container
 
@@ -63,7 +68,6 @@ def check_container(container):
     assert len(list(container)) == len(container)
 
     for term in container:
-        assert isinstance(term, mm.util.Term)
         assert term in container
         assert isinstance(getattr(container, term.name), mm.util.Term)
         assert getattr(container, term.name) == term
@@ -82,3 +86,24 @@ def check_container(container):
 
     assert isinstance(container._repr_latex_(), str)
     assert re.search(r'^\$.+\$$', container._repr_latex_())
+
+
+def check_system(system):
+    assert isinstance(system, mm.System)
+
+    assert isinstance(system.energy, mm.Energy)
+    check_container(system.energy)
+
+    assert isinstance(system.dynamics, mm.Dynamics)
+    check_container(system.dynamics)
+
+    assert isinstance(system.T, numbers.Real)
+    assert system.T >= 0
+
+    assert isinstance(system.name, str)
+
+    if hasattr(system, 'm'):
+        assert isinstance(system.m, df.Field) or system.m is None
+
+    assert isinstance(repr(system), str)
+    assert re.search(r'^System\(name=.+\)$', repr(system))

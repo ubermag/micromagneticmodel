@@ -1,10 +1,10 @@
 import pytest
 import pkg_resources
+import micromagneticmodel.util
 import micromagneticmodel.consts
-import micromagneticmodel.util  # to avoid import order conflicts
-from .energy import Exchange, Zeeman, UniaxialAnisotropy, \
+from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Energy
-from .dynamics import Precession, Damping, ZhangLi, Dynamics
+from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, Dynamics
 from .evolvers import Evolver
 from .drivers import Driver
 from .system import System

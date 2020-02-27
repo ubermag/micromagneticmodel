@@ -20,10 +20,10 @@ class Damping(DynamicsTerm):
     alpha : numbers.Real, dict, discretisedfield.Field
 
         If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter, either
-        a dictionary, e.g. ``alpha={'region1': 1e5, 'region2': 5e5}`` (if the
-        parameter is defined "per region") or ``discretisedfield.Field`` is
-        passed.
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``alpha={'region1': 1e5, 'region2': 5e5}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
     Examples
     --------

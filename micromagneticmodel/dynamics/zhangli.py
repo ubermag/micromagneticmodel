@@ -54,9 +54,9 @@ class ZhangLi(DynamicsTerm):
 
     """
     _allowed_attributes = ['u', 'beta']
-    _reprlatex = (r'$-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
+    _reprlatex = (r'-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
                   r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
-                  r'\boldsymbol\nabla)\mathbf{m}\big]$')
+                  r'\boldsymbol\nabla)\mathbf{m}\big]')
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

@@ -1,3 +1,4 @@
+from .energyterm import EnergyTerm
 from .exchange import Exchange
 from .zeeman import Zeeman
 from .demag import Demag

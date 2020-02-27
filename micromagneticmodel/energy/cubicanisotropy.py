@@ -27,9 +27,9 @@ class CubicAnisotropy(EnergyTerm):
     K, : numbers.Real, dict, discretisedfield.Field
 
         If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter, either
-        a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if the
-        parameter is defined "per region") or ``discretisedfield.Field`` is
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if
+        the parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
     u1/u2 : (3,) array_like, dict, discretisedfield.Field
@@ -37,9 +37,9 @@ class CubicAnisotropy(EnergyTerm):
         If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
         passed, which consists of ``numbers.Real``, a spatially constant
         parameter is defined. For a spatially varying parameter, either a
-        dictionary, e.g. ``u1={'region1': (0, 0, 1), 'region2': (1, 0, 0)}`` (if
-        the parameter is defined "per region") or ``discretisedfield.Field`` is
-        passed.
+        dictionary, e.g. ``u1={'region1': (0, 0, 1), 'region2': (1, 0, 0)}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
     Examples
     --------

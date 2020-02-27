@@ -127,7 +127,7 @@ class TestEnergy:
         check_container(container)
         assert 'D' in container._repr_latex_()
         assert len(container) == 2
-        assert mm.Zeeman(H=(0, 0, 1e6)) in container  # term of the same type present
+        assert mm.Zeeman(H=(0, 0, 1e6)) in container  # same type term present?
         assert 'dmi' in dir(container)
         assert len(list(container)) == 2
 

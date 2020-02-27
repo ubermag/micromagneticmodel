@@ -5,7 +5,8 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field))
+@ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3),
+                              otherwise=df.Field))
 class Zeeman(EnergyTerm):
     """Zeeman energy term.
 
@@ -20,9 +21,9 @@ class Zeeman(EnergyTerm):
         If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
         passed, which consists of ``numbers.Real``, a spatially constant
         parameter is defined. For a spatially varying parameter, either a
-        dictionary, e.g. ``H={'region1': (0, 0, 3e6), 'region2': (0, 0, -3e6)}``
-        (if the parameter is defined "per region") or ``discretisedfield.Field``
-        is passed.
+        dictionary, e.g. ``H={'region1': (0, 0, 3e6), 'region2': (0, 0,
+        -3e6)}`` (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
     Examples
     --------

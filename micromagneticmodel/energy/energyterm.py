@@ -1,10 +1,10 @@
 import abc
 import ubermagutil as uu
-from ..util import Term
+import micromagneticmodel as mm
 
 
 @uu.inherit_docs
-class EnergyTerm(Term):
+class EnergyTerm(mm.util.Term):
     """A parent class for all energy terms.
 
     """

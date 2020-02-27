@@ -25,28 +25,71 @@ class TestEnergy:
                               [self.exchange, self.zeeman]]
 
     def test_init(self):
+        # Init with terms list.
         container = mm.Energy(terms=self.terms)
         check_container(container)
-        assert len(container) == 0
+        assert len(container) == 6
 
+        # Empty terms list.
         container = mm.Energy()
         check_container(container)
         assert len(container) == 0
 
+        # Add terms one by one.
         for i, term in enumerate(self.terms):
             container += term
             check_container(container)
             assert len(container) == i + 1
             assert isinstance(container, mm.Energy)
 
-        assert len(container) == 6
-
-    def test_add_sum_of_terms(self):
+        # Create container as a sum of terms.
         container = (self.exchange + self.zeeman + self.uniaxialanisotropy +
                      self.demag + self.dmi + self.cubicanisotropy)
-
         check_container(container)
         assert len(container) == 6
+
+    def test_init_invalid_args(self):
+        container = mm.Energy()
+        for term in self.invalid_terms:
+            with pytest.raises(TypeError):
+                container += term
+
+        check_container(container)
+        assert len(container) == 0
+
+    def test_add_sub(self):
+        container1 = mm.Energy(terms=[self.exchange, self.dmi])
+        container2 = mm.Energy(terms=[self.zeeman, self.demag])
+        container3 = mm.Energy(terms=[self.demag])
+
+        res = container1 + container2
+        check_container(res)
+        assert len(res) == 4
+        assert container1 + container2 == container2 + container1
+
+        res = container2 - container3
+        check_container(res)
+        assert len(res) == 1
+        assert self.demag not in res
+
+        assert res + self.demag == self.demag + res
+
+        with pytest.raises(TypeError):
+            res = container1 + 5
+
+        with pytest.raises(TypeError):
+            res = container1 - 5
+
+    def test_repr(self):
+        container = mm.Energy(terms=self.terms)
+        check_container(container)
+
+        assert isinstance(repr(container), str)
+        assert 'Exchange' in repr(container)
+
+        container -= container.exchange
+
+        assert 'Exchange' not in repr(container)
 
     def test_repr_latex(self):
         container = mm.Energy()
@@ -54,52 +97,49 @@ class TestEnergy:
         latexstr = container._repr_latex_()
         assert latexstr == '$w=0$'
 
-    def test_add_exception(self):
-        container = mm.Energy()
-        for term in self.invalid_terms:
-            with pytest.raises(TypeError):
-                container += term
-    """
-    def test_repr(self):
-        container = self.exchange + self.zeeman + \
-                      self.uniaxialanisotropy + self.demag + \
-                      self.dmi + self.cubicanisotropy
-
-        assert isinstance(repr(container), str)
-
     def test_getattr(self):
-        container = mm.container()
-        for term in self.terms:
-            container += term
+        container = mm.Energy(terms=self.terms)
+        check_container(container)
 
         assert isinstance(container.exchange, mm.Exchange)
-        assert container.exchange.A == 1e-12
-
+        assert hasattr(container.exchange, 'A')
         assert isinstance(container.zeeman, mm.Zeeman)
-        assert container.zeeman.H == (0, 0, 1.2e6)
-
-        assert isinstance(container.uniaxialanisotropy,
-                          mm.UniaxialAnisotropy)
-        assert container.uniaxialanisotropy.K1 == 1e4
-        assert container.uniaxialanisotropy.u == (0, 1, 0)
-
+        assert hasattr(container.zeeman, 'H')
+        assert isinstance(container.uniaxialanisotropy, mm.UniaxialAnisotropy)
+        assert hasattr(container.uniaxialanisotropy, 'K')
+        assert hasattr(container.uniaxialanisotropy, 'u')
         assert isinstance(container.demag, mm.Demag)
+        assert isinstance(container.cubicanisotropy, mm.CubicAnisotropy)
+        assert hasattr(container.cubicanisotropy, 'K')
+        assert hasattr(container.cubicanisotropy, 'u1')
+        assert hasattr(container.cubicanisotropy, 'u2')
+        assert isinstance(container.dmi, mm.DMI)
+        assert hasattr(container.dmi, 'D')
+        assert hasattr(container.dmi, 'crystalclass')
 
-        assert isinstance(container.cubicanisotropy,
-                          mm.CubicAnisotropy)
-        assert container.cubicanisotropy.K1 == {'r1': 1e6,
-                                                  'r2': 5e6}
-        assert container.cubicanisotropy.u1 == (0, 0, 1)
-        assert container.cubicanisotropy.u2 == (0, 1, 0)
-
-    def test_getattr_error(self):
-        container = self.exchange + self.zeeman
-
+        # Try to get non-existing attribute.
+        container -= self.exchange
+        check_container(container)
         with pytest.raises(AttributeError):
-            demag = container.demag
+            exchange = container.exchange
 
-    def test_script(self):
-        container = mm.container()
-        with pytest.raises(NotImplementedError):
-            script = container._script
-    """
+    def test_freestyle(self):
+        container = self.dmi + self.zeeman  # single term is not allowed
+        check_container(container)
+        assert 'D' in container._repr_latex_()
+        assert len(container) == 2
+        assert mm.Zeeman(H=(0, 0, 1e6)) in container  # term of the same type present
+        assert 'dmi' in dir(container)
+        assert len(list(container)) == 2
+
+        container -= mm.DMI(D=1e-3, crystalclass='T')
+        check_container(container)
+        assert len(container) == 1
+        assert mm.DMI(D=1e-2, crystalclass='Cnv') not in container
+        assert self.exchange not in container
+        assert self.zeeman in container
+        assert container.zeeman == self.zeeman
+
+        container = self.demag + container
+        check_container(container)
+        assert len(container) == 2

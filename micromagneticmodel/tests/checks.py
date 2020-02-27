@@ -60,11 +60,13 @@ def check_container(container):
 
     assert isinstance(iter(container), types.GeneratorType)
     assert list(container) == container._terms
+    assert len(list(container)) == len(container)
 
     for term in container:
         assert isinstance(term, mm.util.Term)
         assert term in container
         assert isinstance(getattr(container, term.name), mm.util.Term)
+        assert getattr(container, term.name) == term
         assert term.name in dir(container)
 
     assert container == container

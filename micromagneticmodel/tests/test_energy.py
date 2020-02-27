@@ -21,8 +21,7 @@ class TestEnergy:
                       self.dmi,
                       self.cubicanisotropy]
 
-        self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12],
-                              [self.exchange, self.zeeman]]
+        self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7e-12], [self.exchange, 2]]
 
     def test_init(self):
         # Init with terms list.

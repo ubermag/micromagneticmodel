@@ -13,5 +13,5 @@ class TestDemag:
         assert re.search(r'^Demag\(.*\)$', repr(term))
 
     def test_init_invalid_args(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Exchange(wrong=1)

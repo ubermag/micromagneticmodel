@@ -39,5 +39,5 @@ class TestSlonczewski:
                 term = mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
                                       eps_prime=eps_prime)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Slonczewski(wrong=1)

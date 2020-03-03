@@ -48,5 +48,5 @@ class TestCubicAnisotropy:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.CubicAnisotropy(K=K, u1=u1, u2=u2)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.CubicAnisotropy(wrong=1)

@@ -22,7 +22,7 @@ class Term(metaclass=abc.ABCMeta):
                 setattr(self, key, value)
             else:
                 msg = f'Invalid attribute {key} for {self.__class__}.'
-                raise ValueError(msg)
+                raise AttributeError(msg)
 
     @property
     @abc.abstractmethod

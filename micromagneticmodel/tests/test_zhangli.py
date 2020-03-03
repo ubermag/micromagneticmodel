@@ -32,5 +32,5 @@ class TestZhangLi:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.ZhangLi(u=u, beta=beta)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.ZhangLi(wrong=1)

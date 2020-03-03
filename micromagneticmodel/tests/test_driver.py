@@ -3,7 +3,10 @@ import micromagneticmodel as mm
 
 
 class MyDriver(mm.Driver):
-    _allowed_kwargs = ['arg1', 'arg2']
+    _allowed_attributes = ['arg1', 'arg2']
+
+    def drive(self, system):
+        return system
 
 
 def test_init():
@@ -15,13 +18,6 @@ def test_init():
         driver = MyDriver(arg1=1, arg2='abc', arg3=3)
 
 
-def test_script():
-    driver = mm.Driver()
-    with pytest.raises(NotImplementedError):
-        script = driver._script
-
-
 def test_drive():
-    driver = mm.Driver()
-    with pytest.raises(NotImplementedError):
-        script = driver.drive()
+    driver = MyDriver()
+    assert driver.drive(system=5) == 5

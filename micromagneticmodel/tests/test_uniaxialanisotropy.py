@@ -42,5 +42,5 @@ class TestUniaxialAnisotropy:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.UniaxialAnisotropy(K=K, u=u)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.UniaxialAnisotropy(wrong=1)

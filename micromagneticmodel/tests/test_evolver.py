@@ -3,7 +3,7 @@ import micromagneticmodel as mm
 
 
 class MyEvolver(mm.Evolver):
-    _allowed_kwargs = ['arg1', 'arg2']
+    _allowed_attributes = ['arg1', 'arg2']
 
 
 def test_init():
@@ -12,10 +12,4 @@ def test_init():
     assert evolver.arg2 == 'abc'
 
     with pytest.raises(AttributeError):
-        evolver = MyEvolver(arg1=1, arg2='abc', arg3=3)
-
-
-def test_script():
-    evolver = MyEvolver(arg1=1, arg2='abc')
-    with pytest.raises(NotImplementedError):
-        script = evolver._script
+        evolver = MyEvolver(arg1=1, arg2='abc', arg3=3)  # arg3 is not allowed

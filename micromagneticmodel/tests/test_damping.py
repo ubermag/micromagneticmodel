@@ -27,5 +27,5 @@ class TestDamping:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Damping(alpha=alpha)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Damping(wrong=1)

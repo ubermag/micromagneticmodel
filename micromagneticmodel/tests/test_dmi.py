@@ -32,5 +32,5 @@ class TestDMI:
                 with pytest.raises((TypeError, ValueError)):
                     term = mm.DMI(D=D, crystalclass=crystalclass)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.DMI(wrong=1)

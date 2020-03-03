@@ -38,5 +38,5 @@ class TestZeeman:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Zeeman(H=H)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Zeeman(wrong=1)

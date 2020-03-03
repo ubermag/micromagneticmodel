@@ -27,5 +27,5 @@ class TestExchange:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Exchange(A=A)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Exchange(wrong=1)

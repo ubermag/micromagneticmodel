@@ -27,5 +27,5 @@ class TestPrecession:
             with pytest.raises((TypeError, ValueError)):
                 term = mm.Precession(gamma=gamma)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             term = mm.Precession(wrong=1)

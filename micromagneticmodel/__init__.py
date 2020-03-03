@@ -4,7 +4,8 @@ import micromagneticmodel.util
 import micromagneticmodel.consts
 from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Energy
-from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, Dynamics
+from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \
+    Slonczewski, Dynamics
 from .evolvers import Evolver
 from .drivers import Driver
 from .system import System

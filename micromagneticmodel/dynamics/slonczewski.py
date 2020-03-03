@@ -21,7 +21,7 @@ class Slonczewski(DynamicsTerm):
 
         \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} =
         \\gamma\\beta\\epsilon(\\mathbf{m} \\times \\mathbf{m}_\\text{p}
-        \\times \\mathbf{m}) - \\gamma\\beta\\epsilon (\\mathbf{m} \\times
+        \\times \\mathbf{m}) - \\gamma\\beta\\epsilon' (\\mathbf{m} \\times
         \\mathbf{m}_\\text{p})
 
     .. math::

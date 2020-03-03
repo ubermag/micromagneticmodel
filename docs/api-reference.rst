@@ -19,6 +19,7 @@ API Reference
    precession
    damping
    zhangli
+   slonczewski
    dynamics
    system
    evolver

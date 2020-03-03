@@ -18,4 +18,4 @@ class EnergyTerm(mm.util.Term):
 
     @abc.abstractmethod
     def effective_field(self, m):
-        pass
+        pass  # pragma: no cover

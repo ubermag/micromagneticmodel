@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'micromagneticmodel'
-copyright = '2019, Marijan Beg and Hans Fangohr'
+copyright = '2020, Marijan Beg and Hans Fangohr'
 author = 'Marijan Beg and Hans Fangohr'
 
 

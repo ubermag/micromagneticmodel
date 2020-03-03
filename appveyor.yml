@@ -17,7 +17,7 @@ install:
   - python -m pip install --upgrade pip nbval pycodestyle .
 
 test_script:
-  - python -c "import micromagneticmodel as uu; import sys; sys.exit(uu.test())"
+  - python -c "import micromagneticmodel as mm; import sys; sys.exit(mm.test())"
   - python -m pytest -v --doctest-modules --ignore=micromagneticmodel\tests micromagneticmodel
   - python -m pytest -v --nbval docs\ipynb\
   - python -m pycodestyle --filename=*.py .

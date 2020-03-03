@@ -12,4 +12,4 @@ class DynamicsTerm(mm.util.Term):
 
     @abc.abstractmethod
     def dmdt(self, m, Heff):
-        raise NotImplementedError
+        pass  # pragma: no cover

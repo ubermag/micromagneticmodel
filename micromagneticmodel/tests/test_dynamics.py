@@ -52,6 +52,8 @@ class TestDynamics:
         container2 = mm.Dynamics(terms=[self.damping])
         container3 = mm.Dynamics(terms=[self.precession, self.damping])
 
+        assert container1 != container2
+
         res = container1 + container2
         check_container(res)
         assert len(res) == 3
@@ -61,6 +63,8 @@ class TestDynamics:
         check_container(res)
         assert len(res) == 1
         assert self.damping not in res
+        with pytest.raises(ValueError):
+            res -= self.damping
 
         assert res + self.damping == self.damping + res
 

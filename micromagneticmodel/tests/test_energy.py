@@ -61,6 +61,8 @@ class TestEnergy:
         container2 = mm.Energy(terms=[self.zeeman, self.demag])
         container3 = mm.Energy(terms=[self.demag])
 
+        assert container1 != container2
+
         res = container1 + container2
         check_container(res)
         assert len(res) == 4
@@ -70,6 +72,8 @@ class TestEnergy:
         check_container(res)
         assert len(res) == 1
         assert self.demag not in res
+        with pytest.raises(ValueError):
+            res -= self.demag
 
         assert res + self.demag == self.demag + res
 

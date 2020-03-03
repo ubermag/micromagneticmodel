@@ -6,7 +6,7 @@ API Reference
    :caption: Contents:
 
    term
-   termscontainer
+   container
    energyterm
    dynamicsterm
    exchange
@@ -15,10 +15,10 @@ API Reference
    demag
    uniaxialanisotropy
    cubicanisotropy
-   hamiltonian
+   energy
    precession
    damping
-   stt
+   zhangli
    dynamics
    system
    evolver

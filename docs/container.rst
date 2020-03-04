@@ -1,6 +1,6 @@
-``micromagneticmodel.util.Container``
-=====================================
+``micromagneticmodel.abstract.Container``
+=========================================
 
-.. autoclass:: micromagneticmodel.util.Container
+.. autoclass:: micromagneticmodel.abstract.Container
    :members:
    :special-members:

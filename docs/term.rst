@@ -1,6 +1,6 @@
-``micromagneticmodel.util.Term``
-================================
+``micromagneticmodel.abstract.Term``
+====================================
 
-.. autoclass:: micromagneticmodel.util.Term
+.. autoclass:: micromagneticmodel.abstract.Term
    :members:
    :special-members:

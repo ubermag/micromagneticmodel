@@ -5,6 +5,7 @@ API Reference
    :maxdepth: 1
    :caption: Contents:
 
+   abstract
    term
    container
    energyterm

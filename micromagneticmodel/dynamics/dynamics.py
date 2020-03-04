@@ -4,7 +4,7 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-class Dynamics(mm.util.Container):
+class Dynamics(mm.abstract.Container):
     """Dynamics terms container class.
 
     Parameters

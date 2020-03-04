@@ -4,7 +4,7 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-class Energy(mm.util.Container):
+class Energy(mm.abstract.Container):
     """Energy terms container class.
 
     Parameters

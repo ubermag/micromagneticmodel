@@ -84,7 +84,7 @@ class Container(metaclass=abc.ABCMeta):
 
         Yields
         ------
-        micromagneticmodel.util.Term
+        micromagneticmodel.abstract.Term
 
             Term in the container.
 
@@ -111,7 +111,7 @@ class Container(metaclass=abc.ABCMeta):
 
         Parameters
         ----------
-        item : micromagneticmodel.util.Term
+        item : micromagneticmodel.abstract.Term
 
             Energy or dynamics term.
 
@@ -282,20 +282,20 @@ class Container(metaclass=abc.ABCMeta):
     def __add__(self, other):
         """Binary ``+`` operator.
 
-        It can be applied only between ``micromagneticmodel.util.Term`` or
-        ``micromagneticmodel.util.TermsContainer`` objects. If the term with
-        the same name is already present in the container ``ValueError`` is
-        raised.
+        It can be applied only between ``micromagneticmodel.abstract.Term`` or
+        ``micromagneticmodel.abstract.TermsContainer`` objects. If the term
+        with the same name is already present in the container ``ValueError``
+        is raised.
 
         Parameters
         ----------
-        other : micromagneticmodel.util.Term, TermsContainer
+        other : micromagneticmodel.abstract.Term, TermsContainer
 
             Second operand.
 
         Returns
         -------
-        micromagneticmodel.util.TermContainer
+        micromagneticmodel.abstract.TermContainer
 
             Resulting container.
 
@@ -346,19 +346,19 @@ class Container(metaclass=abc.ABCMeta):
         """Binary ``-`` operator.
 
         It can be applied only between
-        ``micromagneticmodel.util.TermsContainer`` and
-        ``micromagneticmodel.util.Term``. It removes the term with the same
+        ``micromagneticmodel.abstract.TermsContainer`` and
+        ``micromagneticmodel.abstract.Term``. It removes the term with the same
         name from the container.
 
         Parameters
         ----------
-        other : micromagneticmodel.util.Term
+        other : micromagneticmodel.abstract.Term
 
             Second operand.
 
         Returns
         -------
-        micromagneticmodel.util.TermContainer
+        micromagneticmodel.abstract.TermContainer
 
             Resulting container.
 

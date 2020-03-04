@@ -4,7 +4,7 @@ import micromagneticmodel as mm
 
 
 @uu.inherit_docs
-class DynamicsTerm(mm.util.Term):
+class DynamicsTerm(mm.abstract.Term):
     """A parent class for all dynamics terms.
 
     """

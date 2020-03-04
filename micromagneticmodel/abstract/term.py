@@ -95,18 +95,18 @@ class Term(metaclass=abc.ABCMeta):
     def __add__(self, other):
         """Binary ``+`` operator.
 
-        It can be applied only between two ``micromagneticmodel.util.Term``
+        It can be applied only between two ``micromagneticmodel.abstract.Term``
         objects.
 
         Parameters
         ----------
-        other : micromagneticmodel.util.Term
+        other : micromagneticmodel.abstract.Term
 
             Second operand.
 
         Returns
         -------
-        micromagneticmodel.util.Container
+        micromagneticmodel.abstract.Container
 
             Resulting sum.
 

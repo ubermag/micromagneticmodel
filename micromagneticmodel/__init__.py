@@ -1,6 +1,6 @@
 import pytest
 import pkg_resources
-import micromagneticmodel.util
+import micromagneticmodel.abstract
 import micromagneticmodel.consts
 from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Energy

@@ -7,7 +7,7 @@ import micromagneticmodel as mm
 
 
 def check_term(term):
-    assert isinstance(term, mm.util.Term)
+    assert isinstance(term, mm.abstract.Term)
 
     assert isinstance(term._allowed_attributes, list)
     assert len(term._allowed_attributes) > 0
@@ -60,7 +60,7 @@ def check_term(term):
 
 
 def check_container(container):
-    assert isinstance(container, mm.util.Container)
+    assert isinstance(container, mm.abstract.Container)
     assert isinstance(container._terms, list)
 
     if isinstance(container, mm.Energy):
@@ -77,7 +77,7 @@ def check_container(container):
 
     for term in container:
         assert term in container
-        assert isinstance(getattr(container, term.name), mm.util.Term)
+        assert isinstance(getattr(container, term.name), mm.abstract.Term)
         assert getattr(container, term.name) == term
         assert term.name in dir(container)
 

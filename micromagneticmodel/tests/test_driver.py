@@ -5,19 +5,19 @@ import micromagneticmodel as mm
 class MyDriver(mm.Driver):
     _allowed_attributes = ['arg1', 'arg2']
 
-    def drive(self, system):
+    def drive(self, system):  # A simple drive method
         return system
 
 
-def test_init():
-    driver = MyDriver(arg1=1, arg2='abc')
-    assert driver.arg1 == 1
-    assert driver.arg2 == 'abc'
+class TestDriver:
+    def test_init(self):
+        driver = MyDriver(arg1=1, arg2='abc')
+        assert driver.arg1 == 1
+        assert driver.arg2 == 'abc'
 
-    with pytest.raises(AttributeError):
-        driver = MyDriver(arg1=1, arg2='abc', arg3=3)
+        with pytest.raises(AttributeError):
+            driver = MyDriver(arg1=1, arg2='abc', arg3=3)  # arg3 not allowed
 
-
-def test_drive():
-    driver = MyDriver()
-    assert driver.drive(system=5) == 5
+    def test_drive(self):
+        driver = MyDriver()
+        assert driver.drive(system=5) == 5

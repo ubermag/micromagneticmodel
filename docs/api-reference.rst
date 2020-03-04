@@ -16,6 +16,7 @@ API Reference
    demag
    uniaxialanisotropy
    cubicanisotropy
+   magnetoelastic
    energy
    precession
    damping

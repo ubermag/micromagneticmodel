@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.Damping
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

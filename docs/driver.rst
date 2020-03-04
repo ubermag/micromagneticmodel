@@ -2,6 +2,6 @@
 =============================
 
 .. autoclass:: micromagneticmodel.Driver
-   :members:
-   :special-members:
-   :private-members:
+  :members:
+  :special-members:
+  :inherited-members:

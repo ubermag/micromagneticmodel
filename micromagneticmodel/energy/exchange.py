@@ -12,9 +12,8 @@ class Exchange(EnergyTerm):
 
     .. math::
 
-        w_\\text{ex} = A \\left[ (\\nabla \\mathbf{m}_\\text{x})^{2} + (\\nabla
-        \\mathbf{m}_\\text{y})^{2} + (\\nabla \\mathbf{m}_\\text{z})^{2}
-        \\right]
+        w_\\text{ex} = A \\left[ (\\nabla \\mathbf{m}_{x})^{2} + (\\nabla
+        \\mathbf{m}_{y})^{2} + (\\nabla \\mathbf{m}_{z})^{2} \\right]
 
     Parameters
     ----------

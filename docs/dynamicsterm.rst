@@ -2,4 +2,6 @@
 ===================================
 
 .. autoclass:: micromagneticmodel.DynamicsTerm
-   :members:
+  :members:
+  :special-members:
+  :inherited-members:

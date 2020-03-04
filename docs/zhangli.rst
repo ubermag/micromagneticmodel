@@ -2,6 +2,6 @@
 ==============================
 
 .. autoclass:: micromagneticmodel.ZhangLi
-   :members:
-   :special-members:
-   :private-members:
+  :members:
+  :special-members:
+  :inherited-members:

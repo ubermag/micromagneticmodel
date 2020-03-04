@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.Dynamics
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

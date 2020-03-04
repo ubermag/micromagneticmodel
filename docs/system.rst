@@ -4,4 +4,3 @@
 .. autoclass:: micromagneticmodel.System
    :members:
    :special-members:
-   :private-members:

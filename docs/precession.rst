@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.Precession
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

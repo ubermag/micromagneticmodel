@@ -4,3 +4,4 @@
 .. autoclass:: micromagneticmodel.abstract.Term
    :members:
    :special-members:
+   :inherited-members:

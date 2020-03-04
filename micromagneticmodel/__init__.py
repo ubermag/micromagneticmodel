@@ -3,7 +3,7 @@ import pkg_resources
 import micromagneticmodel.abstract
 import micromagneticmodel.consts
 from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
-    CubicAnisotropy, Demag, Zeeman, DMI, Energy
+    CubicAnisotropy, Demag, Zeeman, DMI, MagnetoElastic, Energy
 from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \
     Slonczewski, Dynamics
 from .evolver import Evolver

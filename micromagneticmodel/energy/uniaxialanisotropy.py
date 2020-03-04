@@ -17,7 +17,7 @@ class UniaxialAnisotropy(EnergyTerm):
 
     Parameters
     ----------
-    K, : numbers.Real, dict, discretisedfield.Field
+    K : numbers.Real, dict, discretisedfield.Field
 
         If a single value ``numbers.Real`` is passed, a spatially constant
         parameter is defined. For a spatially varying parameter, either a

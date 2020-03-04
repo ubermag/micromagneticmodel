@@ -5,4 +5,5 @@ from .demag import Demag
 from .dmi import DMI
 from .uniaxialanisotropy import UniaxialAnisotropy
 from .cubicanisotropy import CubicAnisotropy
+from .magnetoelastic import MagnetoElastic
 from .energy import Energy

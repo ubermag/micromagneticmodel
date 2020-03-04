@@ -42,15 +42,9 @@ class System:
 
             Name of the system. Defaults to ``'unnamed'``.
 
-        Raises
-        ------
-        AttributeError
-
-            If a keyword argument not in ``_allowed_attributes`` is passed.
-
         Examples
         --------
-        1. Setting a system class
+        1. Defining a system.
 
         >>> import micromagneticmodel as mm
         >>> import discretisedfield as df

@@ -110,8 +110,8 @@ def check_system(system):
 
     assert isinstance(system.name, str)
 
-    if hasattr(system, 'm'):
-        assert isinstance(system.m, df.Field) or system.m is None
+    if system.m is not None:
+        assert isinstance(system.m, df.Field)
 
     assert isinstance(repr(system), str)
     assert re.search(r'^System\(name=.+\)$', repr(system))

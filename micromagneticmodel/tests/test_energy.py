@@ -98,7 +98,7 @@ class TestEnergy:
         container = mm.Energy()
         check_container(container)
         latexstr = container._repr_latex_()
-        assert latexstr == '$w=0$'
+        assert latexstr == '$0$'
 
     def test_getattr(self):
         container = mm.Energy(terms=self.terms)

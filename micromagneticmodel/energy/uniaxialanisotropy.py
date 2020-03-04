@@ -19,10 +19,10 @@ class UniaxialAnisotropy(EnergyTerm):
     ----------
     K, : numbers.Real, dict, discretisedfield.Field
 
-        If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter,
-        either a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if
-        the parameter is defined "per region") or ``discretisedfield.Field`` is
+        If a single value ``numbers.Real`` is passed, a spatially constant
+        parameter is defined. For a spatially varying parameter, either a
+        dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if the
+        parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
     u : (3,) array_like, dict, discretisedfield.Field

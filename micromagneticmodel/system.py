@@ -56,7 +56,7 @@ class System:
         >>> mesh = df.Mesh(region=region, n=n)
         >>> m = df.Field(mesh, dim=3, value=(0, 0, 1), norm=1e6)
         >>> energy = mm.Exchange(A=1e-11) + mm.Demag()
-        >>> dynamics = mm.Precession(gamma=mm.consts.gamma0) + \
+        >>> dynamics = mm.Precession(gamma0=mm.consts.gamma0) + \
                 mm.Damping(alpha=0.1)
         >>> T = 0
         >>> name = 'my_cool_system'
@@ -152,9 +152,9 @@ class System:
         >>> system.dynamics = mm.Damping(alpha=0.001)
         >>> repr(system.dynamics)
         'Damping(alpha=0.001)'
-        >>> system.dynamics += mm.Precession(gamma=2.21e5)
+        >>> system.dynamics += mm.Precession(gamma0=2.21e5)
         >>> repr(system.dynamics)
-        'Damping(alpha=0.001) + Precession(gamma=221000.0)'
+        'Damping(alpha=0.001) + Precession(gamma0=221000.0)'
 
         .. seealso:: :py:func:`~micromagneticmodel.System.energy`
 

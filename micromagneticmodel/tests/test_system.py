@@ -27,7 +27,7 @@ class TestSystem:
         check_system(system)
         assert len(system.energy) == 2
 
-        system.dynamics = mm.Precession(gamma=2.21e5) + mm.Damping(alpha=1)
+        system.dynamics = mm.Precession(gamma0=2.21e5) + mm.Damping(alpha=1)
         check_system(system)
         assert len(system.dynamics) == 2
 

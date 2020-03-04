@@ -20,7 +20,7 @@ class ZhangLi(DynamicsTerm):
     ----------
     beta : numbers.Real
 
-        A single scalar can be passed.
+        A single scalar value can be passed.
 
     u : number.Real, discretisedfield.Field
 

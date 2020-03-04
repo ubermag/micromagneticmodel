@@ -15,17 +15,17 @@ class TestPrecession:
                              [1, 2, 3], {'a': -1, 'b': 3}]
 
     def test_init_valid_args(self):
-        for gamma in self.valid_args:
-            term = mm.Precession(gamma=gamma)
+        for gamma0 in self.valid_args:
+            term = mm.Precession(gamma0=gamma0)
             check_term(term)
-            assert hasattr(term, 'gamma')
+            assert hasattr(term, 'gamma0')
             assert term.name == 'precession'
-            assert re.search(r'^Precession\(gamma=.+\)$', repr(term))
+            assert re.search(r'^Precession\(gamma0=.+\)$', repr(term))
 
     def test_init_invalid_args(self):
-        for gamma in self.invalid_args:
+        for gamma0 in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Precession(gamma=gamma)
+                term = mm.Precession(gamma0=gamma0)
 
         with pytest.raises(AttributeError):
             term = mm.Precession(wrong=1)

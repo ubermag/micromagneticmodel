@@ -26,10 +26,10 @@ class CubicAnisotropy(EnergyTerm):
     ----------
     K, : numbers.Real, dict, discretisedfield.Field
 
-        If a single positive value ``numbers.Real`` is passed, a spatially
-        constant parameter is defined. For a spatially varying parameter,
-        either a dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if
-        the parameter is defined "per region") or ``discretisedfield.Field`` is
+        If a single value ``numbers.Real`` is passed, a spatially constant
+        parameter is defined. For a spatially varying parameter, either a
+        dictionary, e.g. ``K={'region1': 1e6, 'region2': 5e5}`` (if the
+        parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
     u1/u2 : (3,) array_like, dict, discretisedfield.Field
@@ -71,7 +71,7 @@ class CubicAnisotropy(EnergyTerm):
     4. An attempt to define the cubic anisotropy energy term using a wrong
     value.
 
-    >>> # length-4 vector
+    >>> # length-4 vector for u1
     >>> ca = mm.CubicAnisotropy(K=1e5, u1=(0, 0, 1, 0), u2=(1, 0, 0))
     Traceback (most recent call last):
     ...
@@ -85,7 +85,7 @@ class CubicAnisotropy(EnergyTerm):
         a1 = r'(\mathbf{m} \cdot \mathbf{u}_{1})^{2}'
         a2 = r'(\mathbf{m} \cdot \mathbf{u}_{2})^{2}'
         a3 = r'(\mathbf{m} \cdot \mathbf{u}_{3})^{2}'
-        return r'-K_{{1}} [{0}{1}+{1}{2}+{2}{0}]'.format(a1, a2, a3)
+        return r'-K [{0}{1}+{1}{2}+{2}{0}]'.format(a1, a2, a3)
 
     def effective_field(self, m):
         raise NotImplementedError

@@ -19,11 +19,10 @@ class Dynamics(mm.abstract.Container):
 
     >>> import micromagneticmodel as mm
     ...
-    >>> terms = [mm.Precession(gamma=mm.consts.gamma0), mm.Damping(alpha=0.1)]
+    >>> terms = [mm.Precession(gamma0=mm.consts.gamma0), mm.Damping(alpha=0.1)]
     >>> dynamics = mm.Dynamics(terms=terms)
     >>> len(dynamics)  # the number of terms
     2
 
     """
-    _lhslatex = r'\frac{\partial \mathbf{m}}{\partial t}='
     _term_class = DynamicsTerm

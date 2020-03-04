@@ -12,13 +12,15 @@ class Exchange(EnergyTerm):
 
     .. math::
 
-        w_\\text{ex} = A (\\nabla \\mathbf{m})^{2}
+        w_\\text{ex} = A \\left[ (\\nabla \\mathbf{m}_\\text{x})^{2} + (\\nabla
+        \\mathbf{m}_\\text{y})^{2} + (\\nabla \\mathbf{m}_\\text{z})^{2}
+        \\right]
 
     Parameters
     ----------
     A : numbers.Real, dict, discretisedfield.Field
 
-        If a single positive value ``numbers.Real`` is passed, a spatially
+        If a single unsigned value ``numbers.Real`` is passed, a spatially
         constant parameter is defined. For a spatially varying parameter,
         either a dictionary, e.g. ``A={'region1': 1e-12, 'region2': 5e-12}``
         (if the parameter is defined "per region") or
@@ -54,7 +56,9 @@ class Exchange(EnergyTerm):
 
     """
     _allowed_attributes = ['A']
-    _reprlatex = r'A (\nabla \mathbf{m})^{2}'
+    _reprlatex = (r'A \left[ (\nabla \mathbf{m}_\text{x})^{2} + '
+                  r'(\nabla \mathbf{m}_\text{y})^{2} + '
+                  r'(\nabla \mathbf{m}_\text{z})^{2} \right]')
 
     def effective_field(self, m):
         raise NotImplementedError

@@ -41,8 +41,8 @@ class Zeeman(EnergyTerm):
 
     >>> import discretisedfield as df
     ...
-    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
-    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 10e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 10))
     >>> H = df.Field(mesh, dim=3, value=(1e6, -1e6, 0))
     >>> zeeman = mm.Zeeman(H=H)
 

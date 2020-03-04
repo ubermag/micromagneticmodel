@@ -12,8 +12,9 @@ class Damping(DynamicsTerm):
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = \\alpha \\mathbf{m} \\times
-        \\frac{\\partial \\mathbf{m}}{\\partial t}
+        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -\\frac{\\gamma_{0}
+        \\alpha} {1 + \\alpha^{2}} \\mathbf{m} \\times (\\mathbf{m} \\times
+        \\mathbf{H}_\\text{eff})
 
     Parameters
     ----------
@@ -55,8 +56,8 @@ class Damping(DynamicsTerm):
 
     """
     _allowed_attributes = ['alpha']
-    _reprlatex = (r'\alpha \mathbf{m} \times '
-                  r'\frac{\partial \mathbf{m}}{\partial t}')
+    _reprlatex = (r'-\frac{\gamma_{0} \alpha}{1 + \alpha^{2}} \mathbf{m} '
+                  r'\times (\mathbf{m} \times \mathbf{H}_\text{eff})')
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

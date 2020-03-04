@@ -20,8 +20,8 @@ class Slonczewski(DynamicsTerm):
     .. math::
 
         \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} =
-        \\gamma\\beta\\epsilon(\\mathbf{m} \\times \\mathbf{m}_\\text{p}
-        \\times \\mathbf{m}) - \\gamma\\beta\\epsilon' (\\mathbf{m} \\times
+        \\gamma_{0}\\beta\\epsilon(\\mathbf{m} \\times \\mathbf{m}_\\text{p}
+        \\times \\mathbf{m}) - \\gamma_{0}\\beta\\epsilon' (\\mathbf{m} \\times
         \\mathbf{m}_\\text{p})
 
     .. math::
@@ -106,11 +106,11 @@ class Slonczewski(DynamicsTerm):
 
     @property
     def _reprlatex(self):
-        reprlatex = (r'\gamma\beta\epsilon(\mathbf{m} \times '
+        reprlatex = (r'\gamma_{0}\beta\epsilon(\mathbf{m} \times '
                      r'\mathbf{m}_\text{p} \times \mathbf{m})')
         if hasattr(self, 'eps_prime'):
             if self.eps_prime:
-                reprlatex += (r"-\gamma\beta\epsilon' (\mathbf{m} "
+                reprlatex += (r"-\gamma_{0}\beta\epsilon' (\mathbf{m} "
                               r"\times \mathbf{m}_\text{p})")
 
         return reprlatex

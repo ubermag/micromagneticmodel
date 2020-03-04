@@ -15,7 +15,7 @@ class Demag(EnergyTerm):
     ----------
     asymptotic_radius : numbers.Real, optional
 
-        Optional asymptotic radius.
+        Optional asymptotic radius parameter.
 
     Examples
     --------

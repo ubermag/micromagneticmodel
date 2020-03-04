@@ -99,7 +99,7 @@ class Term(Abstract):
 
         2. Adding dynamics terms.
 
-        >>> precession = mm.Precession(gamma=mm.consts.gamma0)
+        >>> precession = mm.Precession(gamma0=mm.consts.gamma0)
         >>> damping = mm.Damping(alpha=0.01)
         ...
         >>> container = precession + damping

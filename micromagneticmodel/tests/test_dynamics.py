@@ -5,7 +5,7 @@ from .checks import check_container
 
 class TestDynamics:
     def setup(self):
-        self.precession = mm.Precession(gamma=2.21e5)
+        self.precession = mm.Precession(gamma0=2.21e5)
         self.damping = mm.Damping(alpha={'r1': 1, 'r2': 0.5})
         self.zhangli = mm.ZhangLi(u=500, beta=0.2)
 
@@ -89,14 +89,14 @@ class TestDynamics:
         container = mm.Dynamics()
         check_container(container)
         latexstr = container._repr_latex_()
-        assert '0' in latexstr
+        assert latexstr == '$0$'
 
     def test_getattr(self):
         container = mm.Dynamics(terms=self.terms)
         check_container(container)
 
         assert isinstance(container.precession, mm.Precession)
-        assert hasattr(container.precession, 'gamma')
+        assert hasattr(container.precession, 'gamma0')
         assert isinstance(container.damping, mm.Damping)
         assert hasattr(container.damping, 'alpha')
         assert isinstance(container.zhangli, mm.ZhangLi)

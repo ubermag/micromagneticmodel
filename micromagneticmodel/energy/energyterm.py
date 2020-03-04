@@ -11,7 +11,7 @@ class EnergyTerm(mm.abstract.Term):
     _container_class = 'Energy'
 
     def energy(self, m):
-        raise NotImplementedError  # can be implemented as Heff*m.integrate
+        raise NotImplementedError  # can be implemented as (Heff*m).integrate
 
     def density(self, m):
         raise NotImplementedError  # can be implemented as Heff*m

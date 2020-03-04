@@ -29,7 +29,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> dynamics = mm.Dynamics()
         >>> len(dynamics)
         0
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
         >>> len(dynamics)
         1
         >>> dynamics += mm.Damping()
@@ -69,7 +69,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> dynamics = mm.Dynamics()
         >>> len(dynamics)
         0
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
         >>> len(dynamics)
         1
         >>> dynamics += mm.Damping(alpha=0.2)
@@ -180,10 +180,10 @@ class Container(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> dynamics = mm.Dynamics()
-        >>> dynamics += mm.Precession(gamma=500)
+        >>> dynamics += mm.Precession(gamma0=500)
         >>> dynamics += mm.Damping(alpha=0.2)
         >>> dynamics.precession
-        Precession(gamma=500)
+        Precession(gamma0=500)
         >>> dynamics.damping
         Damping(alpha=0.2)
         >>> dynamics.stt
@@ -221,7 +221,7 @@ class Container(metaclass=abc.ABCMeta):
         False
         >>> 'damping' in dir(dynamics)
         False
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
         >>> 'precession' in dir(dynamics)
         True
         >>> dynamics += mm.Damping(alpha=0.2)
@@ -316,7 +316,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> dynamics = mm.Dynamics()
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
         >>> dynamics += mm.Damping(alpha=0.2)
         >>> len(dynamics)
         2
@@ -379,7 +379,7 @@ class Container(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> dynamics = mm.Dynamics()
-        >>> dynamics += mm.Precession(gamma=mm.consts.gamma0)
+        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
         >>> len(dynamics)
         1
         >>> damping = mm.Damping(alpha=0.2)
@@ -461,27 +461,24 @@ class Container(metaclass=abc.ABCMeta):
         >>> energy = mm.Energy()
         >>> energy += zeeman
         >>> energy._repr_latex_()
-        '$w=-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
+        '$-\\\\mu_{0}M_\\\\text{s} \\\\mathbf{m} \\\\cdot \\\\mathbf{H}$'
         >>> # energy  # inside Jupyter
 
         """
-        reprlatex = self._lhslatex
+        reprlatex = ''
         if not self._terms:
             reprlatex += '0'
         else:
             for term in self:
                 termlatex = term._reprlatex
-                if not termlatex.startswith('-'):
-                    reprlatex += f'+ {termlatex}'
-                else:
+                if not reprlatex:
+                    # Adding the first term. No leading +.
                     reprlatex += termlatex
+                else:
+                    if not termlatex.startswith('-'):
+                        # Is it the first term added to the sum? No leading +.
+                        reprlatex += f'+ {termlatex}'
+                    else:
+                        reprlatex += termlatex
 
         return f'${reprlatex}$'
-
-    @property
-    @abc.abstractmethod
-    def _lhslatex(self):
-        """Lefthandside of the LaTeX representation string.
-
-        """
-        pass  # pragma: no cover

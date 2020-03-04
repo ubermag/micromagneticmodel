@@ -1,47 +1,50 @@
-import importlib
 import discretisedfield as df
 import micromagneticmodel as mm
 import ubermagutil.typesystem as ts
 
 
-@ts.typesystem(name=ts.Name(const=True))
+@ts.typesystem(m=ts.Typed(expected_type=df.Field, allow_none=True),
+               T=ts.Scalar(unsigned=True),
+               name=ts.Name(const=True))
 class System:
-    _attributes = ['hamiltonian', 'dynamics', 'm', 'name']
+    def __init__(self, energy=0, dynamics=0, m=None, T=0, name='unnamed'):
+        """System.
 
-    def __init__(self, **kwargs):
-        """System class.
+        This class is used for defining a micromagnetic system. In order to
+        uniquely define a micromagnetic system, the following parameters can be
+        provided:
 
-        This class is used for defining a micromagnetic system. In
-        order to uniquely define a micromagnetic system, the following
-        three parameters must be provided:
-
-        - Hamiltonian
-        - Dynamics equation
-        - Initial magnetisation configuration
-
-        In addition, `name` can be passed at initialisation.
+        - Energy equation (``system.energy``)
+        - Dynamics equation  (``system.dynamics``)
+        - Magnetisation field (``system.m``)
+        - Temperature (``system.T``)
+        - Name (``system.name``)
 
         Parameters
         ----------
-        hamiltonian : micromagneticmodel.Hamiltonian, optional
-            Hamiltonian as a sum of different energy terms.
-        dynamics : micromagneticmodel.Dynamics, optional
-            Dynamics as a sum of different dynamics terms.
-        m : disretisedfield.Field, optional
-            Initial magnetisation configuration as a three-dimensional
-            field.
-        name : str, optional
-            Name of the system.
+        energy : micromagneticmodel.Energy, optional
 
-        Raises
-        ------
-        AttributeError
-            If a keyword argument which is not in the parameter list
-            is passed.
+            Energy equation. Defaults to 0.
+
+        dynamics : micromagneticmodel.Dynamics, optional
+
+            Dynamics equation. Defaults to 0.
+
+        m : disretisedfield.Field, optional
+
+            Magnetisation field. Defaults to ``None``.
+
+        T : numbers.Real
+
+            Temperature. Defaults to 0.
+
+        name : str, optional
+
+            Name of the system. Defaults to ``'unnamed'``.
 
         Examples
         --------
-        1. Setting a simple system class
+        1. Defining a system.
 
         >>> import micromagneticmodel as mm
         >>> import discretisedfield as df
@@ -49,96 +52,125 @@ class System:
         >>> p1 = (0, 0, 0)
         >>> p2 = (10e-9, 10e-9, 10e-9)
         >>> n = (5, 5, 5)
-        >>> mesh = df.Mesh(p1=p1, p2=p2, n=n)
+        >>> region = df.Region(p1=p1, p2=p2)
+        >>> mesh = df.Mesh(region=region, n=n)
         >>> m = df.Field(mesh, dim=3, value=(0, 0, 1), norm=1e6)
-        >>> hamiltonian = mm.Exchange(A=1e-11) + mm.Demag()
-        >>> dynamics = mm.Precession(gamma=mm.consts.gamma0) + \
+        >>> energy = mm.Exchange(A=1e-11) + mm.Demag()
+        >>> dynamics = mm.Precession(gamma0=mm.consts.gamma0) + \
                 mm.Damping(alpha=0.1)
-        >>> system = mm.System(hamiltonian=hamiltonian,
+        >>> T = 0
+        >>> name = 'my_cool_system'
+        >>> system = mm.System(energy=energy,
         ...                    dynamics=dynamics,
         ...                    m=m,
-        ...                    name='mysystem')
+        ...                    T=T,
+        ...                    name=name)
 
         """
-        self._module = importlib.__import__(self.__class__.__module__)
-        for key, value in kwargs.items():
-            if key in System._attributes:
-                setattr(self, key, value)
-            else:
-                raise AttributeError('Unexpected kwarg {}.'.format(key))
+        self.energy = energy
+        self.dynamics = dynamics
+        self.m = m
+        self.T = T
+        self.name = name
 
-        if not hasattr(self, 'hamiltonian'):
-            self.hamiltonian = 0
-        if not hasattr(self, 'dynamics'):
-            self.dynamics = 0
+        # Newly created system has not been "driven" yet.
         self.drive_number = 0
 
     @property
-    def hamiltonian(self):
-        """Hamiltonian of the system.
+    def energy(self):
+        """Energy equation of the system.
+
+        Parameters
+        ----------
+        value : micromagneticmodel.Energy, micromagneticmodel.EnergyTerm
+
+            Energy container/term of the system.
 
         Returns
         -------
-        micromagneticmodel.Hamiltonian
-            Hamiltonian as a sum of energy terms.
+        micromagneticmodel.Energy
+
+            Energy container of the system.
+
+        Examples
+        --------
+        1. System's energy equation.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> system = mm.System(name='my_cool_system')
+        >>> repr(system.energy)  # energy not set yet
+        'Energy()'
+        >>> system.energy = mm.Exchange(A=1e-12)
+        >>> repr(system.energy)
+        'Exchange(A=1e-12)'
+        >>> system.energy += mm.Demag()
+        >>> repr(system.energy)
+        'Exchange(A=1e-12) + Demag()'
+
+        .. seealso:: :py:func:`~micromagneticmodel.System.dynamics`
 
         """
-        return self._hamiltonian
+        return self._energy
 
-    @hamiltonian.setter
-    def hamiltonian(self, value):
-        self._hamiltonian = self._module.Hamiltonian()
-        setattr(self._hamiltonian, '_system', self)
+    @energy.setter
+    def energy(self, value):
+        empty_container = mm.Energy()
         if value == 0:
-            pass
-        elif isinstance(value, (mm.EnergyTerm, mm.Hamiltonian)):
-            self._hamiltonian += value
+            self._energy = empty_container
+        elif isinstance(value, (mm.EnergyTerm, mm.Energy)):
+            self._energy = empty_container + value  # checks by + operator
         else:
-            raise TypeError(f'Unsupported type(value)={type(value)}')
+            msg = f'Cannot set energy equation with {type(value)}.'
+            raise TypeError(msg)
 
     @property
     def dynamics(self):
         """Dynamics equation of the system.
 
+        Parameters
+        ----------
+        value : micromagneticmodel.Dynamics, micromagneticmodel.DynamicsTerm
+
+            Dynamics container/term of the system.
+
         Returns
         -------
         micromagneticmodel.Dynamics
-            Dynamics equation as a sum of dynamics terms.
+
+            Dynamics container of the system.
+
+        Examples
+        --------
+        1. System's dynamics equation.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> system = mm.System(name='my_cool_system')
+        >>> repr(system.dynamics)  # energy not set yet
+        'Dynamics()'
+        >>> system.dynamics = mm.Damping(alpha=0.001)
+        >>> repr(system.dynamics)
+        'Damping(alpha=0.001)'
+        >>> system.dynamics += mm.Precession(gamma0=2.21e5)
+        >>> repr(system.dynamics)
+        'Damping(alpha=0.001) + Precession(gamma0=221000.0)'
+
+        .. seealso:: :py:func:`~micromagneticmodel.System.energy`
 
         """
         return self._dynamics
 
     @dynamics.setter
     def dynamics(self, value):
-        self._dynamics = self._module.Dynamics()
-        setattr(self._dynamics, '_system', self)
+        empty_container = mm.Dynamics()
         if value == 0:
-            pass
+            self._dynamics = empty_container
         elif isinstance(value, (mm.DynamicsTerm, mm.Dynamics)):
-            self._dynamics += value
+            self._dynamics = empty_container + value  # checks by + operator
         else:
-            raise TypeError(f'Unsupported type(value)={type(value)}')
-
-    @property
-    def m(self):
-        """Magnetisation configuration.
-
-        Magnetisation configuration describes the state of the system.
-
-        Returns
-        -------
-        discertisedfield.Field
-            Magnetisation configuration.
-
-        """
-        return self._m
-
-    @m.setter
-    def m(self, value):
-        if isinstance(value, df.Field):
-            self._m = value
-        else:
-            raise TypeError('Unsupported type(m)={}'.format(type(value)))
+            msg = f'Cannot set dynamics equation with {type(value)}.'
+            raise TypeError(msg)
 
     def __repr__(self):
         """Representation string.
@@ -146,15 +178,18 @@ class System:
         Returns
         -------
         str
-            Representation string
+
+            Representation string.
+
+        Examples
+        --------
+        1. Getting representation string.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> system = mm.System(name='my_cool_system')
+        >>> repr(system)
+        "System(name='my_cool_system')"
 
         """
         return f'System(name=\'{self.name}\')'
-
-    @property
-    def _script(self):
-        """This method should be implemented by a specific micromagnetic
-        calculator.
-
-        """
-        raise NotImplementedError

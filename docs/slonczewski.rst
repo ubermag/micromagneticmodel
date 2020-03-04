@@ -1,7 +1,7 @@
-``micromagneticmodel.Hamiltonian``
+``micromagneticmodel.Slonczewski``
 ==================================
 
-.. autoclass:: micromagneticmodel.Hamiltonian
+.. autoclass:: micromagneticmodel.Slonczewski
    :members:
    :special-members:
    :private-members:

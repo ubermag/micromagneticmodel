@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.UniaxialAnisotropy
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

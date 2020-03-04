@@ -1,24 +1,17 @@
+import re
 import pytest
+import discretisedfield as df
 import micromagneticmodel as mm
+from .checks import check_term
 
 
 class TestDemag:
-    def test_repr_latex_(self):
-        demag = mm.Demag()
-        latex = demag._repr_latex_()
+    def test_init_valid_arg(self):
+        term = mm.Demag()
+        check_term(term)
+        assert term.name == 'demag'
+        assert re.search(r'^Demag\(.*\)$', repr(term))
 
-        # Assert some characteristics of LaTeX string.
-        assert isinstance(latex, str)
-
-    def test_name(self):
-        demag = mm.Demag()
-        assert demag.name == 'demag'
-
-    def test_repr(self):
-        demag = mm.Demag()
-        assert repr(demag) == 'Demag(name=\'demag\')'
-
-    def test_script(self):
-        demag = mm.Demag()
-        with pytest.raises(NotImplementedError):
-            script = demag._script
+    def test_init_invalid_args(self):
+        with pytest.raises(AttributeError):
+            term = mm.Exchange(wrong=1)

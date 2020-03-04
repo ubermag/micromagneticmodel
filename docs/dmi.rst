@@ -4,4 +4,4 @@
 .. autoclass:: micromagneticmodel.DMI
    :members:
    :special-members:
-   :private-members:
+   :inherited-members:

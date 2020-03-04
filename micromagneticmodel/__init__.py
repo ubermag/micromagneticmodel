@@ -1,15 +1,14 @@
 import pytest
 import pkg_resources
+import micromagneticmodel.abstract
 import micromagneticmodel.consts
-import micromagneticmodel.util  # to avoid import order conflicts
-from .hamiltonian import EnergyTerm, Exchange, UniaxialAnisotropy, \
-    CubicAnisotropy, Demag, Zeeman, DMI, Hamiltonian
-from .dynamics import DynamicsTerm, Precession, \
-    Damping, ZhangLi, Dynamics
-from .evolvers import Evolver
-from .drivers import Driver
+from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
+    CubicAnisotropy, Demag, Zeeman, DMI, Energy
+from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \
+    Slonczewski, Dynamics
+from .evolver import Evolver
+from .driver import Driver
 from .system import System
-from .data import Data
 
 
 def test():

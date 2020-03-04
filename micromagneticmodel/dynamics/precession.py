@@ -1,62 +1,62 @@
+import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
-@ts.typesystem(gamma=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                                  otherwise=df.Field),
-               name=ts.Name(const=True))
+@uu.inherit_docs
+@ts.typesystem(gamma0=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
+                                   otherwise=df.Field))
 class Precession(DynamicsTerm):
-    _latex = (r'$-\gamma_{0}^{*} \mathbf{m} \times '
-              r'\mathbf{H}_\text{eff}$')
+    """Precession dynamics term.
 
-    def __init__(self, gamma, name='precession', **kwargs):
-        """Precession dynamics term.
+    .. math::
 
-        This object models micromagnetic precession dynamics term. It
-        takes the gyrotropic ratio constant `gamma` and `name` as
-        input parameters. In addition, any further parameters,
-        required by a specific micromagnetic calculator can be passed.
+        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -\\frac{\\gamma_{0}}{1 +
+        \\alpha^{2}} \\mathbf{m} \\times \\mathbf{H}_\\text{eff}
 
-        Parameters
-        ----------
-        gamma : int, float, dict, discretisedfield.Field
-            A single positive value (int, float) can be
-            passed. Alternatively, if it is defined per region, a
-            dictionary can be passed, e.g. `gamma={'region1': 1e-12,
-            'region2': 5e-12}`. If it is possible to define the
-            parameter "per cell", `discretisedfield.Field` can be
-            passed.
-        name : str
-            Name of the dynamics term.
+    Parameters
+    ----------
+    gamma0 : numbers.Real, dict, discretisedfield.Field
 
-        Examples
-        --------
-        1. Initialising the precession dynamics term.
+        If a single unsigned value ``numbers.Real`` is passed, a spatially
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``gamma={'region1': 1e5, 'region2': 5e5}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
-        >>> import micromagneticmodel as mm
-        ...
-        >>> precession1 = mm.Precession(gamma=mm.consts.gamma0)
-        >>> precession2 = mm.Precession(gamma={'r1:r2': 1,
-        ...                                    'r2': 2})
-        >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-        ...                cell=(1e-9, 1e-9, 1e-9))
-        >>> field = df.Field(mesh, dim=1, value=mm.consts.gamma0)
-        >>> precession3 = mm.Precession(gamma=field)
+    Examples
+    --------
+    1. Defining the precession dynamics term using scalar.
 
-        """
-        self.gamma = gamma
-        self.name = name
-        self.__dict__.update(kwargs)
+    >>> import micromagneticmodel as mm
+    ...
+    >>> precession = mm.Precession(gamma0=mm.consts.gamma0)
 
-    @property
-    def _repr(self):
-        """A representation string property.
+    2. Defining the precession dynamics term using dictionary.
 
-        Returns
-        -------
-        str
-            A representation string.
+    >>> precession = mm.Precession(gamma0={'region1': 1e5, 'region2': 2e6})
 
-        """
-        return f'Precession(gamma={self.gamma}, name=\'{self.name}\')'
+    3. Defining the precession dynamics term using ``discretisedfield.Field``.
+
+    >>> import discretisedfield as df
+    ...
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> gamma0 = df.Field(mesh, dim=1, value=5e5)
+    >>> precession = mm.Precession(gamma0=gamma0)
+
+    4. An attempt to define the precession dynamics term using a wrong value.
+
+    >>> precession = mm.Precession(gamma0=-5)  # negative value
+    Traceback (most recent call last):
+    ...
+    ValueError: ...
+
+    """
+    _allowed_attributes = ['gamma0']
+    _reprlatex = (r'-\frac{\gamma_{0}}{1 + \alpha^{2}} \mathbf{m} '
+                  r'\times \mathbf{H}_\text{eff}')
+
+    def dmdt(self, m, Heff):
+        raise NotImplementedError

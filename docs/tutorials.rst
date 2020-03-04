@@ -16,4 +16,3 @@ Tutorials
    ipynb/07-tutorial-constants
    ipynb/08-tutorial-defining-system.ipynb
    ipynb/09-tutorial-other
-

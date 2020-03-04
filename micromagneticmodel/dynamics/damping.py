@@ -1,62 +1,63 @@
+import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
+@uu.inherit_docs
 @ts.typesystem(alpha=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                                  otherwise=df.Field),
-               name=ts.Name(const=True))
+                                  otherwise=df.Field))
 class Damping(DynamicsTerm):
-    _latex = (r'$\alpha \mathbf{m} \times'
-              r'\frac{\partial \mathbf{m}}{\partial t}$')
+    """Damping dynamics term.
 
-    def __init__(self, alpha, name='damping', **kwargs):
-        """Damping dynamics term.
+    .. math::
 
-        This object models micromagnetic damping dynamics term. It
-        takes the Gilbert damping constant `alpha` and `name` as input
-        parameters. In addition, any further parameters, required by a
-        specific micromagnetic calculator can be passed.
+        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -\\frac{\\gamma_{0}
+        \\alpha} {1 + \\alpha^{2}} \\mathbf{m} \\times (\\mathbf{m} \\times
+        \\mathbf{H}_\\text{eff})
 
-        Parameters
-        ----------
-        alpha : int, float, dict, discretisedfield.Field
-            A single positive value (int, float) can be
-            passed. Alternatively, if it is defined per region, a
-            dictionary can be passed, e.g. `alpha={'region1': 1e-12,
-            'region2': 5e-12}`. If it is possible to define the
-            parameter "per cell", `discretisedfield.Field` can be
-            passed.
-        name : str
-            Name of the dynamics term.
+    Parameters
+    ----------
+    alpha : numbers.Real, dict, discretisedfield.Field
 
-        Examples
-        --------
-        1. Initialising the damping dynamics term.
+        If a single positive value ``numbers.Real`` is passed, a spatially
+        constant parameter is defined. For a spatially varying parameter,
+        either a dictionary, e.g. ``alpha={'region1': 1e5, 'region2': 5e5}``
+        (if the parameter is defined "per region") or
+        ``discretisedfield.Field`` is passed.
 
-        >>> import micromagneticmodel as mm
-        ...
-        >>> damping1 = mm.Damping(alpha=0.1)
-        >>> damping2 = mm.Damping(alpha={'r1': 1,
-        ...                                    'r2': 2})
-        >>> mesh = df.Mesh(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9),
-        ...                cell=(1e-9, 1e-9, 1e-9))
-        >>> field = df.Field(mesh, dim=1, value=0.1)
-        >>> damping3 = mm.Damping(alpha=field)
+    Examples
+    --------
+    1. Defining the damping dynamics term using scalar.
 
-        """
-        self.alpha = alpha
-        self.name = name
-        self.__dict__.update(kwargs)
+    >>> import micromagneticmodel as mm
+    ...
+    >>> damping = mm.Damping(alpha=0.01)
 
-    @property
-    def _repr(self):
-        """A representation string property.
+    2. Defining the damping dynamics term using dictionary.
 
-        Returns
-        -------
-        str
-            A representation string.
+    >>> damping = mm.Damping(alpha={'region1': 0.01, 'region2': 0.005})
 
-        """
-        return f'Damping(alpha={self.alpha}, name=\'{self.name}\')'
+    3. Defining the damping dynamics term using ``discretisedfield.Field``.
+
+    >>> import discretisedfield as df
+    ...
+    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
+    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
+    >>> alpha = df.Field(mesh, dim=1, value=0.012)
+    >>> damping = mm.Damping(alpha=alpha)
+
+    4. An attempt to define the damping dynamics term using a wrong value.
+
+    >>> damping = mm.Damping(alpha=-5)  # negative value
+    Traceback (most recent call last):
+    ...
+    ValueError: ...
+
+    """
+    _allowed_attributes = ['alpha']
+    _reprlatex = (r'-\frac{\gamma_{0} \alpha}{1 + \alpha^{2}} \mathbf{m} '
+                  r'\times (\mathbf{m} \times \mathbf{H}_\text{eff})')
+
+    def dmdt(self, m, Heff):
+        raise NotImplementedError

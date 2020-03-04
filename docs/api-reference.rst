@@ -2,13 +2,12 @@ API Reference
 =============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
+   abstract
    term
-   termsum
-   data
-   energyproperties
+   container
    energyterm
    dynamicsterm
    exchange
@@ -17,10 +16,11 @@ API Reference
    demag
    uniaxialanisotropy
    cubicanisotropy
-   hamiltonian
+   energy
    precession
    damping
-   stt
+   zhangli
+   slonczewski
    dynamics
    system
    evolver

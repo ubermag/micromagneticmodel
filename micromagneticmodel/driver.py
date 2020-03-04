@@ -8,7 +8,7 @@ class Driver(metaclass=abc.ABCMeta):
 
         Raises
         ------
-        ValueError
+        AttributeError
 
             If a keyword argument not in ``_allowed_attributes`` is passed.
 
@@ -30,11 +30,10 @@ class Driver(metaclass=abc.ABCMeta):
         pass  # pragma: no cover
 
     @abc.abstractmethod
-    def drive(self):
+    def drive(self, system, **kwargs):
         """Drive method.
 
-        This method should be implemented by a specific micromagnetic
-        caclulator.
+        This method must be implemented by a specific micromagnetic calculator.
 
         """
         pass  # pragma: no cover

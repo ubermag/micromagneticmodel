@@ -6,8 +6,8 @@ from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, Energy
 from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \
     Slonczewski, Dynamics
-from .evolvers import Evolver
-from .drivers import Driver
+from .evolver import Evolver
+from .driver import Driver
 from .system import System
 
 

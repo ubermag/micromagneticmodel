@@ -1,38 +1,12 @@
 import abc
 import micromagneticmodel as mm
+from .abstract import Abstract
 
 
-class Term(metaclass=abc.ABCMeta):
+class Term(Abstract):
     """An abstract class for deriving all energy and dynamics terms.
 
     """
-    def __init__(self, **kwargs):
-        """It can be initialised with keyword arguments defined in
-        ``_allowed_attributes``, which is a list of strings.
-
-        Raises
-        ------
-        ValueError
-
-            If a keyword argument not in ``_allowed_attributes`` is passed.
-
-        """
-        for key, value in kwargs.items():
-            if key in self._allowed_attributes:
-                setattr(self, key, value)
-            else:
-                msg = f'Invalid attribute {key} for {self.__class__}.'
-                raise AttributeError(msg)
-
-    @property
-    @abc.abstractmethod
-    def _allowed_attributes(self):
-        """A list of attributes allowed to be set at initialisation by passing
-        keyword arguments.
-
-        """
-        pass  # pragma: no cover
-
     @property
     @abc.abstractmethod
     def _container_class(self):
@@ -138,39 +112,6 @@ class Term(metaclass=abc.ABCMeta):
         result += other
         return result
 
-    def __repr__(self):
-        """Representation string.
-
-        Returns
-        -------
-        str
-
-            Representation string.
-
-        Examples
-        --------
-        1. Getting representation string.
-
-        >>> import micromagneticmodel as mm
-        ...
-        >>> zeeman = mm.Zeeman(H=(100, 0, 0))
-        >>> repr(zeeman)
-        'Zeeman(H=(100, 0, 0))'
-        >>> damping = mm.Damping(alpha=0.01)
-        >>> repr(damping)
-        'Damping(alpha=0.01)'
-
-        """
-        attributes = []
-        for attr in self._allowed_attributes:
-            if hasattr(self, attr):
-                if isinstance(getattr(self, attr), str):
-                    attributes.append(f'{attr}=\'{getattr(self, attr)}\'')
-                else:
-                    attributes.append(f'{attr}={getattr(self, attr)}')
-        attributes = ', '.join(attributes)
-        return f'{self.__class__.__name__}({attributes})'
-
     @property
     @abc.abstractmethod
     def _reprlatex(self):
@@ -203,33 +144,3 @@ class Term(metaclass=abc.ABCMeta):
 
         """
         return f'${self._reprlatex}$'
-
-    @property
-    def name(self):
-        """Name.
-
-        Used for accessing individual terms from
-        ``micromagneticmodel.Container`` objects. The name of the object is the
-        same as the name of the class in lowercase.
-
-        Returns
-        -------
-        str
-
-            Term name.
-
-        Examples
-        --------
-        1. Getting term names.
-
-        >>> import micromagneticmodel as mm
-        ...
-        >>> ua = mm.UniaxialAnisotropy(K=5e6, u=(0, 0, 1))
-        >>> ua.name
-        'uniaxialanisotropy'
-        >>> damping = mm.Damping(alpha=0.01)
-        >>> damping.name
-        'damping'
-
-        """
-        return self.__class__.__name__.lower()

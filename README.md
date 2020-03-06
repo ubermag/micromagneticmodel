@@ -6,9 +6,9 @@ Marijan Beg<sup>1,2</sup> and Hans Fangohr<sup>2,1</sup>
 
 | Description | Badge |
 | --- | --- |
-| Latest release | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
-|                | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
-| Build | [![Build Status](https://travis-ci.org/ubermag/micromagneticmodel.svg?branch=master)](https://travis-ci.org/ubermag/micromagneticmodel) |
+| Releasea | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
+|          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
+| Builds | [![Build Status](https://travis-ci.org/ubermag/micromagneticmodel.svg?branch=master)](https://travis-ci.org/ubermag/micromagneticmodel) |
 |       | [![Build status](https://ci.appveyor.com/api/projects/status/qhi1comhtaja0073?svg=true)](https://ci.appveyor.com/project/marijanbeg/micromagneticmodel) |
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/ubermag/micromagneticmodel) |
 | Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](https://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |

@@ -33,6 +33,28 @@ class Abstract(metaclass=abc.ABCMeta):
         """
         pass  # pragma: no cover
 
+    def __iter__(self):
+        """Iterator.
+
+        It yields all defined attributes and their values.
+
+        Examples
+        --------
+        1. Iterating through all defined attributes and their values.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> uniaxialanisotropy = mm.UniaxialAnisotropy(K=1e5, u=(0, 0, 1))
+        >>> for attr, value in uniaxialanisotropy:
+        ...     print(f'{attr} = {value}')
+        K = 100000.0
+        u = (0, 0, 1)
+
+        """
+        for attr in self._allowed_attributes:
+            if hasattr(self, attr):
+                yield attr, getattr(self, attr)
+
     def __repr__(self):
         """Representation string.
 

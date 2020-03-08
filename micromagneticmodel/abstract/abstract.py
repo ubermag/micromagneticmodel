@@ -79,12 +79,11 @@ class Abstract(metaclass=abc.ABCMeta):
 
         """
         attributes = []
-        for attr in self._allowed_attributes:
-            if hasattr(self, attr):
-                if isinstance(getattr(self, attr), str):
-                    attributes.append(f'{attr}=\'{getattr(self, attr)}\'')
-                else:
-                    attributes.append(f'{attr}={getattr(self, attr)}')
+        for attr, value in self:
+            if isinstance(value, str):
+                attributes.append(f'{attr}=\'{value}\'')
+            else:
+                attributes.append(f'{attr}={value}')
         attributes = ', '.join(attributes)
         return f'{self.__class__.__name__}({attributes})'
 

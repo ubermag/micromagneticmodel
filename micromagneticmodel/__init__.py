@@ -2,6 +2,7 @@ import pytest
 import pkg_resources
 import micromagneticmodel.abstract
 import micromagneticmodel.consts
+import micromagneticmodel.examples
 from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
     CubicAnisotropy, Demag, Zeeman, DMI, MagnetoElastic, Energy
 from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \

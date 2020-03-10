@@ -6,7 +6,7 @@ Marijan Beg<sup>1,2</sup> and Hans Fangohr<sup>2,1</sup>
 
 | Description | Badge |
 | --- | --- |
-| Releasea | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
+| Releases | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
 |          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Builds | [![Build Status](https://travis-ci.org/ubermag/micromagneticmodel.svg?branch=master)](https://travis-ci.org/ubermag/micromagneticmodel) |
 |       | [![Build status](https://ci.appveyor.com/api/projects/status/qhi1comhtaja0073?svg=true)](https://ci.appveyor.com/project/marijanbeg/micromagneticmodel) |

@@ -146,3 +146,12 @@ class TestEnergy:
         container = self.demag + container
         check_container(container)
         assert len(container) == 2
+
+    def test_energy_and_energy_density(self):
+        container = self.dmi + self.zeeman  # single term is not allowed
+
+        with pytest.raises(NotImplementedError):
+            res = container.energy(None)
+
+        with pytest.raises(NotImplementedError):
+            res = container.density(None)

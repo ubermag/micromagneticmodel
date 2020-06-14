@@ -75,6 +75,7 @@ class System:
 
         # Newly created system has not been "driven" yet.
         self.drive_number = 0
+        self.compute_number = 0
 
     @property
     def energy(self):

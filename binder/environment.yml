@@ -4,4 +4,4 @@ channels:
 dependencies:
   - python==3.8
   - pip
-  - micromagneticmodel==0.8.18
+  - micromagneticmodel==0.8.19

@@ -83,7 +83,12 @@ class Zeeman(EnergyTerm):
     >>> H = df.Field(mesh, dim=3, value=(1e6, -1e6, 0))
     >>> zeeman = mm.Zeeman(H=H)
 
-    4. An attempt to define the Zeeman energy term using a wrong value.
+    4. Defining the Zeeman energy term using a vector which changes as a sine
+    wave.
+
+    >>> zeeman = mm.Zeeman(H=(0, 0, 1e6), wave='sin', f=1e9, t0=0)
+
+    5. An attempt to define the Zeeman energy term using a wrong value.
 
     >>> zeeman = mm.Zeeman(H=(0, -1e7))  # length-2 vector
     Traceback (most recent call last):

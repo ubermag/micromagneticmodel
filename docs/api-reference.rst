@@ -17,6 +17,7 @@ API Reference
    uniaxialanisotropy
    cubicanisotropy
    magnetoelastic
+   rkky
    energy
    precession
    damping

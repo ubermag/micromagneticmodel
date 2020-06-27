@@ -12,8 +12,7 @@ class Exchange(EnergyTerm):
 
     .. math::
 
-        w_\\text{ex} = A \\left[ (\\nabla \\mathbf{m}_{x})^{2} + (\\nabla
-        \\mathbf{m}_{y})^{2} + (\\nabla \\mathbf{m}_{z})^{2} \\right]
+        w = - A \\mathbf{m} \\cdot \\nabla^{2} \\mathbf{m}
 
     Parameters
     ----------
@@ -55,9 +54,7 @@ class Exchange(EnergyTerm):
 
     """
     _allowed_attributes = ['A']
-    _reprlatex = (r'A \left[ (\nabla \mathbf{m}_\text{x})^{2} + '
-                  r'(\nabla \mathbf{m}_\text{y})^{2} + '
-                  r'(\nabla \mathbf{m}_\text{z})^{2} \right]')
+    _reprlatex = r'- A \mathbf{m} \cdot \nabla^{2} \mathbf{m}'
 
     def effective_field(self, m):
         raise NotImplementedError

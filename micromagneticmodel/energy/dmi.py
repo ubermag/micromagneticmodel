@@ -13,19 +13,18 @@ class DMI(EnergyTerm):
 
     .. math::
 
-        w_\\text{dmi}^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times
-        \\mathbf{m})
+        w^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times \\mathbf{m})
 
     .. math::
 
-        w_\\text{dmi}^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} -
-        m_{z} \\nabla \\cdot \\mathbf{m} )
+        w^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} - m_{z} \\nabla
+        \\cdot \\mathbf{m} )
 
     .. math::
 
-        w_\\text{dmi}^\\text{D2d} = D \\mathbf{m} \\cdot \\left(
-        \\frac{\\partial \\mathbf{m}}{\\partial x} \\times \\hat{x} -
-        \\frac{\\partial \\mathbf{m}}{\\partial y} \\times \\hat{y} \\right)
+        w^\\text{D2d} = D \\mathbf{m} \\cdot \\left( \\frac{\\partial
+        \\mathbf{m}}{\\partial x} \\times \\hat{x} - \\frac{\\partial
+        \\mathbf{m}}{\\partial y} \\times \\hat{y} \\right)
 
     Parameters
     ----------
@@ -45,13 +44,13 @@ class DMI(EnergyTerm):
 
     Examples
     --------
-    1. Defining the DMI energy term using scalar.
+    1. Defining DMI energy term using a scalar.
 
     >>> import micromagneticmodel as mm
     ...
     >>> dmi = mm.DMI(D=1e-3, crystalclass='T')
 
-    2. Defining the DMI energy term using dictionary.
+    2. Defining DMI energy term using a dictionary.
 
     >>> dmi = mm.DMI(D={'region1': 1e-3, 'region2': 5e-3}, crystalclass='Cnv')
 

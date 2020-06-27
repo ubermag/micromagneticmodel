@@ -15,12 +15,12 @@ class CubicAnisotropy(EnergyTerm):
 
     .. math::
 
-        w_\\text{ca} = -K [(\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}
-                           (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
-                         + (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
-                           (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
-                         + (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
-                           (\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}]
+        w = -K [(\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}
+                (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
+              + (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
+                (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
+              + (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
+                (\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}]
 
     Parameters
     ----------

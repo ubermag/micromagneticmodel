@@ -70,9 +70,9 @@ class Abstract(metaclass=abc.ABCMeta):
 
         >>> import micromagneticmodel as mm
         ...
-        >>> zeeman = mm.Zeeman(H=(100, 0, 0))
-        >>> repr(zeeman)
-        'Zeeman(H=(100, 0, 0))'
+        >>> exchange = mm.Exchange(A=1e-12)
+        >>> repr(exchange)
+        'Exchange(A=1e-12)'
         >>> damping = mm.Damping(alpha=0.01)
         >>> repr(damping)
         'Damping(alpha=0.01)'

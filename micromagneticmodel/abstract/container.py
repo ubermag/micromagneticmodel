@@ -430,10 +430,10 @@ class Container(metaclass=abc.ABCMeta):
         >>> import micromagneticmodel as mm
         ...
         >>> exchange = mm.Exchange(A=1e-12)
-        >>> zeeman = mm.Zeeman(H=(100, 0, 0))
-        >>> energy = exchange + zeeman
+        >>> demag = mm.Demag()
+        >>> energy = exchange + demag
         >>> repr(energy)
-        'Exchange(A=1e-12) + Zeeman(H=(100, 0, 0))'
+        'Exchange(A=1e-12) + Demag()'
 
         """
         if len(self) == 0:

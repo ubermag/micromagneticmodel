@@ -16,8 +16,8 @@ class MagnetoElastic(EnergyTerm):
 
     .. math::
 
-        w_\\text{mel} = B_{1}\\sum_{i} m_{i}\\epsilon_{ii} +
-        B_{2}\\sum_{i}\\sum_{j\\ne i} m_{i}m_{j}\\epsilon_{ij}
+        w = B_{1}\\sum_{i} m_{i}\\epsilon_{ii} + B_{2}\\sum_{i}\\sum_{j\\ne i}
+        m_{i}m_{j}\\epsilon_{ij}
 
     Parameters
     ----------

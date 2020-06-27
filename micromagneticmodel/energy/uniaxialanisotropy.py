@@ -13,7 +13,7 @@ class UniaxialAnisotropy(EnergyTerm):
 
     .. math::
 
-        w_\\text{ua} = -K (\\mathbf{m} \\cdot \\mathbf{u})^{2}
+        w = -K (\\mathbf{m} \\cdot \\mathbf{u})^{2}
 
     Parameters
     ----------

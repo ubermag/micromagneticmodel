@@ -8,14 +8,14 @@ class Demag(EnergyTerm):
 
     .. math::
 
-        w_\\text{d} = -\\frac{1}{2}\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot
+        w = -\\frac{1}{2}\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot
         \\mathbf{H}_\\text{d}
 
     Parameters
     ----------
     asymptotic_radius : numbers.Real, optional
 
-        Optional asymptotic radius parameter.
+        Asymptotic radius parameter.
 
     Examples
     --------

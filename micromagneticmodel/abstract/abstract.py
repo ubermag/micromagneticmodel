@@ -1,4 +1,5 @@
 import abc
+import ubermagutil.typesystem as ts
 
 
 class Abstract(metaclass=abc.ABCMeta):
@@ -82,7 +83,8 @@ class Abstract(metaclass=abc.ABCMeta):
         for attr, value in self:
             if isinstance(value, str):
                 attributes.append(f'{attr}=\'{value}\'')
-            else:
+            elif not isinstance(value, ts.Descriptor):
+                # The parameter is not set.
                 attributes.append(f'{attr}={value}')
         attributes = ', '.join(attributes)
         return f'{self.__class__.__name__}({attributes})'

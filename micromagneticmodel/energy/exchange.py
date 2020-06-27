@@ -5,8 +5,7 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(A=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                              otherwise=df.Field))
+@ts.typesystem(A=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field))
 class Exchange(EnergyTerm):
     """Exchange energy term.
 

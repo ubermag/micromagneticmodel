@@ -7,7 +7,7 @@ from .energyterm import EnergyTerm
 @uu.inherit_docs
 @ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3),
                               otherwise=df.Field),
-               wave=ts.Subset(sample_set={'sine', 'sinc'}, unpack=False),
+               wave=ts.Subset(sample_set={'sin', 'sinc'}, unpack=False),
                f=ts.Scalar(positive=True),
                t0=ts.Scalar())
 class Zeeman(EnergyTerm):
@@ -95,7 +95,7 @@ class Zeeman(EnergyTerm):
 
     @property
     def _reprlatex(self):
-        if self.wave == 'sine':
+        if self.wave == 'sin':
             return (r'-\mu_{0}M_\text{s} \mathbf{m}'
                     r'\cdot \mathbf{H} \sin[2 \pi f (t-t_{0})]')
         elif self.wave == 'sinc':

@@ -4,7 +4,7 @@ import micromagneticmodel.abstract
 import micromagneticmodel.consts
 import micromagneticmodel.examples
 from .energy import EnergyTerm, Exchange, Zeeman, UniaxialAnisotropy, \
-    CubicAnisotropy, Demag, Zeeman, DMI, MagnetoElastic, Energy
+    CubicAnisotropy, Demag, Zeeman, DMI, MagnetoElastic, RKKY, Energy
 from .dynamics import DynamicsTerm, Precession, Damping, ZhangLi, \
     Slonczewski, Dynamics
 from .evolver import Evolver

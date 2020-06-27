@@ -11,8 +11,7 @@ class TestExchange:
         field = df.Field(mesh, dim=1, value=5e-12)
 
         self.valid_args = [1, 2.0, 5e-11, 1e6, {'a': 1, 'b': 1e-12}, field]
-        self.invalid_args = [-1, -2.1, 'a', (1, 2), -3.6e-6, '0',
-                             [1, 2, 3], {'a': -1, 'b': 3}]
+        self.invalid_args = ['a', (1, 2), '0', [1, 2, 3], {'a': 'c', 'b': 3}]
 
     def test_init_valid_args(self):
         for A in self.valid_args:

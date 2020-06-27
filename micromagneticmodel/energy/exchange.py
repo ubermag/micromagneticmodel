@@ -46,10 +46,10 @@ class Exchange(EnergyTerm):
 
     4. An attempt to define the exchange energy term using a wrong value.
 
-    >>> exchange = mm.Exchange(A=-5)  # negative value
+    >>> exchange = mm.Exchange(A='123')  # string value
     Traceback (most recent call last):
     ...
-    ValueError: ...
+    TypeError: ...
 
     """
     _allowed_attributes = ['A']

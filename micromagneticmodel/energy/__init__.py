@@ -6,4 +6,5 @@ from .dmi import DMI
 from .uniaxialanisotropy import UniaxialAnisotropy
 from .cubicanisotropy import CubicAnisotropy
 from .magnetoelastic import MagnetoElastic
+from .rkky import RKKY
 from .energy import Energy

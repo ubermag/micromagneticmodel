@@ -40,3 +40,11 @@ class TestZeeman:
 
         with pytest.raises(AttributeError):
             term = mm.Zeeman(wrong=1)
+
+    def test_init_time_dependent(self):
+        for H in self.valid_args:
+            term = mm.Zeeman(H=H, wave='sin', f=1e9, t0=0)
+            check_term(term)
+
+            term = mm.Zeeman(H=H, wave='sinc', f=1e9, t0=1e-12)
+            check_term(term)

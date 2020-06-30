@@ -19,7 +19,7 @@ class Abstract(metaclass=abc.ABCMeta):
 
         """
         for key, value in kwargs.items():
-            if key in self._allowed_attributes:
+            if key in self._allowed_attributes or key == 'name':
                 setattr(self, key, value)
             else:
                 msg = f'Invalid attribute {key} for {self.__class__}.'
@@ -93,8 +93,8 @@ class Abstract(metaclass=abc.ABCMeta):
     def name(self):
         """Name.
 
-        The name of the object is the same as the name of the class in
-        lowercase.
+        If the name was not provided during initialisation, the name of the
+        object is the same as the name of the class in lowercase.
 
         Returns
         -------
@@ -111,9 +111,16 @@ class Abstract(metaclass=abc.ABCMeta):
         >>> ua = mm.UniaxialAnisotropy(K=5e6, u=(0, 0, 1))
         >>> ua.name
         'uniaxialanisotropy'
-        >>> damping = mm.Damping(alpha=0.01)
+        >>> damping = mm.Damping(alpha=0.01, name='my_damping')
         >>> damping.name
-        'damping'
+        'my_damping'
 
         """
-        return self.__class__.__name__.lower()
+        if hasattr(self, '_name'):
+            return self._name
+        else:
+            return self.__class__.__name__.lower()
+
+    @name.setter
+    def name(self, value):
+        self._name = value

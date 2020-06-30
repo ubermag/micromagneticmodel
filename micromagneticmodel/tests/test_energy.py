@@ -147,6 +147,22 @@ class TestEnergy:
         check_container(container)
         assert len(container) == 2
 
+    def test_same_class_terms(self):
+        term1 = mm.UniaxialAnisotropy(K=1e6, u=(0, 0, 1))
+        term2 = mm.UniaxialAnisotropy(K=2e6, u=(0, 1, 0))
+        term3 = mm.UniaxialAnisotropy(K=2e6, u=(1, 0, 0), name='ua2')
+
+        with pytest.raises(ValueError):
+            container = term1 + term2
+
+        container = term1 + term3
+        check_container(container)
+        assert len(container) == 2
+        assert term1 in container
+        assert term3 in container
+        assert container.uniaxialanisotropy.K == 1e6
+        assert container.ua2.K == 2e6
+
     def test_energy_and_energy_density(self):
         container = self.dmi + self.zeeman  # single term is not allowed
 

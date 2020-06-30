@@ -37,7 +37,7 @@ class Zeeman(EnergyTerm):
         w = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}
         \\text{sinc}[2\\pi f(t-t_{0})]
 
-    and ``f`` is interpreted as a cut-off frequency.
+    and ``f`` is a cut-off frequency.
 
     Parameters
     ----------

@@ -19,6 +19,7 @@ Tutorials
    ipynb/term-parameters
    ipynb/energy-terms
    ipynb/dynamics-terms
+   ipynb/same-class-terms
 
 **Evolvers and drivers**:
 

@@ -6,6 +6,8 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 @ts.typesystem(K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+               K1=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+               K2=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
                u=ts.Parameter(descriptor=ts.Vector(size=3),
                               otherwise=df.Field))
 class UniaxialAnisotropy(EnergyTerm):
@@ -13,11 +15,12 @@ class UniaxialAnisotropy(EnergyTerm):
 
     .. math::
 
-        w = -K (\\mathbf{m} \\cdot \\mathbf{u})^{2}
+        w = -K/K_{1} (\\mathbf{m} \\cdot \\mathbf{u})^{2} - K_{2} (\\mathbf{m}
+        \\cdot \\mathbf{u})^{4}
 
     Parameters
     ----------
-    K : numbers.Real, dict, discretisedfield.Field
+    K / K1 / K2 : numbers.Real, dict, discretisedfield.Field
 
         If a single value ``numbers.Real`` is passed, a spatially constant
         parameter is defined. For a spatially varying parameter, either a
@@ -59,7 +62,11 @@ class UniaxialAnisotropy(EnergyTerm):
     >>> u = df.Field(mesh, dim=3, value=(0, 1, 0))
     >>> ua = mm.UniaxialAnisotropy(K=K, u=u)
 
-    4. An attempt to define the uniaxial anisotropy energy term using a wrong
+    4. Defining higher-order uniaxial anisotropy
+
+    >>> ua = mm.UniaxialAnisotropy(K1=1e5, K2=2e3, u=(0, 0, 1))
+
+    5. An attempt to define the uniaxial anisotropy energy term using a wrong
     value.
 
     >>> ua = mm.UniaxialAnisotropy(K=1e5, u=(0, 0, 1, 0))  # length-4 vector
@@ -68,8 +75,9 @@ class UniaxialAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['K', 'u']
-    _reprlatex = r'-K (\mathbf{m} \cdot \mathbf{u})^{2}'
+    _allowed_attributes = ['K', 'K1', 'K2', 'u']
+    _reprlatex = (r'-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - '
+                  r'K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}')
 
     def effective_field(self, m):
         raise NotImplementedError

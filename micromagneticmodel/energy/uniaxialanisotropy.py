@@ -76,8 +76,14 @@ class UniaxialAnisotropy(EnergyTerm):
 
     """
     _allowed_attributes = ['K', 'K1', 'K2', 'u']
-    _reprlatex = (r'-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - '
-                  r'K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}')
+
+    @property
+    def _reprlatex(self):
+        if not isinstance(self.K2, ts.Descriptor):
+            return (r'-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - '
+                    r'K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}')
+        else:
+            return r'-K (\mathbf{m} \cdot \mathbf{u})^{2}'
 
     def effective_field(self, m):
         raise NotImplementedError

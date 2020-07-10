@@ -44,3 +44,7 @@ class TestUniaxialAnisotropy:
 
         with pytest.raises(AttributeError):
             term = mm.UniaxialAnisotropy(wrong=1)
+
+    def test_higher_order_anisotropy(self):
+        term = mm.UniaxialAnisotropy(K1=1e5, K2=3e2, u=(0, 0, 1))
+        check_term(term)

@@ -45,11 +45,10 @@ class Abstract(metaclass=abc.ABCMeta):
 
         >>> import micromagneticmodel as mm
         ...
-        >>> uniaxialanisotropy = mm.UniaxialAnisotropy(K=1e5, u=(0, 0, 1))
-        >>> for attr, value in uniaxialanisotropy:
+        >>> exchange = mm.Exchange(A=1)
+        >>> for attr, value in exchange:
         ...     print(f'{attr} = {value}')
-        K = 100000.0
-        u = (0, 0, 1)
+        A = 1
 
         """
         for attr in self._allowed_attributes:

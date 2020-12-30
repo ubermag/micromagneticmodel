@@ -3,26 +3,24 @@ import ubermagutil.typesystem as ts
 
 
 class Abstract(metaclass=abc.ABCMeta):
-    """An abstract class for deriving all energy and dynamics terms as well as
-    driver and evolver classes.
+    """Abstract class for deriving all terms, drivers, and evolvers.
+
+    It can be initialised with keyword arguments defined in
+    ``_allowed_attributes``, which is a list of strings.
+
+    Raises
+    ------
+    AttributeError
+
+        If a keyword argument not in ``_allowed_attributes`` is passed.
 
     """
     def __init__(self, **kwargs):
-        """It can be initialised with keyword arguments defined in
-        ``_allowed_attributes``, which is a list of strings.
-
-        Raises
-        ------
-        AttributeError
-
-            If a keyword argument not in ``_allowed_attributes`` is passed.
-
-        """
         for key, value in kwargs.items():
             if key in self._allowed_attributes or key == 'name':
                 setattr(self, key, value)
             else:
-                msg = f'Invalid attribute {key} for {self.__class__}.'
+                msg = f'Invalid attribute {key=} for {self.__class__=}.'
                 raise AttributeError(msg)
 
     @property

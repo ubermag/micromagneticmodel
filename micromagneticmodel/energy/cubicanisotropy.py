@@ -24,7 +24,7 @@ class CubicAnisotropy(EnergyTerm):
 
     Parameters
     ----------
-    K, : numbers.Real, dict, discretisedfield.Field
+    K : numbers.Real, dict, discretisedfield.Field
 
         If a single value ``numbers.Real`` is passed, a spatially constant
         parameter is defined. For a spatially varying parameter, either a
@@ -32,7 +32,7 @@ class CubicAnisotropy(EnergyTerm):
         parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
-    u1 : (3,) array_like, dict, discretisedfield.Field
+    u1, u2 : (3,) array_like, dict, discretisedfield.Field
 
         If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
         passed, which consists of ``numbers.Real``, a spatially constant

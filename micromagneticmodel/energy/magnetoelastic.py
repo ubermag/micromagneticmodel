@@ -21,7 +21,7 @@ class MagnetoElastic(EnergyTerm):
 
     Parameters
     ----------
-    B1/B2 : numbers.Real, dict, discretisedfield.Field
+    B1, B2 : numbers.Real, dict, discretisedfield.Field
 
         If a single value ``numbers.Real`` is passed, a spatially constant
         parameter is defined. For a spatially varying parameter, either a

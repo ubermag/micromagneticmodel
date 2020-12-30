@@ -4,7 +4,9 @@ from .abstract import Abstract
 
 
 class Term(Abstract):
-    """An abstract class for deriving all energy and dynamics terms.
+    """Abstract class for deriving energy and dynamics terms.
+
+    This class is derived from ``micromagneticmodel.abstract.Abstract`.`
 
     """
     @property

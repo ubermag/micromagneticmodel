@@ -32,7 +32,7 @@ class CubicAnisotropy(EnergyTerm):
         parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
-    u1/u2 : (3,) array_like, dict, discretisedfield.Field
+    u1 : (3,) array_like, dict, discretisedfield.Field
 
         If a single length-3 array_like (tuple, list, ``numpy.ndarray``) is
         passed, which consists of ``numbers.Real``, a spatially constant

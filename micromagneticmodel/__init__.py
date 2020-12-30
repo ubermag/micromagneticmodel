@@ -1,3 +1,4 @@
+"""Main package"""
 import pytest
 import pkg_resources
 import micromagneticmodel.abstract
@@ -12,10 +13,21 @@ from .driver import Driver
 from .system import System
 
 
-def test():
-    return pytest.main(['-v', '--pyargs',
-                        'micromagneticmodel'])  # pragma: no cover
-
-
 __version__ = pkg_resources.get_distribution(__name__).version
 __dependencies__ = pkg_resources.require(__name__)
+
+
+def test():
+    """Run all package tests.
+
+    Examples
+    --------
+    1. Run all tests.
+
+    >>> import micromagneticmodel
+    ...
+    >>> # micromagneticmodel.test()
+
+    """
+    return pytest.main(['-v', '--pyargs',
+                        'micromagneticmodel', '-l'])  # pragma: no cover

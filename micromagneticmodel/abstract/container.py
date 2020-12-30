@@ -2,41 +2,43 @@ import abc
 
 
 class Container(metaclass=abc.ABCMeta):
+    """Container abstract class.
+
+    Container can be initialised with a list of either energy or
+    dynamics terms.
+
+    Parameters
+    ----------
+    terms : list, optional
+
+        A list of either energy or dynamics terms. Defaults to ``None``. If
+        ``terms`` is not passed, an empty container is initialised.
+
+    Examples
+    --------
+    1. Defining energy terms container.
+
+    >>> import micromagneticmodel as mm
+    ...
+    >>> terms = [mm.Exchange(A=1e-12), mm.Demag()]
+    >>> energy = mm.Energy(terms=terms)
+    >>> len(energy)  # the number of terms
+    2
+
+    2. Defining dynamics terms container, by adding terms individually.
+
+    >>> dynamics = mm.Dynamics()
+    >>> len(dynamics)
+    0
+    >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
+    >>> len(dynamics)
+    1
+    >>> dynamics += mm.Damping()
+    >>> len(dynamics)
+    2
+
+    """
     def __init__(self, terms=None):
-        """Container can be initialised with a list of either energy or
-        dynamics terms.
-
-        Parameters
-        ----------
-        terms : list, optional
-
-            A list of either energy or dynamics terms. Defaults to ``None``. If
-            ``terms`` is not passed, an empty container is initialised.
-
-        Examples
-        --------
-        1. Defining energy terms container.
-
-        >>> import micromagneticmodel as mm
-        ...
-        >>> terms = [mm.Exchange(A=1e-12), mm.Demag()]
-        >>> energy = mm.Energy(terms=terms)
-        >>> len(energy)  # the number of terms
-        2
-
-        2. Defining dynamics terms container, by adding terms individually.
-
-        >>> dynamics = mm.Dynamics()
-        >>> len(dynamics)
-        0
-        >>> dynamics += mm.Precession(gamma0=mm.consts.gamma0)
-        >>> len(dynamics)
-        1
-        >>> dynamics += mm.Damping()
-        >>> len(dynamics)
-        2
-
-        """
         self._terms = list()
         if terms is not None:
             for term in terms:

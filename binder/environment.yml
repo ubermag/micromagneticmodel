@@ -1,4 +1,4 @@
-name: binder-environment
+name: conda-environment
 
 channels:
   - conda-forge

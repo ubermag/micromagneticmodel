@@ -7,66 +7,66 @@ import ubermagutil.typesystem as ts
                T=ts.Scalar(unsigned=True),
                name=ts.Name(const=True))
 class System:
+    """System class.
+
+    This class is used for defining a micromagnetic system. In order to
+    uniquely define a micromagnetic system, the following parameters can be
+    provided:
+
+    - Energy equation (``system.energy``)
+    - Dynamics equation  (``system.dynamics``)
+    - Magnetisation field (``system.m``)
+    - Temperature (``system.T``)
+    - Name (``system.name``)
+
+    Parameters
+    ----------
+    energy : micromagneticmodel.Energy, optional
+
+        Energy equation. Defaults to 0.
+
+    dynamics : micromagneticmodel.Dynamics, optional
+
+        Dynamics equation. Defaults to 0.
+
+    m : disretisedfield.Field, optional
+
+        Magnetisation field. Defaults to ``None``.
+
+    T : numbers.Real
+
+        Temperature. Defaults to 0.
+
+    name : str, optional
+
+        Name of the system. Defaults to ``'unnamed'``.
+
+    Examples
+    --------
+    1. Defining a system.
+
+    >>> import micromagneticmodel as mm
+    >>> import discretisedfield as df
+    ...
+    >>> p1 = (0, 0, 0)
+    >>> p2 = (10e-9, 10e-9, 10e-9)
+    >>> n = (5, 5, 5)
+    >>> region = df.Region(p1=p1, p2=p2)
+    >>> mesh = df.Mesh(region=region, n=n)
+    >>> m = df.Field(mesh, dim=3, value=(0, 0, 1), norm=1e6)
+    >>> energy = mm.Exchange(A=1e-11) + mm.Demag()
+    >>> dynamics = mm.Precession(gamma0=mm.consts.gamma0) + \
+            mm.Damping(alpha=0.1)
+    >>> T = 0
+    >>> name = 'my_cool_system'
+    >>> system = mm.System(energy=energy,
+    ...                    dynamics=dynamics,
+    ...                    m=m,
+    ...                    T=T,
+    ...                    name=name)
+
+    """
     def __init__(self, energy=0, dynamics=0, m=None, T=0, name='unnamed'):
-        """System.
-
-        This class is used for defining a micromagnetic system. In order to
-        uniquely define a micromagnetic system, the following parameters can be
-        provided:
-
-        - Energy equation (``system.energy``)
-        - Dynamics equation  (``system.dynamics``)
-        - Magnetisation field (``system.m``)
-        - Temperature (``system.T``)
-        - Name (``system.name``)
-
-        Parameters
-        ----------
-        energy : micromagneticmodel.Energy, optional
-
-            Energy equation. Defaults to 0.
-
-        dynamics : micromagneticmodel.Dynamics, optional
-
-            Dynamics equation. Defaults to 0.
-
-        m : disretisedfield.Field, optional
-
-            Magnetisation field. Defaults to ``None``.
-
-        T : numbers.Real
-
-            Temperature. Defaults to 0.
-
-        name : str, optional
-
-            Name of the system. Defaults to ``'unnamed'``.
-
-        Examples
-        --------
-        1. Defining a system.
-
-        >>> import micromagneticmodel as mm
-        >>> import discretisedfield as df
-        ...
-        >>> p1 = (0, 0, 0)
-        >>> p2 = (10e-9, 10e-9, 10e-9)
-        >>> n = (5, 5, 5)
-        >>> region = df.Region(p1=p1, p2=p2)
-        >>> mesh = df.Mesh(region=region, n=n)
-        >>> m = df.Field(mesh, dim=3, value=(0, 0, 1), norm=1e6)
-        >>> energy = mm.Exchange(A=1e-11) + mm.Demag()
-        >>> dynamics = mm.Precession(gamma0=mm.consts.gamma0) + \
-                mm.Damping(alpha=0.1)
-        >>> T = 0
-        >>> name = 'my_cool_system'
-        >>> system = mm.System(energy=energy,
-        ...                    dynamics=dynamics,
-        ...                    m=m,
-        ...                    T=T,
-        ...                    name=name)
-
-        """
         self.energy = energy
         self.dynamics = dynamics
         self.m = m

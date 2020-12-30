@@ -1,16 +1,12 @@
 PROJECT=micromagneticmodel
 IPYNBPATH=docs/ipynb/*.ipynb
-CODECOVTOKEN=eae96112-f8ac-4f24-b90b-6b3debfa8689
-PYTHON?=python3
+PYTHON?=python
 
-test:
-	$(PYTHON) -m pytest
-
-test-test:
+test-unittests:
 	$(PYTHON) -c "import sys; import $(PROJECT); sys.exit($(PROJECT).test())"
 
 test-coverage:
-	$(PYTHON) -m pytest -v --cov=$(PROJECT) --cov-config .coveragerc
+	$(PYTHON) -m pytest -v --cov=$(PROJECT) --cov-report=xml --cov-config .coveragerc
 
 test-docs:
 	$(PYTHON) -m pytest -v --doctest-modules --ignore=$(PROJECT)/tests $(PROJECT)
@@ -21,29 +17,7 @@ test-ipynb:
 test-pycodestyle:
 	$(PYTHON) -m pycodestyle --filename=*.py .
 
-test-all: test-test test-coverage test-docs test-ipynb test-pycodestyle
-
-upload-coverage: SHELL:=/bin/bash
-upload-coverage:
-	bash <(curl -s https://codecov.io/bash) -t $(CODECOVTOKEN)
-
-travis-build: SHELL:=/bin/bash
-travis-build:
-	ci_env=`bash <(curl -s https://codecov.io/env)`
-	docker build -f docker/Dockerfile -t dockertestimage .
-	docker run -e ci_env -ti -d --name testcontainer dockertestimage
-	docker exec testcontainer make test-all
-	docker exec testcontainer make upload-coverage
-	docker stop testcontainer
-	docker rm testcontainer
-
-test-docker:
-	docker build -f docker/Dockerfile -t dockertestimage .
-	docker run -ti -d --name testcontainer dockertestimage
-	docker exec testcontainer find . -name '*.pyc' -delete
-	docker exec testcontainer make test-all
-	docker stop testcontainer
-	docker rm testcontainer
+test-all: test-unittests test-coverage test-docs test-ipynb test-pycodestyle
 
 build-dists:
 	rm -rf dist/

@@ -1,3 +1,4 @@
+"""Physical constants"""
 import math
 
 # Fundamental constants

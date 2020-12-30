@@ -8,7 +8,7 @@ Marijan Beg<sup>1,2</sup> and Hans Fangohr<sup>1,2,3</sup>
 | Description | Badge |
 | --- | --- |
 | Tests | [![workflow](https://github.com/ubermag/micromagneticmodel/workflows/workflow/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aworkflow) |
-|       | [![conda](https://github.com/ubermag/ubermagutil/micromagneticmodel/conda/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aconda) |
+|       | [![conda](https://github.com/ubermag/micromagneticmodel/workflows/conda/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aconda) |
 | Releases | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
 |          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg?token=Z4SzFZSXSE)](https://codecov.io/gh/ubermag/micromagneticmodel) |

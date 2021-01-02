@@ -21,7 +21,7 @@ def macrospin():
 
     Examples
     --------
-    1. Getting macrospin example.
+    1. Getting macrospin example system.
 
     >>> import micromagneticmodel as mm
     ...

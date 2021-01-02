@@ -12,9 +12,7 @@ from .evolver import Evolver
 from .driver import Driver
 from .system import System
 
-
 __version__ = pkg_resources.get_distribution(__name__).version
-__dependencies__ = pkg_resources.require(__name__)
 
 
 def test():

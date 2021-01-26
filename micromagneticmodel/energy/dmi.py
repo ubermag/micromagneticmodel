@@ -36,6 +36,9 @@ class DMI(EnergyTerm):
         the parameter is defined "per region") or ``discretisedfield.Field`` is
         passed.
 
+        *Note*: Initialisation with ``discretisedfield.Field`` is currently
+        incompatible with OOMMF.
+
     crystalclass : str
 
         One of the following crystalographic classes is allowed: ``'Cnv'``,

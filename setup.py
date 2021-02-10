@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='micromagneticmodel',
-    version='0.11',
+    version='0.11.1',
     description=('Python-based domain-specific language for '
                  'computational magnetism'),
     author='Marijan Beg, Martin Lang, and Hans Fangohr',
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     python_requires='>=3.8',
-    install_requires=['discretisedfield==0.11'],
+    install_requires=['discretisedfield==0.11.1'],
     classifiers=['Development Status :: 5 - Production/Stable',
                  'Intended Audience :: Education',
                  'Intended Audience :: Developers',

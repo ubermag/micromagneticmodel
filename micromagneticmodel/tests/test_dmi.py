@@ -10,7 +10,10 @@ class TestDMI:
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
         field = df.Field(mesh, dim=1, value=5e-3)
 
-        self.crystalclasses = ['T', 'O', 'Cnv', 'D2d']
+        self.crystalclasses = ['T', 'O', 'Cnv_x', 'Cnv_y', 'Cnv_z', 'D2d_x',
+                               'D2d_y', 'D2d_z',
+                               'Cnv', 'D2d'  # legacy crystalclass names
+                               ]
         self.valid_args = [1, 2.0, 5e-11, 1e6, {'a': 1, 'b': 1e-12}, field]
         self.invalid_args = ['a', (1, 2), {}, '0',
                              [1, 2, 3], {'a b': -1, 'b': 3}]

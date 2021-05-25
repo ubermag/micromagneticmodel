@@ -6,7 +6,9 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 @ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               crystalclass=ts.Subset(sample_set={'Cnv', 'T', 'O', 'D2d'},
+               crystalclass=ts.Subset(sample_set={'Cnv', 'Cnv_x', 'Cnv_y',
+                                                  'Cnv_z', 'T', 'O', 'D2d',
+                                                  'D2d_x', 'D2d_y', 'D2d_z'},
                                       unpack=False))
 class DMI(EnergyTerm):
     """Dzyaloshinskii-Moriya energy term.

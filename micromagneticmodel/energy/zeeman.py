@@ -9,7 +9,10 @@ from .energyterm import EnergyTerm
                               otherwise=df.Field),
                wave=ts.Subset(sample_set={'sin', 'sinc'}, unpack=False),
                f=ts.Scalar(positive=True),
-               t0=ts.Scalar())
+               t0=ts.Scalar(),
+               tlist=ts.Typed(expected_type=list),
+               dtlist=ts.Typed(expected_type=list),
+               tstep=ts.Scalar(positive=True))
 class Zeeman(EnergyTerm):
     """Zeeman energy term.
 
@@ -96,7 +99,7 @@ class Zeeman(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['H', 'wave', 'f', 't0']
+    _allowed_attributes = ['H', 'wave', 'f', 't0', 'tlist', 'dtlist', 'tstep']
 
     @property
     def _reprlatex(self):

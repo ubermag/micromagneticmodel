@@ -1,14 +1,42 @@
-NEW WEBSITE: https://ubermag.github.io
-======================================
+.. mdinclude:: ../README.md
+    :start-line: 0
+    :end-line: 6
 
-``Micromagneticmodel`` is part of the ``ubermag`` metapackage. Recently, the
-websites for the different subpackages have been centralised. Please use the new
-`documentation <https://ubermag.github.io/documentation/micromagneticmodel.html>`_
-and `API reference <https://ubermag.github.io/api/micromagneticmodel.html>`_ in
-the future. 
+.. mdinclude:: ../README.md
+    :start-line: 21
+    :end-line: 34
 
-You should be redirected in 5 seconds automatically.
+.. toctree::
+    :maxdepth: 1
+    :caption: Tutorials
 
-.. raw:: html
+    ipynb/installation-testing-update
+    ipynb/deriving-energy-term
+    ipynb/deriving-dynamics-term
+    ipynb/term-parameters
+    ipynb/energy-terms
+    ipynb/dynamics-terms
+    ipynb/same-class-terms
+    ipynb/evolver-driver
+    ipynb/system
+    ipynb/constants
+    ipynb/other
 
-     <meta http-equiv="Refresh" content="5; url=https://ubermag.github.io/documentation/micromagneticmodel.html" />
+API Reference
+-------------
+.. autosummary::
+    :nosignatures:
+    :toctree: _autosummary
+    :caption: API Reference
+    :template: module-template.rst
+    :recursive:
+
+    micromagneticmodel
+    micromagneticmodel.abstract
+    micromagneticmodel.consts
+    micromagneticmodel.examples
+
+Index
+-----
+
+- :ref:`genindex`

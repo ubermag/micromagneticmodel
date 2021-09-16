@@ -5,9 +5,8 @@ import micromagneticmodel as mm
 
 @uu.inherit_docs
 class EnergyTerm(mm.abstract.Term):
-    """A parent class for all energy terms.
+    """A parent class for all energy terms."""
 
-    """
     _container_class = 'Energy'
 
     def energy(self, m):

@@ -14,11 +14,11 @@ from .energyterm import EnergyTerm
                tstep=ts.Scalar(positive=True),
                tcl_strings=ts.Typed(expected_type=dict))
 class Zeeman(EnergyTerm):
-    """Zeeman energy term.
+    r"""Zeeman energy term.
 
     .. math::
 
-        w = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}
+        w = -\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}
 
     Zeeman energy term allows defining time-dependent as well as
     time-independent external magnetic field. If only external magnetic field
@@ -30,15 +30,15 @@ class Zeeman(EnergyTerm):
 
     .. math::
 
-        w = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H} \\sin[2\\pi
+        w = -\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H} \sin[2\pi
         f(t-t_{0})]
 
     whereas for ``wave='sinc'``, the energy density is:
 
     .. math::
 
-        w = -\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot \\mathbf{H}
-        \\text{sinc}[2\\pi f(t-t_{0})]
+        w = -\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}
+        \text{sinc}[2\pi f(t-t_{0})]
 
     and ``f`` is a cut-off frequency.
 
@@ -99,7 +99,9 @@ class Zeeman(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['H', 'wave', 'f', 't0', 'time_dependence', 'tstep', 'tcl_strings']
+
+    _allowed_attributes = ['H', 'wave', 'f', 't0', 'time_dependence', 'tstep',
+                           'tcl_strings']
 
     @property
     def _reprlatex(self):

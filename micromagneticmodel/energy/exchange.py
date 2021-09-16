@@ -7,11 +7,11 @@ from .energyterm import EnergyTerm
 @uu.inherit_docs
 @ts.typesystem(A=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field))
 class Exchange(EnergyTerm):
-    """Exchange energy term.
+    r"""Exchange energy term.
 
     .. math::
 
-        w = - A \\mathbf{m} \\cdot \\nabla^{2} \\mathbf{m}
+        w = - A \mathbf{m} \cdot \nabla^{2} \mathbf{m}
 
     Parameters
     ----------

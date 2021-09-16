@@ -9,22 +9,22 @@ from .energyterm import EnergyTerm
                crystalclass=ts.Subset(sample_set={'Cnv', 'T', 'O', 'D2d'},
                                       unpack=False))
 class DMI(EnergyTerm):
-    """Dzyaloshinskii-Moriya energy term.
+    r"""Dzyaloshinskii-Moriya energy term.
 
     .. math::
 
-        w^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times \\mathbf{m})
+        w^\text{T(O)} = D \mathbf{m} \cdot (\nabla  \times \mathbf{m})
 
     .. math::
 
-        w^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} - m_{z} \\nabla
-        \\cdot \\mathbf{m} )
+        w^\text{Cnv} = D ( \mathbf{m} \cdot \nabla m_{z} - m_{z} \nabla
+        \cdot \mathbf{m} )
 
     .. math::
 
-        w^\\text{D2d} = D \\mathbf{m} \\cdot \\left( \\frac{\\partial
-        \\mathbf{m}}{\\partial x} \\times \\hat{x} - \\frac{\\partial
-        \\mathbf{m}}{\\partial y} \\times \\hat{y} \\right)
+        w^\text{D2d} = D \mathbf{m} \cdot \left( \frac{\partial
+        \mathbf{m}}{\partial x} \times \hat{x} - \frac{\partial
+        \mathbf{m}}{\partial y} \times \hat{y} \right)
 
     Parameters
     ----------

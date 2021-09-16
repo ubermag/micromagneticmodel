@@ -8,12 +8,12 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(gamma0=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
                                    otherwise=df.Field))
 class Precession(DynamicsTerm):
-    """Precession dynamics term.
+    r"""Precession dynamics term.
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -\\frac{\\gamma_{0}}{1 +
-        \\alpha^{2}} \\mathbf{m} \\times \\mathbf{H}_\\text{eff}
+        \frac{\text{d}\mathbf{m}}{\text{d}t} = -\frac{\gamma_{0}}{1 +
+        \alpha^{2}} \mathbf{m} \times \mathbf{H}_\text{eff}
 
     Parameters
     ----------

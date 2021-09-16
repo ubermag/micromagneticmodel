@@ -8,13 +8,13 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(alpha=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
                                   otherwise=df.Field))
 class Damping(DynamicsTerm):
-    """Damping dynamics term.
+    r"""Damping dynamics term.
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -\\frac{\\gamma_{0}
-        \\alpha} {1 + \\alpha^{2}} \\mathbf{m} \\times (\\mathbf{m} \\times
-        \\mathbf{H}_\\text{eff})
+        \frac{\text{d}\mathbf{m}}{\text{d}t} = -\frac{\gamma_{0}
+        \alpha} {1 + \alpha^{2}} \mathbf{m} \times (\mathbf{m} \times
+        \mathbf{H}_\text{eff})
 
     Parameters
     ----------

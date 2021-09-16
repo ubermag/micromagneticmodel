@@ -15,24 +15,24 @@ from .dynamicsterm import DynamicsTerm
                eps_prime=ts.Parameter(descriptor=ts.Scalar(),
                                       otherwise=df.Field))
 class Slonczewski(DynamicsTerm):
-    """Slonczewski spin transfer torque dynamics term.
+    r"""Slonczewski spin transfer torque dynamics term.
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} =
-        \\gamma_{0}\\beta\\epsilon(\\mathbf{m} \\times \\mathbf{m}_\\text{p}
-        \\times \\mathbf{m}) - \\gamma_{0}\\beta\\epsilon' (\\mathbf{m} \\times
-        \\mathbf{m}_\\text{p})
+        \frac{\text{d}\mathbf{m}}{\text{d}t} =
+        \gamma_{0}\beta\epsilon(\mathbf{m} \times \mathbf{m}_\text{p}
+        \times \mathbf{m}) - \gamma_{0}\beta\epsilon' (\mathbf{m} \times
+        \mathbf{m}_\text{p})
 
     .. math::
 
-        \\beta = \\left| \\frac{\\hbar}{\\mu_{0}e} \\right|
-        \\frac{J}{tM_\\text{s}}
+        \beta = \left| \frac{\hbar}{\mu_{0}e} \right|
+        \frac{J}{tM_\text{s}}
 
     .. math::
 
-        \\epsilon = \\frac{P\\Lambda^{2}}{(\\Lambda^{2} + 1) + (\\Lambda^{2} -
-        1)(\\mathbf{m}\\cdot\\mathbf{m}_\\text{p})}
+        \epsilon = \frac{P\Lambda^{2}}{(\Lambda^{2} + 1) + (\Lambda^{2} -
+        1)(\mathbf{m}\cdot\mathbf{m}_\text{p})}
 
     Parameters
     ----------
@@ -102,6 +102,7 @@ class Slonczewski(DynamicsTerm):
     TypeError: ...
 
     """
+
     _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime']
 
     @property

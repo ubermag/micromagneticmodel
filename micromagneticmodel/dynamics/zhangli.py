@@ -8,13 +8,13 @@ from .dynamicsterm import DynamicsTerm
 @ts.typesystem(u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
                beta=ts.Scalar())
 class ZhangLi(DynamicsTerm):
-    """Zhang-Li spin transfer torque dynamics term.
+    r"""Zhang-Li spin transfer torque dynamics term.
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} = -(\\mathbf{u} \\cdot
-        \\boldsymbol\\nabla)\\mathbf{m} + \\beta\\mathbf{m} \\times
-        \\big[(\\mathbf{u} \\cdot \\boldsymbol\\nabla)\\mathbf{m}\\big]
+        \frac{\text{d}\mathbf{m}}{\text{d}t} = -(\mathbf{u} \cdot
+        \boldsymbol\nabla)\mathbf{m} + \beta\mathbf{m} \times
+        \big[(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}\big]
 
     Parameters
     ----------
@@ -53,6 +53,7 @@ class ZhangLi(DynamicsTerm):
     TypeError: ...
 
     """
+
     _allowed_attributes = ['u', 'beta']
     _reprlatex = (r'-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
                   r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '

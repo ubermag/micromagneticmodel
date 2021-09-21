@@ -1,30 +1,33 @@
 # micromagneticmodel
-Marijan Beg<sup>1,2</sup>, Martin Lang<sup>1</sup>, and Hans Fangohr<sup>1,2,3</sup>
+[Marijan Beg](https://github.com/marijanbeg)<sup>1,2</sup>, [Martin Lang](https://github.com/lang-m)<sup>2</sup>, [Samuel Holt](https://github.com/samjrholt)<sup>3</sup>, [Hans Fangohr](https://github.com/fangohr)<sup>2,4,5</sup>
 
-<sup>1</sup> *Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, United Kingdom*  
-<sup>2</sup> *European XFEL GmbH, Holzkoppel 4, 22869 Schenefeld, Germany*  
-<sup>3</sup> *Max Planck Institute for the Structure and Dynamics of Matter, Luruper Chaussee 149, 22761 Hamburg, Germany*   
+<sup>1</sup> *Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK*  
+<sup>2</sup> *Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK*  
+<sup>3</sup> *Department of Physics, University of Warwick, Coventry CV4 7AL, UK*  
+<sup>4</sup> *Max Planck Institute for the Structure and Dynamics of Matter, Luruper Chaussee 149, 22761 Hamburg, Germany*  
+<sup>5</sup> *Center for Free-Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany*
 
 | Description | Badge |
 | --- | --- |
-| Tests | [![workflow](https://github.com/ubermag/micromagneticmodel/workflows/workflow/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aworkflow) |
+| Tests | [![Build status](https://github.com/ubermag/micromagneticmodel/workflows/workflow/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aworkflow) |
 |       | [![conda](https://github.com/ubermag/micromagneticmodel/workflows/conda/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aconda) |
 | Releases | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
 |          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
-| Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg?token=Z4SzFZSXSE)](https://codecov.io/gh/ubermag/micromagneticmodel) |
-| Documentation | [![Documentation Status](https://readthedocs.org/projects/micromagneticmodel/badge/?version=latest)](https://micromagneticmodel.readthedocs.io/en/latest/?badge=latest) |
+| Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg?token=hcK4fofmrL)](https://codecov.io/gh/ubermag/micromagneticmodel) |
+| Documentation | [![Documentation](https://img.shields.io/badge/Docs-ubermag.github.io-blue)](https://ubermag.github.io/documentation/micromagneticmodel.html) |
 | YouTube | [![YouTube](https://img.shields.io/badge/YouTube-ubermag-blue)](https://www.youtube.com/channel/UC7MSqVQSMFV42R1jAYmKGLg) |
-| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/HEAD?urlpath=lab/tree/docs/ipynb/index.ipynb) |
+| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/stable?filepath=docs%2Fipynb%2Findex.ipynb) |
 | Platforms | [![Platforms](https://anaconda.org/conda-forge/micromagneticmodel/badges/platforms.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Downloads | [![Downloads](https://anaconda.org/conda-forge/micromagneticmodel/badges/downloads.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |
-| DOI | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3539480.svg)](https://doi.org/10.5281/zenodo.3539480) |
+| DOI | [![DOI](https://zenodo.org/badge/67028400.svg)](https://zenodo.org/badge/latestdoi/67028400) |
 
 ## About
 
-`micromagneticmodel` is a Python package providing:
+`micromagneticmodel` is a Python package, integrated with Jupyter, providing:
 
 - Domain-specific language for computational magnetism.
+
 
 It is available on Windows, MacOS, and Linux. It requires Python 3.8+.
 
@@ -54,10 +57,10 @@ All contributions are welcome, however small they are. If you would like to cont
 
 **Contributors**:
 
-- Thomas Kluyver ([@takluyver](https://github.com/takluyver)), European XFEL, Germany
-- Ryan A. Pepper ([@rpep](https://github.com/rpep)), University of Southampton, United Kingdom
-- Sergii Mamedov ([@sergii-mamedov](https://github.com/sergii-mamedov)), European XFEL, Germany
-- Natalie Downing ([@gamdow](https://github.com/gamdow)), University of Southampton, United Kingdom
+- [Thomas Kluyver](https://github.com/takluyver)
+- [Ryan A. Pepper](https://github.com/rpep)
+- [Sergii Mamedov](https://github.com/sergii-mamedov)
+- [Natalie Downing](https://github.com/gamdow)
 
 ## License
 
@@ -65,12 +68,15 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 ## How to cite
 
-1. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [*AIP Advances* **7**, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
+1. M. Beg, M. Lang, and H. Fangohr. Ubermag: Towards more effective micromagnetic workflows. [*IEEE Transactions on Magnetics*](https://doi.org/10.1109/TMAG.2021.3078896) (2021).
 
-2. M. Beg and H. Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism. DOI: [10.5281/zenodo.3539480](http://doi.org/10.5281/zenodo.3539480) (2021).
+2. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [*AIP Advances* **7**, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
+
+3. Marijan Beg, Martin Lang, Samuel Holt, Hans Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism DOI: [10.5281/zenodo.3539461](http://doi.org/10.5281/zenodo.3539461) (2021).
 
 ## Acknowledgements
 
 - [OpenDreamKit](http://opendreamkit.org/) – Horizon 2020 European Research Infrastructure project (676541)
 
 - EPSRC Programme Grant on [Skyrmionics](http://www.skyrmions.ac.uk) (EP/N032128/1)
+

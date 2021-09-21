@@ -6,7 +6,10 @@ from .dynamicsterm import DynamicsTerm
 
 @uu.inherit_docs
 @ts.typesystem(u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               beta=ts.Scalar())
+               beta=ts.Scalar(),
+               time_dependence=ts.Typed(expected_type=list),
+               tstep=ts.Scalar(positive=True),
+               tcl_strings=ts.Typed(expected_type=dict))
 class ZhangLi(DynamicsTerm):
     r"""Zhang-Li spin transfer torque dynamics term.
 
@@ -54,7 +57,8 @@ class ZhangLi(DynamicsTerm):
 
     """
 
-    _allowed_attributes = ['u', 'beta']
+    _allowed_attributes = ['u', 'beta',
+                           'time_dependence', 'tstep', 'tcl_strings']
     _reprlatex = (r'-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
                   r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
                   r'\boldsymbol\nabla)\mathbf{m}\big]')

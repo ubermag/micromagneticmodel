@@ -10,9 +10,14 @@ from .energyterm import EnergyTerm
                wave=ts.Subset(sample_set={'sin', 'sinc'}, unpack=False),
                f=ts.Scalar(positive=True),
                t0=ts.Scalar(),
-               #time_dependence=ts.Typed(expected_type=list),
+               # time_dependence=ts.Typed(expected_type=callable),
                tstep=ts.Scalar(positive=True),
-               tcl_strings=ts.Typed(expected_type=dict))
+               tcl_strings=ts.Dictionary(
+                   key_descriptor=ts.Subset(
+                       sample_set=('proc', 'energy', 'type', 'script_args',
+                                   'script'),
+                       value_descriptor=ts.Typed(expected_type=str))
+               ))
 class Zeeman(EnergyTerm):
     r"""Zeeman energy term.
 

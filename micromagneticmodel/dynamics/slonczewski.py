@@ -13,7 +13,10 @@ from .dynamicsterm import DynamicsTerm
                P=ts.Parameter(descriptor=ts.Scalar(positive=True),
                               otherwise=df.Field),
                eps_prime=ts.Parameter(descriptor=ts.Scalar(),
-                                      otherwise=df.Field))
+                                      otherwise=df.Field),
+               # time_dependence=ts.Typed(expected_type=callable),
+               tstep=ts.Scalar(positive=True),
+               tcl_strings=ts.Typed(expected_type=dict))
 class Slonczewski(DynamicsTerm):
     r"""Slonczewski spin transfer torque dynamics term.
 
@@ -103,7 +106,8 @@ class Slonczewski(DynamicsTerm):
 
     """
 
-    _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime']
+    _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime',
+                           'time_dependence', 'tstep', 'tcl_strings']
 
     @property
     def _reprlatex(self):

@@ -15,7 +15,7 @@ from .energyterm import EnergyTerm
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
                        sample_set=('proc', 'energy', 'type', 'script_args',
-                                   'script'),
+                                   'script'), unpack=False,
                        value_descriptor=ts.Typed(expected_type=str))
                ))
 class Zeeman(EnergyTerm):

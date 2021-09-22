@@ -1,6 +1,6 @@
 import re
 import pytest
-import discretisedfield as df
+import numpy as np
 import micromagneticmodel as mm
 from .checks import check_term
 
@@ -34,3 +34,34 @@ class TestZhangLi:
 
         with pytest.raises(AttributeError):
             term = mm.ZhangLi(wrong=1)
+
+    def test_init_time_dependent(self):
+
+        def time_dep(t):
+            return np.sin(t / 1e-10)**2
+
+        for u, beta in self.valid_args:
+            term = mm.ZhangLi(u=u, beta=beta,
+                              time_dependence=time_dep, tstep=1e-12)
+            check_term(term)
+            assert hasattr(term, 'u')
+            assert hasattr(term, 'beta')
+            assert hasattr(term, 'time_dependence')
+            assert hasattr(term, 'tstep')
+            assert term.name == 'zhangli'
+            assert re.search(r'^ZhangLi\(u=.+\, beta=.+\)$', repr(term))
+
+            tcl_strings = {}
+            tcl_strings['proc'] = '''proc TimeFunction { total_time } {
+            return $total_time/10
+            }'''
+            tcl_strings['proc_args'] = 'total_time'
+            tcl_strings['proc_name'] = 'TimeFunction'
+
+            term = mm.ZhangLi(u=u, beta=beta, tcl_strings=tcl_strings)
+            check_term(term)
+            assert hasattr(term, 'u')
+            assert hasattr(term, 'beta')
+            assert hasattr(term, 'tcl_strings')
+            assert term.name == 'zhangli'
+            assert re.search(r'^ZhangLi\(u=.+\, beta=.+\)$', repr(term))

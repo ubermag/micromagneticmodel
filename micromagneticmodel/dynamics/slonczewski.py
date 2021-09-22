@@ -16,7 +16,11 @@ from .dynamicsterm import DynamicsTerm
                                       otherwise=df.Field),
                # time_dependence=ts.Typed(expected_type=callable),
                tstep=ts.Scalar(positive=True),
-               tcl_strings=ts.Typed(expected_type=dict))
+               tcl_strings=ts.Dictionary(
+                   key_descriptor=ts.Subset(
+                       sample_set=('proc', 'proc_args', 'proc_name'),
+                       value_descriptor=ts.Typed(expected_type=str))
+               ))
 class Slonczewski(DynamicsTerm):
     r"""Slonczewski spin transfer torque dynamics term.
 

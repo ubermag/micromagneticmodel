@@ -19,9 +19,9 @@ from .dynamicsterm import DynamicsTerm
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
                        sample_set=('proc', 'proc_args', 'proc_name'),
-                       unpack=False,
-                       value_descriptor=ts.Typed(expected_type=str))
-               ))
+                       unpack=False),
+                   value_descriptor=ts.Typed(expected_type=str))
+               )
 class Slonczewski(DynamicsTerm):
     r"""Slonczewski spin transfer torque dynamics term.
 

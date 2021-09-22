@@ -11,12 +11,12 @@ from .energyterm import EnergyTerm
                u=ts.Parameter(descriptor=ts.Vector(size=3),
                               otherwise=df.Field))
 class UniaxialAnisotropy(EnergyTerm):
-    """Uniaxial anisotropy energy term.
+    r"""Uniaxial anisotropy energy term.
 
     .. math::
 
-        w = -K/K_{1} (\\mathbf{m} \\cdot \\mathbf{u})^{2} - K_{2} (\\mathbf{m}
-        \\cdot \\mathbf{u})^{4}
+        w = -K/K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - K_{2} (\mathbf{m}
+        \cdot \mathbf{u})^{4}
 
     Parameters
     ----------

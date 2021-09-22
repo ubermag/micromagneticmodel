@@ -4,12 +4,12 @@ from .energyterm import EnergyTerm
 
 @uu.inherit_docs
 class Demag(EnergyTerm):
-    """Demagnetisation energy term.
+    r"""Demagnetisation energy term.
 
     .. math::
 
-        w = -\\frac{1}{2}\\mu_{0}M_\\text{s} \\mathbf{m} \\cdot
-        \\mathbf{H}_\\text{d}
+        w = -\frac{1}{2}\mu_{0}M_\text{s} \mathbf{m} \cdot
+        \mathbf{H}_\text{d}
 
     Parameters
     ----------

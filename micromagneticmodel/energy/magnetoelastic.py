@@ -12,12 +12,12 @@ from .energyterm import EnergyTerm
                e_offdiag=ts.Parameter(descriptor=ts.Vector(size=3),
                                       otherwise=df.Field))
 class MagnetoElastic(EnergyTerm):
-    """Magneto-elastic energy term.
+    r"""Magneto-elastic energy term.
 
     .. math::
 
-        w = B_{1}\\sum_{i} m_{i}\\epsilon_{ii} + B_{2}\\sum_{i}\\sum_{j\\ne i}
-        m_{i}m_{j}\\epsilon_{ij}
+        w = B_{1}\sum_{i} m_{i}\epsilon_{ii} + B_{2}\sum_{i}\sum_{j\ne i}
+        m_{i}m_{j}\epsilon_{ij}
 
     Parameters
     ----------

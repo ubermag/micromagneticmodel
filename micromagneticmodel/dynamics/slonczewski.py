@@ -13,26 +13,34 @@ from .dynamicsterm import DynamicsTerm
                P=ts.Parameter(descriptor=ts.Scalar(positive=True),
                               otherwise=df.Field),
                eps_prime=ts.Parameter(descriptor=ts.Scalar(),
-                                      otherwise=df.Field))
+                                      otherwise=df.Field),
+               # time_dependence=ts.Typed(expected_type=callable),
+               tstep=ts.Scalar(positive=True),
+               tcl_strings=ts.Dictionary(
+                   key_descriptor=ts.Subset(
+                       sample_set=('proc', 'proc_args', 'proc_name'),
+                       unpack=False),
+                   value_descriptor=ts.Typed(expected_type=str))
+               )
 class Slonczewski(DynamicsTerm):
-    """Slonczewski spin transfer torque dynamics term.
+    r"""Slonczewski spin transfer torque dynamics term.
 
     .. math::
 
-        \\frac{\\text{d}\\mathbf{m}}{\\text{d}t} =
-        \\gamma_{0}\\beta\\epsilon(\\mathbf{m} \\times \\mathbf{m}_\\text{p}
-        \\times \\mathbf{m}) - \\gamma_{0}\\beta\\epsilon' (\\mathbf{m} \\times
-        \\mathbf{m}_\\text{p})
+        \frac{\text{d}\mathbf{m}}{\text{d}t} =
+        \gamma_{0}\beta\epsilon(\mathbf{m} \times \mathbf{m}_\text{p}
+        \times \mathbf{m}) - \gamma_{0}\beta\epsilon' (\mathbf{m} \times
+        \mathbf{m}_\text{p})
 
     .. math::
 
-        \\beta = \\left| \\frac{\\hbar}{\\mu_{0}e} \\right|
-        \\frac{J}{tM_\\text{s}}
+        \beta = \left| \frac{\hbar}{\mu_{0}e} \right|
+        \frac{J}{tM_\text{s}}
 
     .. math::
 
-        \\epsilon = \\frac{P\\Lambda^{2}}{(\\Lambda^{2} + 1) + (\\Lambda^{2} -
-        1)(\\mathbf{m}\\cdot\\mathbf{m}_\\text{p})}
+        \epsilon = \frac{P\Lambda^{2}}{(\Lambda^{2} + 1) + (\Lambda^{2} -
+        1)(\mathbf{m}\cdot\mathbf{m}_\text{p})}
 
     Parameters
     ----------
@@ -102,7 +110,9 @@ class Slonczewski(DynamicsTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime']
+
+    _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime',
+                           'time_dependence', 'tstep', 'tcl_strings']
 
     @property
     def _reprlatex(self):

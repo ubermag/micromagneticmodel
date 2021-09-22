@@ -11,16 +11,16 @@ from .energyterm import EnergyTerm
                u2=ts.Parameter(descriptor=ts.Vector(size=3),
                                otherwise=df.Field))
 class CubicAnisotropy(EnergyTerm):
-    """Cubic anisotropy energy term.
+    r"""Cubic anisotropy energy term.
 
     .. math::
 
-        w = -K [(\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}
-                (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
-              + (\\mathbf{m} \\cdot \\mathbf{u}_{2})^{2}
-                (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
-              + (\\mathbf{m} \\cdot \\mathbf{u}_{3})^{2}
-                (\\mathbf{m} \\cdot \\mathbf{u}_{1})^{2}]
+        w = -K [(\mathbf{m} \cdot \mathbf{u}_{1})^{2}
+                (\mathbf{m} \cdot \mathbf{u}_{2})^{2}
+              + (\mathbf{m} \cdot \mathbf{u}_{2})^{2}
+                (\mathbf{m} \cdot \mathbf{u}_{3})^{2}
+              + (\mathbf{m} \cdot \mathbf{u}_{3})^{2}
+                (\mathbf{m} \cdot \mathbf{u}_{1})^{2}]
 
     Parameters
     ----------

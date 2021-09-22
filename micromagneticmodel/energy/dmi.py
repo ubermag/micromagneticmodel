@@ -11,44 +11,44 @@ from .energyterm import EnergyTerm
                                                   'D2d_x', 'D2d_y', 'D2d_z'},
                                       unpack=False))
 class DMI(EnergyTerm):
-    """Dzyaloshinskii-Moriya energy term.
+    r"""Dzyaloshinskii-Moriya energy term.
 
     .. math::
 
-        w^\\text{T(O)} = D \\mathbf{m} \\cdot (\\nabla  \\times \\mathbf{m})
+        w^\text{T(O)} = D \mathbf{m} \cdot (\nabla  \times \mathbf{m})
 
     .. math::
 
-        w_x^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{x} - m_{x} \\nabla
-        \\cdot \\mathbf{m} )
+        w_x^\text{Cnv} = D ( \mathbf{m} \cdot \nabla m_{x} - m_{x} \nabla
+        \cdot \mathbf{m} )
 
     .. math::
 
-        w_y^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{y} - m_{y} \\nabla
-        \\cdot \\mathbf{m} )
+        w_y^\text{Cnv} = D ( \mathbf{m} \cdot \nabla m_{y} - m_{y} \nabla
+        \cdot \mathbf{m} )
 
     .. math::
 
-        w_z^\\text{Cnv} = D ( \\mathbf{m} \\cdot \\nabla m_{z} - m_{z} \\nabla
-        \\cdot \\mathbf{m} )
+        w_z^\text{Cnv} = D ( \mathbf{m} \cdot \nabla m_{z} - m_{z} \nabla
+        \cdot \mathbf{m} )
 
     .. math::
 
-        w_x^\\text{D2d} = D \\mathbf{m} \\cdot \\left( \\frac{\\partial
-        \\mathbf{m}}{\\partial y} \\times \\hat{y} - \\frac{\\partial
-        \\mathbf{m}}{\\partial z} \\times \\hat{z} \\right)
+        w_x^\text{D2d} = D \mathbf{m} \cdot \left( \frac{\partial
+        \mathbf{m}}{\partial y} \times \hat{y} - \frac{\partial
+        \mathbf{m}}{\partial z} \times \hat{z} \right)
 
     .. math::
 
-        w_y^\\text{D2d} = D \\mathbf{m} \\cdot \\left( \\frac{\\partial
-        \\mathbf{m}}{\\partial z} \\times \\hat{z} - \\frac{\\partial
-        \\mathbf{m}}{\\partial x} \\times \\hat{x} \\right)
+        w_y^\text{D2d} = D \mathbf{m} \cdot \left( \frac{\partial
+        \mathbf{m}}{\partial z} \times \hat{z} - \frac{\partial
+        \mathbf{m}}{\partial x} \times \hat{x} \right)
 
     .. math::
 
-        w_z^\\text{D2d} = D \\mathbf{m} \\cdot \\left( \\frac{\\partial
-        \\mathbf{m}}{\\partial x} \\times \\hat{x} - \\frac{\\partial
-        \\mathbf{m}}{\\partial y} \\times \\hat{y} \\right)
+        w_z^\text{D2d} = D \mathbf{m} \cdot \left( \frac{\partial
+        \mathbf{m}}{\partial x} \times \hat{x} - \frac{\partial
+        \mathbf{m}}{\partial y} \times \hat{y} \right)
 
     Parameters
     ----------

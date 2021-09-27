@@ -16,7 +16,7 @@
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg?token=hcK4fofmrL)](https://codecov.io/gh/ubermag/micromagneticmodel) |
 | Documentation | [![Documentation](https://img.shields.io/badge/Docs-ubermag.github.io-blue)](https://ubermag.github.io/documentation/micromagneticmodel.html) |
 | YouTube | [![YouTube](https://img.shields.io/badge/YouTube-ubermag-blue)](https://www.youtube.com/channel/UC7MSqVQSMFV42R1jAYmKGLg) |
-| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/stable?urlpath=lab/tree/docs/ipynb/index.ipynb)|
+| Binder | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ubermag/micromagneticmodel/stable?urlpath=lab/tree/docs/index.ipynb) |
 | Platforms | [![Platforms](https://anaconda.org/conda-forge/micromagneticmodel/badges/platforms.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Downloads | [![Downloads](https://anaconda.org/conda-forge/micromagneticmodel/badges/downloads.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | License | [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) |

@@ -27,11 +27,19 @@ class Zeeman(EnergyTerm):
 
     Zeeman energy term allows defining time-dependent as well as
     time-independent external magnetic field. If only external magnetic field
-    ``H`` is passed, a time-constant field is defined. On the other hand, in
-    order to define a time-dependent field, ``wave`` must be passed as a
-    string. ``wave`` can be either ``'sine'`` or ``'sinc'``. If time-dependent
-    external magnetic field is defined, apart from ``wave``, ``f`` and ``t0``
-    must be passed. For ``wave='sine'``, energy density is:
+    ``H`` is passed, a time-constant field is defined.
+
+    Three different methods are available to define a time-dependent field:
+
+    - pre-defined ``sine`` wave and ``sinc`` pulse
+    - custom time-dependence via Python callable
+    - custom ``tcl`` code passed directly to OOMMF
+
+    There are two built-in functions to specify a time-dependent field. To use
+    these ``wave`` must be passed as a string. ``wave`` can be either
+    ``'sine'`` or ``'sinc'``. If time-dependent external magnetic field is
+    defined using ``wave``, ``f`` and ``t0`` must be passed. For
+    ``wave='sine'``, energy density is:
 
     .. math::
 
@@ -47,6 +55,27 @@ class Zeeman(EnergyTerm):
 
     and ``f`` is a cut-off frequency.
 
+    Arbitrary time-dependence can be specified by passing a callable to
+    ``time_dependence``. Additionally ``tstep`` in seconds must be provided.
+    The function is evaluated at all time steps separated by ``tstep`` (up to
+    the desired run-time). Additionally, the derivative is computed internally
+    (using central differences). Therefore, the function has to be derivable.
+    In order for this method to be stable a reasonable small time-step must be
+    chosen. As a rough guideline start around 1e-13s. The callable passed to
+    ``time_dependence`` must either return a single number that is used to
+    multiply the initial field or a list of nine values that define a matrix
+    ``M`` that is multiplied with the initial field vector. Ordering of the
+    matrix elements is ``[M11, M12, M12, M21, M22, M23, M31, M32, M33]``. The
+    matrix allows for more complicated processes, e.g. a rotating field.
+
+    To have more control and use the full flexibility of OOMMF it is also
+    possible to directly pass several tcl strings that are added to the ``mif``
+    file without further modification. Please refer to the OOMMF documentation
+    The dictionary must be passed to ``tcl_strings`` and must contain ``proc``,
+    ``energy``, ``type``, ``script_args``, and ``script``. Please refer to the
+    OOMMF documentation for detailed explanations. Generally, specifying
+    ``time_dependence`` and ``tstep`` is easier for the user.
+
     Parameters
     ----------
     H : (3,) array_like, dict, discretisedfield.Field
@@ -58,17 +87,34 @@ class Zeeman(EnergyTerm):
         -3e6)}`` (if the parameter is defined "per region") or
         ``discretisedfield.Field`` is passed.
 
-    wave : str
+    wave : str, optional
 
         For a time dependent field, either ``'sine'`` or ``'sinc'`` is passed.
 
-    f : numbers.Real
+    f : numbers.Real, optional (required for ``wave``)
 
         (Cut-off) frequency in Hz.
 
-    t0 : numbers.Real
+    t0 : numbers.Real, optional (required for ``wave``)
 
         Time for adjusting the phase (time-shift) of a wave.
+
+    time_dependence : callable, optional
+
+        Callable to define arbitrary time-dependence. Called at times that are
+        multiples of ``tstep``. Must return either a single number or a list of
+        nine values.
+
+    tstep : numbers.Real, optional (required for ``time_dependence``)
+
+        Time steps in seconds to evaluate callable ``time_dependence`` at.
+
+    tcl_strings : dict, optional
+
+        Dictionary of ``tcl`` strings to be included into the ``mif`` file for
+        more control over specific time-dependencies. Must contain the
+        following keys: ``proc``, ``energy``, ``type``, ``script_args``, and
+        ``script`` (name of the script).
 
     Examples
     --------

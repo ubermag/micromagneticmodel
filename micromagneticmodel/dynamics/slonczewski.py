@@ -18,7 +18,7 @@ from .dynamicsterm import DynamicsTerm
                tstep=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
-                       sample_set=('proc', 'proc_args', 'proc_name'),
+                       sample_set=('script', 'script_args', 'script_name'),
                        unpack=False),
                    value_descriptor=ts.Typed(expected_type=str))
                )

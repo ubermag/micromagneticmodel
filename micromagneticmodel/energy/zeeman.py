@@ -14,8 +14,8 @@ from .energyterm import EnergyTerm
                tstep=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
-                       sample_set=('proc', 'energy', 'type', 'script_args',
-                                   'script'), unpack=False),
+                       sample_set=('script', 'energy', 'type', 'script_args',
+                                   'script_name'), unpack=False),
                    value_descriptor=ts.Typed(expected_type=str))
                )
 class Zeeman(EnergyTerm):

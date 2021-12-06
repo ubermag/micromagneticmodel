@@ -41,13 +41,12 @@ class TestZhangLi:
             return np.sin(t / 1e-10)**2
 
         for u, beta in self.valid_args:
-            term = mm.ZhangLi(u=u, beta=beta,
-                              time_dependence=time_dep, tstep=1e-12)
+            term = mm.ZhangLi(u=u, beta=beta, func=time_dep, dt=1e-12)
             check_term(term)
             assert hasattr(term, 'u')
             assert hasattr(term, 'beta')
-            assert hasattr(term, 'time_dependence')
-            assert hasattr(term, 'tstep')
+            assert hasattr(term, 'func')
+            assert hasattr(term, 'dt')
             assert term.name == 'zhangli'
             assert re.search(r'^ZhangLi\(u=.+\, beta=.+\)$', repr(term))
 

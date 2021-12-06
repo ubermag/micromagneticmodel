@@ -94,7 +94,7 @@ class Zeeman(EnergyTerm):
     wave : str, optional
 
         For a time dependent field, either ``'sine'`` or ``'sinc'`` is passed.
-        Deprecated use ``func`` instead.
+        Deprecated, use ``func`` instead.
 
     f : numbers.Real, optional (required for ``wave``)
 

@@ -84,6 +84,22 @@ class Slonczewski(DynamicsTerm):
         the parameter is defined "per region") or ``discretisedfield.Field`` is
         passed. Defaults to 0.
 
+    func : callable, optional
+
+        Callables can be used to define arbitrary time-dependence. Called at
+        times that are multiples of ``dt``. Must return a single number.
+
+    dt : numbers.Real, optional (required for ``func``)
+
+        Time steps in seconds to evaluate callable ``func`` at.
+
+    tcl_strings : dict, optional
+
+        Dictionary of ``tcl`` strings to be included into the ``mif`` file for
+        more control over specific time-dependencies. Must contain the
+        following keys: ``script``, ``script_args``, and ``script_name``. Refer
+        to the OOMMF documentation for more details.
+
     Examples
     --------
     1. Defining spatially constant Slonczewski dynamics term.

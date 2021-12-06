@@ -96,11 +96,11 @@ class Zeeman(EnergyTerm):
         For a time dependent field, either ``'sine'`` or ``'sinc'`` is passed.
         Deprecated, use ``func`` instead.
 
-    f : numbers.Real, optional (required for ``wave``)
+    f : numbers.Real, optional (required for ``func='sin'``/``'sinc'``)
 
         (Cut-off) frequency in Hz.
 
-    t0 : numbers.Real, optional (required for ``wave``)
+    t0 : numbers.Real, optional (required for ``func='sin'``/``'sinc'``)
 
         Time for adjusting the phase (time-shift) of a wave.
 
@@ -108,19 +108,19 @@ class Zeeman(EnergyTerm):
 
         Predefined functions can be used by passing ``'sin'`` or ``'sinc'``.
         Callables can be used to define arbitrary time-dependence. Called at
-        times that are multiples of ``tstep``. Must return either a single
+        times that are multiples of ``dt``. Must return either a single
         number or a list of nine values.
 
-    tstep : numbers.Real, optional (required for ``time_dependence``)
+    dt : numbers.Real, optional (required for callable ``func``)
 
-        Time steps in seconds to evaluate callable ``time_dependence`` at.
+        Time steps in seconds to evaluate callable ``func`` at.
 
     tcl_strings : dict, optional
 
         Dictionary of ``tcl`` strings to be included into the ``mif`` file for
         more control over specific time-dependencies. Must contain the
-        following keys: ``proc``, ``energy``, ``type``, ``script_args``, and
-        ``script`` (name of the script).
+        following keys: ``script``, ``energy``, ``type``, ``script_args``, and
+        ``script_name``. Refer to the OOMMF documentation for more details.
 
     Examples
     --------

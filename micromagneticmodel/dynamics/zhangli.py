@@ -36,6 +36,22 @@ class ZhangLi(DynamicsTerm):
         `numbers.Real` can be passed, or alternatively
         ``discretisedfield.Field`` can be passed.
 
+    func : callable, optional
+
+        Callables can be used to define arbitrary time-dependence. Called at
+        times that are multiples of ``dt``. Must return a single number.
+
+    dt : numbers.Real, optional (required for ``func``)
+
+        Time steps in seconds to evaluate callable ``func`` at.
+
+    tcl_strings : dict, optional
+
+        Dictionary of ``tcl`` strings to be included into the ``mif`` file for
+        more control over specific time-dependencies. Must contain the
+        following keys: ``script``, ``script_args``, and ``script_name``. Refer
+        to the OOMMF documentation for more details.
+
     Examples
     --------
     1. Defining the Zhang-Li dynamics term using scalar.

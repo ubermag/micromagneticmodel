@@ -40,17 +40,17 @@ class Zeeman(EnergyTerm):
     - custom ``tcl`` code passed directly to OOMMF
 
     There are two built-in functions to specify a time-dependent field. To use
-    these ``wave`` must be passed as a string. ``wave`` can be either
+    these as string must be passed to ``func``. ``func`` can be either
     ``'sine'`` or ``'sinc'``. If time-dependent external magnetic field is
-    defined using ``wave``, ``f`` and ``t0`` must be passed. For
-    ``wave='sine'``, energy density is:
+    defined using ``func``, ``f`` and ``t0`` must be passed. For
+    ``func='sine'``, energy density is:
 
     .. math::
 
         w = -\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H} \sin[2\pi
         f(t-t_{0})]
 
-    whereas for ``wave='sinc'``, the energy density is:
+    whereas for ``func='sinc'``, the energy density is:
 
     .. math::
 
@@ -60,13 +60,13 @@ class Zeeman(EnergyTerm):
     and ``f`` is a cut-off frequency.
 
     Arbitrary time-dependence can be specified by passing a callable to
-    ``time_dependence``. Additionally ``tstep`` in seconds must be provided.
-    The function is evaluated at all time steps separated by ``tstep`` (up to
+    ``func``. Additionally ``dt`` in seconds must be provided.
+    The function is evaluated at all time steps separated by ``dt`` (up to
     the desired run-time). Additionally, the derivative is computed internally
     (using central differences). Therefore, the function has to be derivable.
     In order for this method to be stable a reasonable small time-step must be
     chosen. As a rough guideline start around 1e-13s. The callable passed to
-    ``time_dependence`` must either return a single number that is used to
+    ``func`` must either return a single number that is used to
     multiply the initial field or a list of nine values that define a matrix
     ``M`` that is multiplied with the initial field vector. Ordering of the
     matrix elements is ``[M11, M12, M12, M21, M22, M23, M31, M32, M33]``. The
@@ -94,6 +94,7 @@ class Zeeman(EnergyTerm):
     wave : str, optional
 
         For a time dependent field, either ``'sine'`` or ``'sinc'`` is passed.
+        Deprecated use ``func`` instead.
 
     f : numbers.Real, optional (required for ``wave``)
 
@@ -103,11 +104,12 @@ class Zeeman(EnergyTerm):
 
         Time for adjusting the phase (time-shift) of a wave.
 
-    time_dependence : callable, optional
+    func : str, callable, optional
 
-        Callable to define arbitrary time-dependence. Called at times that are
-        multiples of ``tstep``. Must return either a single number or a list of
-        nine values.
+        Predefined functions can be used by passing ``'sin'`` or ``'sinc'``.
+        Callables can be used to define arbitrary time-dependence. Called at
+        times that are multiples of ``tstep``. Must return either a single
+        number or a list of nine values.
 
     tstep : numbers.Real, optional (required for ``time_dependence``)
 

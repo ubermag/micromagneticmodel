@@ -1,3 +1,4 @@
+import collections
 import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
@@ -14,8 +15,8 @@ from .dynamicsterm import DynamicsTerm
                               otherwise=df.Field),
                eps_prime=ts.Parameter(descriptor=ts.Scalar(),
                                       otherwise=df.Field),
-               # time_dependence=ts.Typed(expected_type=callable),
-               tstep=ts.Scalar(positive=True),
+               func=ts.Typed(expected_type=collections.abc.Callable),
+               dt=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
                        sample_set=('script', 'script_args', 'script_name'),
@@ -112,7 +113,7 @@ class Slonczewski(DynamicsTerm):
     """
 
     _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime',
-                           'time_dependence', 'tstep', 'tcl_strings']
+                           'func', 'dt', 'tcl_strings']
 
     @property
     def _reprlatex(self):

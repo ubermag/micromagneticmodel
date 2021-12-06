@@ -1,3 +1,4 @@
+import collections
 import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
@@ -10,8 +11,11 @@ from .energyterm import EnergyTerm
                wave=ts.Subset(sample_set={'sin', 'sinc'}, unpack=False),
                f=ts.Scalar(positive=True),
                t0=ts.Scalar(),
-               # time_dependence=ts.Typed(expected_type=callable),
-               tstep=ts.Scalar(positive=True),
+               func=ts.Parameter(
+                   descriptor=ts.Subset(sample_set={'sin', 'sinc'},
+                                        unpack=False),
+                   otherwise=collections.abc.Callable),
+               dt=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
                        sample_set=('script', 'energy', 'type', 'script_args',
@@ -151,8 +155,7 @@ class Zeeman(EnergyTerm):
 
     """
 
-    _allowed_attributes = ['H', 'wave', 'f', 't0', 'time_dependence', 'tstep',
-                           'tcl_strings']
+    _allowed_attributes = ['H', 'wave', 'f', 't0', 'func', 'dt', 'tcl_strings']
 
     @property
     def _reprlatex(self):

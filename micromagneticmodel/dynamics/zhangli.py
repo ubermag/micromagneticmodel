@@ -1,3 +1,4 @@
+import collections
 import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
@@ -7,8 +8,8 @@ from .dynamicsterm import DynamicsTerm
 @uu.inherit_docs
 @ts.typesystem(u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
                beta=ts.Scalar(),
-               # time_dependence=ts.Typed(expected_type=callable),
-               tstep=ts.Scalar(positive=True),
+               func=ts.Typed(expected_type=collections.abc.Callable),
+               dt=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
                        sample_set=('script', 'script_args', 'script_name'),
@@ -62,8 +63,8 @@ class ZhangLi(DynamicsTerm):
 
     """
 
-    _allowed_attributes = ['u', 'beta',
-                           'time_dependence', 'tstep', 'tcl_strings']
+    _allowed_attributes = ['u', 'beta', 'func', 'dt', 'tcl_strings']
+
     _reprlatex = (r'-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
                   r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
                   r'\boldsymbol\nabla)\mathbf{m}\big]')

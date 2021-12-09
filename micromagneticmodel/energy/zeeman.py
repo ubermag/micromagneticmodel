@@ -33,7 +33,15 @@ class Zeeman(EnergyTerm):
     time-independent external magnetic field. If only external magnetic field
     ``H`` is passed, a time-constant field is defined.
 
-    Three different methods are available to define a time-dependent field:
+    The time-dependent field $H(t)$ is obtained by multiplying the
+    time-independent field `H` with a time-dependent pre-factor:
+
+    .. math::
+
+        H(t) = f(t) H
+
+    Three different methods are available to define the pre-factor for a
+    time-dependent field:
 
     - pre-defined ``sine`` wave and ``sinc`` pulse
     - custom time-dependence via Python callable

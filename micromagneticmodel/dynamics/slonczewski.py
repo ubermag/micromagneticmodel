@@ -93,7 +93,7 @@ class Slonczewski(DynamicsTerm):
 
     func : callable, optional
 
-        Callables to define arbitrary time-dependence, multiplies ``J``. Called
+        Callable to define arbitrary time-dependence, multiplies ``J``. Called
         at times that are multiples of ``dt``. Must return a single number.
 
     dt : numbers.Real, optional (required for ``func``)

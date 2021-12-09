@@ -45,7 +45,7 @@ class ZhangLi(DynamicsTerm):
 
     func : callable, optional
 
-        Callables to define arbitrary time-dependence, multiplies ``u``. Called
+        Callable to define arbitrary time-dependence, multiplies ``u``. Called
         at times that are multiples of ``dt``. Must return a single number.
 
     dt : numbers.Real, optional (required for ``func``)

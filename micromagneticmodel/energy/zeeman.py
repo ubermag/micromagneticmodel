@@ -38,7 +38,7 @@ class Zeeman(EnergyTerm):
 
     .. math::
 
-        H(t) = f(t) H
+        H(t) = f(t) \cdot H
 
     Three different methods are available to define the pre-factor for a
     time-dependent field:
@@ -68,25 +68,26 @@ class Zeeman(EnergyTerm):
     and ``f`` is a cut-off frequency.
 
     Arbitrary time-dependence can be specified by passing a callable to
-    ``func``. Additionally ``dt`` in seconds must be provided.
-    The function is evaluated at all time steps separated by ``dt`` (up to
-    the desired run-time). Additionally, the derivative is computed internally
-    (using central differences). Therefore, the function has to be derivable.
-    In order for this method to be stable a reasonable small time-step must be
-    chosen. As a rough guideline start around 1e-13s. The callable passed to
-    ``func`` must either return a single number that is used to
+    ``func``. Additionally ``dt`` (in seconds) must be provided. The function
+    is evaluated at all time steps separated by ``dt`` (up to the desired
+    run-time). Additionally, the derivative is computed internally (using
+    central differences). Therefore, the function has to be differentiable. In
+    order for this method to be stable a reasonable small time-step must be
+    chosen. As a rough guideline start around ``dt=1e-13`` (s). The callable
+    passed to ``func`` must either return a single number that is used to
     multiply the initial field or a list of nine values that define a matrix
     ``M`` that is multiplied with the initial field vector. Ordering of the
-    matrix elements is ``[M11, M12, M12, M21, M22, M23, M31, M32, M33]``. The
+    matrix elements is ``[M11, M12, M13, M21, M22, M23, M31, M32, M33]``. The
     matrix allows for more complicated processes, e.g. a rotating field.
 
     To have more control and use the full flexibility of OOMMF it is also
     possible to directly pass several tcl strings that are added to the ``mif``
-    file without further modification. Please refer to the OOMMF documentation
-    The dictionary must be passed to ``tcl_strings`` and must contain ``proc``,
-    ``energy``, ``type``, ``script_args``, and ``script``. Please refer to the
-    OOMMF documentation for detailed explanations. Generally, specifying
-    ``time_dependence`` and ``tstep`` is easier for the user.
+    file without further processing. The dictionary must be passed to
+    ``tcl_strings`` and must contain ``script``, ``energy``, ``type``,
+    ``script_args``, and ``script_name``. Please refer to the OOMMF
+    documentation for detailed explanations. Generally speakin, specifying
+    ``time_dependence`` and ``tstep`` is easier for the user and should be
+    preferred, if possible.
 
     Parameters
     ----------
@@ -154,9 +155,17 @@ class Zeeman(EnergyTerm):
     4. Defining the Zeeman energy term using a vector which changes as a sine
     wave.
 
-    >>> zeeman = mm.Zeeman(H=(0, 0, 1e6), wave='sin', f=1e9, t0=0)
+    >>> zeeman = mm.Zeeman(H=(0, 0, 1e6), func='sin', f=1e9, t0=0)
 
-    5. An attempt to define the Zeeman energy term using a wrong value.
+    5. Defining an exponentially decaying field.
+
+    >>> import numpy as np
+    >>> def decay(t):
+    ...     t_0 = 1e-10
+    ...     return np.exp(-t / t_0)
+    >>> zeeman = mm.Zeeman(H=(0, 0, 1e6), func=decay, dt=1e-13)
+
+    6. An attempt to define the Zeeman energy term using a wrong value.
 
     >>> zeeman = mm.Zeeman(H=(0, -1e7))  # length-2 vector
     Traceback (most recent call last):

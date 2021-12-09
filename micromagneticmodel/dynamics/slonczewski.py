@@ -43,6 +43,13 @@ class Slonczewski(DynamicsTerm):
         \epsilon = \frac{P\Lambda^{2}}{(\Lambda^{2} + 1) + (\Lambda^{2} -
         1)(\mathbf{m}\cdot\mathbf{m}_\text{p})}
 
+    A time-dependent current can be specified by providing a time-dependent
+    pre-factor that is used to multiply ``J``. The time-dependence can either
+    be specified by providing a callable ``func`` (must be differentiable in
+    time) that is evaluated at time steps ``dt`` or by passing a dictionary
+    ``tcl_strings`` of tcl strings that are written to the mif file without
+    further processing.
+
     Parameters
     ----------
     J : numbers.Real, dict, discretisedfield.Field
@@ -86,8 +93,8 @@ class Slonczewski(DynamicsTerm):
 
     func : callable, optional
 
-        Callables can be used to define arbitrary time-dependence. Called at
-        times that are multiples of ``dt``. Must return a single number.
+        Callables to define arbitrary time-dependence, multiplies ``J``. Called
+        at times that are multiples of ``dt``. Must return a single number.
 
     dt : numbers.Real, optional (required for ``func``)
 
@@ -118,7 +125,17 @@ class Slonczewski(DynamicsTerm):
     >>> slonczewski = mm.Slonczewski(J=J, mp=(1, 0, 0), P=0.4, Lambda=2,
     ...                              eps_prime=2)
 
-    3. An attempt to define the Slonczewski dynamics term using a wrong value.
+    3. Defining an exponentially decaying current.
+
+    >>> import micromagneticmodel as mm
+    ...
+    >>> def decay(t):
+    ...     t_0 = 1e-10
+    ...     return np.exp(-t / t_0)
+    >>> slonczewski = mm.Slonczewski(J=7.5e12, mp=(1, 0, 0), P=0.4, Lambda=2,
+    ...                              func=decay, dt=1e-13)
+
+    4. An attempt to define the Slonczewski dynamics term using a wrong value.
 
     >>> # scalar value for mp
     >>> slonczewski = mm.Slonczewski(J=J, mp=5, P=0.4, Lambda=2)

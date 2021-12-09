@@ -25,6 +25,13 @@ class ZhangLi(DynamicsTerm):
         \boldsymbol\nabla)\mathbf{m} + \beta\mathbf{m} \times
         \big[(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}\big]
 
+    A time-dependent current can be specified by providing a time-dependent
+    pre-factor that is used to multiply ``u``. The time-dependence can either
+    be specified by providing a callable ``func`` (must be differentiable in
+    time) that is evaluated at time steps ``dt`` or by passing a dictionary
+    ``tcl_strings`` of tcl strings that are written to the mif file without
+    further processing.
+
     Parameters
     ----------
     beta : numbers.Real
@@ -38,8 +45,8 @@ class ZhangLi(DynamicsTerm):
 
     func : callable, optional
 
-        Callables can be used to define arbitrary time-dependence. Called at
-        times that are multiples of ``dt``. Must return a single number.
+        Callables to define arbitrary time-dependence, multiplies ``u``. Called
+        at times that are multiples of ``dt``. Must return a single number.
 
     dt : numbers.Real, optional (required for ``func``)
 
@@ -70,7 +77,17 @@ class ZhangLi(DynamicsTerm):
     >>> u = df.Field(mesh, dim=1, value=1e5)
     >>> zhangli = mm.ZhangLi(beta=beta, u=u)
 
-    3. An attempt to define the Zhang-Li dynamics term using a wrong value.
+    3. Defining a sinusoidal decaying current.
+
+    >>> import micromagneticmodel as mm
+    >>> import numpy as np
+    ...
+    >>> def sin_wave(t):
+    ...     omega = 2 * np.pi / 1e-9
+    ...     return np.sin(omega * t)
+    >>> zhangli = mm.ZhangLi(beta=0.01, u=5e6, func=sin_wave, dt=1e-13)
+
+    4. An attempt to define the Zhang-Li dynamics term using a wrong value.
 
     >>> zhangli = mm.ZhangLi(beta=-1, u=(0, 0, 1))  # vector value
     Traceback (most recent call last):

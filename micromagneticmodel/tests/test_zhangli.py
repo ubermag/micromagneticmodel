@@ -51,11 +51,11 @@ class TestZhangLi:
             assert re.search(r'^ZhangLi\(u=.+\, beta=.+\)$', repr(term))
 
             tcl_strings = {}
-            tcl_strings['proc'] = '''proc TimeFunction { total_time } {
+            tcl_strings['script'] = '''proc TimeFunction { total_time } {
             return $total_time/10
             }'''
-            tcl_strings['proc_args'] = 'total_time'
-            tcl_strings['proc_name'] = 'TimeFunction'
+            tcl_strings['script_args'] = 'total_time'
+            tcl_strings['script_name'] = 'TimeFunction'
 
             term = mm.ZhangLi(u=u, beta=beta, tcl_strings=tcl_strings)
             check_term(term)

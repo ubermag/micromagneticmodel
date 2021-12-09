@@ -59,11 +59,11 @@ class TestSlonczewski:
             assert re.search(r'^Slonczewski\(J=.+\)$', repr(term))
 
             tcl_strings = {}
-            tcl_strings['proc'] = '''proc TimeFunction { total_time } {
+            tcl_strings['script'] = '''proc TimeFunction { total_time } {
             return $total_time/10
             }'''
-            tcl_strings['proc_args'] = 'total_time'
-            tcl_strings['proc_name'] = 'TimeFunction'
+            tcl_strings['script_args'] = 'total_time'
+            tcl_strings['script_name'] = 'TimeFunction'
 
             term = mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
                                   eps_prime=eps_prime, tcl_strings=tcl_strings)

@@ -153,7 +153,7 @@ class Zeeman(EnergyTerm):
     >>> zeeman = mm.Zeeman(H=H)
 
     4. Defining the Zeeman energy term using a vector which changes as a sine
-    wave.
+       wave.
 
     >>> zeeman = mm.Zeeman(H=(0, 0, 1e6), func='sin', f=1e9, t0=0)
 

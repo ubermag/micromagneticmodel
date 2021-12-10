@@ -43,20 +43,28 @@ class TestZeeman:
 
     def test_init_time_dependent(self):
         for H in self.valid_args:
+            # deprecated
             term = mm.Zeeman(H=H, wave='sin', f=1e9, t0=0)
             check_term(term)
 
+            # deprecated
             term = mm.Zeeman(H=H, wave='sinc', f=1e9, t0=1e-12)
+            check_term(term)
+
+            term = mm.Zeeman(H=H, func='sin', f=1e9, t0=0)
+            check_term(term)
+
+            term = mm.Zeeman(H=H, func='sinc', f=1e9, t0=1e-12)
             check_term(term)
 
             def time_dep(t):
                 return np.sin(t / 1e-10)**2
 
-            term = mm.Zeeman(H=H, time_dependence=time_dep, tstep=1e-12)
+            term = mm.Zeeman(H=H, func=time_dep, dt=1e-12)
             check_term(term)
 
             tcl_strings = {}
-            tcl_strings['proc'] = '''proc TimeFunction { total_time } {
+            tcl_strings['script'] = '''proc TimeFunction { total_time } {
             set PI [expr {4*atan(1.)}]
             set w [expr {1e9*2*$PI}]
             set ct [expr {cos($w*$total_time)}]
@@ -73,6 +81,7 @@ class TestZeeman:
             tcl_strings['energy'] = 'Oxs_TransformZeeman'
             tcl_strings['type'] = 'general'
             tcl_strings['script_args'] = 'total_time'
-            tcl_strings['script'] = 'TimeFunction'
+            tcl_strings['script_name'] = 'TimeFunction'
 
             term = mm.Zeeman(H=H, tcl_strings=tcl_strings)
+            check_term(term)

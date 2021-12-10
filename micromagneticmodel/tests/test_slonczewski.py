@@ -50,21 +50,20 @@ class TestSlonczewski:
 
         for J, mp, P, Lambda, eps_prime in self.valid_args:
             term = mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
-                                  eps_prime=eps_prime,
-                                  time_dependence=time_dep, tstep=1e-12)
+                                  eps_prime=eps_prime, func=time_dep, dt=1e-12)
             check_term(term)
             assert hasattr(term, 'J')
-            assert hasattr(term, 'time_dependence')
-            assert hasattr(term, 'tstep')
+            assert hasattr(term, 'func')
+            assert hasattr(term, 'dt')
             assert term.name == 'slonczewski'
             assert re.search(r'^Slonczewski\(J=.+\)$', repr(term))
 
             tcl_strings = {}
-            tcl_strings['proc'] = '''proc TimeFunction { total_time } {
+            tcl_strings['script'] = '''proc TimeFunction { total_time } {
             return $total_time/10
             }'''
-            tcl_strings['proc_args'] = 'total_time'
-            tcl_strings['proc_name'] = 'TimeFunction'
+            tcl_strings['script_args'] = 'total_time'
+            tcl_strings['script_name'] = 'TimeFunction'
 
             term = mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
                                   eps_prime=eps_prime, tcl_strings=tcl_strings)

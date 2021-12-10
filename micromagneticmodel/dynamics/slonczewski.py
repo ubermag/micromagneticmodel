@@ -1,3 +1,4 @@
+import collections
 import ubermagutil as uu
 import discretisedfield as df
 import ubermagutil.typesystem as ts
@@ -14,11 +15,11 @@ from .dynamicsterm import DynamicsTerm
                               otherwise=df.Field),
                eps_prime=ts.Parameter(descriptor=ts.Scalar(),
                                       otherwise=df.Field),
-               # time_dependence=ts.Typed(expected_type=callable),
-               tstep=ts.Scalar(positive=True),
+               func=ts.Typed(expected_type=collections.abc.Callable),
+               dt=ts.Scalar(positive=True),
                tcl_strings=ts.Dictionary(
                    key_descriptor=ts.Subset(
-                       sample_set=('proc', 'proc_args', 'proc_name'),
+                       sample_set=('script', 'script_args', 'script_name'),
                        unpack=False),
                    value_descriptor=ts.Typed(expected_type=str))
                )
@@ -41,6 +42,12 @@ class Slonczewski(DynamicsTerm):
 
         \epsilon = \frac{P\Lambda^{2}}{(\Lambda^{2} + 1) + (\Lambda^{2} -
         1)(\mathbf{m}\cdot\mathbf{m}_\text{p})}
+
+    A time-dependent current can be specified by providing a time-dependent
+    pre-factor that is used to multiply ``J``. The time-dependence can either
+    be specified by providing a callable ``func`` that is evaluated at time
+    steps ``dt`` or by passing a dictionary ``tcl_strings`` of tcl strings that
+    are written to the mif file.
 
     Parameters
     ----------
@@ -83,6 +90,23 @@ class Slonczewski(DynamicsTerm):
         the parameter is defined "per region") or ``discretisedfield.Field`` is
         passed. Defaults to 0.
 
+    func : callable, optional
+
+        Callable to define arbitrary time-dependence, multiplies ``J``. Called
+        at times that are multiples of ``dt``. Must return a single number.
+
+    dt : numbers.Real, optional (required for ``func``)
+
+        Time steps in seconds to evaluate callable ``func`` at.
+
+    tcl_strings : dict, optional
+
+        Dictionary of ``tcl`` strings to be included into the ``mif`` file for
+        more control over specific time-dependencies. Must contain the
+        following keys: ``script``, ``script_args``, and ``script_name``. Refer
+        to the OOMMF documentation for more details (
+        https://math.nist.gov/oommf/doc/userguide20a3/userguide/Standard_Oxs_Ext_Child_Clas.html#SX).
+
     Examples
     --------
     1. Defining spatially constant Slonczewski dynamics term.
@@ -101,7 +125,18 @@ class Slonczewski(DynamicsTerm):
     >>> slonczewski = mm.Slonczewski(J=J, mp=(1, 0, 0), P=0.4, Lambda=2,
     ...                              eps_prime=2)
 
-    3. An attempt to define the Slonczewski dynamics term using a wrong value.
+    3. Defining an exponentially decaying current.
+
+    >>> import micromagneticmodel as mm
+    ...
+    >>> def decay(t):
+    ...     t_0 = 1e-10
+    ...     return np.exp(-t / t_0)
+    >>> slonczewski = mm.Slonczewski(J=7.5e12, mp=(1, 0, 0), P=0.4, Lambda=2,
+    ...                              func=decay, dt=1e-13)
+
+    4. An attempt to define the Slonczewski dynamics term using a wrong value
+       (here using a scalar for ``mp`` where a vector is required).
 
     >>> # scalar value for mp
     >>> slonczewski = mm.Slonczewski(J=J, mp=5, P=0.4, Lambda=2)
@@ -112,7 +147,7 @@ class Slonczewski(DynamicsTerm):
     """
 
     _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime',
-                           'time_dependence', 'tstep', 'tcl_strings']
+                           'func', 'dt', 'tcl_strings']
 
     @property
     def _reprlatex(self):

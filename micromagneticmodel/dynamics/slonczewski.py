@@ -45,10 +45,9 @@ class Slonczewski(DynamicsTerm):
 
     A time-dependent current can be specified by providing a time-dependent
     pre-factor that is used to multiply ``J``. The time-dependence can either
-    be specified by providing a callable ``func`` (must be differentiable in
-    time) that is evaluated at time steps ``dt`` or by passing a dictionary
-    ``tcl_strings`` of tcl strings that are written to the mif file without
-    further processing.
+    be specified by providing a callable ``func`` that is evaluated at time
+    steps ``dt`` or by passing a dictionary ``tcl_strings`` of tcl strings that
+    are written to the mif file.
 
     Parameters
     ----------
@@ -105,7 +104,8 @@ class Slonczewski(DynamicsTerm):
         Dictionary of ``tcl`` strings to be included into the ``mif`` file for
         more control over specific time-dependencies. Must contain the
         following keys: ``script``, ``script_args``, and ``script_name``. Refer
-        to the OOMMF documentation for more details.
+        to the OOMMF documentation for more details (
+        https://math.nist.gov/oommf/doc/userguide20a3/userguide/Standard_Oxs_Ext_Child_Clas.html#SX).
 
     Examples
     --------
@@ -135,7 +135,8 @@ class Slonczewski(DynamicsTerm):
     >>> slonczewski = mm.Slonczewski(J=7.5e12, mp=(1, 0, 0), P=0.4, Lambda=2,
     ...                              func=decay, dt=1e-13)
 
-    4. An attempt to define the Slonczewski dynamics term using a wrong value.
+    4. An attempt to define the Slonczewski dynamics term using a wrong value
+       (here using a scalar for ``mp`` where a vector is required).
 
     >>> # scalar value for mp
     >>> slonczewski = mm.Slonczewski(J=J, mp=5, P=0.4, Lambda=2)

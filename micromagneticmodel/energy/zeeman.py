@@ -34,7 +34,7 @@ class Zeeman(EnergyTerm):
     ``H`` is passed, a time-constant field is defined.
 
     The time-dependent field $H(t)$ is obtained by multiplying the
-    time-independent field `H` with a time-dependent pre-factor:
+    time-independent field `H` with a time-dependent pre-factor $f(t)$:
 
     .. math::
 
@@ -48,7 +48,7 @@ class Zeeman(EnergyTerm):
     - custom ``tcl`` code passed directly to OOMMF
 
     There are two built-in functions to specify a time-dependent field. To use
-    these as string must be passed to ``func``. ``func`` can be either
+    these a string must be passed to ``func``. ``func`` can be either
     ``'sine'`` or ``'sinc'``. If time-dependent external magnetic field is
     defined using ``func``, ``f`` and ``t0`` must be passed. For
     ``func='sine'``, energy density is:
@@ -75,17 +75,19 @@ class Zeeman(EnergyTerm):
     order for this method to be stable a reasonable small time-step must be
     chosen. As a rough guideline start around ``dt=1e-13`` (s). The callable
     passed to ``func`` must either return a single number that is used to
-    multiply the initial field or a list of nine values that define a matrix
-    ``M`` that is multiplied with the initial field vector. Ordering of the
-    matrix elements is ``[M11, M12, M13, M21, M22, M23, M31, M32, M33]``. The
-    matrix allows for more complicated processes, e.g. a rotating field.
+    multiply the initial field ``H`` or a list of nine values that define a
+    matrix ``M`` that is multiplied with the initial field vector. Ordering of
+    the matrix elements is ``[M11, M12, M13, M21, M22, M23, M31, M32, M33]``.
+    The matrix allows for more complicated processes, e.g. a rotating field
+    (for more details see the OOMMF documentation:
+    https://math.nist.gov/oommf/doc/userguide20a3/userguide/Standard_Oxs_Ext_Child_Clas.html#TZ).
 
     To have more control and use the full flexibility of OOMMF it is also
     possible to directly pass several tcl strings that are added to the ``mif``
     file without further processing. The dictionary must be passed to
     ``tcl_strings`` and must contain ``script``, ``energy``, ``type``,
     ``script_args``, and ``script_name``. Please refer to the OOMMF
-    documentation for detailed explanations. Generally speakin, specifying
+    documentation for detailed explanations. In general, specifying
     ``time_dependence`` and ``tstep`` is easier for the user and should be
     preferred, if possible.
 
@@ -99,11 +101,6 @@ class Zeeman(EnergyTerm):
         dictionary, e.g. ``H={'region1': (0, 0, 3e6), 'region2': (0, 0,
         -3e6)}`` (if the parameter is defined "per region") or
         ``discretisedfield.Field`` is passed.
-
-    wave : str, optional
-
-        For a time dependent field, either ``'sine'`` or ``'sinc'`` is passed.
-        Deprecated, use ``func`` instead.
 
     f : numbers.Real, optional (required for ``func='sin'``/``'sinc'``)
 
@@ -129,7 +126,10 @@ class Zeeman(EnergyTerm):
         Dictionary of ``tcl`` strings to be included into the ``mif`` file for
         more control over specific time-dependencies. Must contain the
         following keys: ``script``, ``energy``, ``type``, ``script_args``, and
-        ``script_name``. Refer to the OOMMF documentation for more details.
+        ``script_name``. Refer to the OOMMF documentation for more details:
+        https://math.nist.gov/oommf/doc/userguide20a3/userguide/Standard_Oxs_Ext_Child_Clas.html#SU.
+        ``script_name`` refers to what is called ``script`` in the function
+        definition on the OOMMF website.
 
     Examples
     --------
@@ -174,6 +174,7 @@ class Zeeman(EnergyTerm):
 
     """
 
+    # 'wave' is replaced by 'func' (deprecated but kept for compatibility)
     _allowed_attributes = ['H', 'wave', 'f', 't0', 'func', 'dt', 'tcl_strings']
 
     @property

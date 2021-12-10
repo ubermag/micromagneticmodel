@@ -27,10 +27,9 @@ class ZhangLi(DynamicsTerm):
 
     A time-dependent current can be specified by providing a time-dependent
     pre-factor that is used to multiply ``u``. The time-dependence can either
-    be specified by providing a callable ``func`` (must be differentiable in
-    time) that is evaluated at time steps ``dt`` or by passing a dictionary
-    ``tcl_strings`` of tcl strings that are written to the mif file without
-    further processing.
+    be specified by providing a callable ``func`` that is evaluated at time
+    steps ``dt`` or by passing a dictionary ``tcl_strings`` of tcl strings that
+    are written to the mif file.
 
     Parameters
     ----------
@@ -57,7 +56,9 @@ class ZhangLi(DynamicsTerm):
         Dictionary of ``tcl`` strings to be included into the ``mif`` file for
         more control over specific time-dependencies. Must contain the
         following keys: ``script``, ``script_args``, and ``script_name``. Refer
-        to the OOMMF documentation for more details.
+        to the OOMMF documentation for more details (behaves similar to
+        Slonczewski current/Oxs_SpinXferEvolve:
+        https://math.nist.gov/oommf/doc/userguide20a3/userguide/Standard_Oxs_Ext_Child_Clas.html#SX).
 
     Examples
     --------
@@ -87,7 +88,8 @@ class ZhangLi(DynamicsTerm):
     ...     return np.sin(omega * t)
     >>> zhangli = mm.ZhangLi(beta=0.01, u=5e6, func=sin_wave, dt=1e-13)
 
-    4. An attempt to define the Zhang-Li dynamics term using a wrong value.
+    4. An attempt to define the Zhang-Li dynamics term using a wrong value
+       (here using a vector ``u`` where a scalar value is required).
 
     >>> zhangli = mm.ZhangLi(beta=-1, u=(0, 0, 1))  # vector value
     Traceback (most recent call last):

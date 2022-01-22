@@ -1,11 +1,13 @@
 # micromagneticmodel
-[Marijan Beg](https://github.com/marijanbeg)<sup>1,2</sup>, [Martin Lang](https://github.com/lang-m)<sup>2</sup>, [Samuel Holt](https://github.com/samjrholt)<sup>3</sup>, [Hans Fangohr](https://github.com/fangohr)<sup>2,4,5</sup>
+
+[Marijan Beg](https://github.com/marijanbeg)<sup>1,2</sup>, [Martin Lang](https://github.com/lang-m)<sup>2</sup>, [Samuel Holt](https://github.com/samjrholt)<sup>2,3</sup>, and [Hans Fangohr](https://github.com/fangohr)<sup>2,4,5</sup>
 
 <sup>1</sup> *Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK*  
 <sup>2</sup> *Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK*  
 <sup>3</sup> *Department of Physics, University of Warwick, Coventry CV4 7AL, UK*  
 <sup>4</sup> *Max Planck Institute for the Structure and Dynamics of Matter, Luruper Chaussee 149, 22761 Hamburg, Germany*  
-<sup>5</sup> *Center for Free-Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany*
+<sup>5</sup> *Center for Free-Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany*  
+
 
 | Description | Badge |
 | --- | --- |
@@ -37,7 +39,7 @@ APIs and tutorials are available in the documentation. To access the documentati
 
 ## Installation, testing, and upgrade
 
-We recommend installation using `conda` package manager. Instructions can be found in the documentation.
+We recommend installation using `conda` package manager. Instructions can be found in the [documentation](https://ubermag.github.io/installation.html).
 
 ## Binder
 
@@ -72,11 +74,10 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 2. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [*AIP Advances* **7**, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
 
-3. Marijan Beg, Martin Lang, Samuel Holt, Hans Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism DOI: [10.5281/zenodo.3539461](http://doi.org/10.5281/zenodo.3539461) (2021).
+3. Marijan Beg, Martin Lang, Samuel Holt, and Hans Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism DOI: [10.5281/zenodo.3539479](http://doi.org/10.5281/zenodo.3539479) (2022).
 
 ## Acknowledgements
 
 - [OpenDreamKit](http://opendreamkit.org/) – Horizon 2020 European Research Infrastructure project (676541)
 
 - EPSRC Programme Grant on [Skyrmionics](http://www.skyrmions.ac.uk) (EP/N032128/1)
-

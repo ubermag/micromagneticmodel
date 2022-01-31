@@ -1,7 +1,10 @@
 import re
-import pytest
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 

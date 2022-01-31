@@ -1,5 +1,7 @@
 import re
+
 import pytest
+
 import micromagneticmodel as mm
 
 

@@ -1,8 +1,10 @@
+import numbers
 import re
 import types
-import pytest
-import numbers
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
 
 

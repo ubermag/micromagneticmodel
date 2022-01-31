@@ -1,4 +1,5 @@
 import numbers
+
 import micromagneticmodel as mm
 
 

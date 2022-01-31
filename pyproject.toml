@@ -75,3 +75,6 @@ about = """
 
 [tool.coverage.run]
 omit = ["micromagneticmodel/tests/*"]
+
+[tool.isort]
+skip_gitignore = true  # ignores files listed in .gitignore

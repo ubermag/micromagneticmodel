@@ -1,4 +1,4 @@
-"""Main package"""
+"""Domain-specific language for computational magnetism."""
 import pytest
 import pkg_resources
 import micromagneticmodel.abstract

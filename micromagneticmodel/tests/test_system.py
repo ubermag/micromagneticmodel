@@ -39,19 +39,19 @@ class TestSystem:
 
     def test_init_invalid_args(self):
         with pytest.raises(TypeError):
-            system = mm.System(energy=5)
+            mm.System(energy=5)
 
         with pytest.raises(TypeError):
-            system = mm.System(dynamics=5)
+            mm.System(dynamics=5)
 
         with pytest.raises(TypeError):
-            system = mm.System(name=152)
+            mm.System(name=152)
 
         with pytest.raises(ValueError):
-            system = mm.System(T=-0.1)
+            mm.System(T=-0.1)
 
         with pytest.raises(TypeError):
-            system = mm.System(m=-0.1)
+            mm.System(m=-0.1)
 
     def test_repr(self):
         system = mm.System(name='my_very_cool_system')

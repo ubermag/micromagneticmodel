@@ -1,7 +1,5 @@
 import re
 
-import discretisedfield as df
-import numpy as np
 import pytest
 
 import micromagneticmodel as mm

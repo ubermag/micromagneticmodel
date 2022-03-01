@@ -18,7 +18,7 @@ class TestAbstract:
         assert self.obj.arg2 == 'abc'
 
         with pytest.raises(AttributeError):
-            obj = MyDerivedClass(arg1=1, arg3=3)  # arg3 not allowed
+            MyDerivedClass(arg1=1, arg3=3)  # arg3 not allowed
 
     def test_iter(self):
         assert len(list(self.obj)) == 2

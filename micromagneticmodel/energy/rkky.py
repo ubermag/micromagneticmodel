@@ -1,4 +1,3 @@
-import discretisedfield as df
 import ubermagutil as uu
 import ubermagutil.typesystem as ts
 

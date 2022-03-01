@@ -1,7 +1,10 @@
 import re
-import pytest
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -33,7 +36,7 @@ class TestDMI:
         for crystalclass in self.crystalclasses:
             for D in self.invalid_args:
                 with pytest.raises((TypeError, ValueError)):
-                    term = mm.DMI(D=D, crystalclass=crystalclass)
+                    mm.DMI(D=D, crystalclass=crystalclass)
 
         with pytest.raises(AttributeError):
-            term = mm.DMI(wrong=1)
+            mm.DMI(wrong=1)

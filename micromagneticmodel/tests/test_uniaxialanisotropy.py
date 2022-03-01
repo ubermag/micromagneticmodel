@@ -1,8 +1,11 @@
 import re
-import pytest
-import numpy as np
+
 import discretisedfield as df
+import numpy as np
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -40,10 +43,10 @@ class TestUniaxialAnisotropy:
     def test_init_invalid_args(self):
         for K, u in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.UniaxialAnisotropy(K=K, u=u)
+                mm.UniaxialAnisotropy(K=K, u=u)
 
         with pytest.raises(AttributeError):
-            term = mm.UniaxialAnisotropy(wrong=1)
+            mm.UniaxialAnisotropy(wrong=1)
 
     def test_higher_order_anisotropy(self):
         term = mm.UniaxialAnisotropy(K1=1e5, K2=3e2, u=(0, 0, 1))

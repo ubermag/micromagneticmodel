@@ -1,8 +1,10 @@
 import re
-import pytest
-import numpy as np
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -40,8 +42,8 @@ class TestMagnetoElastic:
     def test_init_invalid_args(self):
         for B1, B2, e_diag, e_offdiag in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.MagnetoElastic(B1=B1, B2=B2, e_diag=e_diag,
-                                         e_offdiag=e_offdiag)
+                mm.MagnetoElastic(B1=B1, B2=B2, e_diag=e_diag,
+                                  e_offdiag=e_offdiag)
 
         with pytest.raises(AttributeError):
-            term = mm.MagnetoElastic(wrong=1)
+            mm.MagnetoElastic(wrong=1)

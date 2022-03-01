@@ -1,8 +1,11 @@
 import re
-import pytest
-import numpy as np
+
 import discretisedfield as df
+import numpy as np
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -37,11 +40,11 @@ class TestSlonczewski:
     def test_init_invalid_args(self):
         for J, mp, P, Lambda, eps_prime in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
-                                      eps_prime=eps_prime)
+                mm.Slonczewski(J=J, mp=mp, P=P, Lambda=Lambda,
+                               eps_prime=eps_prime)
 
         with pytest.raises(AttributeError):
-            term = mm.Slonczewski(wrong=1)
+            mm.Slonczewski(wrong=1)
 
     def test_init_time_dependent(self):
 

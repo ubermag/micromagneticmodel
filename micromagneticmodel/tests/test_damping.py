@@ -1,7 +1,10 @@
 import re
-import pytest
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -25,7 +28,7 @@ class TestDamping:
     def test_init_invalid_args(self):
         for alpha in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Damping(alpha=alpha)
+                mm.Damping(alpha=alpha)
 
         with pytest.raises(AttributeError):
-            term = mm.Damping(wrong=1)
+            mm.Damping(wrong=1)

@@ -1,8 +1,9 @@
 import re
+
 import pytest
-import numpy as np
-import discretisedfield as df
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -27,7 +28,7 @@ class TestRKKY:
     def test_init_invalid_args(self):
         for sigma, subregions in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.RKKY(sigma=sigma, subregions=subregions)
+                mm.RKKY(sigma=sigma, subregions=subregions)
 
         with pytest.raises(AttributeError):
-            term = mm.RKKY(wrong=1)
+            mm.RKKY(wrong=1)

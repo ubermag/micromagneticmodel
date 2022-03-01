@@ -1,8 +1,10 @@
+import numbers
 import re
 import types
-import pytest
-import numbers
+
 import discretisedfield as df
+import pytest
+
 import micromagneticmodel as mm
 
 
@@ -15,15 +17,15 @@ def check_term(term):
     if isinstance(term, mm.energy.energyterm.EnergyTerm):
         assert isinstance(getattr(mm, term._container_class)(), mm.Energy)
         with pytest.raises(NotImplementedError):
-            effective_field = term.effective_field(m=None)
+            term.effective_field(m=None)
         with pytest.raises(NotImplementedError):
-            energy = term.energy(m=None)
+            term.energy(m=None)
         with pytest.raises(NotImplementedError):
-            density = term.density(m=None)
+            term.density(m=None)
     else:
         assert isinstance(getattr(mm, term._container_class)(), mm.Dynamics)
         with pytest.raises(NotImplementedError):
-            dmdt = term.dmdt(m=None, Heff=None)
+            term.dmdt(m=None, Heff=None)
 
     assert term == term
     assert not term != term

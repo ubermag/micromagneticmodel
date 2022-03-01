@@ -1,7 +1,9 @@
 import collections
-import ubermagutil as uu
+
 import discretisedfield as df
+import ubermagutil as uu
 import ubermagutil.typesystem as ts
+
 from .energyterm import EnergyTerm
 
 

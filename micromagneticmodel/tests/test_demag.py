@@ -1,7 +1,9 @@
 import re
+
 import pytest
-import discretisedfield as df
+
 import micromagneticmodel as mm
+
 from .checks import check_term
 
 
@@ -14,4 +16,4 @@ class TestDemag:
 
     def test_init_invalid_args(self):
         with pytest.raises(AttributeError):
-            term = mm.Exchange(wrong=1)
+            mm.Exchange(wrong=1)

@@ -1,6 +1,7 @@
 import discretisedfield as df
-import micromagneticmodel as mm
 import ubermagutil.typesystem as ts
+
+import micromagneticmodel as mm
 
 
 @ts.typesystem(m=ts.Typed(expected_type=df.Field, allow_none=True),

@@ -1,5 +1,7 @@
 import ubermagutil as uu
+
 import micromagneticmodel as mm
+
 from .dynamicsterm import DynamicsTerm
 
 

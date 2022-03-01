@@ -1,4 +1,5 @@
 import discretisedfield as df
+
 import micromagneticmodel as mm
 
 

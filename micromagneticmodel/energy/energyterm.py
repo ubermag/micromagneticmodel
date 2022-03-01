@@ -1,5 +1,7 @@
 import abc
+
 import ubermagutil as uu
+
 import micromagneticmodel as mm
 
 

@@ -17,4 +17,4 @@ class TestDemag:
 
     def test_init_invalid_args(self):
         with pytest.raises(AttributeError):
-            term = mm.Exchange(wrong=1)
+            mm.Exchange(wrong=1)

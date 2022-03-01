@@ -44,8 +44,8 @@ class TestEnergy:
             assert isinstance(container, mm.Energy)
 
         # Create container as a sum of terms.
-        container = (self.exchange + self.zeeman + self.uniaxialanisotropy +
-                     self.demag + self.dmi + self.cubicanisotropy)
+        container = (self.exchange + self.zeeman + self.uniaxialanisotropy
+                     + self.demag + self.dmi + self.cubicanisotropy)
         check_container(container)
         assert len(container) == 6
 
@@ -126,7 +126,7 @@ class TestEnergy:
         container -= self.exchange
         check_container(container)
         with pytest.raises(AttributeError):
-            exchange = container.exchange
+            container.exchange
 
     def test_freestyle(self):
         container = self.dmi + self.zeeman  # single term is not allowed
@@ -169,7 +169,7 @@ class TestEnergy:
         container = self.dmi + self.zeeman  # single term is not allowed
 
         with pytest.raises(NotImplementedError):
-            res = container.energy(None)
+            container.energy(None)
 
         with pytest.raises(NotImplementedError):
-            res = container.density(None)
+            container.density(None)

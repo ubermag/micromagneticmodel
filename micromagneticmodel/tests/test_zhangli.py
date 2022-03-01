@@ -18,7 +18,7 @@ class TestZhangLi:
         self.invalid_args = [((1, -2), 1),
                              (-1.0, '2.0'),
                              ((0, 0, 0, 9), 5e-11),
-                             (11, -1e-12+2j),
+                             (11, -1e-12 + 2j),
                              (1, {'r1 2': 1, 'r2': 2})]
 
     def test_init_valid_args(self):
@@ -33,10 +33,10 @@ class TestZhangLi:
     def test_init_invalid_args(self):
         for u, beta in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.ZhangLi(u=u, beta=beta)
+                mm.ZhangLi(u=u, beta=beta)
 
         with pytest.raises(AttributeError):
-            term = mm.ZhangLi(wrong=1)
+            mm.ZhangLi(wrong=1)
 
     def test_init_time_dependent(self):
 

@@ -49,7 +49,7 @@ class TestCubicAnisotropy:
     def test_init_invalid_args(self):
         for K, u1, u2 in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.CubicAnisotropy(K=K, u1=u1, u2=u2)
+                mm.CubicAnisotropy(K=K, u1=u1, u2=u2)
 
         with pytest.raises(AttributeError):
-            term = mm.CubicAnisotropy(wrong=1)
+            mm.CubicAnisotropy(wrong=1)

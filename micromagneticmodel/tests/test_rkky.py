@@ -30,7 +30,7 @@ class TestRKKY:
     def test_init_invalid_args(self):
         for sigma, subregions in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.RKKY(sigma=sigma, subregions=subregions)
+                mm.RKKY(sigma=sigma, subregions=subregions)
 
         with pytest.raises(AttributeError):
-            term = mm.RKKY(wrong=1)
+            mm.RKKY(wrong=1)

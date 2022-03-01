@@ -28,7 +28,7 @@ class TestPrecession:
     def test_init_invalid_args(self):
         for gamma0 in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Precession(gamma0=gamma0)
+                mm.Precession(gamma0=gamma0)
 
         with pytest.raises(AttributeError):
-            term = mm.Precession(wrong=1)
+            mm.Precession(wrong=1)

@@ -27,7 +27,7 @@ class TestExchange:
     def test_init_invalid_args(self):
         for A in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Exchange(A=A)
+                mm.Exchange(A=A)
 
         with pytest.raises(AttributeError):
-            term = mm.Exchange(wrong=1)
+            mm.Exchange(wrong=1)

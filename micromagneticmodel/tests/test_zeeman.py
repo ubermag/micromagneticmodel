@@ -39,10 +39,10 @@ class TestZeeman:
     def test_init_invalid_args(self):
         for H in self.invalid_args:
             with pytest.raises((TypeError, ValueError)):
-                term = mm.Zeeman(H=H)
+                mm.Zeeman(H=H)
 
         with pytest.raises(AttributeError):
-            term = mm.Zeeman(wrong=1)
+            mm.Zeeman(wrong=1)
 
     def test_init_time_dependent(self):
         for H in self.valid_args:

@@ -23,7 +23,7 @@ class TestSystem:
         assert len(system.dynamics) == 0
         assert system.m is None
         assert system.T == 0
-        assert system.name == 'unnamed'  # Default value
+        assert system.name == "unnamed"  # Default value
 
         system.energy = mm.Exchange(A=1e-12) + mm.Demag()
         check_system(system)
@@ -54,6 +54,6 @@ class TestSystem:
             mm.System(m=-0.1)
 
     def test_repr(self):
-        system = mm.System(name='my_very_cool_system')
+        system = mm.System(name="my_very_cool_system")
         check_system(system)
-        assert repr(system) == 'System(name=\'my_very_cool_system\')'
+        assert repr(system) == "System(name='my_very_cool_system')"

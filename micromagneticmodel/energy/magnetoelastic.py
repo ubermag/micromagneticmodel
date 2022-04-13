@@ -6,12 +6,12 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(B1=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               B2=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               e_diag=ts.Parameter(descriptor=ts.Vector(size=3),
-                                   otherwise=df.Field),
-               e_offdiag=ts.Parameter(descriptor=ts.Vector(size=3),
-                                      otherwise=df.Field))
+@ts.typesystem(
+    B1=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    B2=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    e_diag=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+    e_offdiag=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+)
 class MagnetoElastic(EnergyTerm):
     r"""Magneto-elastic energy term.
 
@@ -83,9 +83,11 @@ class MagnetoElastic(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['B1', 'B2', 'e_diag', 'e_offdiag']
-    _reprlatex = (r'B_{1}\sum_{i} m_{i}\epsilon_{ii} + '
-                  r'B_{2}\sum_{i}\sum_{j\ne i} m_{i}m_{j}\epsilon_{ij}')
+    _allowed_attributes = ["B1", "B2", "e_diag", "e_offdiag"]
+    _reprlatex = (
+        r"B_{1}\sum_{i} m_{i}\epsilon_{ii} + "
+        r"B_{2}\sum_{i}\sum_{j\ne i} m_{i}m_{j}\epsilon_{ij}"
+    )
 
     def effective_field(self, m):
         raise NotImplementedError

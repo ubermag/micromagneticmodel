@@ -2,7 +2,7 @@
 import math
 
 # Fundamental constants
-mu0 = 4*math.pi*1e-7
+mu0 = 4 * math.pi * 1e-7
 """magnetic constant (N/A**2)"""
 
 e = 1.6021766208e-19
@@ -22,14 +22,14 @@ g = 2.00231930436182
 
 
 # Derived constants
-hbar = h/(2*math.pi)
+hbar = h / (2 * math.pi)
 """reduced Planck constant (Js)"""
 
-gamma = g*e/(2*me)
+gamma = g * e / (2 * me)
 """gyrotropic ratio (C/kg)"""
 
-muB = gamma*hbar
+muB = gamma * hbar
 """Bohr magneton (J/T)"""
 
-gamma0 = gamma*mu0
+gamma0 = gamma * mu0
 """LLG precession term gamma (m/As)"""

@@ -11,12 +11,11 @@ class Term(Abstract):
     This class is derived from ``micromagneticmodel.abstract.Abstract``.
 
     """
+
     @property
     @abc.abstractmethod
     def _container_class(self):
-        """A class of a container, which is the result of adding terms.
-
-        """
+        """A class of a container, which is the result of adding terms."""
         pass  # pragma: no cover
 
     def __eq__(self, other):
@@ -119,14 +118,14 @@ class Term(Abstract):
     @property
     @abc.abstractmethod
     def _reprlatex(self):
-        """"LaTeX representation abstract method, rendered inside Jupyter and
+        """ "LaTeX representation abstract method, rendered inside Jupyter and
         returned by ``micromagneticmodel.Term._repr_latex_``.
 
         """
         pass  # pragma: no cover
 
     def _repr_latex_(self):
-        """"LaTeX representation method, rendered in Jupyter. This method has
+        """ "LaTeX representation method, rendered in Jupyter. This method has
         the priority over ``__repr__`` in Jupyter.
 
         Returns
@@ -147,4 +146,4 @@ class Term(Abstract):
         >>> # zeeman  # inside Jupyter
 
         """
-        return f'${self._reprlatex}$'
+        return f"${self._reprlatex}$"

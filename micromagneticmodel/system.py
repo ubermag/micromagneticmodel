@@ -4,9 +4,11 @@ import ubermagutil.typesystem as ts
 import micromagneticmodel as mm
 
 
-@ts.typesystem(m=ts.Typed(expected_type=df.Field, allow_none=True),
-               T=ts.Scalar(unsigned=True),
-               name=ts.Name(const=True))
+@ts.typesystem(
+    m=ts.Typed(expected_type=df.Field, allow_none=True),
+    T=ts.Scalar(unsigned=True),
+    name=ts.Name(const=True),
+)
 class System:
     """System class.
 
@@ -67,7 +69,8 @@ class System:
     ...                    name=name)
 
     """
-    def __init__(self, energy=0, dynamics=0, m=None, T=0, name='unnamed'):
+
+    def __init__(self, energy=0, dynamics=0, m=None, T=0, name="unnamed"):
         self.energy = energy
         self.dynamics = dynamics
         self.m = m
@@ -123,7 +126,7 @@ class System:
         elif isinstance(value, (mm.EnergyTerm, mm.Energy)):
             self._energy = empty_container + value  # checks by + operator
         else:
-            msg = f'Cannot set energy equation with {type(value)}.'
+            msg = f"Cannot set energy equation with {type(value)}."
             raise TypeError(msg)
 
     @property
@@ -171,7 +174,7 @@ class System:
         elif isinstance(value, (mm.DynamicsTerm, mm.Dynamics)):
             self._dynamics = empty_container + value  # checks by + operator
         else:
-            msg = f'Cannot set dynamics equation with {type(value)}.'
+            msg = f"Cannot set dynamics equation with {type(value)}."
             raise TypeError(msg)
 
     def __repr__(self):
@@ -194,4 +197,4 @@ class System:
         "System(name='my_cool_system')"
 
         """
-        return f'System(name=\'{self.name}\')'
+        return f"System(name='{self.name}')"

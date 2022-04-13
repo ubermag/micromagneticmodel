@@ -5,9 +5,11 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(sigma=ts.Scalar(),
-               sigma2=ts.Scalar(),
-               subregions=ts.Typed(expected_type=(list, tuple, set)))
+@ts.typesystem(
+    sigma=ts.Scalar(),
+    sigma2=ts.Scalar(),
+    subregions=ts.Typed(expected_type=(list, tuple, set)),
+)
 class RKKY(EnergyTerm):
     """RKKY energy term.
 
@@ -45,12 +47,12 @@ class RKKY(EnergyTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ['sigma', 'sigma2', 'subregions']
+
+    _allowed_attributes = ["sigma", "sigma2", "subregions"]
 
     @property
     def _reprlatex(self):
-        return (r'\text{{RKKY}}'
-                r'(\text{{{}}}, \text{{{}}})'.format(*self.subregions))
+        return r"\text{{RKKY}}" r"(\text{{{}}}, \text{{{}}})".format(*self.subregions)
 
     def effective_field(self, m):
         raise NotImplementedError

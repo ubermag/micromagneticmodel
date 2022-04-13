@@ -7,10 +7,19 @@ import micromagneticmodel.consts
 import micromagneticmodel.examples
 
 from .driver import Driver
-from .dynamics import (Damping, Dynamics, DynamicsTerm, Precession,
-                       Slonczewski, ZhangLi)
-from .energy import (DMI, RKKY, CubicAnisotropy, Demag, Energy, EnergyTerm,
-                     Exchange, MagnetoElastic, UniaxialAnisotropy, Zeeman)
+from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
+from .energy import (
+    DMI,
+    RKKY,
+    CubicAnisotropy,
+    Demag,
+    Energy,
+    EnergyTerm,
+    Exchange,
+    MagnetoElastic,
+    UniaxialAnisotropy,
+    Zeeman,
+)
 from .evolver import Evolver
 from .system import System
 
@@ -29,5 +38,6 @@ def test():
     >>> # micromagneticmodel.test()
 
     """
-    return pytest.main(['-v', '--pyargs',
-                        'micromagneticmodel', '-l'])  # pragma: no cover
+    return pytest.main(
+        ["-v", "--pyargs", "micromagneticmodel", "-l"]
+    )  # pragma: no cover

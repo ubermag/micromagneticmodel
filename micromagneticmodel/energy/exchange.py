@@ -53,8 +53,8 @@ class Exchange(EnergyTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ['A']
-    _reprlatex = r'- A \mathbf{m} \cdot \nabla^{2} \mathbf{m}'
+    _allowed_attributes = ["A"]
+    _reprlatex = r"- A \mathbf{m} \cdot \nabla^{2} \mathbf{m}"
 
     def effective_field(self, m):
         raise NotImplementedError

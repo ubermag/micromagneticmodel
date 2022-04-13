@@ -27,9 +27,10 @@ class Demag(EnergyTerm):
     >>> demag = mm.Demag()
 
     """
-    _allowed_attributes = ['asymptotic_radius']
-    _reprlatex = (r'-\frac{1}{2}\mu_{0}M_\text{s}'
-                  r'\mathbf{m} \cdot \mathbf{H}_\text{d}')
+    _allowed_attributes = ["asymptotic_radius"]
+    _reprlatex = (
+        r"-\frac{1}{2}\mu_{0}M_\text{s}" r"\mathbf{m} \cdot \mathbf{H}_\text{d}"
+    )
 
     def effective_field(self, m):
         raise NotImplementedError

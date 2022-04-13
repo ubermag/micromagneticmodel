@@ -6,11 +6,12 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               K1=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               K2=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               u=ts.Parameter(descriptor=ts.Vector(size=3),
-                              otherwise=df.Field))
+@ts.typesystem(
+    K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    K1=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    K2=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    u=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+)
 class UniaxialAnisotropy(EnergyTerm):
     r"""Uniaxial anisotropy energy term.
 
@@ -76,15 +77,17 @@ class UniaxialAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['K', 'K1', 'K2', 'u']
+    _allowed_attributes = ["K", "K1", "K2", "u"]
 
     @property
     def _reprlatex(self):
         if not isinstance(self.K2, ts.Descriptor):
-            return (r'-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - '
-                    r'K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}')
+            return (
+                r"-K_{1} (\mathbf{m} \cdot \mathbf{u})^{2} - "
+                r"K_{2} (\mathbf{m} \cdot \mathbf{u})^{4}"
+            )
         else:
-            return r'-K (\mathbf{m} \cdot \mathbf{u})^{2}'
+            return r"-K (\mathbf{m} \cdot \mathbf{u})^{2}"
 
     def effective_field(self, m):
         raise NotImplementedError

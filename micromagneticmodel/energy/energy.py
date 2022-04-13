@@ -27,6 +27,7 @@ class Energy(mm.abstract.Container):
     2
 
     """
+
     _term_class = EnergyTerm
 
     def energy(self, m):

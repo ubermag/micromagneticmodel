@@ -8,23 +8,21 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(J=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               mp=ts.Parameter(descriptor=ts.Vector(size=3),
-                               otherwise=df.Field),
-               Lambda=ts.Parameter(descriptor=ts.Scalar(positive=True),
-                                   otherwise=df.Field),
-               P=ts.Parameter(descriptor=ts.Scalar(positive=True),
-                              otherwise=df.Field),
-               eps_prime=ts.Parameter(descriptor=ts.Scalar(),
-                                      otherwise=df.Field),
-               func=ts.Typed(expected_type=collections.abc.Callable),
-               dt=ts.Scalar(positive=True),
-               tcl_strings=ts.Dictionary(
-                   key_descriptor=ts.Subset(
-                       sample_set=('script', 'script_args', 'script_name'),
-                       unpack=False),
-                   value_descriptor=ts.Typed(expected_type=str))
-               )
+@ts.typesystem(
+    J=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    mp=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+    Lambda=ts.Parameter(descriptor=ts.Scalar(positive=True), otherwise=df.Field),
+    P=ts.Parameter(descriptor=ts.Scalar(positive=True), otherwise=df.Field),
+    eps_prime=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    func=ts.Typed(expected_type=collections.abc.Callable),
+    dt=ts.Scalar(positive=True),
+    tcl_strings=ts.Dictionary(
+        key_descriptor=ts.Subset(
+            sample_set=("script", "script_args", "script_name"), unpack=False
+        ),
+        value_descriptor=ts.Typed(expected_type=str),
+    ),
+)
 class Slonczewski(DynamicsTerm):
     r"""Slonczewski spin transfer torque dynamics term.
 
@@ -148,17 +146,29 @@ class Slonczewski(DynamicsTerm):
 
     """
 
-    _allowed_attributes = ['J', 'mp', 'P', 'Lambda', 'eps_prime',
-                           'func', 'dt', 'tcl_strings']
+    _allowed_attributes = [
+        "J",
+        "mp",
+        "P",
+        "Lambda",
+        "eps_prime",
+        "func",
+        "dt",
+        "tcl_strings",
+    ]
 
     @property
     def _reprlatex(self):
-        reprlatex = (r'\gamma_{0}\beta\epsilon(\mathbf{m} \times '
-                     r'\mathbf{m}_\text{p} \times \mathbf{m})')
-        if hasattr(self, 'eps_prime'):
+        reprlatex = (
+            r"\gamma_{0}\beta\epsilon(\mathbf{m} \times "
+            r"\mathbf{m}_\text{p} \times \mathbf{m})"
+        )
+        if hasattr(self, "eps_prime"):
             if self.eps_prime:
-                reprlatex += (r"-\gamma_{0}\beta\epsilon' (\mathbf{m} "
-                              r"\times \mathbf{m}_\text{p})")
+                reprlatex += (
+                    r"-\gamma_{0}\beta\epsilon' (\mathbf{m} "
+                    r"\times \mathbf{m}_\text{p})"
+                )
 
         return reprlatex
 

@@ -6,11 +6,24 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               crystalclass=ts.Subset(sample_set={'Cnv', 'Cnv_x', 'Cnv_y',
-                                                  'Cnv_z', 'T', 'O', 'D2d',
-                                                  'D2d_x', 'D2d_y', 'D2d_z'},
-                                      unpack=False))
+@ts.typesystem(
+    D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    crystalclass=ts.Subset(
+        sample_set={
+            "Cnv",
+            "Cnv_x",
+            "Cnv_y",
+            "Cnv_z",
+            "T",
+            "O",
+            "D2d",
+            "D2d_x",
+            "D2d_y",
+            "D2d_z",
+        },
+        unpack=False,
+    ),
+)
 class DMI(EnergyTerm):
     r"""Dzyaloshinskii-Moriya energy term.
 
@@ -100,33 +113,43 @@ class DMI(EnergyTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ['D', 'crystalclass']
+    _allowed_attributes = ["D", "crystalclass"]
 
     @property
     def _reprlatex(self):
-        if self.crystalclass in ['T', 'O']:
-            return r'D \mathbf{m} \cdot (\nabla \times \mathbf{m})'
-        elif 'Cnv' in self.crystalclass:
-            if self.crystalclass == 'Cnv':
-                direction = 'z'
+        if self.crystalclass in ["T", "O"]:
+            return r"D \mathbf{m} \cdot (\nabla \times \mathbf{m})"
+        elif "Cnv" in self.crystalclass:
+            if self.crystalclass == "Cnv":
+                direction = "z"
             else:
                 direction = self.crystalclass[-1]
-            return (r'D ( \mathbf{m} \cdot \nabla m_{' + direction + r'} '
-                    r'- m_{' + direction + r'} \nabla \cdot \mathbf{m} )')
+            return (
+                r"D ( \mathbf{m} \cdot \nabla m_{" + direction + r"} "
+                r"- m_{" + direction + r"} \nabla \cdot \mathbf{m} )"
+            )
         else:
-            if self.crystalclass == 'D2d_x':
-                dir1 = 'y'
-                dir2 = 'z'
-            elif self.crystalclass == 'D2d_y':
-                dir1 = 'z'
-                dir2 = 'x'
+            if self.crystalclass == "D2d_x":
+                dir1 = "y"
+                dir2 = "z"
+            elif self.crystalclass == "D2d_y":
+                dir1 = "z"
+                dir2 = "x"
             else:
-                dir1 = 'x'
-                dir2 = 'y'
-            return (r'D\mathbf{m} \cdot \left( \frac{\partial '
-                    r'\mathbf{m}}{\partial ' + dir1 + r'} \times \hat{' + dir1
-                    + r'} - \frac{\partial \mathbf{m}}{\partial ' + dir2
-                    + r'} \times \hat{' + dir2 + r'} \right)')
+                dir1 = "x"
+                dir2 = "y"
+            return (
+                r"D\mathbf{m} \cdot \left( \frac{\partial "
+                r"\mathbf{m}}{\partial "
+                + dir1
+                + r"} \times \hat{"
+                + dir1
+                + r"} - \frac{\partial \mathbf{m}}{\partial "
+                + dir2
+                + r"} \times \hat{"
+                + dir2
+                + r"} \right)"
+            )
 
     def effective_field(self, m):
         raise NotImplementedError

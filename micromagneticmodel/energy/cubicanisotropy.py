@@ -6,11 +6,11 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               u1=ts.Parameter(descriptor=ts.Vector(size=3),
-                               otherwise=df.Field),
-               u2=ts.Parameter(descriptor=ts.Vector(size=3),
-                               otherwise=df.Field))
+@ts.typesystem(
+    K=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    u1=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+    u2=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+)
 class CubicAnisotropy(EnergyTerm):
     r"""Cubic anisotropy energy term.
 
@@ -79,14 +79,14 @@ class CubicAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['K', 'u1', 'u2']
+    _allowed_attributes = ["K", "u1", "u2"]
 
     @property
     def _reprlatex(self):
-        a1 = r'(\mathbf{m} \cdot \mathbf{u}_{1})^{2}'
-        a2 = r'(\mathbf{m} \cdot \mathbf{u}_{2})^{2}'
-        a3 = r'(\mathbf{m} \cdot \mathbf{u}_{3})^{2}'
-        return r'-K [{0}{1}+{1}{2}+{2}{0}]'.format(a1, a2, a3)
+        a1 = r"(\mathbf{m} \cdot \mathbf{u}_{1})^{2}"
+        a2 = r"(\mathbf{m} \cdot \mathbf{u}_{2})^{2}"
+        a3 = r"(\mathbf{m} \cdot \mathbf{u}_{3})^{2}"
+        return r"-K [{0}{1}+{1}{2}+{2}{0}]".format(a1, a2, a3)
 
     def effective_field(self, m):
         raise NotImplementedError

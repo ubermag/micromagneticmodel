@@ -8,16 +8,18 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
-               beta=ts.Scalar(),
-               func=ts.Typed(expected_type=collections.abc.Callable),
-               dt=ts.Scalar(positive=True),
-               tcl_strings=ts.Dictionary(
-                   key_descriptor=ts.Subset(
-                       sample_set=('script', 'script_args', 'script_name'),
-                       unpack=False),
-                   value_descriptor=ts.Typed(expected_type=str))
-               )
+@ts.typesystem(
+    u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    beta=ts.Scalar(),
+    func=ts.Typed(expected_type=collections.abc.Callable),
+    dt=ts.Scalar(positive=True),
+    tcl_strings=ts.Dictionary(
+        key_descriptor=ts.Subset(
+            sample_set=("script", "script_args", "script_name"), unpack=False
+        ),
+        value_descriptor=ts.Typed(expected_type=str),
+    ),
+)
 class ZhangLi(DynamicsTerm):
     r"""Zhang-Li spin transfer torque dynamics term.
 
@@ -100,11 +102,13 @@ class ZhangLi(DynamicsTerm):
 
     """
 
-    _allowed_attributes = ['u', 'beta', 'func', 'dt', 'tcl_strings']
+    _allowed_attributes = ["u", "beta", "func", "dt", "tcl_strings"]
 
-    _reprlatex = (r'-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + '
-                  r'\beta\mathbf{m} \times \big[(\mathbf{u} \cdot '
-                  r'\boldsymbol\nabla)\mathbf{m}\big]')
+    _reprlatex = (
+        r"-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + "
+        r"\beta\mathbf{m} \times \big[(\mathbf{u} \cdot "
+        r"\boldsymbol\nabla)\mathbf{m}\big]"
+    )
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

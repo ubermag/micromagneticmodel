@@ -4,9 +4,8 @@ import micromagneticmodel as mm
 
 
 class Driver(mm.abstract.Abstract):
-    """An abstract class for deriving drivers.
+    """An abstract class for deriving drivers."""
 
-    """
     @abc.abstractmethod
     def drive(self, system, **kwargs):
         """Drive method.

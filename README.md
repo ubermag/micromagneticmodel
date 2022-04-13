@@ -13,7 +13,8 @@
 | --- | --- |
 | Tests | [![Build status](https://github.com/ubermag/micromagneticmodel/workflows/workflow/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aworkflow) |
 |       | [![conda](https://github.com/ubermag/micromagneticmodel/workflows/conda/badge.svg)](https://github.com/ubermag/micromagneticmodel/actions?query=workflow%3Aconda) |
-| Linting | [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ubermag/micromagneticmodel/master.svg)](https://results.pre-commit.ci/latest/github/ubermag/micromagneticmodel/master)
+| Linting | [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ubermag/micromagneticmodel/master.svg)](https://results.pre-commit.ci/latest/github/ubermag/micromagneticmodel/master) |
+|         | [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) |
 | Releases | [![PyPI version](https://badge.fury.io/py/micromagneticmodel.svg)](https://badge.fury.io/py/micromagneticmodel) |
 |          | [![Anaconda-Server Badge](https://anaconda.org/conda-forge/micromagneticmodel/badges/version.svg)](https://anaconda.org/conda-forge/micromagneticmodel) |
 | Coverage | [![codecov](https://codecov.io/gh/ubermag/micromagneticmodel/branch/master/graph/badge.svg?token=hcK4fofmrL)](https://codecov.io/gh/ubermag/micromagneticmodel) |

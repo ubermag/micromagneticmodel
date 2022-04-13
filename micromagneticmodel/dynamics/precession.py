@@ -6,8 +6,9 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(gamma0=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                                   otherwise=df.Field))
+@ts.typesystem(
+    gamma0=ts.Parameter(descriptor=ts.Scalar(unsigned=True), otherwise=df.Field)
+)
 class Precession(DynamicsTerm):
     r"""Precession dynamics term.
 
@@ -55,9 +56,11 @@ class Precession(DynamicsTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['gamma0']
-    _reprlatex = (r'-\frac{\gamma_{0}}{1 + \alpha^{2}} \mathbf{m} '
-                  r'\times \mathbf{H}_\text{eff}')
+    _allowed_attributes = ["gamma0"]
+    _reprlatex = (
+        r"-\frac{\gamma_{0}}{1 + \alpha^{2}} \mathbf{m} "
+        r"\times \mathbf{H}_\text{eff}"
+    )
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

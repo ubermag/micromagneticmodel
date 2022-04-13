@@ -29,7 +29,7 @@ def check_term(term):
 
     assert term == term
     assert not term != term
-    assert term != '5'
+    assert term != "5"
 
     container = getattr(mm, term._container_class)()
     check_container(container)
@@ -52,13 +52,13 @@ def check_term(term):
         container = term + term
 
     assert isinstance(repr(term), str)
-    assert re.search(r'^.+\(.*\)$', repr(term))
+    assert re.search(r"^.+\(.*\)$", repr(term))
 
     assert isinstance(term._repr_latex_(), str)
-    assert re.search(r'^\$.+\$$', term._repr_latex_())
+    assert re.search(r"^\$.+\$$", term._repr_latex_())
 
     assert isinstance(term.name, str)
-    assert re.search(r'\w+', term.name)
+    assert re.search(r"\w+", term.name)
 
 
 def check_container(container):
@@ -66,9 +66,9 @@ def check_container(container):
     assert isinstance(container._terms, list)
 
     if isinstance(container, mm.Energy):
-        assert container._term_class.__name__ == 'EnergyTerm'
+        assert container._term_class.__name__ == "EnergyTerm"
     else:
-        assert container._term_class.__name__ == 'DynamicsTerm'
+        assert container._term_class.__name__ == "DynamicsTerm"
 
     assert isinstance(len(container), int)
     assert len(container) >= 0
@@ -85,7 +85,7 @@ def check_container(container):
 
     assert container == container
     assert not container != container
-    assert container != '5'
+    assert container != "5"
 
     # neutral element for addition
     assert container + container.__class__() == container
@@ -95,7 +95,7 @@ def check_container(container):
     assert isinstance(repr(container), str)
 
     assert isinstance(container._repr_latex_(), str)
-    assert re.search(r'^\$.+\$$', container._repr_latex_())
+    assert re.search(r"^\$.+\$$", container._repr_latex_())
 
 
 def check_system(system):
@@ -116,4 +116,4 @@ def check_system(system):
         assert isinstance(system.m, df.Field)
 
     assert isinstance(repr(system), str)
-    assert re.search(r'^System\(name=.+\)$', repr(system))
+    assert re.search(r"^System\(name=.+\)$", repr(system))

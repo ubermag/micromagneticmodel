@@ -8,14 +8,12 @@ from .checks import check_container
 class TestDynamics:
     def setup(self):
         self.precession = mm.Precession(gamma0=2.21e5)
-        self.damping = mm.Damping(alpha={'r1': 1, 'r2': 0.5})
+        self.damping = mm.Damping(alpha={"r1": 1, "r2": 0.5})
         self.zhangli = mm.ZhangLi(u=500, beta=0.2)
 
-        self.terms = [self.precession,
-                      self.damping,
-                      self.zhangli]
+        self.terms = [self.precession, self.damping, self.zhangli]
 
-        self.invalid_terms = [1, 2.5, 0, 'abc', [3, 7], [self.precession, 5]]
+        self.invalid_terms = [1, 2.5, 0, "abc", [3, 7], [self.precession, 5]]
 
     def test_init(self):
         # Init with terms list.
@@ -36,7 +34,7 @@ class TestDynamics:
             assert isinstance(container, mm.Dynamics)
 
         # Create container as a sum of terms.
-        container = (self.precession + self.damping)
+        container = self.precession + self.damping
         check_container(container)
         assert len(container) == 2
 
@@ -81,29 +79,29 @@ class TestDynamics:
         check_container(container)
 
         assert isinstance(repr(container), str)
-        assert 'Precession' in repr(container)
+        assert "Precession" in repr(container)
 
         container -= container.precession
 
-        assert 'Precession' not in repr(container)
+        assert "Precession" not in repr(container)
 
     def test_repr_latex(self):
         container = mm.Dynamics()
         check_container(container)
         latexstr = container._repr_latex_()
-        assert latexstr == '$0$'
+        assert latexstr == "$0$"
 
     def test_getattr(self):
         container = mm.Dynamics(terms=self.terms)
         check_container(container)
 
         assert isinstance(container.precession, mm.Precession)
-        assert hasattr(container.precession, 'gamma0')
+        assert hasattr(container.precession, "gamma0")
         assert isinstance(container.damping, mm.Damping)
-        assert hasattr(container.damping, 'alpha')
+        assert hasattr(container.damping, "alpha")
         assert isinstance(container.zhangli, mm.ZhangLi)
-        assert hasattr(container.zhangli, 'u')
-        assert hasattr(container.zhangli, 'beta')
+        assert hasattr(container.zhangli, "u")
+        assert hasattr(container.zhangli, "beta")
 
         # Try to get non-existing attribute.
         container -= self.damping
@@ -114,10 +112,10 @@ class TestDynamics:
     def test_freestyle(self):
         container = self.damping + self.zhangli  # single term is not allowed
         check_container(container)
-        assert 'alpha' in container._repr_latex_()
+        assert "alpha" in container._repr_latex_()
         assert len(container) == 2
         assert mm.Damping() in container  # term of the same type present
-        assert 'damping' in dir(container)
+        assert "damping" in dir(container)
         assert len(list(container)) == 2
 
         container -= mm.Damping()

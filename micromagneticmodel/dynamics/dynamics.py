@@ -27,4 +27,5 @@ class Dynamics(mm.abstract.Container):
     2
 
     """
+
     _term_class = DynamicsTerm

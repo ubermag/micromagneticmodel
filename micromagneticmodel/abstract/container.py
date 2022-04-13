@@ -38,6 +38,7 @@ class Container(metaclass=abc.ABCMeta):
     2
 
     """
+
     def __init__(self, terms=None):
         self._terms = list()
         if terms is not None:
@@ -48,9 +49,7 @@ class Container(metaclass=abc.ABCMeta):
     @property
     @abc.abstractmethod
     def _term_class(self):
-        """The class of terms which can be added to ``Container``.
-
-        """
+        """The class of terms which can be added to ``Container``."""
         pass  # pragma: no cover
 
     def __len__(self):
@@ -198,7 +197,7 @@ class Container(metaclass=abc.ABCMeta):
             if term.name == attr:
                 return term
         else:
-            msg = f'Object has no attribute {attr}.'
+            msg = f"Object has no attribute {attr}."
             raise AttributeError(msg)
 
     def __dir__(self):
@@ -330,16 +329,14 @@ class Container(metaclass=abc.ABCMeta):
 
         if isinstance(other, self._term_class):
             if other in result:
-                msg = (f'Cannot have two {other.__class__} '
-                       'terms in the container.')
+                msg = f"Cannot have two {other.__class__} terms in the container."
                 raise ValueError(msg)
             result._terms.append(other)
         elif isinstance(other, self.__class__):
             for term in other:
                 result += term
         else:
-            msg = (f'Unsupported operand type(s) for +: '
-                   f'{type(self)} and {type(other)}.')
+            msg = f"Unsupported operand type(s) for +: {type(self)} and {type(other)}."
             raise TypeError(msg)
 
         return result
@@ -401,7 +398,7 @@ class Container(metaclass=abc.ABCMeta):
 
         if isinstance(other, self._term_class):
             if other not in result:
-                msg = f'Term {other.__class__} not in {self.__class__}.'
+                msg = f"Term {other.__class__} not in {self.__class__}."
                 raise ValueError(msg)
             for term in result:
                 if term.name == other.name:
@@ -410,8 +407,7 @@ class Container(metaclass=abc.ABCMeta):
             for term in other:
                 result -= term
         else:
-            msg = (f'Unsupported operand type(s) for +: '
-                   f'{type(self)} and {type(other)}.')
+            msg = f"Unsupported operand type(s) for +: {type(self)} and {type(other)}."
             raise TypeError(msg)
 
         return result
@@ -439,12 +435,12 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         if len(self) == 0:
-            return f'{self.__class__.__name__}()'
+            return f"{self.__class__.__name__}()"
         else:
-            return ' + '.join([repr(term) for term in self])
+            return " + ".join([repr(term) for term in self])
 
     def _repr_latex_(self):
-        """"LaTeX representation method, rendered inside Jupyter. This method
+        """ "LaTeX representation method, rendered inside Jupyter. This method
         has the priority over ``__repr__`` in Jupyter.
 
         Returns
@@ -467,9 +463,9 @@ class Container(metaclass=abc.ABCMeta):
         >>> # energy  # inside Jupyter
 
         """
-        reprlatex = ''
+        reprlatex = ""
         if not self._terms:
-            reprlatex += '0'
+            reprlatex += "0"
         else:
             for term in self:
                 termlatex = term._reprlatex
@@ -477,10 +473,10 @@ class Container(metaclass=abc.ABCMeta):
                     # Adding the first term. No leading +.
                     reprlatex += termlatex
                 else:
-                    if not termlatex.startswith('-'):
+                    if not termlatex.startswith("-"):
                         # Is it the first term added to the sum? No leading +.
-                        reprlatex += f'+ {termlatex}'
+                        reprlatex += f"+ {termlatex}"
                     else:
                         reprlatex += termlatex
 
-        return f'${reprlatex}$'
+        return f"${reprlatex}$"

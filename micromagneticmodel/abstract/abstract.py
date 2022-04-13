@@ -16,12 +16,13 @@ class Abstract(metaclass=abc.ABCMeta):
         If a keyword argument not in ``_allowed_attributes`` is passed.
 
     """
+
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
-            if key in self._allowed_attributes or key == 'name':
+            if key in self._allowed_attributes or key == "name":
                 setattr(self, key, value)
             else:
-                msg = f'Invalid attribute {key=} for {self.__class__=}.'
+                msg = f"Invalid attribute {key=} for {self.__class__=}."
                 raise AttributeError(msg)
 
     @property
@@ -80,12 +81,12 @@ class Abstract(metaclass=abc.ABCMeta):
         attributes = []
         for attr, value in self:
             if isinstance(value, str):
-                attributes.append(f'{attr}=\'{value}\'')
+                attributes.append(f"{attr}='{value}'")
             elif not isinstance(value, ts.Descriptor):
                 # The parameter is not set.
-                attributes.append(f'{attr}={value}')
-        attributes = ', '.join(attributes)
-        return f'{self.__class__.__name__}({attributes})'
+                attributes.append(f"{attr}={value}")
+        attributes = ", ".join(attributes)
+        return f"{self.__class__.__name__}({attributes})"
 
     @property
     def name(self):
@@ -114,7 +115,7 @@ class Abstract(metaclass=abc.ABCMeta):
         'my_damping'
 
         """
-        if hasattr(self, '_name'):
+        if hasattr(self, "_name"):
             return self._name
         else:
             return self.__class__.__name__.lower()

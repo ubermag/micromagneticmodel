@@ -6,8 +6,9 @@ from .dynamicsterm import DynamicsTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(alpha=ts.Parameter(descriptor=ts.Scalar(unsigned=True),
-                                  otherwise=df.Field))
+@ts.typesystem(
+    alpha=ts.Parameter(descriptor=ts.Scalar(unsigned=True), otherwise=df.Field)
+)
 class Damping(DynamicsTerm):
     r"""Damping dynamics term.
 
@@ -56,9 +57,11 @@ class Damping(DynamicsTerm):
     ValueError: ...
 
     """
-    _allowed_attributes = ['alpha']
-    _reprlatex = (r'-\frac{\gamma_{0} \alpha}{1 + \alpha^{2}} \mathbf{m} '
-                  r'\times (\mathbf{m} \times \mathbf{H}_\text{eff})')
+    _allowed_attributes = ["alpha"]
+    _reprlatex = (
+        r"-\frac{\gamma_{0} \alpha}{1 + \alpha^{2}} \mathbf{m} "
+        r"\times (\mathbf{m} \times \mathbf{H}_\text{eff})"
+    )
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

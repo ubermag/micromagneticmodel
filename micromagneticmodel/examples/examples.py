@@ -30,7 +30,7 @@ def macrospin():
     System(name='macrospin')
 
     """
-    name = 'macrospin'
+    name = "macrospin"
     p1 = (0, 0, 0)
     p2 = (1e-9, 1e-9, 1e-9)
     n = (1, 1, 1)
@@ -39,8 +39,7 @@ def macrospin():
 
     system = mm.System(name=name)
     system.energy = mm.Zeeman(H=(0, 0, 1e6))
-    system.dynamics = (mm.Precession(gamma0=mm.consts.gamma0) +
-                       mm.Damping(alpha=0.1))
+    system.dynamics = mm.Precession(gamma0=mm.consts.gamma0) + mm.Damping(alpha=0.1)
     system.m = df.Field(mesh, dim=3, value=(0, 1, 1), norm=1e6)
 
     return system

@@ -2,7 +2,7 @@ import micromagneticmodel as mm
 
 
 class MyDriver(mm.Driver):
-    _allowed_attributes = ['arg1', 'arg2']
+    _allowed_attributes = ["arg1", "arg2"]
 
     def drive(self, system):  # A simple drive method
         return system

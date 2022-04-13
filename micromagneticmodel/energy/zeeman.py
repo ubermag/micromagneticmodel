@@ -8,22 +8,24 @@ from .energyterm import EnergyTerm
 
 
 @uu.inherit_docs
-@ts.typesystem(H=ts.Parameter(descriptor=ts.Vector(size=3),
-                              otherwise=df.Field),
-               wave=ts.Subset(sample_set={'sin', 'sinc'}, unpack=False),
-               f=ts.Scalar(positive=True),
-               t0=ts.Scalar(),
-               func=ts.Parameter(
-                   descriptor=ts.Subset(sample_set={'sin', 'sinc'},
-                                        unpack=False),
-                   otherwise=collections.abc.Callable),
-               dt=ts.Scalar(positive=True),
-               tcl_strings=ts.Dictionary(
-                   key_descriptor=ts.Subset(
-                       sample_set=('script', 'energy', 'type', 'script_args',
-                                   'script_name'), unpack=False),
-                   value_descriptor=ts.Typed(expected_type=str))
-               )
+@ts.typesystem(
+    H=ts.Parameter(descriptor=ts.Vector(size=3), otherwise=df.Field),
+    wave=ts.Subset(sample_set={"sin", "sinc"}, unpack=False),
+    f=ts.Scalar(positive=True),
+    t0=ts.Scalar(),
+    func=ts.Parameter(
+        descriptor=ts.Subset(sample_set={"sin", "sinc"}, unpack=False),
+        otherwise=collections.abc.Callable,
+    ),
+    dt=ts.Scalar(positive=True),
+    tcl_strings=ts.Dictionary(
+        key_descriptor=ts.Subset(
+            sample_set=("script", "energy", "type", "script_args", "script_name"),
+            unpack=False,
+        ),
+        value_descriptor=ts.Typed(expected_type=str),
+    ),
+)
 class Zeeman(EnergyTerm):
     r"""Zeeman energy term.
 
@@ -177,18 +179,22 @@ class Zeeman(EnergyTerm):
     """
 
     # 'wave' is replaced by 'func' (deprecated but kept for compatibility)
-    _allowed_attributes = ['H', 'wave', 'f', 't0', 'func', 'dt', 'tcl_strings']
+    _allowed_attributes = ["H", "wave", "f", "t0", "func", "dt", "tcl_strings"]
 
     @property
     def _reprlatex(self):
-        if self.wave == 'sin':
-            return (r'-\mu_{0}M_\text{s} \mathbf{m}'
-                    r'\cdot \mathbf{H} \sin[2 \pi f (t-t_{0})]')
-        elif self.wave == 'sinc':
-            return (r'-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}\, '
-                    r'\text{sinc}[2 \pi f (t-t_{0})]')
+        if self.wave == "sin":
+            return (
+                r"-\mu_{0}M_\text{s} \mathbf{m}"
+                r"\cdot \mathbf{H} \sin[2 \pi f (t-t_{0})]"
+            )
+        elif self.wave == "sinc":
+            return (
+                r"-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}\, "
+                r"\text{sinc}[2 \pi f (t-t_{0})]"
+            )
         else:
-            return r'-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}'
+            return r"-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}"
 
     def effective_field(self, m):
         raise NotImplementedError

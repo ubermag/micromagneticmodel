@@ -193,6 +193,14 @@ class Zeeman(EnergyTerm):
                 r"-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}\, "
                 r"\text{sinc}[2 \pi f (t-t_{0})]"
             )
+        elif (
+            self.name != self.__class__.__name__.lower()
+        ):  # Check for user defined name
+            return (
+                r"-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}_\text"
+                + f"{{{self.name}}}"
+            )
+
         else:
             return r"-\mu_{0}M_\text{s} \mathbf{m} \cdot \mathbf{H}"
 

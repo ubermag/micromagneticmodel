@@ -64,7 +64,9 @@ class Term(Abstract):
         False
 
         """
-        if isinstance(other, self.__class__):
+        if (
+            isinstance(other, self.__class__) and self.name == other.name
+        ):  # To take into account user defined names
             return True
         else:
             return False

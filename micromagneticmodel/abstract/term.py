@@ -64,12 +64,8 @@ class Term(Abstract):
         False
 
         """
-        if (
-            isinstance(other, self.__class__) and self.name == other.name
-        ):  # To take into account user defined names
-            return True
-        else:
-            return False
+        if isinstance(other, self.__class__):
+            return self.name == other.name
 
     def __add__(self, other):
         """Binary ``+`` operator.

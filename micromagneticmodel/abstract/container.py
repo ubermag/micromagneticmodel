@@ -138,9 +138,8 @@ class Container(metaclass=abc.ABCMeta):
         True
         >>> mm.Zeeman(H=(0, 0, 1)) in energy
         False
-        >>> # Looks for a term of the same type only.
         >>> mm.Exchange(A=5e-11) in energy
-        True
+        False
 
         """
         return item in self._terms
@@ -324,10 +323,17 @@ class Container(metaclass=abc.ABCMeta):
             result._terms.append(term)
 
         if isinstance(other, self._term_class):
-            if other in result:
-                msg = f"Cannot have two {other.__class__} terms in the container."
+            if any(
+                isinstance(other, term.__class__) and other.name == term.name
+                for term in self._terms
+            ):
+                msg = (
+                    f"Cannot have same class {other.__class__} and name {other.name} "
+                    "in the container. Please provide a different 'name' for the term."
+                )
                 raise ValueError(msg)
-            result._terms.append(other)
+            else:
+                result._terms.append(other)
         elif isinstance(other, self.__class__):
             for term in other:
                 result += term

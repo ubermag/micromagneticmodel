@@ -143,11 +143,7 @@ class Container(metaclass=abc.ABCMeta):
         True
 
         """
-        for term in self:
-            if term.name == item.name:
-                return True
-        else:
-            return False
+        return item in self._terms
 
     def __getattr__(self, attr):
         """Accessing an individual term from the container.
@@ -400,9 +396,8 @@ class Container(metaclass=abc.ABCMeta):
             if other not in result:
                 msg = f"Term {other.__class__} not in {self.__class__}."
                 raise ValueError(msg)
-            for term in result:
-                if term.name == other.name:
-                    result._terms.remove(term)
+            else:
+                result._terms.remove(other)
         elif isinstance(other, self.__class__):
             for term in other:
                 result -= term

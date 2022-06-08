@@ -268,12 +268,11 @@ class Container(metaclass=abc.ABCMeta):
         True
 
         """
-        if not isinstance(other, self.__class__):
-            return False
-        if len(self) == len(other) and all(term in self for term in other):
-            return True
-        else:
-            return False
+        return (
+            isinstance(other, self.__class__)
+            and len(self) == len(other)
+            and all(term in self for term in other)
+        )
 
     def __add__(self, other):
         """Binary ``+`` operator.

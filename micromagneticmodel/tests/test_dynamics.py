@@ -114,11 +114,12 @@ class TestDynamics:
         check_container(container)
         assert "alpha" in container._repr_latex_()
         assert len(container) == 2
-        assert mm.Damping() in container  # term of the same type present
+        assert mm.Damping() not in container
+        assert mm.Damping(alpha={"r1": 1, "r2": 0.5}) in container
         assert "damping" in dir(container)
         assert len(list(container)) == 2
 
-        container -= mm.Damping()
+        container -= mm.Damping(alpha={"r1": 1, "r2": 0.5})
         check_container(container)
         assert len(container) == 1
         assert mm.Damping() not in container

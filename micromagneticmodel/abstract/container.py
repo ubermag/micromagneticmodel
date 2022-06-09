@@ -138,16 +138,18 @@ class Container(metaclass=abc.ABCMeta):
         True
         >>> mm.Zeeman(H=(0, 0, 1)) in energy
         False
-        >>> # Looks for a term of the same type only.
+
+        A check with a different term is only ``True`` if all attributes
+        (e.g. exchange constant ``A`` and ``name``) match one of the terms in
+        the energy equation
+
         >>> mm.Exchange(A=5e-11) in energy
-        True
+        False
+        >>> mm.Exchange(A=1e-12, name="my_exchange") in energy
+        False
 
         """
-        for term in self:
-            if term.name == item.name:
-                return True
-        else:
-            return False
+        return item in self._terms
 
     def __getattr__(self, attr):
         """Accessing an individual term from the container.
@@ -273,12 +275,11 @@ class Container(metaclass=abc.ABCMeta):
         True
 
         """
-        if not isinstance(other, self.__class__):
-            return False
-        if len(self) == len(other) and all(term in self for term in other):
-            return True
-        else:
-            return False
+        return (
+            isinstance(other, self.__class__)
+            and len(self) == len(other)
+            and all(term in self for term in other)
+        )
 
     def __add__(self, other):
         """Binary ``+`` operator.
@@ -324,14 +325,21 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         result = self.__class__()
-        for term in self:
-            result._terms.append(term)
+        result._terms.extend(self)
 
         if isinstance(other, self._term_class):
-            if other in result:
-                msg = f"Cannot have two {other.__class__} terms in the container."
+            if any(
+                isinstance(other, term.__class__) and other.name == term.name
+                for term in self._terms
+            ):
+                msg = (
+                    f"There is already a term of type {other.__class__} with  name "
+                    f"'{other.name}' in {self.__class__}. Please provide a different "
+                    f"name for {other}."
+                )
                 raise ValueError(msg)
-            result._terms.append(other)
+            else:
+                result._terms.append(other)
         elif isinstance(other, self.__class__):
             for term in other:
                 result += term
@@ -393,16 +401,14 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         result = self.__class__()
-        for term in self:
-            result._terms.append(term)
+        result._terms.extend(self)
 
         if isinstance(other, self._term_class):
             if other not in result:
-                msg = f"Term {other.__class__} not in {self.__class__}."
+                msg = f"Term {other} not in {self.__class__}."
                 raise ValueError(msg)
-            for term in result:
-                if term.name == other.name:
-                    result._terms.remove(term)
+            else:
+                result._terms.remove(other)
         elif isinstance(other, self.__class__):
             for term in other:
                 result -= term

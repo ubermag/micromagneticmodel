@@ -50,8 +50,8 @@ class Term(Abstract):
         ...
         >>> exchange == exchange
         True
-        >>> exchange == mm.Exchange(A=5e-11)  # only class is checked
-        True
+        >>> exchange == mm.Exchange(A=5e-11)
+        False
         >>> zeeman != exchange
         True
         >>> zeeman == exchange
@@ -64,8 +64,8 @@ class Term(Abstract):
         False
 
         """
-        if isinstance(other, self.__class__):
-            return True
+        if isinstance(other, self.__class__) and self.name == other.name:
+            return dict(self) == dict(other)
         else:
             return False
 

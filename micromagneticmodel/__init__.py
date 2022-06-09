@@ -21,6 +21,7 @@ from .energy import (
     Zeeman,
 )
 from .evolver import Evolver
+from .runner import Runner
 from .system import System
 
 __version__ = pkg_resources.get_distribution(__name__).version

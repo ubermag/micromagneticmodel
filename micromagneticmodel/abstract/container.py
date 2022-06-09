@@ -138,9 +138,11 @@ class Container(metaclass=abc.ABCMeta):
         True
         >>> mm.Zeeman(H=(0, 0, 1)) in energy
         False
-        >>> # A check with a different term is only ``True`` if all attributes
-        >>> # (e.g. exchange constant ``A`` and ``name``) match one of the terms in
-        >>> # the energy equation
+
+        A check with a different term is only ``True`` if all attributes
+        (e.g. exchange constant ``A`` and ``name``) match one of the terms in
+        the energy equation
+
         >>> mm.Exchange(A=5e-11) in energy
         False
         >>> mm.Exchange(A=1e-12, name="my_exchange") in energy

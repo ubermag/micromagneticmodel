@@ -65,9 +65,7 @@ class Term(Abstract):
 
         """
         if isinstance(other, self.__class__) and self.name == other.name:
-            attrs = {attr: val for attr, val in self}
-            attrs_other = {attr: val for attr, val in other}
-            return attrs == attrs_other
+            return dict(self) == dict(other)
         else:
             return False
 

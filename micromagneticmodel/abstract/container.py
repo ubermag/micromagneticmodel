@@ -138,7 +138,12 @@ class Container(metaclass=abc.ABCMeta):
         True
         >>> mm.Zeeman(H=(0, 0, 1)) in energy
         False
+        >>> # A check with a different term is only ``True`` if all attributes
+        >>> # (e.g. exchange constant ``A`` and ``name``) match one of the terms in
+        >>> # the energy equation
         >>> mm.Exchange(A=5e-11) in energy
+        False
+        >>> mm.Exchange(A=1e-12, name="my_exchange") in energy
         False
 
         """
@@ -318,8 +323,7 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         result = self.__class__()
-        for term in self:
-            result._terms.append(term)
+        result._terms.extend(self)
 
         if isinstance(other, self._term_class):
             if any(
@@ -327,8 +331,9 @@ class Container(metaclass=abc.ABCMeta):
                 for term in self._terms
             ):
                 msg = (
-                    f"Cannot have same class {other.__class__} and name {other.name} "
-                    "in the container. Please provide a different 'name' for the term."
+                    f"There is already a term of type {other.__class__} with  name "
+                    f"'{other.name}' in {self.__class__}. Please provide a different "
+                    f"name for {other}."
                 )
                 raise ValueError(msg)
             else:
@@ -394,12 +399,11 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         result = self.__class__()
-        for term in self:
-            result._terms.append(term)
+        result._terms.extend(self)
 
         if isinstance(other, self._term_class):
             if other not in result:
-                msg = f"Term {other.__class__} not in {self.__class__}."
+                msg = f"Term {other} not in {self.__class__}."
                 raise ValueError(msg)
             else:
                 result._terms.remove(other)

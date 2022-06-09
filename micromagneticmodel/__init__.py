@@ -6,7 +6,7 @@ import micromagneticmodel.abstract
 import micromagneticmodel.consts
 import micromagneticmodel.examples
 
-from .driver import Driver
+from .driver import Driver, ExternalDriver
 from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
 from .energy import (
     DMI,

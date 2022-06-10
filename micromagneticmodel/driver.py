@@ -1,4 +1,6 @@
 import abc
+import datetime
+import json
 import pathlib
 import subprocess as sp
 import sys
@@ -276,6 +278,17 @@ class ExternalDriver(Driver):
             f.write(header)
             f.write("\n")
             f.write(" ".join(run_cmd))
+
+    def _write_info_json(self, system, **kwargs):
+        info = {}
+        info["drive_number"] = system.drive_number
+        info["date"] = datetime.datetime.now().strftime("%Y-%m-%d")
+        info["time"] = datetime.datetime.now().strftime("%H:%M:%S")
+        info["driver"] = self.__class__.__name__
+        for k, v in kwargs.items():
+            info[k] = v
+        with open("info.json", "wt", encoding="utf-8") as jsonfile:
+            jsonfile.write(json.dumps(info))
 
     @staticmethod
     def _setup_working_directory(system, dirname, mode, append=True):

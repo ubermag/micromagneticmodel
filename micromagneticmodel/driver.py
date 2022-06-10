@@ -17,10 +17,6 @@ class Driver(mm.abstract.Abstract):
     def drive(self, system, **kwargs):
         """Drives the system in phase space."""
 
-    @abc.abstractmethod
-    def drive_kwargs_setup(self, **kwargs):
-        """Abstract method to check and initialise kwargs for drive."""
-
     @property
     @abc.abstractmethod
     def _x(self):
@@ -29,6 +25,10 @@ class Driver(mm.abstract.Abstract):
 
 class ExternalDriver(Driver):
     """Base class for existing external simulation packages (e.g. OOMMF, mumax3)."""
+
+    @abc.abstractmethod
+    def drive_kwargs_setup(self, **kwargs):
+        """Abstract method to check and initialise kwargs for drive."""
 
     @abc.abstractmethod
     def schedule_kwargs_setup(self, **kwargs):

@@ -1,4 +1,5 @@
 import discretisedfield as df
+import pytest
 
 import micromagneticmodel as mm
 
@@ -64,6 +65,9 @@ def test_external_driver(tmp_path):
     assert system.m.allclose(-mm.examples.macrospin().m)
     assert (tmp_path / system.name / "drive-0" / "info.json").exists()
 
+    with pytest.raises(FileExistsError):
+        driver.drive(system, dirname=str(tmp_path), append=False)
+
     # There is no scheduling system available for the tests. Instead we use 'python'
     # because we know that this is always an executable. The created schedule script
     # contains only Python comments so nothing is actually happening.
@@ -72,4 +76,15 @@ def test_external_driver(tmp_path):
     assert (tmp_path / system.name / "drive-1" / "info.json").exists()
     assert (tmp_path / system.name / "drive-1" / "job.sh").exists()
 
-    assert len(list((tmp_path / system.name).glob("drive*"))) == 2
+    # Schedule header from file and runtime error during schedule.
+    with (tmp_path / "header.sh").open("wt", encoding="utf-8") as f:
+        f.write("import sys\nsys.exit(1)")
+    with pytest.raises(RuntimeError):
+        driver.schedule(
+            system, "python", str(tmp_path / "header.sh"), dirname=str(tmp_path)
+        )
+        assert (tmp_path / system.name / "drive-2" / "macrospin.input").exists()
+        assert (tmp_path / system.name / "drive-2" / "info.json").exists()
+        assert (tmp_path / system.name / "drive-2" / "job.sh").exists()
+
+    assert len(list((tmp_path / system.name).glob("drive*"))) == 3

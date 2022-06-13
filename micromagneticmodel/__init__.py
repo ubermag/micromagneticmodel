@@ -6,7 +6,7 @@ import micromagneticmodel.abstract
 import micromagneticmodel.consts
 import micromagneticmodel.examples
 
-from .driver import Driver
+from .driver import Driver, ExternalDriver
 from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
 from .energy import (
     DMI,
@@ -21,6 +21,7 @@ from .energy import (
     Zeeman,
 )
 from .evolver import Evolver
+from .runner import ExternalRunner
 from .system import System
 
 __version__ = pkg_resources.get_distribution(__name__).version

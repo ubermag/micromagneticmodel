@@ -29,13 +29,15 @@ class MyExternalDriver(mm.ExternalDriver):
 
     def _write_input_files(self, system, **kwargs):
         with open(f"{system.name}.input", "wt", encoding="utf-8") as f:
-            f.write(str(-1))
+            f.write(str(-1))  # factor -1 used to invert magnetisation direction in call
         self._write_info_json(system, **kwargs)
 
     def _call(self, system, runner, dry_run=False, **kwargs):
         if dry_run:
-            # Must be a comment when executed with Python to be able to test
-            # schedule with Python as executable (which is always available).
+            # Python is used to test/simulate schedule during tests because there
+            # typically is no scheduling system and Python is always available.
+            # Therefore, dry_run must return a Python comment that can be added to the
+            # schedule script without breaking the execution.
             return ["#", "run", "command", "line"]
         with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
             factor = int(f.read())

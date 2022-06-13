@@ -34,7 +34,9 @@ class MyExternalDriver(mm.ExternalDriver):
 
     def _call(self, system, runner, dry_run=False, **kwargs):
         if dry_run:
-            return ["run", "command", "line"]
+            # Must be a comment when executed with Python to be able to test
+            # schedule with Python as executable (which is always available).
+            return ["#", "run", "command", "line"]
         with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
             factor = int(f.read())
         (factor * system.m).write("output.omf")
@@ -60,7 +62,10 @@ def test_external_driver(tmp_path):
     assert system.m.allclose(-mm.examples.macrospin().m)
     assert (tmp_path / system.name / "drive-0" / "info.json").exists()
 
-    driver.schedule(system, "dir", "schedule-header", dirname=str(tmp_path))
+    # There is no scheduling system available for the tests. Instead we use 'python'
+    # because we know that this is always an executable. The created schedule script
+    # contains only Python comments so nothing is actually happening.
+    driver.schedule(system, "python", "#Schedule header", dirname=str(tmp_path))
     assert (tmp_path / system.name / "drive-1" / "macrospin.input").exists()
     assert (tmp_path / system.name / "drive-1" / "info.json").exists()
     assert (tmp_path / system.name / "drive-1" / "job.sh").exists()

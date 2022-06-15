@@ -4,14 +4,14 @@ import sys
 import ubermagutil as uu
 
 
-class ExternalRunner(metaclass=abc.ABCMeta):
+class ExternalRunner(abc.ABC):
     @property
     @abc.abstractmethod
     def package_name(self):
         """Name of the external simulation package."""
 
     @abc.abstractmethod
-    def _call(self, *args, **kwargs):
+    def _call(self, argstr, need_stderr, dry_run, **kwargs):
         """Package-specific implementation to call run the simulation."""
 
     def call(
@@ -99,15 +99,12 @@ class ExternalRunner(metaclass=abc.ABCMeta):
 
         if res.returncode != 0:
             msg = f"Error in {self.package_name} run.\n"
-            cmdstr = " ".join(res.args)
-            msg += f"command: {cmdstr}\n"
+            msg += f"command: {' '.join(res.args)}\n"
             if sys.platform != "win32":
                 # Only on Linux and MacOS - on Windows we do not get stderr and
                 # stdout.
-                stderr = res.stderr.decode("utf-8", "replace")
-                stdout = res.stdout.decode("utf-8", "replace")
-                msg += f"stdout: {stdout}\n"
-                msg += f"stderr: {stderr}\n"
+                msg += f"stdout: {res.stderr.decode('utf-8', 'replace')}\n"
+                msg += f"stderr: {res.stdout.decode('utf-8', 'replace')}\n"
             raise RuntimeError(msg)
 
         return res

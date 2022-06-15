@@ -10,7 +10,7 @@ class MyRunner(mm.ExternalRunner):
     def package_name(self):
         return "my_package"
 
-    def _call(self, argstr, dry_run=False, returncode=0, **kwargs):
+    def _call(self, argstr, need_stderr=False, dry_run=False, returncode=0, **kwargs):
         if dry_run:
             return ["my_package", argstr, "command", "line"]
         return sp.CompletedProcess(

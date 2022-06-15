@@ -12,7 +12,7 @@ class ExternalRunner(abc.ABC):
 
     @abc.abstractmethod
     def _call(self, argstr, need_stderr, dry_run, **kwargs):
-        """Package-specific implementation to call run the simulation."""
+        """Package-specific implementation to run the simulation."""
 
     def call(
         self,
@@ -34,8 +34,7 @@ class ExternalRunner(abc.ABC):
 
         need_stderr : bool, optional
 
-            If ``need_stderr=True``, standard error is captured. Defaults to
-            ``False``.
+            If ``need_stderr=True``, standard error is captured. Defaults to ``False``.
 
         verbose : int, optional
 

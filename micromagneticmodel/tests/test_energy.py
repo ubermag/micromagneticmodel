@@ -141,10 +141,12 @@ class TestEnergy:
         check_container(container)
         assert "D" in container._repr_latex_()
         assert len(container) == 2
-        assert mm.Zeeman(H=(0, 0, 1e6)) in container  # same type term present?
+        assert mm.Zeeman(H=(0, 0, 1e6)) not in container  # Different values of H
         assert "dmi" in dir(container)
         assert len(list(container)) == 2
 
+        with pytest.raises(ValueError):
+            container -= mm.DMI(D=1e-3, crystalclass="Cnv")
         container -= mm.DMI(D=1e-3, crystalclass="T")
         check_container(container)
         assert len(container) == 1
@@ -161,6 +163,7 @@ class TestEnergy:
         term1 = mm.UniaxialAnisotropy(K=1e6, u=(0, 0, 1))
         term2 = mm.UniaxialAnisotropy(K=2e6, u=(0, 1, 0))
         term3 = mm.UniaxialAnisotropy(K=2e6, u=(1, 0, 0), name="ua2")
+        term4 = mm.UniaxialAnisotropy(K=3e6, u=(0, 1, 0), name="ua3")
 
         with pytest.raises(ValueError):
             container = term1 + term2
@@ -172,6 +175,14 @@ class TestEnergy:
         assert term3 in container
         assert container.uniaxialanisotropy.K == 1e6
         assert container.ua2.K == 2e6
+
+        container_diff_name = term1 + term3 + term4
+        check_container(container_diff_name)
+        container_diff_name -= container_diff_name.ua3
+        check_container(container_diff_name)
+        assert term4 not in container_diff_name
+        assert term3 in container_diff_name
+        assert term1 in container_diff_name
 
     def test_energy_and_energy_density(self):
         container = self.dmi + self.zeeman  # single term is not allowed

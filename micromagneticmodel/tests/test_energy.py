@@ -192,3 +192,16 @@ class TestEnergy:
 
         with pytest.raises(NotImplementedError):
             container.density(None)
+
+    def test_contains_get(self):
+        container = self.dmi + self.zeeman + mm.Zeeman(name="custom", H=(0, 0, 1))
+
+        assert container.contains(type=mm.DMI)
+        assert container.contains(type=mm.Zeeman)
+        assert not container.contains(type=mm.Exchange)
+
+        assert container.get(type=mm.DMI) == [self.dmi]
+        assert len(container.get(type=mm.Zeeman)) == 2
+        assert self.zeeman in container.get(type=mm.Zeeman)
+        assert mm.Zeeman(name="custom", H=(0, 0, 1)) in container.get(type=mm.Zeeman)
+        assert container.get(type=mm.Exchange) == []

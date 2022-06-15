@@ -131,8 +131,10 @@ class TestDynamics:
         check_container(container)
         assert len(container) == 2
 
-    def test_contains_get(self):
+    def test_get(self):
         container = self.damping + self.precession
-        assert container.get(type=mm.Damping) == [self.damping]
-        assert container.get(type=mm.Precession) == [self.precession]
+        assert len(container.get(type=mm.Damping)) == 1
+        assert self.damping in container.get(type=mm.Damping)
+        assert container.get(type=mm.Precession)
+        assert self.precession in container.get(type=mm.Precession)
         assert not container.get(type=mm.ZhangLi)

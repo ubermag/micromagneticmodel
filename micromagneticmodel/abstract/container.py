@@ -486,3 +486,11 @@ class Container(metaclass=abc.ABCMeta):
                         reprlatex += termlatex
 
         return f"${reprlatex}$"
+
+    def get(self, *, type):
+        """Return a list of all terms of type ``type`` in the container."""
+        return [term for term in self if isinstance(term, type)]
+
+    def contains(self, *, type):
+        """Check if terms of type ``type`` are in the container."""
+        return len(self.get(type=type)) > 0

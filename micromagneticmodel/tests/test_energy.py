@@ -110,6 +110,14 @@ class TestEnergy:
         latexstr = container._repr_latex_()
         assert latexstr == "$0$"
 
+    def test_getitem(self):
+        container = self.demag + self.dmi
+        assert self.demag == container[0]
+        assert self.dmi == container[1]
+        assert self.demag == container[-2]
+        with pytest.raises(IndexError):
+            container[3]
+
     def test_getattr(self):
         container = mm.Energy(terms=self.terms)
         check_container(container)
@@ -193,10 +201,12 @@ class TestEnergy:
         with pytest.raises(NotImplementedError):
             container.density(None)
 
-    def test_contains_get(self):
+    def test_get(self):
         container = self.dmi + self.zeeman + mm.Zeeman(name="custom", H=(0, 0, 1))
         assert container.get(type=mm.DMI) == [self.dmi]
         assert len(container.get(type=mm.Zeeman)) == 2
         assert self.zeeman in container.get(type=mm.Zeeman)
         assert mm.Zeeman(name="custom", H=(0, 0, 1)) in container.get(type=mm.Zeeman)
+
+        assert container.get(type=mm.dmi)
         assert not container.get(type=mm.Exchange)

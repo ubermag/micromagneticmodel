@@ -1,7 +1,7 @@
 import abc
 
 
-class Container(metaclass=abc.ABCMeta):
+class Container(abc.ABC):
     """Container abstract class.
 
     Container can be initialised with a list of either energy or
@@ -150,6 +150,44 @@ class Container(metaclass=abc.ABCMeta):
 
         """
         return item in self._terms
+
+    def __getitem__(self, index):
+        """Access individual terms from the container by index.
+
+        Parameters
+        ----------
+        item : int
+
+            Index of the term.
+
+        Returns
+        -------
+        micromagneticmodel.Term
+
+            Term from the container.
+
+        Examples
+        --------
+        1. Accessing individual terms from the container.
+
+        >>> import micromagneticmodel as mm
+        ...
+        >>> dynamics = mm.Dynamics()
+        >>> dynamics += mm.Precession(gamma0=500)
+        >>> dynamics += mm.Damping(alpha=0.2)
+        >>> dynamics[0]
+        Precession(gamma0=500)
+        >>> dynamics[1]
+        Damping(alpha=0.2)
+        >>> dynamics[-1]
+        Damping(alpha=0.2)
+        >>> dynamics[3]
+        Traceback (most recent call last):
+        ...
+        IndexError: ...
+
+        """
+        return self._terms[index]
 
     def __getattr__(self, attr):
         """Accessing an individual term from the container.
@@ -489,4 +527,4 @@ class Container(metaclass=abc.ABCMeta):
 
     def get(self, *, type):
         """Return a list of all terms of type ``type`` in the container."""
-        return [term for term in self if isinstance(term, type)]
+        return self.__class__(terms=[term for term in self if isinstance(term, type)])

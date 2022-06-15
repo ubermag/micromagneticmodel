@@ -36,7 +36,7 @@ def test_call(capsys):
     assert captured.out == ""
     assert captured.err == ""
 
-    runner.call("argstr", verbose=2)  # no total -> output like verbos=1
+    runner.call("argstr", verbose=2)  # no total -> output like verbose=1
     captured = capsys.readouterr()
     assert "Running my_package" in captured.out
     assert captured.err == ""

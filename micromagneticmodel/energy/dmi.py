@@ -22,7 +22,13 @@ from .energyterm import EnergyTerm
             "D2d_z",
             "S4_x",
             "S4_y",
-            "S4_z"
+            "S4_z",
+            "Dn_x",
+            "Dn_y",
+            "Dn_z",
+            "Cn_x",
+            "Cn_y",
+            "Cn_z"
         },
         unpack=False,
     ),
@@ -116,7 +122,7 @@ class DMI(EnergyTerm):
     TypeError: ...
 
     """
-    _allowed_attributes = ["D", "D1", "D2", "crystalclass"]
+    _allowed_attributes = ["D", "D1", "D2", "D3", "crystalclass"]
 
     @property
     def _reprlatex(self):

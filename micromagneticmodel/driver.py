@@ -224,6 +224,11 @@ class ExternalDriver(Driver):
             system=system, dirname=dirname, mode="drive", append=append
         )
 
+        # Convert to absolute path if it is a file name because the file will be
+        # accessed from a different directory.
+        if pathlib.Path(header).exists():
+            header = pathlib.Path(header).absolute()
+
         with uu.changedir(workingdir):
             self._write_input_files(
                 system=system,

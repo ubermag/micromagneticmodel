@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "micromagneticmodel"
-version = "0.61.1"
+version = "0.62.0"
 description = "Python-based domain-specific language for computational magnetism"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -35,7 +35,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "discretisedfield>=0.62.0"
+    "discretisedfield>=0.63.0"
 ]
 
 [project.optional-dependencies]

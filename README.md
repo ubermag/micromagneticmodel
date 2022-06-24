@@ -1,6 +1,6 @@
 # micromagneticmodel
 
-[Marijan Beg](https://github.com/marijanbeg)<sup>1,2</sup>, [Martin Lang](https://github.com/lang-m)<sup>2</sup>, [Samuel Holt](https://github.com/samjrholt)<sup>2,3</sup>, and [Hans Fangohr](https://github.com/fangohr)<sup>2,4,5</sup>
+[Marijan Beg](https://github.com/marijanbeg)<sup>1,2</sup>, [Martin Lang](https://github.com/lang-m)<sup>2</sup>, [Samuel Holt](https://github.com/samjrholt)<sup>2,3</sup>, [Swapneel Amit Pathak](https://github.com/swapneelap)<sup>2,4</sup>, and [Hans Fangohr](https://github.com/fangohr)<sup>2,4,5</sup>
 
 <sup>1</sup> *Department of Earth Science and Engineering, Imperial College London, London SW7 2AZ, UK*  
 <sup>2</sup> *Faculty of Engineering and Physical Sciences, University of Southampton, Southampton SO17 1BJ, UK*  
@@ -76,7 +76,7 @@ Licensed under the BSD 3-Clause "New" or "Revised" License. For details, please 
 
 2. M. Beg, R. A. Pepper, and H. Fangohr. User interfaces for computational science: A domain specific language for OOMMF embedded in Python. [*AIP Advances* **7**, 56025](http://aip.scitation.org/doi/10.1063/1.4977225) (2017).
 
-3. Marijan Beg, Martin Lang, Samuel Holt, and Hans Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism DOI: [10.5281/zenodo.3539479](http://doi.org/10.5281/zenodo.3539479) (2022).
+3. Marijan Beg, Martin Lang, Samuel Holt, Swapneel Amit Pathak, and Hans Fangohr. micromagneticmodel: Python-based domain-specific language for computational magnetism DOI: [10.5281/zenodo.3539479](http://doi.org/10.5281/zenodo.3539479) (2022).
 
 ## Acknowledgements
 

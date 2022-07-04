@@ -29,9 +29,11 @@ class Slonczewski(DynamicsTerm):
     .. math::
 
         \frac{\text{d}\mathbf{m}}{\text{d}t} =
-        \gamma_{0}\beta\epsilon(\mathbf{m} \times \mathbf{m}_\text{p}
-        \times \mathbf{m}) - \gamma_{0}\beta\epsilon' (\mathbf{m} \times
-        \mathbf{m}_\text{p})
+        -\beta\frac{\epsilon - \alpha\epsilon'}{1+\alpha^{2}}
+        \mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m})
+        +\beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}
+        \mathbf{m} \times \mathbf{m}_\text{p}
+
 
     .. math::
 
@@ -159,16 +161,20 @@ class Slonczewski(DynamicsTerm):
 
     @property
     def _reprlatex(self):
-        reprlatex = (
-            r"\gamma_{0}\beta\epsilon(\mathbf{m} \times "
-            r"\mathbf{m}_\text{p} \times \mathbf{m})"
-        )
-        if hasattr(self, "eps_prime"):
-            if self.eps_prime:
-                reprlatex += (
-                    r"-\gamma_{0}\beta\epsilon' (\mathbf{m} "
-                    r"\times \mathbf{m}_\text{p})"
-                )
+        if hasattr(self, "eps_prime") and self.eps_prime:
+            reprlatex = (
+                r"-\beta\frac{\epsilon - \alpha\epsilon'}{1+\alpha^{2}}"
+                r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
+                r"+\beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times \mathbf{m}_\text{p}"
+            )
+        else:
+            reprlatex = (
+                r"-\beta\frac{\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
+                r"-\beta\frac{\alpha\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times \mathbf{m}_\text{p}"
+            )
 
         return reprlatex
 

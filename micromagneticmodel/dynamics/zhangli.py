@@ -25,9 +25,10 @@ class ZhangLi(DynamicsTerm):
 
     .. math::
 
-        \frac{\text{d}\mathbf{m}}{\text{d}t} = -(\mathbf{u} \cdot
-        \boldsymbol\nabla)\mathbf{m} + \beta\mathbf{m} \times
-        \big[(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}\big]
+        \frac{\text{d}\mathbf{m}}{\text{d}t} = -\frac{1+\alpha\beta}{1+\alpha^{2}}
+            \mathbf{m} \times (\mathbf{m} \times (\mathbf{u} \cdot \boldsymbol\nabla)
+            \mathbf{m}) - \frac{\beta - \alpha}{1+\alpha^{2}} \mathbf{m} \times
+            (\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}
 
     A time-dependent current can be specified by providing a time-dependent
     pre-factor that is used to multiply ``u``. The time-dependence can either
@@ -105,9 +106,10 @@ class ZhangLi(DynamicsTerm):
     _allowed_attributes = ["u", "beta", "func", "dt", "tcl_strings"]
 
     _reprlatex = (
-        r"-(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m} + "
-        r"\beta\mathbf{m} \times \big[(\mathbf{u} \cdot "
-        r"\boldsymbol\nabla)\mathbf{m}\big]"
+        r"-\frac{1+\alpha\beta}{1+\alpha^{2}} \mathbf{m} \times "
+        r"(\mathbf{m} \times (\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}) - "
+        r"\frac{\beta - \alpha}{1+\alpha^{2}} \mathbf{m} \times "
+        r"(\mathbf{u} \cdot \boldsymbol\nabla)\mathbf{m}"
     )
 
     def dmdt(self, m, Heff):

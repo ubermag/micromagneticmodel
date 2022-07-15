@@ -19,6 +19,7 @@ from .energy import (
     MagnetoElastic,
     UniaxialAnisotropy,
     Zeeman,
+    AEI,
 )
 from .evolver import Evolver
 from .runner import ExternalRunner

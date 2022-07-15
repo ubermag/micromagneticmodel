@@ -8,3 +8,4 @@ from .magnetoelastic import MagnetoElastic
 from .rkky import RKKY
 from .uniaxialanisotropy import UniaxialAnisotropy
 from .zeeman import Zeeman
+from .aei import AEI

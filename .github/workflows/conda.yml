@@ -1,6 +1,7 @@
 name: conda
 
 on:
+  push:
   schedule:
     - cron: '0 0 * * 1'  # run every Monday
 
@@ -20,8 +21,8 @@ jobs:
     steps:
     - name: Initialisation
       uses: actions/checkout@v2
-      with:
-        ref: latest
+      #with:
+        #ref: latest
 
     - name: Set up conda
       uses: conda-incubator/setup-miniconda@v2

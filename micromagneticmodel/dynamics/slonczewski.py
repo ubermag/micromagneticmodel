@@ -29,9 +29,9 @@ class Slonczewski(DynamicsTerm):
     .. math::
 
         \frac{\text{d}\mathbf{m}}{\text{d}t} =
-        -\beta\frac{\epsilon - \alpha\epsilon'}{1+\alpha^{2}}
+        - |\gamma| \beta\frac{\epsilon - \alpha\epsilon'}{1+\alpha^{2}}
         \mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m})
-        +\beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}
+        + |\gamma| \beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}
         \mathbf{m} \times \mathbf{m}_\text{p}
 
 

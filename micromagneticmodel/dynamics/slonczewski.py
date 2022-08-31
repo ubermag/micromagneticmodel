@@ -161,7 +161,7 @@ class Slonczewski(DynamicsTerm):
 
     @property
     def _reprlatex(self):
-        if hasattr(self, "eps_prime") and self.eps_prime:
+        if not isinstance(self.eps_prime, ts.descriptors.Parameter) and self.eps_prime:
             reprlatex = (
                 r"\gamma\beta\frac{\epsilon + \alpha\epsilon'}{1+\alpha^{2}}"
                 r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
@@ -172,7 +172,7 @@ class Slonczewski(DynamicsTerm):
             reprlatex = (
                 r"\gamma\beta\frac{\epsilon}{1+\alpha^{2}}"
                 r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
-                r"\gamma\beta\frac{\alpha\epsilon}{1+\alpha^{2}}"
+                r"+\gamma\beta\frac{\alpha\epsilon}{1+\alpha^{2}}"
                 r"\mathbf{m} \times \mathbf{m}_\text{p}"
             )
 

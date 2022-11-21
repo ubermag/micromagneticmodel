@@ -5,6 +5,8 @@ import pathlib
 import subprocess as sp
 import sys
 
+import discretisedfield as df
+import holoviews as hv
 import ubermagutil as uu
 
 import micromagneticmodel as mm
@@ -302,3 +304,28 @@ class ExternalDriver(Driver):
         workingdir = system_dir / f"{mode}-{next_number}"
         workingdir.mkdir(parents=True)
         return workingdir
+
+    def start_live_view(self, system):
+        self.pipe = hv.streams.Pipe(data=system.m)
+
+        def callback(*args, **kwargs):
+            if isinstance(kwargs["data"], (str, pathlib.Path)):
+                f = df.Field.fromfile(kwargs["data"])
+            else:
+                f = kwargs["data"]
+            return hv.Image(f.plane("z").orientation.x.to_xarray().squeeze())
+
+        pmin = system.m.mesh.region.pmin
+        pmax = system.m.mesh.region.pmax
+        return hv.DynamicMap(callback, streams=[self.pipe]).opts(
+            clim=(-1, 1),
+            colorbar=True,
+            data_aspect=1,
+            xlim=(pmin[0], pmax[0]),
+            ylim=(pmin[1], pmax[1]),
+            cmap="coolwarm",
+        )
+
+    def stop_live_view(self):
+        if hasattr(self, "pipe"):
+            del self.pipe

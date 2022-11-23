@@ -305,19 +305,48 @@ class ExternalDriver(Driver):
         workingdir.mkdir(parents=True)
         return workingdir
 
-    def start_live_view(self, system):
+    def start_live_view(self, system, vdim="z", callback=None):
+        """Create a holoviews plot that automatically updates when driving a system.
+
+        The method can be used repeatedly to create new plots. Old plots do not update
+        anymore once a new plot is created.
+
+
+        This method selects the central plane in z direction and shows one component of
+        the normalised magnetisation if no callback is provided. The component can be
+        selected by passing vdim.
+
+        Parameters
+        ----------
+        system : mm.System
+            The system to display. This affects the range of plotted data.
+        vdim : str, optional
+            Vector component to be shown. This only affects the default callback.
+        callback : callable, optional
+            Function that is called for every field to select data. This function must
+            take a discretisedfield.Field as input and return a 2d xarray.DataArray.
+
+        """
+        if not hv.extension._loaded:
+            hv.extension("bokeh", logo=False)
+        if callback is None:
+
+            def callback(field):
+                # TODO think about the default settings here
+                return getattr(field.plane("z").orientation, vdim).to_xarray().squeeze()
+
         self.pipe = hv.streams.Pipe(data=system.m)
 
-        def callback(*args, **kwargs):
+        def plot(*args, **kwargs):
             if isinstance(kwargs["data"], (str, pathlib.Path)):
-                f = df.Field.fromfile(kwargs["data"])
+                field = df.Field.fromfile(kwargs["data"])
             else:
-                f = kwargs["data"]
-            return hv.Image(f.plane("z").orientation.x.to_xarray().squeeze())
+                field = kwargs["data"]
+            return hv.Image(callback(field))
 
         pmin = system.m.mesh.region.pmin
         pmax = system.m.mesh.region.pmax
-        return hv.DynamicMap(callback, streams=[self.pipe]).opts(
+        return hv.DynamicMap(plot, streams=[self.pipe]).opts(
             clim=(-1, 1),
             colorbar=True,
             data_aspect=1,
@@ -327,5 +356,6 @@ class ExternalDriver(Driver):
         )
 
     def stop_live_view(self):
+        """Stop the live-updating plot."""
         if hasattr(self, "pipe"):
             del self.pipe

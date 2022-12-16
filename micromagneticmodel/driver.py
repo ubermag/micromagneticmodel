@@ -330,14 +330,18 @@ class ExternalDriver(Driver):
         if not hv.extension._loaded:
             hv.extension("bokeh", logo=False)
         if callback is None:
+            default_opts = True
 
             def callback(field):
                 # TODO think about the default settings here
                 return getattr(field.plane("z").orientation, vdim).to_xarray().squeeze()
 
+        else:
+            default_opts = False
+
         self.pipe = hv.streams.Pipe(data=system.m)
 
-        def plot(*args, **kwargs):
+        def plot_callback(*args, **kwargs):
             if isinstance(kwargs["data"], (str, pathlib.Path)):
                 field = df.Field.fromfile(kwargs["data"])
             else:
@@ -346,14 +350,16 @@ class ExternalDriver(Driver):
 
         pmin = system.m.mesh.region.pmin
         pmax = system.m.mesh.region.pmax
-        return hv.DynamicMap(plot, streams=[self.pipe]).opts(
-            clim=(-1, 1),
+        res = hv.DynamicMap(plot_callback, streams=[self.pipe]).opts(
             colorbar=True,
             data_aspect=1,
             xlim=(pmin[0], pmax[0]),
             ylim=(pmin[1], pmax[1]),
-            cmap="coolwarm",
         )
+        if default_opts:
+            return res.opts(clim=(-1, 1), cmap="coolwarm")
+        else:
+            return res
 
     def stop_live_view(self):
         """Stop the live-updating plot."""

@@ -56,7 +56,7 @@ class System:
     >>> n = (5, 5, 5)
     >>> region = df.Region(p1=p1, p2=p2)
     >>> mesh = df.Mesh(region=region, n=n)
-    >>> m = df.Field(mesh, dim=3, value=(0, 0, 1), norm=1e6)
+    >>> m = df.Field(mesh, nvdim=3, value=(0, 0, 1), norm=1e6)
     >>> energy = mm.Exchange(A=1e-11) + mm.Demag()
     >>> dynamics = mm.Precession(gamma0=mm.consts.gamma0) + \
             mm.Damping(alpha=0.1)

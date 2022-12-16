@@ -123,7 +123,7 @@ class Slonczewski(DynamicsTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> J = df.Field(mesh, dim=1, value=1e12)
+    >>> J = df.Field(mesh, nvdim=1, value=1e12)
     >>> slonczewski = mm.Slonczewski(J=J, mp=(1, 0, 0), P=0.4, Lambda=2,
     ...                              eps_prime=2)
 

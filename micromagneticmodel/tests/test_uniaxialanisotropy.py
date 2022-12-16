@@ -12,8 +12,8 @@ from .checks import check_term
 class TestUniaxialAnisotropy:
     def setup(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        Kfield = df.Field(mesh, dim=1, value=5e6)
-        ufield = df.Field(mesh, dim=3, value=(1, 0, 0))
+        Kfield = df.Field(mesh, nvdim=1, value=5e6)
+        ufield = df.Field(mesh, nvdim=3, value=(1, 0, 0))
 
         self.valid_args = [
             (1, (0, 1, 0)),

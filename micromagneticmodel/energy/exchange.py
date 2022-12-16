@@ -42,7 +42,7 @@ class Exchange(EnergyTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> A = df.Field(mesh, dim=1, value=5e-11)
+    >>> A = df.Field(mesh, nvdim=1, value=5e-11)
     >>> exchange = mm.Exchange(A=A)
 
     4. An attempt to define the exchange energy term using a wrong value.

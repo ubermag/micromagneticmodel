@@ -11,10 +11,10 @@ from .checks import check_term
 class TestMagnetoElastic:
     def setup(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        B1field = df.Field(mesh, dim=1, value=5e6)
-        B2field = df.Field(mesh, dim=1, value=7e6)
-        e_diagfield = df.Field(mesh, dim=3, value=(1, 0, 0))
-        e_offdiagfield = df.Field(mesh, dim=3, value=(1, 1, 0))
+        B1field = df.Field(mesh, nvdim=1, value=5e6)
+        B2field = df.Field(mesh, nvdim=1, value=7e6)
+        e_diagfield = df.Field(mesh, nvdim=3, value=(1, 0, 0))
+        e_offdiagfield = df.Field(mesh, nvdim=3, value=(1, 1, 0))
 
         self.valid_args = [
             (1, 1, (0, 1, 0), (2, 3, 7)),

@@ -80,7 +80,7 @@ class ZhangLi(DynamicsTerm):
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
     >>> beta = 0.012
-    >>> u = df.Field(mesh, dim=1, value=1e5)
+    >>> u = df.Field(mesh, nvdim=1, value=1e5)
     >>> zhangli = mm.ZhangLi(beta=beta, u=u)
 
     3. Defining a sinusoidal decaying current.

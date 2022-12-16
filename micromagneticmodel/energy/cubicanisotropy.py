@@ -64,9 +64,9 @@ class CubicAnisotropy(EnergyTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> K = df.Field(mesh, dim=1, value=1e5)
-    >>> u1 = df.Field(mesh, dim=3, value=(0, 1, 0))
-    >>> u2 = df.Field(mesh, dim=3, value=(0, 0, 1))
+    >>> K = df.Field(mesh, nvdim=1, value=1e5)
+    >>> u1 = df.Field(mesh, nvdim=3, value=(0, 1, 0))
+    >>> u2 = df.Field(mesh, nvdim=3, value=(0, 0, 1))
     >>> ca = mm.CubicAnisotropy(K=K, u1=u1, u2=u2)
 
     4. An attempt to define the cubic anisotropy energy term using a wrong

@@ -46,7 +46,7 @@ class Damping(DynamicsTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> alpha = df.Field(mesh, dim=1, value=0.012)
+    >>> alpha = df.Field(mesh, nvdim=1, value=0.012)
     >>> damping = mm.Damping(alpha=alpha)
 
     4. An attempt to define the damping dynamics term using a wrong value.

@@ -11,7 +11,7 @@ from .checks import check_term
 class TestExchange:
     def setup(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
-        field = df.Field(mesh, dim=1, value=5e-12)
+        field = df.Field(mesh, nvdim=1, value=5e-12)
 
         self.valid_args = [1, 2.0, 5e-11, 1e6, {"a": 1, "b": 1e-12}, field]
         self.invalid_args = ["a", (1, 2), "0", [1, 2, 3], {"a": "c", "b": 3}]

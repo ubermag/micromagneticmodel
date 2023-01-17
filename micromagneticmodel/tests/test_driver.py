@@ -42,10 +42,10 @@ class MyExternalDriver(mm.ExternalDriver):
             return ["#", "run", "command", "line"]
         with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
             factor = int(f.read())
-        (factor * system.m).write("output.omf")
+        (factor * system.m).to_file("output.omf")
 
     def _read_data(self, system):
-        system.m = df.Field.fromfile("output.omf")
+        system.m = df.Field.from_file("output.omf")
 
 
 def test_driver():
@@ -60,7 +60,7 @@ def test_external_driver(tmp_path):
     assert driver._x == "x"
 
     driver.drive(system, dirname=str(tmp_path))
-    m_out = df.Field.fromfile(str(tmp_path / system.name / "drive-0" / "output.omf"))
+    m_out = df.Field.from_file(tmp_path / system.name / "drive-0" / "output.omf")
     assert system.m.allclose(m_out)
     assert system.m.allclose(-mm.examples.macrospin().m)
     assert (tmp_path / system.name / "drive-0" / "info.json").exists()

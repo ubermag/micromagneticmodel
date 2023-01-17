@@ -14,7 +14,7 @@ class TestSystem:
         Ms = 1e6
         region = df.Region(p1=p1, p2=p2)
         mesh = df.Mesh(region=region, n=n)
-        self.m = df.Field(mesh=mesh, dim=3, value=(0, 1, 1), norm=Ms)
+        self.m = df.Field(mesh=mesh, nvdim=3, value=(0, 1, 1), norm=Ms)
 
     def test_init_valid_args(self):
         system = mm.System()

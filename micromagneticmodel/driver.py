@@ -27,11 +27,11 @@ class ExternalDriver(Driver):
     """Base class for existing external simulation packages (e.g. OOMMF, mumax3)."""
 
     @abc.abstractmethod
-    def drive_kwargs_setup(self, **kwargs):
+    def drive_kwargs_setup(self, drive_kwargs):
         """Abstract method to check and initialise kwargs for drive."""
 
     @abc.abstractmethod
-    def schedule_kwargs_setup(self, **kwargs):
+    def schedule_kwargs_setup(self, schedule_kwargs):
         """Abstract method to check and initialise kwargs for schedule."""
 
     @abc.abstractmethod
@@ -104,6 +104,11 @@ class ExternalDriver(Driver):
             only relies on the number of magnetisation snapshots already saved to disk
             and therefore only gives a rough indication of progress. Defaults to ``1``.
 
+        kwargs
+
+            Additional calculator-specific keyword arguments can be passed. These are
+            documented in ``drive_kwargs_setup`` of the individual calculators.
+
         Raises
         ------
         FileExistsError
@@ -113,7 +118,7 @@ class ExternalDriver(Driver):
         """
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
-        self.drive_kwargs_setup(**kwargs)
+        self.drive_kwargs_setup(kwargs)
 
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
@@ -209,6 +214,11 @@ class ExternalDriver(Driver):
             If ``verbose=0``, no output is printed. For ``verbose=1`` information about
             the submitted job is printed to stdout.
 
+        kwargs
+
+            Additional calculator-specific keyword arguments can be passed. These are
+            documented in ``schedule_kwargs_setup`` of the individual calculators.
+
         Raises
         ------
         FileExistsError
@@ -218,7 +228,7 @@ class ExternalDriver(Driver):
         """
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
-        self.schedule_kwargs_setup(**kwargs)
+        self.schedule_kwargs_setup(kwargs)
 
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append

@@ -22,10 +22,10 @@ class MyExternalDriver(mm.ExternalDriver):
     def _x(self):
         return "x"
 
-    def schedule_kwargs_setup(self, **kwargs):
+    def schedule_kwargs_setup(self, schedule_kwargs):
         pass
 
-    def drive_kwargs_setup(self, **kwargs):
+    def drive_kwargs_setup(self, drive_kwargs):
         pass
 
     def _write_input_files(self, system, **kwargs):

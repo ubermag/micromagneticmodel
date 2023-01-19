@@ -1,3 +1,4 @@
+from .aei import AEI
 from .cubicanisotropy import CubicAnisotropy
 from .demag import Demag
 from .dmi import DMI
@@ -8,4 +9,3 @@ from .magnetoelastic import MagnetoElastic
 from .rkky import RKKY
 from .uniaxialanisotropy import UniaxialAnisotropy
 from .zeeman import Zeeman
-from .aei import AEI

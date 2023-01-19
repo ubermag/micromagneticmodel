@@ -9,6 +9,7 @@ import micromagneticmodel.examples
 from .driver import Driver, ExternalDriver
 from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
 from .energy import (
+    AEI,
     DMI,
     RKKY,
     CubicAnisotropy,
@@ -19,7 +20,6 @@ from .energy import (
     MagnetoElastic,
     UniaxialAnisotropy,
     Zeeman,
-    AEI,
 )
 from .evolver import Evolver
 from .runner import ExternalRunner

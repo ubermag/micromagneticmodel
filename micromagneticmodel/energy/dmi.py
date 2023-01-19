@@ -20,7 +20,7 @@ from .energyterm import EnergyTerm
             "D2d_x",
             "D2d_y",
             "D2d_z",
-            "T_12"
+            "T_12",
         },
         unpack=False,
     ),

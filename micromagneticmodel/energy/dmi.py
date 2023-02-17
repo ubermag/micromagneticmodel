@@ -29,7 +29,7 @@ from .energyterm import EnergyTerm
             "Cn_x",
             "Cn_y",
             "Cn_z",
-            "C2v"
+            "C2v",
         },
         unpack=False,
     ),

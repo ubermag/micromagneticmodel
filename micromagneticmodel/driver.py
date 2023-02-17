@@ -321,7 +321,6 @@ class ExternalDriver(Driver):
         The method can be used repeatedly to create new plots. Old plots do not update
         anymore once a new plot is created.
 
-
         This method selects the central plane in z direction and shows one component of
         the normalised magnetisation if no callback is provided. The component can be
         selected by passing vdim.
@@ -336,6 +335,11 @@ class ExternalDriver(Driver):
             Function that is called for every field to select data. This function must
             take a discretisedfield.Field as input and return a 2d xarray.DataArray.
 
+        Returns
+        -------
+        holoviews.DynamicMap
+
+            The plot object to show the live view of subsequent simulations.
         """
         if not hv.extension._loaded:
             hv.extension("bokeh", logo=False)
@@ -344,7 +348,7 @@ class ExternalDriver(Driver):
 
             def callback(field):
                 # TODO think about the default settings here
-                return getattr(field.plane("z").orientation, vdim).to_xarray().squeeze()
+                return getattr(field.sel("z").orientation, vdim).to_xarray().squeeze()
 
         else:
             default_opts = False
@@ -353,7 +357,7 @@ class ExternalDriver(Driver):
 
         def plot_callback(*args, **kwargs):
             if isinstance(kwargs["data"], (str, pathlib.Path)):
-                field = df.Field.fromfile(kwargs["data"])
+                field = df.Field.from_file(kwargs["data"])
             else:
                 field = kwargs["data"]
             return hv.Image(callback(field))

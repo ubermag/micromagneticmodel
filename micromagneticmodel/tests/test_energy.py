@@ -110,6 +110,14 @@ class TestEnergy:
         latexstr = container._repr_latex_()
         assert latexstr == "$0$"
 
+    def test_getitem(self):
+        container = self.demag + self.dmi
+        assert self.demag == container[0]
+        assert self.dmi == container[1]
+        assert self.demag == container[-2]
+        with pytest.raises(IndexError):
+            container[3]
+
     def test_getattr(self):
         container = mm.Energy(terms=self.terms)
         check_container(container)
@@ -192,3 +200,19 @@ class TestEnergy:
 
         with pytest.raises(NotImplementedError):
             container.density(None)
+
+    def test_get(self):
+        custom_zeeman = mm.Zeeman(name="custom", H=(0, 0, 1))
+        container = self.dmi + self.zeeman + custom_zeeman
+        dmi_terms = container.get(type=mm.DMI)
+        check_container(dmi_terms)
+        assert len(dmi_terms) == 1
+        assert self.dmi in dmi_terms
+        zeeman_terms = container.get(type=mm.Zeeman)
+        check_container(zeeman_terms)
+        assert len(zeeman_terms) == 2
+        assert self.zeeman in zeeman_terms
+        assert custom_zeeman in zeeman_terms
+
+        assert container.get(type=mm.DMI)
+        assert not container.get(type=mm.Exchange)

@@ -112,7 +112,7 @@ class DMI(EnergyTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> D = df.Field(mesh, dim=1, value=5.7e-3)
+    >>> D = df.Field(mesh, nvdim=1, value=5.7e-3)
     >>> dmi = mm.DMI(D=D, crystalclass='D2d')
 
     4. An attempt to define the DMI energy term using a wrong value.

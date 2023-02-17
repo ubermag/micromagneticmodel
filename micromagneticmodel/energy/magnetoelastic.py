@@ -68,8 +68,8 @@ class MagnetoElastic(EnergyTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> B1 = B2 = df.Field(mesh, dim=1, value=1e6)
-    >>> e_diag = df.Field(mesh, dim=3, value=(1, 1, 1))
+    >>> B1 = B2 = df.Field(mesh, nvdim=1, value=1e6)
+    >>> e_diag = df.Field(mesh, nvdim=3, value=(1, 1, 1))
     >>> mel = mm.MagnetoElastic(B1=B1, B2=B2, e_diag=e_diag,
     ...                         e_offdiag=(0, 0, 0))
 

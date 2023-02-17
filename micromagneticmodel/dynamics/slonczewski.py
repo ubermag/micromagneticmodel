@@ -29,9 +29,11 @@ class Slonczewski(DynamicsTerm):
     .. math::
 
         \frac{\text{d}\mathbf{m}}{\text{d}t} =
-        \gamma_{0}\beta\epsilon(\mathbf{m} \times \mathbf{m}_\text{p}
-        \times \mathbf{m}) - \gamma_{0}\beta\epsilon' (\mathbf{m} \times
-        \mathbf{m}_\text{p})
+        \gamma\beta\frac{\epsilon + \alpha\epsilon'}{1+\alpha^{2}}
+        \mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m})
+        -\gamma\beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}
+        \mathbf{m} \times \mathbf{m}_\text{p}
+
 
     .. math::
 
@@ -121,7 +123,7 @@ class Slonczewski(DynamicsTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> J = df.Field(mesh, dim=1, value=1e12)
+    >>> J = df.Field(mesh, nvdim=1, value=1e12)
     >>> slonczewski = mm.Slonczewski(J=J, mp=(1, 0, 0), P=0.4, Lambda=2,
     ...                              eps_prime=2)
 
@@ -159,16 +161,20 @@ class Slonczewski(DynamicsTerm):
 
     @property
     def _reprlatex(self):
-        reprlatex = (
-            r"\gamma_{0}\beta\epsilon(\mathbf{m} \times "
-            r"\mathbf{m}_\text{p} \times \mathbf{m})"
-        )
-        if hasattr(self, "eps_prime"):
-            if self.eps_prime:
-                reprlatex += (
-                    r"-\gamma_{0}\beta\epsilon' (\mathbf{m} "
-                    r"\times \mathbf{m}_\text{p})"
-                )
+        if not isinstance(self.eps_prime, ts.descriptors.Parameter) and self.eps_prime:
+            reprlatex = (
+                r"\gamma\beta\frac{\epsilon + \alpha\epsilon'}{1+\alpha^{2}}"
+                r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
+                r"-\gamma\beta\frac{\epsilon' - \alpha\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times \mathbf{m}_\text{p}"
+            )
+        else:
+            reprlatex = (
+                r"\gamma\beta\frac{\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times (\mathbf{m}_\text{p} \times \mathbf{m}) "
+                r"+\gamma\beta\frac{\alpha\epsilon}{1+\alpha^{2}}"
+                r"\mathbf{m} \times \mathbf{m}_\text{p}"
+            )
 
         return reprlatex
 

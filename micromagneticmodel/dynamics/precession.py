@@ -45,7 +45,7 @@ class Precession(DynamicsTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> gamma0 = df.Field(mesh, dim=1, value=5e5)
+    >>> gamma0 = df.Field(mesh, nvdim=1, value=5e5)
     >>> precession = mm.Precession(gamma0=gamma0)
 
     4. An attempt to define the precession dynamics term using a wrong value.

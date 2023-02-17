@@ -60,8 +60,8 @@ class UniaxialAnisotropy(EnergyTerm):
     ...
     >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
     >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> K = df.Field(mesh, dim=1, value=1e6)
-    >>> u = df.Field(mesh, dim=3, value=(0, 1, 0))
+    >>> K = df.Field(mesh, nvdim=1, value=1e6)
+    >>> u = df.Field(mesh, nvdim=3, value=(0, 1, 0))
     >>> ua = mm.UniaxialAnisotropy(K=K, u=u)
 
     4. Defining higher-order uniaxial anisotropy

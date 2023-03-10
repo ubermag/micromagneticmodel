@@ -43,6 +43,10 @@ class ExternalDriver(Driver):
         """Call the external package."""
 
     @abc.abstractmethod
+    def _schedule_commands(self, system, runner):
+        """Return a list of commands to append to the scheduling script."""
+
+    @abc.abstractmethod
     def _read_data(self, system):
         """Update system with simulation output (magnetisation and scalar data)."""
 
@@ -276,11 +280,11 @@ class ExternalDriver(Driver):
                 header = f.read()
         else:
             header = header
-        run_cmd = self._call(system=system, runner=runner, dry_run=True)
+        run_commands = self._schedule_commands(system=system, runner=runner)
         with open(script_name, "wt", encoding="utf-8") as f:
             f.write(header)
             f.write("\n")
-            f.write(" ".join(run_cmd))
+            f.write("\n".join(run_commands))
 
     def _write_info_json(self, system, **kwargs):
         info = {}

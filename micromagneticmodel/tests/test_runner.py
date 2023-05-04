@@ -23,7 +23,7 @@ class MyRunner(mm.ExternalRunner):
 
 def test_call(capsys):
     runner = MyRunner()
-    command = runner.call("argstr", dry_run=True)
+    command = runner._call("argstr", dry_run=True)
     assert command == ["my_package", "argstr", "command", "line"]
 
     runner.call("argstr")

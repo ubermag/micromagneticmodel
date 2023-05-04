@@ -21,7 +21,6 @@ class ExternalRunner(abc.ABC):
         verbose=1,
         total=None,
         glob_name="",
-        dry_run=False,
         **kwargs,
     ):
         """Call an external simulation package by passing ``argstr`` to it.
@@ -55,11 +54,6 @@ class ExternalRunner(abc.ABC):
             package writes during the simulation. This information is used to update the
             progress bar.
 
-        dry_run : bool, optional
-
-            If ``dry_run=True`` this method returns the command to call the external
-            package without calling it. Defaults to ``False``.
-
         Raises
         ------
         RuntimeError
@@ -68,17 +62,11 @@ class ExternalRunner(abc.ABC):
 
         Returns
         -------
-        int, str
+        int
 
-            If ``dry_run=False`` and when the run was successful, ``0`` is returned. If
-            ``dry_run=True`` the command to call the external package is returned.
+            If the run was successful, ``0`` is returned.
 
         """
-        if dry_run:
-            return self._call(
-                argstr=argstr, need_stderr=need_stderr, dry_run=True, **kwargs
-            )
-
         if verbose >= 2 and total:
             context = uu.progress.bar(
                 total=total,

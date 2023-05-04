@@ -35,14 +35,17 @@ class MyExternalDriver(mm.ExternalDriver):
 
     def _call(self, system, runner, dry_run=False, **kwargs):
         if dry_run:
-            # Python is used to test/simulate schedule during tests because there
-            # typically is no scheduling system and Python is always available.
-            # Therefore, dry_run must return a Python comment that can be added to the
-            # schedule script without breaking the execution.
-            return ["#", "run", "command", "line"]
+            raise NotImplementedError("This functionality will be removed.")
         with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
             factor = int(f.read())
         (factor * system.m).to_file("output.omf")
+
+    def _schedule_commands(self, system, runner):
+        # Python is used to test/simulate schedule during tests because there
+        # typically is no scheduling system and Python is always available.
+        # Therefore, dry_run must return a Python comment that can be added to the
+        # schedule script without breaking the execution.
+        return ["# run command line"]
 
     def _read_data(self, system):
         system.m = df.Field.from_file("output.omf")

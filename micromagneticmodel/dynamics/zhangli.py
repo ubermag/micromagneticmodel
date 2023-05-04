@@ -1,15 +1,35 @@
 import collections
+import numbers
 
 import discretisedfield as df
+import numpy as np
 import ubermagutil as uu
 import ubermagutil.typesystem as ts
 
 from .dynamicsterm import DynamicsTerm
 
 
+class ScalarVector3(ts.Descriptor):
+    # custom type for Zhand-Li current density u
+    def __set__(self, instance, value):
+        if not isinstance(value, (numbers.Real, tuple, list, np.ndarray, df.Field)):
+            raise TypeError("Cannot set {self.name} with {type(value)}.")
+        if isinstance(value, numbers.Real):
+            pass
+        elif isinstance(value, df.Field):
+            if value.nvdim not in (1, 3):
+                raise ValueError("Cannot set {self.name} with {value.nvdim=}.")
+        else:
+            if not all(isinstance(elem, numbers.Real) for elem in value):
+                raise ValueError(
+                    "Can only set {self.name} with elements of type numbers.Real."
+                )
+        super().__set__(instance, value)
+
+
 @uu.inherit_docs
 @ts.typesystem(
-    u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    u=ScalarVector3(),
     beta=ts.Scalar(),
     func=ts.Typed(expected_type=collections.abc.Callable),
     dt=ts.Scalar(positive=True),
@@ -42,10 +62,12 @@ class ZhangLi(DynamicsTerm):
 
         A single scalar value can be passed.
 
-    u : number.Real, discretisedfield.Field
+    u : number.Real, array-like, discretisedfield.Field
 
-        `numbers.Real` can be passed, or alternatively
-        ``discretisedfield.Field`` can be passed.
+        Velocity of the spin current in m/s. If a scalar value or ``Field`` with
+        ``nvdim==1`` is passed, the current is assumed to flow in x direction. A vector
+        or a ``Field`` with ``nvdim==3`` can be used to specify arbitrary current
+        direction.
 
     func : callable, optional
 

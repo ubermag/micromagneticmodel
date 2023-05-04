@@ -39,7 +39,7 @@ class ExternalDriver(Driver):
         """Write input files required for the external package."""
 
     @abc.abstractmethod
-    def _call(self, system, runner, dry_run=False, **kwargs):
+    def _call(self, system, runner, **kwargs):
         """Call the external package."""
 
     @abc.abstractmethod

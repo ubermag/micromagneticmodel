@@ -33,16 +33,17 @@ class MyExternalDriver(mm.ExternalDriver):
             f.write(str(-1))  # factor -1 used to invert magnetisation direction in call
         self._write_info_json(system, **kwargs)
 
-    def _call(self, system, runner, dry_run=False, **kwargs):
-        if dry_run:
-            # Python is used to test/simulate schedule during tests because there
-            # typically is no scheduling system and Python is always available.
-            # Therefore, dry_run must return a Python comment that can be added to the
-            # schedule script without breaking the execution.
-            return ["#", "run", "command", "line"]
+    def _call(self, system, runner, **kwargs):
         with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
             factor = int(f.read())
         (factor * system.m).to_file("output.omf")
+
+    def _schedule_commands(self, system, runner):
+        # Python is used to test/simulate schedule during tests because there
+        # typically is no scheduling system and Python is always available.
+        # Therefore, we return a Python comment that can be added to the
+        # schedule script without breaking the execution.
+        return ["# run command line"]
 
     def _read_data(self, system):
         system.m = df.Field.from_file("output.omf")

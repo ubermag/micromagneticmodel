@@ -64,7 +64,7 @@ class ExternalRunner(abc.ABC):
         -------
         int
 
-            If the run was successful, ``0`` is returned.
+            Return code of the runner, 0 if the run was successful.
 
         """
         if verbose >= 2 and total:

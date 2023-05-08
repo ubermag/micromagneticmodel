@@ -258,7 +258,9 @@ class ExternalDriver(Driver):
                 stdout = stderr = None  # pragma: no cover
 
             if verbose >= 1:
-                print(f"Running '{cmd} {script_name}' in '{pathlib.Path().absolute()}'.")
+                print(
+                    f"Running '{cmd} {script_name}' in '{pathlib.Path().absolute()}'."
+                )
             system.drive_number += 1
             res = sp.run([cmd, script_name], stdout=stdout, stderr=stderr)
 

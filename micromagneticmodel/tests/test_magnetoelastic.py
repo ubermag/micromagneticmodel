@@ -9,7 +9,7 @@ from .checks import check_term
 
 
 class TestMagnetoElastic:
-    def setup(self):
+    def setup_method(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
         B1field = df.Field(mesh, nvdim=1, value=5e6)
         B2field = df.Field(mesh, nvdim=1, value=7e6)

@@ -6,7 +6,7 @@ from .checks import check_container
 
 
 class TestDynamics:
-    def setup(self):
+    def setup_method(self):
         self.precession = mm.Precession(gamma0=2.21e5)
         self.damping = mm.Damping(alpha={"r1": 1, "r2": 0.5})
         self.zhangli = mm.ZhangLi(u=500, beta=0.2)

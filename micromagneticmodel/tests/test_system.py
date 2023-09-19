@@ -7,7 +7,7 @@ from .checks import check_system
 
 
 class TestSystem:
-    def setup(self):
+    def setup_method(self):
         p1 = (0, 0, 0)
         p2 = (10e-9, 10e-9, 10e-9)
         n = (10, 10, 10)

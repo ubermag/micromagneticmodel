@@ -9,7 +9,7 @@ from .checks import check_term
 
 
 class TestZhangLi:
-    def setup(self):
+    def setup_method(self):
         self.valid_args = [
             (1, 1),
             (-1.0, 2.0),

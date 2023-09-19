@@ -10,7 +10,7 @@ class MyDerivedClass(mm.abstract.Abstract):
 
 
 class TestAbstract:
-    def setup(self):
+    def setup_method(self):
         self.obj = MyDerivedClass(arg1=1, arg2="abc")
 
     def test_init(self):

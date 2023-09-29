@@ -28,7 +28,7 @@ hbar = h / (2 * math.pi)
 gamma = g * e / (2 * me)
 """gyrotropic ratio (C/kg)"""
 
-muB = gamma * hbar
+muB = e * hbar / (2 * me)
 """Bohr magneton (J/T)"""
 
 gamma0 = gamma * mu0

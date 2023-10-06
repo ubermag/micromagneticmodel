@@ -1,5 +1,6 @@
 """Domain-specific language for computational magnetism."""
-import pkg_resources
+import importlib.metadata
+
 import pytest
 
 import micromagneticmodel.abstract
@@ -24,7 +25,7 @@ from .evolver import Evolver
 from .runner import ExternalRunner
 from .system import System
 
-__version__ = pkg_resources.get_distribution(__name__).version
+__version__ = importlib.metadata.version(__package__)
 
 
 def test():

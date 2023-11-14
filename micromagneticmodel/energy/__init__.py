@@ -1,3 +1,4 @@
+from .aei import AEI
 from .cubicanisotropy import CubicAnisotropy
 from .demag import Demag
 from .dmi import DMI

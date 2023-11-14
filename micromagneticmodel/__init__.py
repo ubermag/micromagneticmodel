@@ -10,6 +10,7 @@ import micromagneticmodel.examples
 from .driver import Driver, ExternalDriver
 from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
 from .energy import (
+    AEI,
     DMI,
     RKKY,
     CubicAnisotropy,

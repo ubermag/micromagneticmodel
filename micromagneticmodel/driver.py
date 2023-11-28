@@ -294,6 +294,9 @@ class ExternalDriver(Driver):
         info["date"] = datetime.datetime.now().strftime("%Y-%m-%d")
         info["time"] = datetime.datetime.now().strftime("%H:%M:%S")
         info["driver"] = self.__class__.__name__
+        # "adapter" is the ubermag package (e.g. oommfc) that communicates with the
+        # calculator (e.g. OOMMF)
+        info["adapter"] = self.__module__.split(".")[0]
         for k, v in kwargs.items():
             info[k] = v
         with open("info.json", "wt", encoding="utf-8") as jsonfile:

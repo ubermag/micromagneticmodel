@@ -1,3 +1,6 @@
+import datetime
+import json
+
 import discretisedfield as df
 import pytest
 
@@ -65,6 +68,18 @@ def test_external_driver(tmp_path):
     assert system.m.allclose(m_out)
     assert system.m.allclose(-mm.examples.macrospin().m)
     assert (tmp_path / system.name / "drive-0" / "info.json").exists()
+
+    with open(tmp_path / system.name / "drive-0" / "info.json") as f:
+        info = json.load(f)
+
+    assert info["adapter"] == "micromagneticmodel"
+    assert info["driver"] == "MyExternalDriver"
+    assert info["drive_number"] == 0
+
+    info_time = datetime.datetime.fromisoformat(f"{info['date']}T{info['time']}")
+    now = datetime.datetime.now()
+    # assumption: this test runs in under one minute
+    assert (now - info_time).total_seconds() < 60
 
     with pytest.raises(FileExistsError):
         driver.drive(system, dirname=str(tmp_path), append=False)

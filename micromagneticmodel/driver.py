@@ -50,6 +50,10 @@ class ExternalDriver(Driver):
     def _read_data(self, system):
         """Update system with simulation output (magnetisation and scalar data)."""
 
+    @abc.abstractmethod
+    def check_system(self, system):
+        """Check if the dynamics of the system is defined."""
+
     def drive(
         self,
         system,
@@ -123,7 +127,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.drive_kwargs_setup(kwargs)
-
+        self.check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )
@@ -233,7 +237,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.schedule_kwargs_setup(kwargs)
-
+        self.check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )

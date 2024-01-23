@@ -70,7 +70,7 @@ class System:
 
     """
 
-    def __init__(self, energy=0, dynamics=0, m=None, T=0, name="unnamed"):
+    def __init__(self, name, energy=0, dynamics=0, m=None, T=0):
         self.energy = energy
         self.dynamics = dynamics
         self.m = m

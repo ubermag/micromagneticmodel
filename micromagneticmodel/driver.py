@@ -127,7 +127,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.drive_kwargs_setup(kwargs)
-        self.check_system(system)
+        self._check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )
@@ -237,7 +237,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.schedule_kwargs_setup(kwargs)
-        self.check_system(system)
+        self._check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )

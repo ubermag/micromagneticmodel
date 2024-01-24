@@ -31,7 +31,7 @@ class MyExternalDriver(mm.ExternalDriver):
     def drive_kwargs_setup(self, drive_kwargs):
         pass
 
-    def check_system(self, system):
+    def _check_system(self, system):
         pass
 
     def _write_input_files(self, system, **kwargs):

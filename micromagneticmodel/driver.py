@@ -51,7 +51,7 @@ class ExternalDriver(Driver):
         """Update system with simulation output (magnetisation and scalar data)."""
 
     @abc.abstractmethod
-    def check_system(self, system):
+    def _check_system(self, system):
         """Check if the dynamics of the system is defined."""
 
     def drive(

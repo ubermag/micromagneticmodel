@@ -52,7 +52,7 @@ class ExternalDriver(Driver):
 
     @abc.abstractmethod
     def _check_system(self, system):
-        """Check if the dynamics of the system is defined."""
+        """Check if the system contains all required information."""
 
     def drive(
         self,

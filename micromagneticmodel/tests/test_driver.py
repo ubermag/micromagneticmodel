@@ -31,6 +31,9 @@ class MyExternalDriver(mm.ExternalDriver):
     def drive_kwargs_setup(self, drive_kwargs):
         pass
 
+    def _check_system(self, system):
+        pass
+
     def _write_input_files(self, system, **kwargs):
         with open(f"{system.name}.input", "wt", encoding="utf-8") as f:
             f.write(str(-1))  # factor -1 used to invert magnetisation direction in call

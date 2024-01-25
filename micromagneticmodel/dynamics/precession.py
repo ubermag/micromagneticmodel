@@ -2,6 +2,8 @@ import discretisedfield as df
 import ubermagutil as uu
 import ubermagutil.typesystem as ts
 
+import micromagneticmodel as mm
+
 from .dynamicsterm import DynamicsTerm
 
 
@@ -61,6 +63,10 @@ class Precession(DynamicsTerm):
         r"-\frac{\gamma_{0}}{1 + \alpha^{2}} \mathbf{m} "
         r"\times \mathbf{H}_\text{eff}"
     )
+
+    def __init__(self, gamma0=mm.consts.gamma0, **kwargs):
+        super().__init__(**kwargs)
+        self.gamma0 = gamma0
 
     def dmdt(self, m, Heff):
         raise NotImplementedError

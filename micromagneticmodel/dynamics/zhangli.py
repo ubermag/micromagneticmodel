@@ -9,8 +9,8 @@ import ubermagutil.typesystem as ts
 from .dynamicsterm import DynamicsTerm
 
 
-class ScalarVector3(ts.Descriptor):
-    # custom type for Zhand-Li current density u
+class Scalar_Vector3(ts.Descriptor):
+    """custom type for Zhand-Li current density u.""
     def __set__(self, instance, value):
         if not isinstance(value, (numbers.Real, tuple, list, np.ndarray, df.Field)):
             raise TypeError("Cannot set {self.name} with {type(value)}.")
@@ -29,7 +29,7 @@ class ScalarVector3(ts.Descriptor):
 
 @uu.inherit_docs
 @ts.typesystem(
-    u=ScalarVector3(),
+    u=Scalar_Vector3(),
     beta=ts.Scalar(),
     func=ts.Typed(expected_type=collections.abc.Callable),
     dt=ts.Scalar(positive=True),
@@ -64,7 +64,7 @@ class ZhangLi(DynamicsTerm):
 
     u : number.Real, array-like, discretisedfield.Field
 
-        Velocity of the spin current in m/s. If a scalar value or ``Field`` with
+        Spin-drift velocity in m/s. If a scalar value or ``Field`` with
         ``nvdim==1`` is passed, the current is assumed to flow in x direction. A vector
         or a ``Field`` with ``nvdim==3`` can be used to specify arbitrary current
         direction.

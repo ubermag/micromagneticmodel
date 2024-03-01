@@ -11,6 +11,7 @@ from .dynamicsterm import DynamicsTerm
 
 class Scalar_Vector3(ts.Descriptor):
     """custom type for Zhand-Li current density u."""
+
     def __set__(self, instance, value):
         if not isinstance(value, (numbers.Real, tuple, list, np.ndarray, df.Field)):
             raise TypeError("Cannot set {self.name} with {type(value)}.")

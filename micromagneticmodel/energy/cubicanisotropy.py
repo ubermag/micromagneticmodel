@@ -79,6 +79,7 @@ class CubicAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["K", "u1", "u2"]
 
     @property

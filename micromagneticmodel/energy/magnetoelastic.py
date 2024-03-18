@@ -83,6 +83,7 @@ class MagnetoElastic(EnergyTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["B1", "B2", "e_diag", "e_offdiag"]
     _reprlatex = (
         r"B_{1}\sum_{i} m_{i}\epsilon_{ii} + "

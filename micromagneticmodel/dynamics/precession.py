@@ -56,6 +56,7 @@ class Precession(DynamicsTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["gamma0"]
     _reprlatex = (
         r"-\frac{\gamma_{0}}{1 + \alpha^{2}} \mathbf{m} "

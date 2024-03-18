@@ -1,4 +1,5 @@
 """Domain-specific language for computational magnetism."""
+
 import importlib.metadata
 
 import pytest

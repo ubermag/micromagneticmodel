@@ -16,8 +16,8 @@ class MyRunner(mm.ExternalRunner):
         return sp.CompletedProcess(
             argstr,
             returncode=returncode,
-            stdout="output".encode("utf-8"),
-            stderr="error".encode("utf-8"),
+            stdout=b"output",
+            stderr=b"error",
         )
 
 

@@ -1,7 +1,6 @@
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_container
 
 

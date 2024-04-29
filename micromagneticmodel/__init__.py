@@ -1,4 +1,5 @@
 """Domain-specific language for computational magnetism."""
+
 import importlib.metadata
 
 import pytest
@@ -6,7 +7,6 @@ import pytest
 import micromagneticmodel.abstract
 import micromagneticmodel.consts
 import micromagneticmodel.examples
-
 from .driver import Driver, ExternalDriver
 from .dynamics import Damping, Dynamics, DynamicsTerm, Precession, Slonczewski, ZhangLi
 from .energy import (

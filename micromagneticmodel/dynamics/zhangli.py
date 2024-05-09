@@ -14,16 +14,16 @@ class Scalar_Vector3(ts.Descriptor):
 
     def __set__(self, instance, value):
         if not isinstance(value, (numbers.Real, tuple, list, np.ndarray, df.Field)):
-            raise TypeError("Cannot set {self.name} with {type(value)}.")
+            raise TypeError(f"Cannot set {self.name} with {type(value)}.")
         if isinstance(value, numbers.Real):
             pass
         elif isinstance(value, df.Field):
             if value.nvdim not in (1, 3):
-                raise ValueError("Cannot set {self.name} with {value.nvdim=}.")
+                raise ValueError(f"Cannot set {self.name} with {value.nvdim=}.")
         else:
             if not all(isinstance(elem, numbers.Real) for elem in value):
                 raise ValueError(
-                    "Can only set {self.name} with elements of type numbers.Real."
+                    f"Can only set {self.name} with elements of type numbers.Real."
                 )
         super().__set__(instance, value)
 

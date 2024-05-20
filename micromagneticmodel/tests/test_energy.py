@@ -141,7 +141,7 @@ class TestEnergy:
         container -= self.exchange
         check_container(container)
         with pytest.raises(AttributeError):
-            container.exchange
+            container.exchange  # noqa: B018
 
     def test_freestyle(self):
         container = self.dmi + self.zeeman  # single term is not allowed

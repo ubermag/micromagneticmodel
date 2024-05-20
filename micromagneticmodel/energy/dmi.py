@@ -121,10 +121,7 @@ class DMI(EnergyTerm):
         if self.crystalclass in ["T", "O"]:
             return r"D \mathbf{m} \cdot (\nabla \times \mathbf{m})"
         elif "Cnv" in self.crystalclass:
-            if self.crystalclass == "Cnv":
-                direction = "z"
-            else:
-                direction = self.crystalclass[-1]
+            direction = "z" if self.crystalclass == "Cnv" else self.crystalclass[-1]
             return (
                 r"D ( \mathbf{m} \cdot \nabla m_{" + direction + r"} "
                 r"- m_{" + direction + r"} \nabla \cdot \mathbf{m} )"

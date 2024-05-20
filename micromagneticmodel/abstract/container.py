@@ -103,8 +103,7 @@ class Container(abc.ABC):
         Demag()
 
         """
-        for term in self._terms:
-            yield term
+        yield from self._terms
 
     def __contains__(self, item):
         """Determine whether a term of the same type as ``item`` is in the

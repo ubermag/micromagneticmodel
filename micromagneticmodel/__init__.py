@@ -4,9 +4,6 @@ import importlib.metadata
 
 import pytest
 
-import micromagneticmodel.abstract as abstract
-import micromagneticmodel.consts as const
-import micromagneticmodel.examples as examples
 from .driver import Driver as Driver
 from .driver import ExternalDriver as ExternalDriver
 from .dynamics import Damping as Damping
@@ -17,19 +14,40 @@ from .dynamics import Slonczewski as Slonczewski
 from .dynamics import ZhangLi as ZhangLi
 from .energy import (
     DMI as DMI,
+)
+from .energy import (
     RKKY as RKKY,
+)
+from .energy import (
     CubicAnisotropy as CubicAnisotropy,
+)
+from .energy import (
     Demag as Demag,
+)
+from .energy import (
     Energy as Energy,
+)
+from .energy import (
     EnergyTerm as EnergyTerm,
+)
+from .energy import (
     Exchange as Exchange,
+)
+from .energy import (
     MagnetoElastic as MagnetoElastic,
+)
+from .energy import (
     UniaxialAnisotropy as UniaxialAnisotropy,
+)
+from .energy import (
     Zeeman as Zeeman,
 )
 from .evolver import Evolver as Evolver
 from .runner import ExternalRunner as ExternalRunner
 from .system import System as System
+from micromagneticmodel import abstract as abstract
+from micromagneticmodel import consts as consts
+from micromagneticmodel import examples as examples
 
 __version__ = importlib.metadata.version(__package__)
 

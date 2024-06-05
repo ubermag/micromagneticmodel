@@ -4,9 +4,9 @@ import importlib.metadata
 
 import pytest
 
-from micromagneticmodel import abstract as abstract
-from micromagneticmodel import consts as consts
-from micromagneticmodel import examples as examples
+import micromagneticmodel.abstract as abstract
+import micromagneticmodel.consts as const
+import micromagneticmodel.examples as examples
 from .driver import Driver as Driver
 from .driver import ExternalDriver as ExternalDriver
 from .dynamics import Damping as Damping

@@ -45,9 +45,9 @@ from .energy import (
 from .evolver import Evolver as Evolver
 from .runner import ExternalRunner as ExternalRunner
 from .system import System as System
-from micromagneticmodel import abstract as abstract
-from micromagneticmodel import consts as consts
-from micromagneticmodel import examples as examples
+import micromagneticmodel.abstract as abstract
+import micromagneticmodel.consts as consts
+import micromagneticmodel.examples as examples
 
 __version__ = importlib.metadata.version(__package__)
 

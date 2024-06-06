@@ -4,6 +4,9 @@ import importlib.metadata
 
 import pytest
 
+import micromagneticmodel.abstract as abstract
+import micromagneticmodel.consts as consts
+import micromagneticmodel.examples as examples
 from .driver import Driver as Driver
 from .driver import ExternalDriver as ExternalDriver
 from .dynamics import Damping as Damping
@@ -45,9 +48,6 @@ from .energy import (
 from .evolver import Evolver as Evolver
 from .runner import ExternalRunner as ExternalRunner
 from .system import System as System
-import micromagneticmodel.abstract as abstract
-import micromagneticmodel.consts as consts
-import micromagneticmodel.examples as examples
 
 __version__ = importlib.metadata.version(__package__)
 

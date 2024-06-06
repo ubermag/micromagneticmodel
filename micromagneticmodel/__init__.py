@@ -4,9 +4,9 @@ import importlib.metadata
 
 import pytest
 
-import micromagneticmodel.abstract as abstract
-import micromagneticmodel.consts as consts
-import micromagneticmodel.examples as examples
+import micromagneticmodel.abstract as abstract  # noqa: F401
+import micromagneticmodel.consts as consts  # noqa: F401
+import micromagneticmodel.examples as examples  # noqa: F401
 from .driver import Driver as Driver
 from .driver import ExternalDriver as ExternalDriver
 from .dynamics import Damping as Damping

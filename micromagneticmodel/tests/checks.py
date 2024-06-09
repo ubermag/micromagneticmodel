@@ -28,7 +28,6 @@ def check_term(term):
             term.dmdt(m=None, Heff=None)
 
     assert term == term
-    assert term == term
     assert term != "5"
 
     container = getattr(mm, term._container_class)()
@@ -83,7 +82,6 @@ def check_container(container):
         assert getattr(container, term.name) == term
         assert term.name in dir(container)
 
-    assert container == container
     assert container == container
     assert container != "5"
 

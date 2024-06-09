@@ -134,13 +134,9 @@ class ZhangLi(DynamicsTerm):
     ...     return np.sin(omega * t)
     >>> zhangli = mm.ZhangLi(beta=0.01, u=5e6, func=sin_wave, dt=1e-13)
 
-    4. An attempt to define the Zhang-Li dynamics term using a wrong value
-       (here using a vector ``u`` where a scalar value is required).
+    4. Defining the Zhang-Li dynamics term using vector.
 
-    >>> zhangli = mm.ZhangLi(beta=-1, u=(0, 0, 1))  # vector value
-    Traceback (most recent call last):
-    ...
-    TypeError: ...
+    >>> zhangli = mm.ZhangLi(beta=0.1, u=(0, 0, 1e12))
 
     """
 

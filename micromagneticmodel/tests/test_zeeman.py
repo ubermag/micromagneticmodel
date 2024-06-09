@@ -5,12 +5,11 @@ import numpy as np
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_term
 
 
 class TestZeeman:
-    def setup(self):
+    def setup_method(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
         field = df.Field(mesh, nvdim=3, value=(-1e5, 0, 1e6))
 
@@ -71,9 +70,7 @@ class TestZeeman:
             check_term(term)
 
             tcl_strings = {}
-            tcl_strings[
-                "script"
-            ] = """proc TimeFunction { total_time } {
+            tcl_strings["script"] = """proc TimeFunction { total_time } {
             set PI [expr {4*atan(1.)}]
             set w [expr {1e9*2*$PI}]
             set ct [expr {cos($w*$total_time)}]

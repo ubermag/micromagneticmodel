@@ -1,7 +1,6 @@
 import abc
 
 import micromagneticmodel as mm
-
 from .abstract import Abstract
 
 

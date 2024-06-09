@@ -3,12 +3,11 @@ import re
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_term
 
 
 class TestRKKY:
-    def setup(self):
+    def setup_method(self):
         self.valid_args = [(1, ["a", "b"]), (-1, ["a", "bc"]), (0, ["r1", "r2"])]
         self.invalid_args = [("a", ["a", "b"]), (-1, "a"), (0, 0)]
 

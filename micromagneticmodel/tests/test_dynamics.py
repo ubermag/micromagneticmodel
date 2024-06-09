@@ -1,12 +1,11 @@
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_container
 
 
 class TestDynamics:
-    def setup(self):
+    def setup_method(self):
         self.precession = mm.Precession(gamma0=2.21e5)
         self.damping = mm.Damping(alpha={"r1": 1, "r2": 0.5})
         self.zhangli = mm.ZhangLi(u=500, beta=0.2)
@@ -107,7 +106,7 @@ class TestDynamics:
         container -= self.damping
         check_container(container)
         with pytest.raises(AttributeError):
-            container.damping
+            container.damping  # noqa: B018
 
     def test_freestyle(self):
         container = self.damping + self.zhangli  # single term is not allowed

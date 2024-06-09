@@ -282,12 +282,12 @@ class ExternalDriver(Driver):
 
     def _write_schedule_script(self, system, header, script_name, runner):
         if pathlib.Path(header).exists():
-            with open(header, "rt", encoding="utf-8") as f:
+            with open(header, encoding="utf-8") as f:
                 header = f.read()
         else:
             header = header
         run_commands = self._schedule_commands(system=system, runner=runner)
-        with open(script_name, "wt", encoding="utf-8") as f:
+        with open(script_name, "w", encoding="utf-8") as f:
             f.write(header)
             f.write("\n")
             f.write("\n".join(run_commands))
@@ -303,7 +303,7 @@ class ExternalDriver(Driver):
         info["adapter"] = self.__module__.split(".")[0]
         for k, v in kwargs.items():
             info[k] = v
-        with open("info.json", "wt", encoding="utf-8") as jsonfile:
+        with open("info.json", "w", encoding="utf-8") as jsonfile:
             jsonfile.write(json.dumps(info))
 
     @staticmethod

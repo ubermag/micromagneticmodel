@@ -13,13 +13,30 @@ class Scalar_Vector3(ts.Descriptor):
     """custom type for Zhand-Li current density u."""
 
     def __set__(self, instance, value):
-        if not isinstance(value, (numbers.Real, tuple, list, np.ndarray, df.Field)):
+        if not isinstance(
+            value, (numbers.Real, tuple, list, np.ndarray, dict, df.Field)
+        ):
             raise TypeError(f"Cannot set {self.name} with {type(value)}.")
         if isinstance(value, numbers.Real):
             pass
         elif isinstance(value, df.Field):
             if value.nvdim not in (1, 3):
                 raise ValueError(f"Cannot set {self.name} with {value.nvdim=}.")
+        elif isinstance(value, dict):
+            if all(isinstance(elem, numbers.Real) for elem in value.values()):
+                pass
+            elif any(
+                not isinstance(elem, (tuple, list, np.ndarray))
+                or len(elem) != 3
+                or not all(isinstance(item, numbers.Real) for item in elem)
+                for elem in value.values()
+            ):
+                raise ValueError(
+                    f"Can only set {self.name} with a 'dict' containing either only"
+                    "scalar values or only vector values."
+                )
+        elif len(value) != 3:
+            raise ValueError(f"Can only set {self.name} with a vector with 3 elements.")
         else:
             if not all(isinstance(elem, numbers.Real) for elem in value):
                 raise ValueError(
@@ -63,12 +80,13 @@ class ZhangLi(DynamicsTerm):
 
         A single scalar value can be passed.
 
-    u : number.Real, array-like, discretisedfield.Field
+    u : number.Real, array-like, dict, discretisedfield.Field
 
-        Spin-drift velocity in m/s. If a scalar value or ``Field`` with
-        ``nvdim==1`` is passed, the current is assumed to flow in x direction. A vector
-        or a ``Field`` with ``nvdim==3`` can be used to specify arbitrary current
-        direction.
+        Spin-drift velocity in m/s. If a scalar value or ``Field`` with ``nvdim==1`` is
+        passed, the current is assumed to flow in x direction. A vector (array_like of
+        length 3) or a ``Field`` with ``nvdim==3`` can be used to specify arbitrary
+        current direction. When using a ``dict`` either all elements must be scalar
+        (current in x direction) or a vector must be used for each key.
 
     func : callable, optional
 

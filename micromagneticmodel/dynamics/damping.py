@@ -57,6 +57,7 @@ class Damping(DynamicsTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["alpha"]
     _reprlatex = (
         r"-\frac{\gamma_{0} \alpha}{1 + \alpha^{2}} \mathbf{m} "

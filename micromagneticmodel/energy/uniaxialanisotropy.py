@@ -77,6 +77,7 @@ class UniaxialAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["K", "K1", "K2", "u"]
 
     @property

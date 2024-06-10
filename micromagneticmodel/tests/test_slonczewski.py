@@ -5,7 +5,6 @@ import numpy as np
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_term
 
 
@@ -70,9 +69,7 @@ class TestSlonczewski:
             assert re.search(r"^Slonczewski\(J=.+\)$", repr(term))
 
             tcl_strings = {}
-            tcl_strings[
-                "script"
-            ] = """proc TimeFunction { total_time } {
+            tcl_strings["script"] = """proc TimeFunction { total_time } {
             return $total_time/10
             }"""
             tcl_strings["script_args"] = "total_time"

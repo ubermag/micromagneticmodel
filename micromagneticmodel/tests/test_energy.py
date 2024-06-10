@@ -1,7 +1,6 @@
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_container
 
 
@@ -142,7 +141,7 @@ class TestEnergy:
         container -= self.exchange
         check_container(container)
         with pytest.raises(AttributeError):
-            container.exchange
+            container.exchange  # noqa: B018
 
     def test_freestyle(self):
         container = self.dmi + self.zeeman  # single term is not allowed

@@ -79,6 +79,7 @@ class CubicAnisotropy(EnergyTerm):
     ValueError: ...
 
     """
+
     _allowed_attributes = ["K", "u1", "u2"]
 
     @property
@@ -86,7 +87,7 @@ class CubicAnisotropy(EnergyTerm):
         a1 = r"(\mathbf{m} \cdot \mathbf{u}_{1})^{2}"
         a2 = r"(\mathbf{m} \cdot \mathbf{u}_{2})^{2}"
         a3 = r"(\mathbf{m} \cdot \mathbf{u}_{3})^{2}"
-        return r"-K [{0}{1}+{1}{2}+{2}{0}]".format(a1, a2, a3)
+        return rf"-K [{a1}{a2}+{a2}{a3}+{a3}{a1}]"
 
     def effective_field(self, m):
         raise NotImplementedError

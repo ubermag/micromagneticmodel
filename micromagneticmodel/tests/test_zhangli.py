@@ -4,18 +4,19 @@ import numpy as np
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_term
 
 
 class TestZhangLi:
-    def setup(self):
+    def setup_method(self):
         self.valid_args = [
             (1, 1),
             (-1.0, 2.0),
             (0, 5e-11),
             (19, -1e-12),
+            ((1, -2, 0), 1),
             ({"r1": 1, "r2": 2}, 0.5),
+            ({"r1": (1, 0, 0), "r2": (0, 0, 2)}, 0.5),
         ]
         self.invalid_args = [
             ((1, -2), 1),
@@ -23,6 +24,7 @@ class TestZhangLi:
             ((0, 0, 0, 9), 5e-11),
             (11, -1e-12 + 2j),
             (1, {"r1 2": 1, "r2": 2}),
+            ({"r1": 1, "r2": (0, 0, 2)}, 0.5),
         ]
 
     def test_init_valid_args(self):
@@ -57,9 +59,7 @@ class TestZhangLi:
             assert re.search(r"^ZhangLi\(u=.+\, beta=.+\)$", repr(term))
 
             tcl_strings = {}
-            tcl_strings[
-                "script"
-            ] = """proc TimeFunction { total_time } {
+            tcl_strings["script"] = """proc TimeFunction { total_time } {
             return $total_time/10
             }"""
             tcl_strings["script_args"] = "total_time"

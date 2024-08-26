@@ -5,12 +5,11 @@ import numpy as np
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_term
 
 
 class TestUniaxialAnisotropy:
-    def setup(self):
+    def setup_method(self):
         mesh = df.Mesh(p1=(0, 0, 0), p2=(5, 5, 5), cell=(1, 1, 1))
         Kfield = df.Field(mesh, nvdim=1, value=5e6)
         ufield = df.Field(mesh, nvdim=3, value=(1, 0, 0))

@@ -1,15 +1,53 @@
 import collections
+import numbers
 
 import discretisedfield as df
+import numpy as np
 import ubermagutil as uu
 import ubermagutil.typesystem as ts
 
 from .dynamicsterm import DynamicsTerm
 
 
+class Scalar_Vector3(ts.Descriptor):
+    """custom type for Zhand-Li current density u."""
+
+    def __set__(self, instance, value):
+        if not isinstance(
+            value, (numbers.Real, tuple, list, np.ndarray, dict, df.Field)
+        ):
+            raise TypeError(f"Cannot set {self.name} with {type(value)}.")
+        if isinstance(value, numbers.Real):
+            pass
+        elif isinstance(value, df.Field):
+            if value.nvdim not in (1, 3):
+                raise ValueError(f"Cannot set {self.name} with {value.nvdim=}.")
+        elif isinstance(value, dict):
+            if all(isinstance(elem, numbers.Real) for elem in value.values()):
+                pass
+            elif any(
+                not isinstance(elem, (tuple, list, np.ndarray))
+                or len(elem) != 3
+                or not all(isinstance(item, numbers.Real) for item in elem)
+                for elem in value.values()
+            ):
+                raise ValueError(
+                    f"Can only set {self.name} with a 'dict' containing either only"
+                    "scalar values or only vector values."
+                )
+        elif len(value) != 3:
+            raise ValueError(f"Can only set {self.name} with a vector with 3 elements.")
+        else:
+            if not all(isinstance(elem, numbers.Real) for elem in value):
+                raise ValueError(
+                    f"Can only set {self.name} with elements of type numbers.Real."
+                )
+        super().__set__(instance, value)
+
+
 @uu.inherit_docs
 @ts.typesystem(
-    u=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    u=Scalar_Vector3(),
     beta=ts.Scalar(),
     func=ts.Typed(expected_type=collections.abc.Callable),
     dt=ts.Scalar(positive=True),
@@ -42,10 +80,13 @@ class ZhangLi(DynamicsTerm):
 
         A single scalar value can be passed.
 
-    u : number.Real, discretisedfield.Field
+    u : number.Real, array-like, dict, discretisedfield.Field
 
-        `numbers.Real` can be passed, or alternatively
-        ``discretisedfield.Field`` can be passed.
+        Spin-drift velocity in m/s. If a scalar value or ``Field`` with ``nvdim==1`` is
+        passed, the current is assumed to flow in x direction. A vector (array_like of
+        length 3) or a ``Field`` with ``nvdim==3`` can be used to specify arbitrary
+        current direction. When using a ``dict`` either all elements must be scalar
+        (current in x direction) or a vector must be used for each key.
 
     func : callable, optional
 
@@ -93,13 +134,9 @@ class ZhangLi(DynamicsTerm):
     ...     return np.sin(omega * t)
     >>> zhangli = mm.ZhangLi(beta=0.01, u=5e6, func=sin_wave, dt=1e-13)
 
-    4. An attempt to define the Zhang-Li dynamics term using a wrong value
-       (here using a vector ``u`` where a scalar value is required).
+    4. Defining the Zhang-Li dynamics term using vector.
 
-    >>> zhangli = mm.ZhangLi(beta=-1, u=(0, 0, 1))  # vector value
-    Traceback (most recent call last):
-    ...
-    TypeError: ...
+    >>> zhangli = mm.ZhangLi(beta=0.1, u=(0, 0, 1e12))
 
     """
 

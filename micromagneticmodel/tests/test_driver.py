@@ -1,3 +1,6 @@
+import datetime
+import json
+
 import discretisedfield as df
 import pytest
 
@@ -28,21 +31,25 @@ class MyExternalDriver(mm.ExternalDriver):
     def drive_kwargs_setup(self, drive_kwargs):
         pass
 
+    def _check_system(self, system):
+        pass
+
     def _write_input_files(self, system, **kwargs):
-        with open(f"{system.name}.input", "wt", encoding="utf-8") as f:
+        with open(f"{system.name}.input", "w", encoding="utf-8") as f:
             f.write(str(-1))  # factor -1 used to invert magnetisation direction in call
         self._write_info_json(system, **kwargs)
 
-    def _call(self, system, runner, dry_run=False, **kwargs):
-        if dry_run:
-            # Python is used to test/simulate schedule during tests because there
-            # typically is no scheduling system and Python is always available.
-            # Therefore, dry_run must return a Python comment that can be added to the
-            # schedule script without breaking the execution.
-            return ["#", "run", "command", "line"]
-        with open(f"{system.name}.input", "rt", encoding="utf-8") as f:
+    def _call(self, system, runner, **kwargs):
+        with open(f"{system.name}.input", encoding="utf-8") as f:
             factor = int(f.read())
         (factor * system.m).to_file("output.omf")
+
+    def _schedule_commands(self, system, runner):
+        # Python is used to test/simulate schedule during tests because there
+        # typically is no scheduling system and Python is always available.
+        # Therefore, we return a Python comment that can be added to the
+        # schedule script without breaking the execution.
+        return ["# run command line"]
 
     def _read_data(self, system):
         system.m = df.Field.from_file("output.omf")
@@ -64,6 +71,18 @@ def test_external_driver(tmp_path):
     assert system.m.allclose(m_out)
     assert system.m.allclose(-mm.examples.macrospin().m)
     assert (tmp_path / system.name / "drive-0" / "info.json").exists()
+
+    with open(tmp_path / system.name / "drive-0" / "info.json") as f:
+        info = json.load(f)
+
+    assert info["adapter"] == "micromagneticmodel"
+    assert info["driver"] == "MyExternalDriver"
+    assert info["drive_number"] == 0
+
+    info_time = datetime.datetime.fromisoformat(f"{info['date']}T{info['time']}")
+    now = datetime.datetime.now()
+    # assumption: this test runs in under one minute
+    assert (now - info_time).total_seconds() < 60
 
     with pytest.raises(FileExistsError):
         driver.drive(system, dirname=str(tmp_path), append=False)

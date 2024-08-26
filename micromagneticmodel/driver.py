@@ -39,12 +39,20 @@ class ExternalDriver(Driver):
         """Write input files required for the external package."""
 
     @abc.abstractmethod
-    def _call(self, system, runner, dry_run=False, **kwargs):
+    def _call(self, system, runner, **kwargs):
         """Call the external package."""
+
+    @abc.abstractmethod
+    def _schedule_commands(self, system, runner):
+        """Return a list of commands to append to the scheduling script."""
 
     @abc.abstractmethod
     def _read_data(self, system):
         """Update system with simulation output (magnetisation and scalar data)."""
+
+    @abc.abstractmethod
+    def _check_system(self, system):
+        """Check if the system contains all required information."""
 
     def drive(
         self,
@@ -119,7 +127,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.drive_kwargs_setup(kwargs)
-
+        self._check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )
@@ -229,7 +237,7 @@ class ExternalDriver(Driver):
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
         self.schedule_kwargs_setup(kwargs)
-
+        self._check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )
@@ -254,7 +262,9 @@ class ExternalDriver(Driver):
                 stdout = stderr = None  # pragma: no cover
 
             if verbose >= 1:
-                print(f"Running '{cmd} {script_name}' in '{workingdir.absolute()}'.")
+                print(
+                    f"Running '{cmd} {script_name}' in '{pathlib.Path().absolute()}'."
+                )
             system.drive_number += 1
             res = sp.run([cmd, script_name], stdout=stdout, stderr=stderr)
 
@@ -272,15 +282,15 @@ class ExternalDriver(Driver):
 
     def _write_schedule_script(self, system, header, script_name, runner):
         if pathlib.Path(header).exists():
-            with open(header, "rt", encoding="utf-8") as f:
+            with open(header, encoding="utf-8") as f:
                 header = f.read()
         else:
             header = header
-        run_cmd = self._call(system=system, runner=runner, dry_run=True)
-        with open(script_name, "wt", encoding="utf-8") as f:
+        run_commands = self._schedule_commands(system=system, runner=runner)
+        with open(script_name, "w", encoding="utf-8") as f:
             f.write(header)
             f.write("\n")
-            f.write(" ".join(run_cmd))
+            f.write("\n".join(run_commands))
 
     def _write_info_json(self, system, **kwargs):
         info = {}
@@ -288,9 +298,12 @@ class ExternalDriver(Driver):
         info["date"] = datetime.datetime.now().strftime("%Y-%m-%d")
         info["time"] = datetime.datetime.now().strftime("%H:%M:%S")
         info["driver"] = self.__class__.__name__
+        # "adapter" is the ubermag package (e.g. oommfc) that communicates with the
+        # calculator (e.g. OOMMF)
+        info["adapter"] = self.__module__.split(".")[0]
         for k, v in kwargs.items():
             info[k] = v
-        with open("info.json", "wt", encoding="utf-8") as jsonfile:
+        with open("info.json", "w", encoding="utf-8") as jsonfile:
             jsonfile.write(json.dumps(info))
 
     @staticmethod

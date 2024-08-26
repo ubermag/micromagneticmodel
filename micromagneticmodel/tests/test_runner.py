@@ -16,14 +16,14 @@ class MyRunner(mm.ExternalRunner):
         return sp.CompletedProcess(
             argstr,
             returncode=returncode,
-            stdout="output".encode("utf-8"),
-            stderr="error".encode("utf-8"),
+            stdout=b"output",
+            stderr=b"error",
         )
 
 
 def test_call(capsys):
     runner = MyRunner()
-    command = runner.call("argstr", dry_run=True)
+    command = runner._call("argstr", dry_run=True)
     assert command == ["my_package", "argstr", "command", "line"]
 
     runner.call("argstr")

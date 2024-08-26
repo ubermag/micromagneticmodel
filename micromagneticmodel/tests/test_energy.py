@@ -1,12 +1,11 @@
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_container
 
 
 class TestEnergy:
-    def setup(self):
+    def setup_method(self):
         self.exchange = mm.Exchange(A=1e-12)
         self.zeeman = mm.Zeeman(H=(0, 0, 1.2e6))
         self.uniaxialanisotropy = mm.UniaxialAnisotropy(K=1e4, u=(0, 1, 0))
@@ -142,7 +141,7 @@ class TestEnergy:
         container -= self.exchange
         check_container(container)
         with pytest.raises(AttributeError):
-            container.exchange
+            container.exchange  # noqa: B018
 
     def test_freestyle(self):
         container = self.dmi + self.zeeman  # single term is not allowed

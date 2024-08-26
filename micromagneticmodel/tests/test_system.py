@@ -2,12 +2,11 @@ import discretisedfield as df
 import pytest
 
 import micromagneticmodel as mm
-
 from .checks import check_system
 
 
 class TestSystem:
-    def setup(self):
+    def setup_method(self):
         p1 = (0, 0, 0)
         p2 = (10e-9, 10e-9, 10e-9)
         n = (10, 10, 10)
@@ -17,13 +16,13 @@ class TestSystem:
         self.m = df.Field(mesh=mesh, nvdim=3, value=(0, 1, 1), norm=Ms)
 
     def test_init_valid_args(self):
-        system = mm.System()
+        system = mm.System("test")
         check_system(system)
         assert len(system.energy) == 0
         assert len(system.dynamics) == 0
         assert system.m is None
         assert system.T == 0
-        assert system.name == "unnamed"  # Default value
+        assert system.name == "test"
 
         system.energy = mm.Exchange(A=1e-12) + mm.Demag()
         check_system(system)
@@ -39,19 +38,22 @@ class TestSystem:
 
     def test_init_invalid_args(self):
         with pytest.raises(TypeError):
-            mm.System(energy=5)
+            mm.System("test", energy=5)
 
         with pytest.raises(TypeError):
-            mm.System(dynamics=5)
+            mm.System("test", dynamics=5)
 
         with pytest.raises(TypeError):
-            mm.System(name=152)
+            mm.System("test", name=152)
 
         with pytest.raises(ValueError):
-            mm.System(T=-0.1)
+            mm.System("test", T=-0.1)
 
         with pytest.raises(TypeError):
-            mm.System(m=-0.1)
+            mm.System("test", m=-0.1)
+
+        with pytest.raises(TypeError):
+            mm.System()
 
     def test_repr(self):
         system = mm.System(name="my_very_cool_system")

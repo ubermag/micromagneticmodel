@@ -8,6 +8,12 @@ from .energyterm import EnergyTerm
 @uu.inherit_docs
 @ts.typesystem(
     D=ts.Parameter(descriptor=ts.Scalar(), otherwise=df.Field),
+    BC=ts.Subset(
+        sample_set={
+            "Robin",
+        },
+        unpack=False,
+    ),
     crystalclass=ts.Subset(
         sample_set={
             "Cnv",
@@ -124,7 +130,7 @@ class DMI(EnergyTerm):
 
     """
 
-    _allowed_attributes = ["D", "D1", "D2", "D3", "Dx", "Dy", "crystalclass"]
+    _allowed_attributes = ["D", "D1", "D2", "D3", "Dx", "Dy", "crystalclass", "BC"]
 
     @property
     def _reprlatex(self):

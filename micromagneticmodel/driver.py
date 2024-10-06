@@ -1,6 +1,7 @@
 import abc
 import datetime
 import json
+import os
 import pathlib
 import subprocess as sp
 import sys
@@ -126,6 +127,7 @@ class ExternalDriver(Driver):
         """
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
+        self.start_time = datetime.datetime.now()
         self.drive_kwargs_setup(kwargs)
         self._check_system(system)
         workingdir = self._setup_working_directory(
@@ -140,7 +142,9 @@ class ExternalDriver(Driver):
             )
             self._call(system=system, runner=runner, verbose=verbose, **kwargs)
             self._read_data(system)
-
+        self.end_time = datetime.datetime.now()
+        info_file_path = os.path.join(workingdir, "info.json")
+        self.update_info_json(info_file_path)
         system.drive_number += 1
 
     def schedule(
@@ -325,3 +329,14 @@ class ExternalDriver(Driver):
         workingdir = system_dir / f"{mode}-{next_number}"
         workingdir.mkdir(parents=True)
         return workingdir
+
+    def update_info_json(self, info_file_path):
+        os.path.exists(info_file_path)
+        with open(info_file_path, encoding="utf-8") as jsonfile:
+            info = json.load(jsonfile)
+
+        info["end_time"] = self.end_time.strftime("%H:%M:%S")
+        info["elapsed_time"] = str(self.end_time - self.start_time)
+        info["success"] = True
+        with open(info_file_path, "w", encoding="utf-8") as jsonfile:
+            json.dump(info, jsonfile)

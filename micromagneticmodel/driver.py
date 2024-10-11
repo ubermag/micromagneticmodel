@@ -1,7 +1,6 @@
 import abc
 import datetime
 import json
-import os
 import pathlib
 import subprocess as sp
 import sys
@@ -127,7 +126,7 @@ class ExternalDriver(Driver):
         """
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
-        self.start_time = datetime.datetime.now()
+        drive_kwargs = kwargs.copy()
         self.drive_kwargs_setup(kwargs)
         self._check_system(system)
         workingdir = self._setup_working_directory(
@@ -140,11 +139,12 @@ class ExternalDriver(Driver):
                 ovf_format=ovf_format,
                 **kwargs,
             )
+            self._start_time = datetime.datetime.now()
+            self._write_info_json(system, **drive_kwargs)
             self._call(system=system, runner=runner, verbose=verbose, **kwargs)
             self._read_data(system)
-        self.end_time = datetime.datetime.now()
-        info_file_path = os.path.join(workingdir, "info.json")
-        self.update_info_json(info_file_path)
+            self._end_time = datetime.datetime.now()
+            self._update_info_json()
         system.drive_number += 1
 
     def schedule(
@@ -301,10 +301,11 @@ class ExternalDriver(Driver):
         info["drive_number"] = system.drive_number
         info["date"] = datetime.datetime.now().strftime("%Y-%m-%d")
         info["time"] = datetime.datetime.now().strftime("%H:%M:%S")
-        info["driver"] = self.__class__.__name__
         # "adapter" is the ubermag package (e.g. oommfc) that communicates with the
         # calculator (e.g. OOMMF)
         info["adapter"] = self.__module__.split(".")[0]
+        info["driver"] = self.__class__.__name__
+        info["start_time"] = self._start_time.isoformat(timespec="seconds")
         for k, v in kwargs.items():
             info[k] = v
         with open("info.json", "w", encoding="utf-8") as jsonfile:
@@ -330,13 +331,23 @@ class ExternalDriver(Driver):
         workingdir.mkdir(parents=True)
         return workingdir
 
-    def update_info_json(self, info_file_path):
-        os.path.exists(info_file_path)
-        with open(info_file_path, encoding="utf-8") as jsonfile:
-            info = json.load(jsonfile)
+    @staticmethod
+    def _conversion_to_hms(time_dfference):
+        total_seconds = int(time_dfference.total_seconds())
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        if time_dfference.total_seconds() < 1:
+            microseconds = time_dfference.microseconds
+            return f"{hours:02}:{minutes:02}:{seconds:02}.{microseconds:06}"
+        return f"{hours:02}:{minutes:02}:{seconds:02}"
 
-        info["end_time"] = self.end_time.strftime("%H:%M:%S")
-        info["elapsed_time"] = str(self.end_time - self.start_time)
+    def _update_info_json(self):
+        with open("info.json", encoding="utf-8") as jsonfile:
+            info = json.load(jsonfile)
+        info["end_time"] = self._end_time.isoformat(timespec="seconds")
+        info["elapsed_time"] = self._conversion_to_hms(
+            self._end_time - self._start_time
+        )
         info["success"] = True
-        with open(info_file_path, "w", encoding="utf-8") as jsonfile:
+        with open("info.json", "w", encoding="utf-8") as jsonfile:
             json.dump(info, jsonfile)

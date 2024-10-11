@@ -37,7 +37,6 @@ class MyExternalDriver(mm.ExternalDriver):
     def _write_input_files(self, system, **kwargs):
         with open(f"{system.name}.input", "w", encoding="utf-8") as f:
             f.write(str(-1))  # factor -1 used to invert magnetisation direction in call
-        self._write_info_json(system, **kwargs)
 
     def _call(self, system, runner, **kwargs):
         with open(f"{system.name}.input", encoding="utf-8") as f:

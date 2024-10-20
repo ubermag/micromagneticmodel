@@ -96,16 +96,7 @@ class DMI(EnergyTerm):
     >>> D = {'region1': 1e-3, 'region2': 5e-3}
     >>> dmi = mm.DMI(D=D, crystalclass='Cnv_z')
 
-    3. Defining the DMI energy term using ``discretisedfield.Field``.
-
-    >>> import discretisedfield as df
-    ...
-    >>> region = df.Region(p1=(0, 0, 0), p2=(5e-9, 5e-9, 5e-9))
-    >>> mesh = df.Mesh(region=region, n=(5, 5, 5))
-    >>> D = df.Field(mesh, nvdim=1, value=5.7e-3)
-    >>> dmi = mm.DMI(D=D, crystalclass='D2d')
-
-    4. An attempt to define the DMI energy term using a wrong value.
+    3. An attempt to define the DMI energy term using a wrong value.
 
     >>> dmi = mm.DMI(D=(1, 0, 0), crystalclass='T')  # vector value
     Traceback (most recent call last):

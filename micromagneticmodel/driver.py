@@ -1,6 +1,7 @@
 import abc
 import datetime
 import json
+import math
 import pathlib
 import subprocess as sp
 import sys
@@ -124,14 +125,15 @@ class ExternalDriver(Driver):
             If system directory already exists and append=False.
 
         """
+        drive_kwargs = kwargs.copy()
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
-        drive_kwargs = kwargs.copy()
         self.drive_kwargs_setup(kwargs)
         self._check_system(system)
         workingdir = self._setup_working_directory(
             system=system, dirname=dirname, mode="drive", append=append
         )
+        start_time = datetime.datetime.now()
 
         with uu.changedir(workingdir):
             self._write_input_files(
@@ -139,12 +141,19 @@ class ExternalDriver(Driver):
                 ovf_format=ovf_format,
                 **kwargs,
             )
-            self._start_time = datetime.datetime.now()
-            self._write_info_json(system, **drive_kwargs)
-            self._call(system=system, runner=runner, verbose=verbose, **kwargs)
+
+            self._write_info_json(system, start_time, **drive_kwargs)
+            try:
+                self._call(system=system, runner=runner, verbose=verbose, **kwargs)
+            except Exception:
+                success = False
+                raise
+            else:
+                success = True
+            finally:
+                end_time = datetime.datetime.now()
+                self._update_info_json(start_time, end_time, success)
             self._read_data(system)
-            self._end_time = datetime.datetime.now()
-            self._update_info_json()
         system.drive_number += 1
 
     def schedule(
@@ -296,16 +305,16 @@ class ExternalDriver(Driver):
             f.write("\n")
             f.write("\n".join(run_commands))
 
-    def _write_info_json(self, system, **kwargs):
+    def _write_info_json(self, system, start_time, **kwargs):
         info = {}
         info["drive_number"] = system.drive_number
-        info["date"] = datetime.datetime.now().strftime("%Y-%m-%d")
-        info["time"] = datetime.datetime.now().strftime("%H:%M:%S")
+        info["date"] = start_time.strftime("%Y-%m-%d")
+        info["time"] = start_time.strftime("%H:%M:%S")
+        info["start_time"] = start_time.isoformat(timespec="seconds")
         # "adapter" is the ubermag package (e.g. oommfc) that communicates with the
         # calculator (e.g. OOMMF)
         info["adapter"] = self.__module__.split(".")[0]
         info["driver"] = self.__class__.__name__
-        info["start_time"] = self._start_time.isoformat(timespec="seconds")
         for k, v in kwargs.items():
             info[k] = v
         with open("info.json", "w", encoding="utf-8") as jsonfile:
@@ -332,22 +341,17 @@ class ExternalDriver(Driver):
         return workingdir
 
     @staticmethod
-    def _conversion_to_hms(time_dfference):
-        total_seconds = int(time_dfference.total_seconds())
+    def _conversion_to_hms(time_difference):
+        total_seconds = math.ceil(time_difference.total_seconds())
         hours, remainder = divmod(total_seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        if time_dfference.total_seconds() < 1:
-            microseconds = time_dfference.microseconds
-            return f"{hours:02}:{minutes:02}:{seconds:02}.{microseconds:06}"
         return f"{hours:02}:{minutes:02}:{seconds:02}"
 
-    def _update_info_json(self):
+    def _update_info_json(self, start_time, end_time, success):
         with open("info.json", encoding="utf-8") as jsonfile:
             info = json.load(jsonfile)
-        info["end_time"] = self._end_time.isoformat(timespec="seconds")
-        info["elapsed_time"] = self._conversion_to_hms(
-            self._end_time - self._start_time
-        )
-        info["success"] = True
+        info["end_time"] = end_time.isoformat(timespec="seconds")
+        info["elapsed_time"] = self._conversion_to_hms(end_time - start_time)
+        info["success"] = success
         with open("info.json", "w", encoding="utf-8") as jsonfile:
             json.dump(info, jsonfile)

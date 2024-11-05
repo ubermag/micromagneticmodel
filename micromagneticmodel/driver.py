@@ -249,6 +249,7 @@ class ExternalDriver(Driver):
         """
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
+        drive_kwargs = kwargs.copy()
         self.schedule_kwargs_setup(kwargs)
         self._check_system(system)
         workingdir = self._setup_working_directory(
@@ -260,6 +261,8 @@ class ExternalDriver(Driver):
         if pathlib.Path(header).exists():
             header = pathlib.Path(header).absolute()
 
+        start_time = datetime.datetime.now()
+
         with uu.changedir(workingdir):
             self._write_input_files(
                 system=system,
@@ -269,6 +272,7 @@ class ExternalDriver(Driver):
             self._write_schedule_script(
                 system=system, header=header, script_name=script_name, runner=runner
             )
+            self._write_info_json(system, start_time, **drive_kwargs)
 
             stdout = stderr = sp.PIPE
             if sys.platform == "win32":

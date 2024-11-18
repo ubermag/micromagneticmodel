@@ -1,5 +1,6 @@
 import abc
 import datetime
+import importlib.metadata
 import json
 import math
 import pathlib
@@ -357,5 +358,6 @@ class ExternalDriver(Driver):
         info["end_time"] = end_time.isoformat(timespec="seconds")
         info["elapsed_time"] = self._conversion_to_hms(end_time - start_time)
         info["success"] = success
+        info["ubermag_version"] = importlib.metadata.version("ubermag")
         with open("info.json", "w", encoding="utf-8") as jsonfile:
             json.dump(info, jsonfile)

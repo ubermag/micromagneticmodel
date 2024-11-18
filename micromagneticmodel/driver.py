@@ -248,9 +248,9 @@ class ExternalDriver(Driver):
             If system directory already exists and append=False.
 
         """
+        schedule_kwargs = kwargs.copy()
         # This method is implemented in the derived driver class. It raises
         # exception if any of the arguments are not valid.
-        drive_kwargs = kwargs.copy()
         self.schedule_kwargs_setup(kwargs)
         self._check_system(system)
         workingdir = self._setup_working_directory(
@@ -273,7 +273,7 @@ class ExternalDriver(Driver):
             self._write_schedule_script(
                 system=system, header=header, script_name=script_name, runner=runner
             )
-            self._write_info_json(system, start_time, **drive_kwargs)
+            self._write_info_json(system, start_time, **schedule_kwargs)
 
             stdout = stderr = sp.PIPE
             if sys.platform == "win32":

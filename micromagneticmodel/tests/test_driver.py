@@ -1,4 +1,3 @@
-import datetime
 import json
 
 import discretisedfield as df
@@ -78,10 +77,24 @@ def test_external_driver(tmp_path):
     assert info["driver"] == "MyExternalDriver"
     assert info["drive_number"] == 0
 
-    info_time = datetime.datetime.fromisoformat(f"{info['date']}T{info['time']}")
-    now = datetime.datetime.now()
-    # assumption: this test runs in under one minute
-    assert (now - info_time).total_seconds() < 60
+    assert "start_time" in info
+    assert "end_time" in info
+    assert "elapsed_time" in info
+    assert "success" in info
+    assert info["success"] is True
+
+    def _parse_time_str_to_seconds(time_str):
+        h, m, s = map(int, time_str.split(":"))
+        return h * 3600 + m * 60 + s
+
+    elapsed_time = info["elapsed_time"]
+
+    if isinstance(elapsed_time, str):  # HH:MM:SS format
+        elapsed_seconds = _parse_time_str_to_seconds(elapsed_time)
+        # assumption: this test runs in under one minute
+        assert elapsed_seconds < 60
+    else:
+        raise TypeError("Unexpected format for elapsed_time")
 
     with pytest.raises(FileExistsError):
         driver.drive(system, dirname=str(tmp_path), append=False)

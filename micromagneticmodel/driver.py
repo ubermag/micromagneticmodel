@@ -319,6 +319,9 @@ class ExternalDriver(Driver):
         # "adapter" is the ubermag package (e.g. oommfc) that communicates with the
         # calculator (e.g. OOMMF)
         info["adapter"] = self.__module__.split(".")[0]
+        info["adapter_version"] = importlib.metadata.version(
+            self.__module__.split(".")[0]
+        )
         info["driver"] = self.__class__.__name__
         for k, v in kwargs.items():
             info[k] = v
@@ -358,6 +361,5 @@ class ExternalDriver(Driver):
         info["end_time"] = end_time.isoformat(timespec="seconds")
         info["elapsed_time"] = self._conversion_to_hms(end_time - start_time)
         info["success"] = success
-        info["ubermag_version"] = importlib.metadata.version("ubermag")
         with open("info.json", "w", encoding="utf-8") as jsonfile:
             json.dump(info, jsonfile)

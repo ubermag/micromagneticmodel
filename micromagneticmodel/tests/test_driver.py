@@ -88,13 +88,9 @@ def test_external_driver(tmp_path):
         return h * 3600 + m * 60 + s
 
     elapsed_time = info["elapsed_time"]
-
-    if isinstance(elapsed_time, str):  # HH:MM:SS format
-        elapsed_seconds = _parse_time_str_to_seconds(elapsed_time)
-        # assumption: this test runs in under one minute
-        assert elapsed_seconds < 60
-    else:
-        raise TypeError("Unexpected format for elapsed_time")
+    elapsed_seconds = _parse_time_str_to_seconds(elapsed_time)
+    # assumption: this test runs in under one minute
+    assert elapsed_seconds < 60
 
     with pytest.raises(FileExistsError):
         driver.drive(system, dirname=str(tmp_path), append=False)

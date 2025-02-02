@@ -81,7 +81,7 @@ def test_external_driver(tmp_path):
     assert "end_time" in info
     assert "elapsed_time" in info
     assert "success" in info
-    assert info["success"] is True
+    assert info["success"]
 
     def _parse_time_str_to_seconds(time_str):
         h, m, s = map(int, time_str.split(":"))

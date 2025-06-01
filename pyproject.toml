@@ -7,7 +7,7 @@ name = "micromagneticmodel"
 version = "0.64.0"
 description = "Python-based domain-specific language for computational magnetism"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {file = "LICENSE"}
 
 authors = [
@@ -45,7 +45,8 @@ dev = [
     "nbval",
     "pre-commit",
     "pytest-cov",
-    "twine"
+    "twine",
+    "tomli; python_version < '3.11'",
 ]
 
 [project.urls]

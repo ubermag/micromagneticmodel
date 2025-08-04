@@ -1,4 +1,3 @@
-import datetime
 import json
 
 import discretisedfield as df
@@ -37,7 +36,6 @@ class MyExternalDriver(mm.ExternalDriver):
     def _write_input_files(self, system, **kwargs):
         with open(f"{system.name}.input", "w", encoding="utf-8") as f:
             f.write(str(-1))  # factor -1 used to invert magnetisation direction in call
-        self._write_info_json(system, **kwargs)
 
     def _call(self, system, runner, **kwargs):
         with open(f"{system.name}.input", encoding="utf-8") as f:
@@ -79,10 +77,20 @@ def test_external_driver(tmp_path):
     assert info["driver"] == "MyExternalDriver"
     assert info["drive_number"] == 0
 
-    info_time = datetime.datetime.fromisoformat(f"{info['date']}T{info['time']}")
-    now = datetime.datetime.now()
+    assert "start_time" in info
+    assert "end_time" in info
+    assert "elapsed_time" in info
+    assert "success" in info
+    assert info["success"]
+
+    def _parse_time_str_to_seconds(time_str):
+        h, m, s = map(int, time_str.split(":"))
+        return h * 3600 + m * 60 + s
+
+    elapsed_time = info["elapsed_time"]
+    elapsed_seconds = _parse_time_str_to_seconds(elapsed_time)
     # assumption: this test runs in under one minute
-    assert (now - info_time).total_seconds() < 60
+    assert elapsed_seconds < 60
 
     with pytest.raises(FileExistsError):
         driver.drive(system, dirname=str(tmp_path), append=False)

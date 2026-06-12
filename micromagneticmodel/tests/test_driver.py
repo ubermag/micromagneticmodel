@@ -4,9 +4,10 @@ import discretisedfield as df
 import pytest
 
 import micromagneticmodel as mm
+from micromagneticmodel import adapter_base
 
 
-class MyDriver(mm.Driver):
+class MyDriver(adapter_base.Driver):
     _allowed_attributes = ["arg1", "arg2"]
 
     def drive(self, system):  # A simple drive method
@@ -17,7 +18,7 @@ class MyDriver(mm.Driver):
         return "independent_variable"
 
 
-class MyExternalDriver(mm.ExternalDriver):
+class MyExternalDriver(adapter_base.ExternalDriver):
     _allowed_attributes = ["arg1", "arg2"]
 
     @property

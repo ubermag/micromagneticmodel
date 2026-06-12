@@ -18,6 +18,12 @@ class MyDriver(adapter_base.Driver):
         return "independent_variable"
 
 
+def test_driver():
+    driver = MyDriver()
+    assert driver.drive(system=5) == 5
+    assert driver._x == "independent_variable"
+
+
 class MyExternalDriver(adapter_base.ExternalDriver):
     _allowed_attributes = ["arg1", "arg2"]
 
@@ -52,12 +58,6 @@ class MyExternalDriver(adapter_base.ExternalDriver):
 
     def _read_data(self, system):
         system.m = df.Field.from_file("output.omf")
-
-
-def test_driver():
-    driver = MyDriver()
-    assert driver.drive(system=5) == 5
-    assert driver._x == "independent_variable"
 
 
 def test_external_driver(tmp_path):

@@ -8,11 +8,26 @@ class ExternalRunner(abc.ABC):
     @property
     @abc.abstractmethod
     def package_name(self):
-        """Name of the external simulation package."""
+        """Name of the external simulation package.
+
+        This name is used in status information shown for running jobs.
+        """
 
     @abc.abstractmethod
     def _call(self, argstr, need_stderr, dry_run, **kwargs):
-        """Package-specific implementation to run the simulation."""
+        """Package-specific implementation to run the simulation.
+
+        `argstr` contains flags/options that need to be passed to the external
+        calculator and is assembled by a `Drive`. The `Runner` class needs to provide
+        the executable and should pass `argstr` to it.
+
+        The implementation typically runs the external calculator package in a
+        subprocess. It needs to return a subprocess.CompledProcess instance. If
+        `need_stderr=True` it should capture stderr (TODO when do we capture stdout?)
+
+        For `dry_run=True` it should only assemble the full command line call and return
+        it as `str`.
+        """
 
     def call(
         self,
@@ -88,6 +103,7 @@ class ExternalRunner(abc.ABC):
             msg = f"Error in {self.package_name} run.\n"
             msg += f"command: {' '.join(res.args)}\n"
             if sys.platform != "win32":
+                # TODO this might be OOMMF specific
                 # Only on Linux and MacOS - on Windows we do not get stderr and
                 # stdout.
                 msg += f"stdout: {res.stderr.decode('utf-8', 'replace')}\n"

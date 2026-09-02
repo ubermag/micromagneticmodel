@@ -7,8 +7,6 @@ import pytest
 from . import abstract as abstract
 from . import consts as consts
 from . import examples as examples
-from .driver import Driver as Driver
-from .driver import ExternalDriver as ExternalDriver
 from .dynamics import Damping as Damping
 from .dynamics import Dynamics as Dynamics
 from .dynamics import DynamicsTerm as DynamicsTerm
@@ -25,8 +23,6 @@ from .energy import Exchange as Exchange
 from .energy import MagnetoElastic as MagnetoElastic
 from .energy import UniaxialAnisotropy as UniaxialAnisotropy
 from .energy import Zeeman as Zeeman
-from .evolver import Evolver as Evolver
-from .runner import ExternalRunner as ExternalRunner
 from .system import System as System
 
 __version__ = importlib.metadata.version(__package__)

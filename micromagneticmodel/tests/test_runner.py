@@ -2,10 +2,10 @@ import subprocess as sp
 
 import pytest
 
-import micromagneticmodel as mm
+from micromagneticmodel import adapter_base
 
 
-class MyRunner(mm.ExternalRunner):
+class MyRunner(adapter_base.ExternalRunner):
     @property
     def package_name(self):
         return "my_package"

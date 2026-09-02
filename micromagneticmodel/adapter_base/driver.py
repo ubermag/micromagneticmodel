@@ -26,35 +26,101 @@ class Driver(mm.abstract.Abstract):
 
 
 class ExternalDriver(Driver):
-    """Base class for existing external simulation packages (e.g. OOMMF, mumax3)."""
+    """Base class for existing external simulation packages (e.g. OOMMF, mumax3).
+
+    A `Driver` corresponds to a type of simulation, e.g. energy minimisation or LLG time
+    evolution. The `Driver` takes a ``system`` object and translates it into
+    calculator-specific input files that it stores in a new `drive` directory. It then
+    calls a `Runner`, which will trigger the actual simulation. Once the simulation is
+    complete, the `Driver` reads the final state and updates the ``system`` object.
+
+    This class provides a scaffold for performing such simulations. Adapter packages
+    inherit from this base class and need to implement a number of abstract methods to
+    control calculator-specific behaviour and functionality.
+
+    This class is suitable for adapters that communicate with their calculator by first
+    writing input files to disk and then executing the calculator in a subprocess.
+    """
+
+    @property
+    @abc.abstractmethod
+    def _x(self):
+        """Independent variable.
+
+        The independent variable of a simulation depends on its type. Common examples
+        are `t` for time integration and `iteration` for energy minimisation. It should
+        match the column name used in the tabular output produced by the calculator and
+        can be used to update `system.table` in the `ExternalDriver._read_data` method.
+        """
 
     @abc.abstractmethod
     def drive_kwargs_setup(self, drive_kwargs):
-        """Abstract method to check and initialise kwargs for drive."""
+        """Check and initialise kwargs for drive.
+
+        The user can pass arbitrary keyword arguments to ``drive``. This method needs
+        to validate and document the list of allowed keyword arguments. Any
+        modifications or setting defaults need to be done in-place.
+        """
 
     @abc.abstractmethod
     def schedule_kwargs_setup(self, schedule_kwargs):
-        """Abstract method to check and initialise kwargs for schedule."""
+        """Check and initialise kwargs for schedule.
+
+        The user can pass arbitrary keyword arguments to ``schedule``. This method needs
+        to validate and document the list of allowed keyword arguments. Any
+        modifications or setting defaults need to be done in-place.
+        """
 
     @abc.abstractmethod
-    def _write_input_files(system, **kwargs):
+    def _write_input_files(self, system, **kwargs):
         """Write input files required for the external package."""
 
     @abc.abstractmethod
     def _call(self, system, runner, **kwargs):
-        """Call the external package."""
+        """Call the external package.
+
+        This method is called to run the actual simulation. It is executed in the
+        directory where the input files have been written. The implementation should
+        communicate with a `Runner` and trigger the simulation using `Runner.call`. If
+        `runner=None` it should pick a suitable runner.
+
+        This method should pass suitable flags/options to the `argstr` argument of
+        `Runner.call` that are needed to trigger the simulation of this specific type of
+        drive. The `Runner` class takes care about finding the right executable and
+        passing these arguments to it.
+        """
 
     @abc.abstractmethod
     def _schedule_commands(self, system, runner):
-        """Return a list of commands to append to the scheduling script."""
+        """Return a list of commands to append to the scheduling script.
+
+        This method should make use of the dry-run capabilities of the `Runner.call`
+        method to obtain a command that can run the simulation. This command will be
+        appended to the scheduling script and will be executed in the directory where
+        the input files have been written. If `runner=None` it should pick a suitable
+        runner.
+        """
 
     @abc.abstractmethod
     def _read_data(self, system):
-        """Update system with simulation output (magnetisation and scalar data)."""
+        """Update system with simulation output (magnetisation and scalar data).
+
+        This method is called after the simulation has finished. It should read the
+        (final) simulation output and update the system object by:
+        - setting `system.m` to the final state
+        - reading scalar data of the current drive and setting `system.table`
+
+        This method is called in the directory where the input files have been written.
+        """
 
     @abc.abstractmethod
     def _check_system(self, system):
-        """Check if the system contains all required information."""
+        """Check if the system contains all required information.
+
+        This method is called before creating input files. It can be used to perform
+        drive/calculator-specific checks, e.g. to ensure that the energy or dynamics
+        equations are non-empty.
+        """
 
     def drive(
         self,
@@ -299,6 +365,20 @@ class ExternalDriver(Driver):
                 raise RuntimeError(msg)
 
     def _write_schedule_script(self, system, header, script_name, runner):
+        """
+        Scheduling systems such as slurm typically need a script that will be run. This
+        method creates the script `script_name` by combining:
+
+        - a user provided `header` (either a file on disk that will be read or a str);
+          the header needs to contain all scheduler-specific code such as required
+          resources, runtime, name, ... (for slurm this would be ``#SBATCH ...`` lines).
+
+          The user needs to also ensure that the environment launched by the scheduling
+          system provides the external calculator executable, e.g. by modifying PATH
+          or loading a suitable (conda) environment.
+        - a call to the external calculator that triggers the simulation, provided by
+          the method `_schedule_command`
+        """
         if pathlib.Path(header).exists():
             with open(header, encoding="utf-8") as f:
                 header = f.read()
@@ -311,6 +391,12 @@ class ExternalDriver(Driver):
             f.write("\n".join(run_commands))
 
     def _write_info_json(self, system, start_time, **kwargs):
+        """
+        Each drive contains a file ``info.json`` that contains metadata about the
+        simulation such as date/time/index/used adapater, and can additionally contain
+        arbitrary user-provided key-value pairs, provided these can be serialised to
+        json.
+        """
         info = {}
         info["drive_number"] = system.drive_number
         info["date"] = start_time.strftime("%Y-%m-%d")
@@ -323,13 +409,20 @@ class ExternalDriver(Driver):
             self.__module__.split(".")[0]
         )
         info["driver"] = self.__class__.__name__
-        for k, v in kwargs.items():
-            info[k] = v
+        for key, value in kwargs.items():
+            info.setdefault(key, value)
+
         with open("info.json", "w", encoding="utf-8") as jsonfile:
             jsonfile.write(json.dumps(info))
 
     @staticmethod
     def _setup_working_directory(system, dirname, mode, append=True):
+        """
+        This function creates a new directory of the form
+        `dirname/system.name/mode-<index>`. For `append=True` the <index> is determined
+        automatically by searching for all existing `mode-<index>` directories. For
+        `append=False` the base directory `dirname/system.name` must not exist.
+        """
         system_dir = pathlib.Path(dirname, system.name)
         if system_dir.exists() and not append:
             raise FileExistsError(

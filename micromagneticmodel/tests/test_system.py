@@ -1,4 +1,5 @@
 import discretisedfield as df
+import pyvista
 import pytest
 
 import micromagneticmodel as mm
@@ -59,3 +60,12 @@ class TestSystem:
         system = mm.System(name="my_very_cool_system")
         check_system(system)
         assert repr(system) == "System(name='my_very_cool_system')"
+
+    def test_init_valid_pyvista_unstructured_grid(self):
+        grid = pyvista.UnstructuredGrid()
+
+        system = mm.System("test", m=grid)
+
+        check_system(system)
+        assert system.m is grid
+        

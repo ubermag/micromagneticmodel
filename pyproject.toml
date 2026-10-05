@@ -16,7 +16,8 @@ authors = [
     {name = "Martin Lang"},
     {name = "Samuel Holt"},
     {name = "Swapneel Amit Pathak"},
-    {name = "Hans Fangohr"}
+    {name = "Hans Fangohr"},
+    {name = "Michael Adams"},
 ]
 
 classifiers = [
@@ -35,7 +36,8 @@ classifiers = [
 ]
 
 dependencies = [
-    "discretisedfield>=0.92.0"
+    "discretisedfield>=0.92.0",
+    "pyvista>=0.42.3",
 ]
 
 [project.optional-dependencies]

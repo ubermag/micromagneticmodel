@@ -3,6 +3,7 @@ import re
 import types
 
 import discretisedfield as df
+import pyvista as pv
 import pytest
 
 import micromagneticmodel as mm
@@ -111,7 +112,7 @@ def check_system(system):
     assert isinstance(system.name, str)
 
     if system.m is not None:
-        assert isinstance(system.m, df.Field)
+        assert isinstance(system.m, (df.Field, pv.UnstructuredGrid))
 
     assert isinstance(repr(system), str)
     assert re.search(r"^System\(name=.+\)$", repr(system))

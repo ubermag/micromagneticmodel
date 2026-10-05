@@ -3,8 +3,8 @@ import re
 import types
 
 import discretisedfield as df
-import pyvista as pv
 import pytest
+import pyvista as pv
 
 import micromagneticmodel as mm
 

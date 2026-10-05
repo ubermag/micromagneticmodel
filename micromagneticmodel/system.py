@@ -7,7 +7,7 @@ import micromagneticmodel as mm
 
 @ts.typesystem(
     m=ts.Typed(
-        expected_type=(df.Field, pv.UnstructuredGrid), 
+        expected_type=(df.Field, pv.UnstructuredGrid),
         allow_none=True,
     ),
     T=ts.Scalar(unsigned=True),

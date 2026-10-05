@@ -1,6 +1,6 @@
 import discretisedfield as df
-import pyvista
 import pytest
+import pyvista
 
 import micromagneticmodel as mm
 from .checks import check_system
@@ -68,4 +68,3 @@ class TestSystem:
 
         check_system(system)
         assert system.m is grid
-        

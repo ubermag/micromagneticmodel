@@ -1,11 +1,15 @@
 import discretisedfield as df
+import pyvista as pv
 import ubermagutil.typesystem as ts
 
 import micromagneticmodel as mm
 
 
 @ts.typesystem(
-    m=ts.Typed(expected_type=df.Field, allow_none=True),
+    m=ts.Typed(
+        expected_type=(df.Field, pv.UnstructuredGrid),
+        allow_none=True,
+    ),
     T=ts.Scalar(unsigned=True),
     name=ts.Name(const=True),
 )
